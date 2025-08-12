@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today's Agenda</title>
+    <title>Jane Doe - Developer Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -22,11 +22,6 @@
             --softer-accent: #FCBC94;
             --softest-accent: #F7B09D;
             --subtle-purple: #D5A3BB;
-            --timeline-line: #fde6dd;
-            --timeline-dot-border: #fde6dd;
-            --timeline-dot-border-active: #FCA712;
-            --arrival-pin-outline: #fca5a5;
-            --arrival-pin-fill: #ef4444;
             --font-family: 'Inter', sans-serif;
         }
 
@@ -42,147 +37,117 @@
         }
 
         /* Custom scrollbar for a more minimal feel */
-        .timeline-content::-webkit-scrollbar {
+        .projects-content::-webkit-scrollbar {
             width: 6px;
         }
-        .timeline-content::-webkit-scrollbar-track {
+        .projects-content::-webkit-scrollbar-track {
             background: transparent;
         }
-        .timeline-content::-webkit-scrollbar-thumb {
+        .projects-content::-webkit-scrollbar-thumb {
             background: #e2e8f0;
             border-radius: 3px;
         }
-        .timeline-content::-webkit-scrollbar-thumb:hover {
+        .projects-content::-webkit-scrollbar-thumb:hover {
             background: #cbd5e1;
-        }
-
-        /* Keyframes for the particle burst celebration */
-        @keyframes particle-burst {
-            0% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0.5) translateY(-50px);
-                opacity: 0;
-            }
-        }
-        .particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 100;
-            animation: particle-burst 0.8s ease-out forwards;
         }
     </style>
 </head>
 
 <body class="text-slate-800">
 
-    <div id="app-container" class="max-w-md mx-auto bg-[var(--app-bg)] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[90vh] max-h-[700px]">
+    <div id="app-container" class="max-w-md mx-auto bg-[var(--app-bg)] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[90vh] max-h-[800px]">
         
         <header class="p-6 border-b border-slate-100 flex-shrink-0">
-            <div class="flex justify-between items-center mb-5">
-                <h1 class="text-2xl font-bold text-slate-900">Today's Agenda</h1>
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900">Jane Doe</h1>
+                    <p class="text-base font-medium text-[var(--secondary-accent)]">Software Developer & Designer</p>
+                </div>
                 <div class="group relative">
-                    <button id="add-task-btn" class="w-10 h-10 bg-[var(--primary-action)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    <a href="mailto:hello@example.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-action)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                         </svg>
-                    </button>
+                    </a>
                     <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1.5 bg-[var(--softest-accent)] text-white text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        Add New Task
+                        Contact Me
                     </div>
                 </div>
             </div>
-            <div class="flex items-center space-x-2">
-                <button class="duty-pill active">Day Shift</button>
-                <button class="duty-pill">Night Shift</button>
-                <button class="duty-pill">Off Duty</button>
+            <div class="flex items-center space-x-3">
+                <a href="#" class="social-link">GitHub</a>
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">Portfolio</a>
             </div>
         </header>
 
-        <main id="timeline-content" class="timeline-content flex-grow overflow-y-auto p-6">
-            <ul id="task-list" class="space-y-1">
-                <li class="task-item active">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 18.0003L3.63574 11.6364L5.04996 10.2222L9.9997 15.1709Z"></path></svg>
-                    </div>
-                    <div class="task-details">
-                        <p class="text-sm font-medium">Morning Briefing</p>
-                        <small class="text-sm font-semibold text-slate-400">08:00 AM</small>
-                    </div>
-                </li>
+        <main id="projects-content" class="projects-content flex-grow overflow-y-auto p-6">
+            <div class="space-y-4">
 
-                <li class="task-item">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 18.0003L3.63574 11.6364L5.04996 10.2222L9.9997 15.1709Z"></path></svg>
+                <a href="#" class="project-card">
+                    <div class="flex-grow">
+                        <h2 class="text-base font-semibold text-slate-800 mb-1">QuantumLeap CRM</h2>
+                        <p class="text-sm font-medium text-slate-500 mb-4">A futuristic CRM dashboard designed for next-generation sales teams, focusing on predictive analytics.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">Tailwind CSS</span>
+                        </div>
                     </div>
-                    <div class="task-details">
-                        <p class="text-sm font-medium">Inspect Vehicle & Equipment</p>
-                        <small class="text-sm font-semibold text-slate-400">08:30 AM</small>
+                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
+                        View Project
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </div>
-                </li>
+                </a>
 
-                <li class="task-item">
-                    <div class="timeline-marker">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line"></div>
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 18.0003L3.63574 11.6364L5.04996 10.2222L9.9997 15.1709Z"></path></svg>
+                <a href="#" class="project-card">
+                    <div class="flex-grow">
+                        <h2 class="text-base font-semibold text-slate-800 mb-1">Aura Weather App</h2>
+                        <p class="text-sm font-medium text-slate-500 mb-4">A minimal weather application that uses vibrant gradients to represent current weather conditions.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-pill">Vue.js</span>
+                            <span class="tech-pill">OpenWeather API</span>
+                        </div>
                     </div>
-                    <div class="task-details">
-                        <p class="text-sm font-medium">Patrol Zone Alpha</p>
-                        <small class="text-sm font-semibold text-slate-400">09:00 AM - 11:00 AM</small>
+                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
+                        Live Demo
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </div>
-                </li>
-                
-                <li id="arrival-pin-item" class="task-item">
-                    <div class="timeline-marker">
-                        <div id="arrival-pin" class="arrival-pin"></div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="flex-grow">
+                        <h2 class="text-base font-semibold text-slate-800 mb-1">CodeScribe AI</h2>
+                        <p class="text-sm font-medium text-slate-500 mb-4">An AI-powered tool that automatically generates documentation for Python codebases.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">FastAPI</span>
+                            <span class="tech-pill">GPT-4</span>
+                        </div>
                     </div>
-                    <div class="task-details">
-                        <p class="text-sm font-medium">End of Shift</p>
-                        <small class="text-sm font-semibold text-slate-400">05:00 PM</small>
+                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
+                        View on GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </div>
-                </li>
-            </ul>
+                </a>
+
+            </div>
         </main>
-    </div>
-
-
-    <div id="task-modal" class="fixed inset-0 z-50 hidden">
-        <div id="modal-backdrop" class="absolute inset-0 bg-black/30"></div>
-        <div class="relative w-full max-w-sm bg-white p-6 rounded-xl shadow-lg top-1/4 mx-auto">
-            <h2 id="modal-title" class="text-base font-semibold mb-4">Add New Task</h2>
-            <div>
-                <label for="task-name" class="text-sm font-medium text-slate-600">Task Name</label>
-                <input type="text" id="task-name" class="w-full mt-1 p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[var(--highlight-accent)] focus:border-[var(--highlight-accent)] outline-none">
-            </div>
-            <div class="mt-6 flex justify-end space-x-3">
-                <button id="modal-cancel-btn" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 transition-colors">Cancel</button>
-                <button id="modal-confirm-btn" class="px-4 py-2 text-sm font-medium text-white bg-[var(--primary-action)] rounded-md hover:opacity-90 transition-opacity">Add Task</button>
-            </div>
-        </div>
     </div>
     
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            // This is where you could extend Tailwind further if not using the CDN for a real project
+            // Your Tailwind extensions would go here in a full project
           }
         }
       }
 
       // Base Styles for Components not easily done with just classes
       const componentStyles = `
-        .duty-pill {
+        .social-link {
             padding: 0.375rem 0.875rem; /* py-1.5 px-3.5 */
             border-radius: 9999px; /* rounded-full */
             font-size: 0.875rem; /* text-sm */
@@ -191,93 +156,38 @@
             background-color: white;
             border: 1px solid #e2e8f0;
             color: #475569;
+            text-decoration: none;
         }
-        .duty-pill:hover {
+        .social-link:hover {
             background-color: #f8fafc;
             border-color: #cbd5e1;
-        }
-        .duty-pill.active {
-            background-color: var(--primary-action);
-            color: white;
-            border-color: var(--primary-action);
+            color: #1e293b;
         }
 
-        .task-item {
-            display: flex;
-            align-items: flex-start;
-            cursor: pointer;
-            position: relative;
-            padding: 8px 0;
-        }
-        .task-item.active {
-          background-color: hsl(39 96% 53% / 0.1); /* Highlight color with opacity */
-          border-radius: 8px;
-          margin: 0 -8px; /* Offset padding for full bleed */
-          padding: 8px 8px;
-        }
-        .timeline-marker {
-            position: relative;
+        .project-card {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-right: 1.25rem; /* mr-5 */
-        }
-        .timeline-dot, .arrival-pin {
-            width: 16px;
-            height: 16px;
             background-color: white;
-            border: 3px solid var(--timeline-dot-border);
-            border-radius: 50%;
-            z-index: 1;
-            flex-shrink: 0;
-            transition: border-color 0.3s ease;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.25rem; /* p-5 */
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
         }
-        .task-item.active .timeline-dot {
-            border-color: var(--timeline-dot-border-active);
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07);
         }
-        .timeline-line {
-            width: 2px;
-            flex-grow: 1;
-            background-color: var(--timeline-line);
-            min-height: 48px; /* Minimum space between dots */
-        }
-        .task-item:last-child .timeline-line {
-            display: none;
-        }
-        .task-details {
-            padding-top: 1px;
-        }
-        /* Completed state styles */
-        .task-item.completed .task-details p {
-            text-decoration: line-through;
-            color: #94a3b8;
-        }
-        .task-item.completed .timeline-dot {
-            opacity: 0;
-        }
-        .task-item .checkmark {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: -2px;
-            left: -2px;
-            color: var(--secondary-accent);
-            transform: scale(0);
-            transition: transform 0.3s ease-in-out;
-        }
-        .task-item.completed .checkmark {
-            transform: scale(1);
-        }
-        /* Arrival Pin Styles */
-        #arrival-pin {
-            width: 20px;
-            height: 20px;
-            border-color: var(--arrival-pin-outline);
-            transition: background-color 0.4s ease, border-color 0.4s ease;
-        }
-        #arrival-pin.all-done {
-            background-color: var(--arrival-pin-fill);
-            border-color: var(--arrival-pin-fill);
+        
+        .tech-pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500;
+            border-radius: 9999px;
+            background-color: var(--page-bg);
+            color: var(--primary-action);
         }
       `;
       const styleSheet = document.createElement("style");
@@ -285,100 +195,5 @@
       document.head.appendChild(styleSheet);
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const taskList = document.getElementById('task-list');
-            const arrivalPin = document.getElementById('arrival-pin');
-            const modal = document.getElementById('task-modal');
-            const addTaskBtn = document.getElementById('add-task-btn');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const modalCancelBtn = document.getElementById('modal-cancel-btn');
-
-            const updateActiveTask = () => {
-                const allTasks = Array.from(document.querySelectorAll('.task-item:not(#arrival-pin-item)'));
-                let firstUncompletedFound = false;
-                
-                allTasks.forEach(task => {
-                    task.classList.remove('active');
-                    if (!task.classList.contains('completed') && !firstUncompletedFound) {
-                        task.classList.add('active');
-                        firstUncompletedFound = true;
-                    }
-                });
-            };
-
-            const checkAllComplete = () => {
-                const allTasks = document.querySelectorAll('.task-item:not(#arrival-pin-item)');
-                const allCompleted = Array.from(allTasks).every(task => task.classList.contains('completed'));
-
-                if (allCompleted && allTasks.length > 0) {
-                    arrivalPin.classList.add('all-done');
-                    triggerCelebration();
-                } else {
-                    arrivalPin.classList.remove('all-done');
-                }
-            };
-
-            const triggerCelebration = () => {
-                const particleCount = 30;
-                const pinRect = arrivalPin.getBoundingClientRect();
-                const containerRect = document.getElementById('app-container').getBoundingClientRect();
-                
-                // Position relative to the viewport
-                const startX = pinRect.left + pinRect.width / 2;
-                const startY = pinRect.top + pinRect.height / 2;
-
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    
-                    const angle = Math.random() * 2 * Math.PI;
-                    const radius = Math.random() * 40 + 20;
-                    const endX = Math.cos(angle) * radius;
-                    const endY = Math.sin(angle) * radius;
-                    const color = ['var(--primary-action)', 'var(--secondary-accent)', 'var(--highlight-accent)'][Math.floor(Math.random() * 3)];
-                    
-                    particle.style.backgroundColor = color;
-                    particle.style.left = `${startX}px`;
-                    particle.style.top = `${startY}px`;
-
-                    // We need to overwrite the animation with custom properties to make them move
-                    particle.style.animation = 'none'; // reset animation to apply new properties
-                    particle.offsetHeight; // trigger reflow
-                    particle.style.animation = `particle-burst 0.8s ${Math.random() * 0.2}s ease-out forwards`;
-                    
-                    // The transform is part of the animation, so we don't need to set it here directly
-                    
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        particle.remove();
-                    }, 1000);
-                }
-            };
-
-            // Event Delegation for task completion
-            taskList.addEventListener('click', (e) => {
-                const taskItem = e.target.closest('.task-item:not(#arrival-pin-item)');
-                if (taskItem) {
-                    taskItem.classList.toggle('completed');
-                    updateActiveTask();
-                    checkAllComplete();
-                }
-            });
-
-            // Modal Controls
-            const openModal = () => modal.classList.remove('hidden');
-            const closeModal = () => modal.classList.add('hidden');
-
-            addTaskBtn.addEventListener('click', openModal);
-            modalBackdrop.addEventListener('click', closeModal);
-            modalCancelBtn.addEventListener('click', closeModal);
-
-            // Initial state setup
-            updateActiveTask();
-            checkAllComplete();
-        });
-    </script>
 </body>
 </html>
