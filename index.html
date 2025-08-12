@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jane Doe - Developer Portfolio</title>
+    <title>Cristobal D'Alessio - Portfolio</title>
 
+    <!-- 1. Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- 2. Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- 3. Custom Styles & CSS Variables -->
     <style>
         /* Define the "South Sunset" color palette as CSS variables */
         :root {
@@ -32,20 +35,20 @@
             /* Generous padding for the floating container effect */
             padding: 1rem;
         }
-        @media (min-width: 640px) {
+        @media (min-width: 1024px) {
             body { padding: 2rem; }
         }
 
         /* Custom scrollbar for a more minimal feel */
         .projects-content::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         .projects-content::-webkit-scrollbar-track {
             background: transparent;
         }
         .projects-content::-webkit-scrollbar-thumb {
             background: #e2e8f0;
-            border-radius: 3px;
+            border-radius: 4px;
         }
         .projects-content::-webkit-scrollbar-thumb:hover {
             background: #cbd5e1;
@@ -55,16 +58,19 @@
 
 <body class="text-slate-800">
 
-    <div id="app-container" class="max-w-md mx-auto bg-[var(--app-bg)] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[90vh] max-h-[800px]">
+    <!-- App Container: Now responsive, taking up most of the screen -->
+    <div id="app-container" class="w-full max-w-7xl mx-auto bg-[var(--app-bg)] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[95vh] max-h-[900px]">
         
+        <!-- Fixed Header -->
         <header class="p-6 border-b border-slate-100 flex-shrink-0">
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
                 <div>
-                    <h1 class="text-2xl font-bold text-slate-900">Jane Doe</h1>
-                    <p class="text-base font-medium text-[var(--secondary-accent)]">Software Developer & Designer</p>
+                    <h1 class="text-2xl font-bold text-slate-900">Cristobal D'Alessio</h1>
+                    <p class="text-base font-medium text-[var(--secondary-accent)]">Communications Advisor and App Dev Enthusiast</p>
                 </div>
+                <!-- Contact Me button with custom tooltip -->
                 <div class="group relative">
-                    <a href="mailto:hello@example.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-action)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                    <a href="mailto:hello@example.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-action)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                           <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -75,60 +81,78 @@
                     </div>
                 </div>
             </div>
+            <!-- Social Links -->
             <div class="flex items-center space-x-3">
                 <a href="#" class="social-link">GitHub</a>
                 <a href="#" class="social-link">LinkedIn</a>
-                <a href="#" class="social-link">Portfolio</a>
+                <a href="#" class="social-link">Blog</a>
             </div>
         </header>
 
-        <main id="projects-content" class="projects-content flex-grow overflow-y-auto p-6">
-            <div class="space-y-4">
+        <!-- Scrolling Content Area -->
+        <main id="projects-content" class="projects-content flex-grow overflow-y-auto p-6 bg-slate-50/50">
+            <!-- Responsive Grid for Projects -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
+                <!-- Project Card 1 -->
                 <a href="#" class="project-card">
-                    <div class="flex-grow">
-                        <h2 class="text-base font-semibold text-slate-800 mb-1">QuantumLeap CRM</h2>
-                        <p class="text-sm font-medium text-slate-500 mb-4">A futuristic CRM dashboard designed for next-generation sales teams, focusing on predictive analytics.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="tech-pill">React</span>
-                            <span class="tech-pill">Node.js</span>
-                            <span class="tech-pill">Tailwind CSS</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
-                        View Project
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">QuantumLeap CRM</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">A futuristic CRM dashboard designed for next-generation sales teams, focusing on predictive analytics.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">React</span>
+                        <span class="tech-pill">Node.js</span>
+                        <span class="tech-pill">Tailwind CSS</span>
                     </div>
                 </a>
 
+                <!-- Project Card 2 -->
                 <a href="#" class="project-card">
-                    <div class="flex-grow">
-                        <h2 class="text-base font-semibold text-slate-800 mb-1">Aura Weather App</h2>
-                        <p class="text-sm font-medium text-slate-500 mb-4">A minimal weather application that uses vibrant gradients to represent current weather conditions.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="tech-pill">Vue.js</span>
-                            <span class="tech-pill">OpenWeather API</span>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
-                        Live Demo
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">Aura Weather App</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">A minimal weather application that uses vibrant gradients to represent current weather conditions.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">Vue.js</span>
+                        <span class="tech-pill">OpenWeather API</span>
                     </div>
                 </a>
 
+                <!-- Project Card 3 -->
                 <a href="#" class="project-card">
-                    <div class="flex-grow">
-                        <h2 class="text-base font-semibold text-slate-800 mb-1">CodeScribe AI</h2>
-                        <p class="text-sm font-medium text-slate-500 mb-4">An AI-powered tool that automatically generates documentation for Python codebases.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="tech-pill">Python</span>
-                            <span class="tech-pill">FastAPI</span>
-                            <span class="tech-pill">GPT-4</span>
-                        </div>
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">CodeScribe AI</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">An AI-powered tool that automatically generates documentation for Python codebases.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">FastAPI</span>
+                        <span class="tech-pill">GPT-4</span>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-slate-100 text-sm font-semibold text-[var(--primary-action)] flex items-center justify-end">
-                        View on GitHub
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </a>
+
+                <!-- Project Card 4 -->
+                <a href="#" class="project-card">
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">Momentum Habits</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">A lightweight, cross-platform mobile app for tracking daily habits with a focus on streaks.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">Flutter</span>
+                        <span class="tech-pill">Firebase</span>
+                    </div>
+                </a>
+                
+                <!-- Project Card 5 -->
+                <a href="#" class="project-card">
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">Portfolio Site v1</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">The very page you're looking at now, built with Tailwind CSS and a focus on minimalism.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">HTML</span>
+                        <span class="tech-pill">Tailwind CSS</span>
+                    </div>
+                </a>
+
+                <!-- Project Card 6 -->
+                <a href="#" class="project-card">
+                    <h2 class="text-base font-semibold text-slate-800 mb-1">Data Visualizer</h2>
+                    <p class="text-sm font-medium text-slate-500 mb-4">A web tool for creating beautiful charts and graphs from CSV data uploads.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill">D3.js</span>
+                        <span class="tech-pill">JavaScript</span>
                     </div>
                 </a>
 
@@ -136,6 +160,7 @@
         </main>
     </div>
     
+    <!-- Local Tailwind Configuration & Component Styles -->
     <script>
       tailwind.config = {
         theme: {
