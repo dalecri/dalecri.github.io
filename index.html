@@ -15,16 +15,19 @@
 
     <!-- 3. Custom Styles & CSS Variables -->
     <style>
-        /* Define the "South Sunset" color palette as CSS variables */
+        /* "Violet Volt" - Slick & Vibrant Color Palette */
         :root {
-            --page-bg: #FEF6F4;
-            --app-bg: #FCFAF8;
-            --primary-action: #F96204;
-            --secondary-accent: #9C84C2;
-            --highlight-accent: #FCA712;
-            --softer-accent: #FCBC94;
-            --softest-accent: #F7B09D;
-            --subtle-purple: #D5A3BB;
+            --page-bg: #1F2937; /* Dark Slate background */
+            --app-bg: #FFFFFF;  /* Crisp White container */
+            --subtle-bg: #F9FAFB; /* Very Light Gray for content area */
+            --text-primary: #111827; /* Almost Black for text */
+            --text-secondary: #6B7280; /* Medium Gray for subtitles */
+            --primary-accent: #8B5CF6; /* Deep, vibrant purple */
+            --highlight-accent: #EC4899; /* Energetic pink for highlights */
+            --orange-accent: #F97316; /* NEW: Vibrant orange for description */
+            --pill-bg: #F5F3FF; /* Very light purple for pill background */
+            --pill-text: #7C3AED; /* Strong purple for pill text */
+            --border-color: #E5E7EB; /* Light Gray for borders */
             --font-family: 'Inter', sans-serif;
         }
 
@@ -32,148 +35,115 @@
         body {
             font-family: var(--font-family);
             background-color: var(--page-bg);
-            /* Generous padding for the floating container effect */
             padding: 1rem;
+            min-height: 100vh;
         }
         @media (min-width: 1024px) {
             body { padding: 2rem; }
         }
-
-        /* Custom scrollbar for a more minimal feel */
-        .projects-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .projects-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .projects-content::-webkit-scrollbar-thumb {
-            background: #e2e8f0;
-            border-radius: 4px;
-        }
-        .projects-content::-webkit-scrollbar-thumb:hover {
-            background: #cbd5e1;
-        }
     </style>
 </head>
 
-<body class="text-slate-800">
+<body class="text-[var(--text-primary)]">
 
-    <!-- App Container: Now responsive, taking up most of the screen -->
-    <div id="app-container" class="w-full max-w-7xl mx-auto bg-[var(--app-bg)] rounded-2xl shadow-xl overflow-hidden flex flex-col h-[95vh] max-h-[900px]">
+    <!-- App Container -->
+    <div id="app-container" class="w-full max-w-7xl mx-auto bg-[var(--app-bg)] rounded-2xl shadow-2xl overflow-hidden">
         
-        <!-- Fixed Header -->
-        <header class="p-6 border-b border-slate-100 flex-shrink-0">
-            <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-                <!-- Wrapper for Portrait and Info -->
-                <div class="flex items-center gap-4">
-                    <img src="https://placehold.co/80x80/FEF6F4/F96204?text=CD" alt="Portrait of Cristobal D'Alessio" class="rounded-full w-16 h-16 md:w-20 md:h-20 border-2 border-[var(--softer-accent)] flex-shrink-0">
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900">Cristobal D'Alessio</h1>
-                        <p class="text-base font-medium text-[var(--secondary-accent)]">Communications Advisor and App Dev Enthusiast</p>
+        <!-- Header -->
+        <header class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <!-- Left Column: Info & Description -->
+                <div class="md:col-span-3">
+                    <h1 class="text-3xl font-bold text-[var(--text-primary)]">Cristobal D'Alessio</h1>
+                    <p class="text-lg font-medium text-[var(--text-secondary)] mt-1">Communications Advisor and App Dev Enthusiast</p>
+                    
+                    <!-- UPDATED: Social links -->
+                    <div class="flex items-center space-x-3 mt-6">
+                        <a href="#" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/cristobal-d-alessio-a4598513a" target="_blank" class="social-link">LinkedIn</a>
                     </div>
+                    
+                    <p class="text-base italic font-medium text-[var(--orange-accent)] mt-6 max-w-2xl">
+                        Welcome to my digital space. This page is a curated collection of my latest projects, experiments, and explorations in the world of application development. It's a living portfolio where I blend my passion for clear communication with my enthusiasm for creating clean, functional, and beautiful software.
+                    </p>
                 </div>
-                <!-- Contact Me button with custom tooltip -->
-                <div class="group relative">
-                    <a href="mailto:hello@example.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-action)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                        </svg>
-                    </a>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1.5 bg-[var(--softest-accent)] text-white text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        Contact Me
+
+                <!-- Right Column: Portrait & Contact Button -->
+                <div class="md:col-span-2 relative">
+                    <img src="https://placehold.co/400x500/F5F3FF/8B5CF6?text=CD" alt="Portrait of Cristobal D'Alessio" class="rounded-xl w-full h-full object-cover min-h-[250px] md:min-h-0">
+                    
+                    <div class="absolute top-4 right-4 group" id="contact-button-wrapper">
+                        <a href="mailto:crisdalessio@gmail.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-accent)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
-            <!-- Social Links -->
-            <div class="flex items-center space-x-3">
-                <a href="#" class="social-link">GitHub</a>
-                <a href="#" class="social-link">LinkedIn</a>
-                <a href="#" class="social-link">Blog</a>
-            </div>
-            <!-- UPDATED: Description Text -->
-            <p class="text-base font-medium text-[var(--secondary-accent)] bg-[var(--subtle-purple)]/20 p-4 rounded-lg mt-4 max-w-3xl">
-               <i>Welcome to my digital space. This page is a curated collection of my latest projects, experiments, and explorations in the world of application development. It's a living portfolio where I blend my passion for clear communication with my enthusiasm for creating clean, functional, and beautiful software. </i>
-            </p>
         </header>
 
-        <!-- Scrolling Content Area -->
-        <main id="projects-content" class="projects-content flex-grow overflow-y-auto p-6 bg-slate-50/50">
-            <!-- Responsive Grid for Projects -->
+        <!-- Jump-to-section arrow -->
+        <div class="text-center py-8">
+            <a href="#projects" id="jump-to-projects" class="inline-block text-[var(--primary-accent)] hover:text-[var(--highlight-accent)] transition-colors animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- Content Area -->
+        <main id="projects" class="p-6 bg-[var(--subtle-bg)]">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[var(--text-primary)]">My Creations</h2>
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-                <!-- Project Card 1 -->
-           <!-- NEW Pomodoro App Project Card -->
-                <a href="https://dalecri.github.io/pomodoro-app/" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">Pomodoro App</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">A minimal timer app to boost productivity using the Pomodoro Technique.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">CSS</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
-                </a>
-
-                <!-- Project Card 2 -->
-              <!-- Noise Machine Project Card -->
+                <!-- Project Cards -->
                 <a href="https://dalecri.github.io/noise-machine/" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">White Noise Machine</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">A sleek, themeable sound generator for focus and concentration, built with the Web Audio API.</p>
+                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">White Noise Machine</h2>
+                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A sleek, themeable sound generator for focus and concentration, built with the Web Audio API.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span class="tech-pill">HTML</span>
                         <span class="tech-pill">Tailwind CSS</span>
                         <span class="tech-pill">JavaScript</span>
                     </div>
                 </a>
-
-                <!-- Project Card 3 -->
-                <!-- Japanese Garden Project Card -->
                 <a href="https://dalecri.github.io/japanese-garden/" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">Voxel Japanese Garden</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">A living 3D world built with three.js. Add and complete tasks to grow and shape an interactive voxel garden.</p>
+                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Voxel Japanese Garden</h2>
+                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A living 3D world built with three.js. Add and complete tasks to grow and shape an interactive voxel garden.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span class="tech-pill">three.js</span>
                         <span class="tech-pill">HTML</span>
                         <span class="tech-pill">JavaScript</span>
                     </div>
                 </a>
-
-                <!-- Project Card 4 -->
-               <!-- Lexicon Luxe Project Card -->
                 <a href="https://dalecri.github.io/lexicon-app/" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">Lexicon Luxe</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">A personal dictionary app that finds definitions and translations, saving your vocabulary locally in the browser.</p>
+                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Lexicon Luxe</h2>
+                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A personal dictionary app that finds definitions and translations, saving your vocabulary locally in the browser.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span class="tech-pill">HTML</span>
                         <span class="tech-pill">CSS</span>
                         <span class="tech-pill">JavaScript</span>
                     </div>
                 </a>
-                
-                <!-- Project Card 5 -->
-                <a href="#" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">Portfolio Site v1</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">The very page you're looking at now, built with Tailwind CSS and a focus on minimalism.</p>
+                <a href="https://dalecri.github.io/pomodoro-app/" class="project-card">
+                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Pomodoro App</h2>
+                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A minimal timer app to boost productivity using the Pomodoro Technique.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">Tailwind CSS</span>
-                    </div>
-                </a>
-
-                <!-- Project Card 6 -->
-                <a href="#" class="project-card">
-                    <h2 class="text-base font-semibold text-slate-800 mb-1">Data Visualizer</h2>
-                    <p class="text-sm font-medium text-slate-500 mb-4">A web tool for creating beautiful charts and graphs from CSV data uploads.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">D3.js</span>
+                        <span class="tech-pill">CSS</span>
                         <span class="tech-pill">JavaScript</span>
                     </div>
                 </a>
-
             </div>
         </main>
     </div>
     
+    <!-- FIXED: Tooltip moved outside the main container to prevent clipping -->
+    <div id="tooltip-container" class="absolute top-0 left-0 w-max px-3 py-1.5 bg-[var(--text-primary)] text-white text-xs font-semibold rounded-md opacity-0 transition-opacity whitespace-nowrap pointer-events-none z-50">
+        crisdalessio@gmail.com
+    </div>
+
     <!-- Local Tailwind Configuration & Component Styles -->
     <script>
       tailwind.config = {
@@ -184,59 +154,84 @@
         }
       }
 
-      // Base Styles for Components not easily done with just classes
+      // Base Styles for Components
       const componentStyles = `
         .social-link {
-            padding: 0.375rem 0.875rem; /* py-1.5 px-3.5 */
-            border-radius: 9999px; /* rounded-full */
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
             transition: all 0.2s ease-in-out;
-            background-color: white;
-            border: 1px solid #e2e8f0;
-            color: #475569;
+            background-color: var(--app-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
             text-decoration: none;
         }
         .social-link:hover {
-            background-color: #f8fafc;
-            border-color: #cbd5e1;
-            color: #1e293b;
+            background-color: var(--subtle-bg);
+            border-color: var(--primary-accent);
+            color: var(--primary-accent);
         }
-
         .project-card {
             display: flex;
             flex-direction: column;
             background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            padding: 1.25rem; /* p-5 */
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             text-decoration: none;
         }
         .project-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
         }
-        
         .tech-pill {
             display: inline-block;
             padding: 0.25rem 0.75rem;
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 500;
+            font-size: 0.75rem;
+            font-weight: 600;
             border-radius: 9999px;
-            background-color: var(--page-bg);
-            color: var(--primary-action);
+            background-color: var(--pill-bg);
+            color: var(--pill-text);
         }
       `;
       const styleSheet = document.createElement("style");
       styleSheet.innerText = componentStyles;
       document.head.appendChild(styleSheet);
+      
+      // JavaScript for smooth scrolling and tooltip positioning
+      document.addEventListener('DOMContentLoaded', () => {
+          const jumpLink = document.getElementById('jump-to-projects');
+          if (jumpLink) {
+              jumpLink.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const targetId = jumpLink.getAttribute('href').substring(1);
+                  const targetElement = document.getElementById(targetId);
+                  if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+              });
+          }
+
+          // Tooltip logic
+          const contactButtonWrapper = document.getElementById('contact-button-wrapper');
+          const tooltip = document.getElementById('tooltip-container');
+          if(contactButtonWrapper && tooltip) {
+              contactButtonWrapper.addEventListener('mouseenter', () => {
+                  const rect = contactButtonWrapper.getBoundingClientRect();
+                  tooltip.style.opacity = '1';
+                  // Position tooltip above the button
+                  tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+                  tooltip.style.top = `${rect.top - tooltip.offsetHeight - 8}px`; // 8px spacing
+              });
+              contactButtonWrapper.addEventListener('mouseleave', () => {
+                  tooltip.style.opacity = '0';
+              });
+          }
+      });
     </script>
 
 </body>
 </html>
-
-
-
-
