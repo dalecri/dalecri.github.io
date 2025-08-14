@@ -3,189 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristobal D'Alessio - Portfolio</title>
+    <title>Cristobal D'Alessio - Mission Portfolio</title>
 
     <!-- 1. Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 2. Google Fonts: Inter -->
+    <!-- 2. Google Fonts: Inter & Space Mono for effect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- 3. Custom Styles & CSS Variables -->
     <style>
-        /* "Violet Volt" - Slick & Vibrant Color Palette */
+        /* "Astro-Explorer" Theme v2 - Final Polish */
         :root {
-            --page-bg: #1F2937; /* Dark Slate background */
-            --app-bg: #FFFFFF;  /* Crisp White container */
-            --subtle-bg: #F9FAFB; /* Very Light Gray for content area */
-            --text-primary: #111827; /* Almost Black for text */
-            --text-secondary: #6B7280; /* Medium Gray for subtitles */
-            --primary-accent: #8B5CF6; /* Deep, vibrant purple */
-            --highlight-accent: #EC4899; /* Energetic pink for highlights */
-            --orange-accent: #F97316; /* NEW: Vibrant orange for description */
-            --pill-bg: #F5F3FF; /* Very light purple for pill background */
-            --pill-text: #7C3AED; /* Strong purple for pill text */
-            --border-color: #E5E7EB; /* Light Gray for borders */
-            --font-family: 'Inter', sans-serif;
+            --page-bg: #0D1117; /* Deep space black */
+            --container-bg: #161B22; /* Dark container */
+            --border-color: #30363D; /* Subtle border */
+            --text-primary: #C9D1D9; /* Light gray for body text */
+            --text-bright: #F0F6FC; /* Bright white for headers */
+            --accent-teal: #2DD4BF; /* Vibrant Teal for accents */
+            --accent-pink: #F778BA; /* Neon pink for highlights */
+            --accent-red: #F87171; /* Red for the project planet */
+            --accent-deep-blue: #2563EB; /* Deep ocean blue for history dots */
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace;
         }
 
         /* Apply base styles */
-        body {
-            font-family: var(--font-family);
-            background-color: var(--page-bg);
-            padding: 1rem;
-            min-height: 100vh;
+        html {
+            scroll-behavior: smooth;
         }
-        @media (min-width: 1024px) {
-            body { padding: 2rem; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--page-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* Starfield Background */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Celestial Body hover/active effects */
+        .celestial-body {
+            cursor: pointer;
+        }
+        .celestial-icon {
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 6px currentColor);
+        }
+        .celestial-body:hover .celestial-icon {
+            filter: drop-shadow(0 0 12px var(--accent-pink));
+        }
+        
+        /* Constellation Path Animation */
+        .constellation-path {
+            stroke-dasharray: 4 8; /* Creates the dotted/dashed look */
+            stroke-dashoffset: 0;
+            animation: move-dashes 40s linear infinite;
+        }
+        @keyframes move-dashes {
+            from {
+                stroke-dashoffset: 1000;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        .constellation-path.paused {
+            animation-play-state: paused;
+        }
+
+        /* Header Cockpit styles */
+        .cockpit-header {
+            background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 1)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .cockpit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 50%, var(--container-bg) 100%);
+        }
+
+        .hologram {
+            animation: flicker 5s infinite ease-in-out;
+            filter: drop-shadow(0 0 15px var(--accent-teal));
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        /* Pulsating animation for project planet */
+        .pulsate {
+            animation: slow-pulse 3s infinite ease-in-out;
+            transform-origin: center;
+            transform-box: fill-box; /* Ensures scaling is relative to the element itself */
+        }
+        @keyframes slow-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
     </style>
 </head>
 
-<body class="text-[var(--text-primary)]">
+<body class="p-4 md:p-8">
+    <canvas id="starfield"></canvas>
 
-    <!-- App Container -->
-    <div id="app-container" class="w-full max-w-7xl mx-auto bg-[var(--app-bg)] rounded-2xl shadow-2xl overflow-hidden">
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl mx-auto bg-[var(--container-bg)] rounded-2xl shadow-2xl border border-[var(--border-color)] overflow-hidden">
         
-        <!-- Header -->
-        <header class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-                <!-- Left Column: Info & Description -->
-                <div class="md:col-span-3">
-                    <h1 class="text-3xl font-bold text-[var(--text-primary)]">Cristobal D'Alessio</h1>
-                    <p class="text-lg font-medium text-[var(--text-secondary)] mt-1">Communications Advisor and App Dev Enthusiast</p>
-                    
-                    <!-- UPDATED: Social links -->
-                    <div class="flex items-center space-x-3 mt-6">
-                        <a href="#" class="social-link">GitHub</a>
-                        <a href="https://www.linkedin.com/in/cristobal-d-alessio-a4598513a" target="_blank" class="social-link">LinkedIn</a>
-                    </div>
-                    
-                    <p class="text-base italic font-medium text-[var(--orange-accent)] mt-6 max-w-2xl">
-                        Welcome to my digital space. This page is a curated collection of my latest projects, experiments, and explorations in the world of application development. It's a living portfolio where I blend my passion for clear communication with my enthusiasm for creating clean, functional, and beautiful software.
-                    </p>
+        <!-- Header reimagined as a spaceship cockpit -->
+        <header class="cockpit-header p-6 md:p-8 border-b border-[var(--border-color)]">
+            <div class="cockpit-overlay"></div>
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <!-- Holographic Portrait -->
+                <div class="relative flex-shrink-0">
+                    <img src="https://placehold.co/150x150/161B22/2DD4BF?text=CD" alt="Portrait of Cristobal D'Alessio" class="hologram rounded-full w-32 h-32 md:w-40 md:h-40 border-2 border-[var(--accent-teal)] bg-black/50">
+                    <span class="absolute bottom-2 right-2 w-4 h-4 bg-[var(--accent-teal)] rounded-full border-2 border-[var(--container-bg)] animate-pulse" title="Status: Online"></span>
                 </div>
-
-                <!-- Right Column: Portrait & Contact Button -->
-                <div class="md:col-span-2 relative">
-                    <img src="https://placehold.co/400x500/F5F3FF/8B5CF6?text=CD" alt="Portrait of Cristobal D'Alessio" class="rounded-xl w-full h-full object-cover min-h-[250px] md:min-h-0">
-                    
-                    <div class="absolute top-4 right-4 group" id="contact-button-wrapper">
-                        <a href="mailto:crisdalessio@gmail.com" id="contact-btn" class="w-10 h-10 bg-[var(--primary-accent)] text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                            </svg>
-                        </a>
-                    </div>
+                <!-- HUD Info Display -->
+                <div class="text-center md:text-right">
+                    <p class="font-mono text-lg text-[var(--accent-teal)]">[MISSION COMMANDER]</p>
+                    <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-bright)] mt-1">Cristobal D'Alessio</h1>
+                    <p class="mt-4 text-base max-w-md ml-auto">
+                        Communications Advisor and App Dev Enthusiast on a journey through the cosmos of code.
+                    </p>
                 </div>
             </div>
         </header>
 
-        <!-- Jump-to-section arrow -->
-        <div class="text-center py-8">
-            <a href="#projects" id="jump-to-projects" class="inline-block text-[var(--primary-accent)] hover:text-[var(--highlight-accent)] transition-colors animate-bounce">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-            </a>
-        </div>
+        <!-- Star Chart: Projects as a Journey -->
+        <section class="p-6 md:p-8 text-center">
+            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Constellation Path</h2>
+            <div class="relative w-full max-w-4xl mx-auto">
+                <svg id="constellation-svg" viewBox="0 0 600 200" class="w-full h-auto">
+                    <!-- Path will be drawn by JavaScript -->
+                    <path id="constellation-path" stroke="var(--border-color)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-        <!-- Content Area -->
-        <main id="projects" class="p-6 bg-[var(--subtle-bg)]">
-            <h2 class="text-3xl font-bold text-center mb-8 text-[var(--text-primary)]">My Creations</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Project Cards -->
-                <a href="https://dalecri.github.io/noise-machine/" class="project-card">
-                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">White Noise Machine</h2>
-                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A sleek, themeable sound generator for focus and concentration, built with the Web Audio API.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">Tailwind CSS</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
-                </a>
-                <a href="https://dalecri.github.io/japanese-garden/" class="project-card">
-                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Voxel Japanese Garden</h2>
-                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A living 3D world built with three.js. Add and complete tasks to grow and shape an interactive voxel garden.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">three.js</span>
-                        <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
-                </a>
-                <a href="https://dalecri.github.io/lexicon-app/" class="project-card">
-                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Lexicon Luxe</h2>
-                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A personal dictionary app that finds definitions and translations, saving your vocabulary locally in the browser.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">CSS</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
-                </a>
-                <a href="https://dalecri.github.io/pomodoro-app/" class="project-card">
-                    <h2 class="text-base font-semibold text-[var(--text-primary)] mb-1">Pomodoro App</h2>
-                    <p class="text-sm font-medium text-[var(--text-secondary)] mb-4">A minimal timer app to boost productivity using the Pomodoro Technique.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="tech-pill">HTML</span>
-                        <span class="tech-pill">CSS</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
-                </a>
+                    <!-- Celestial Bodies will be positioned by JavaScript -->
+                    <g data-body-id="body1" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Algonquin (App Dev)</text>
+                    </g>
+                    <g data-body-id="body2" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (IT)</text>
+                    </g>
+                    <g data-body-id="body3" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="-20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Algonquin (PR)</text>
+                    </g>
+                    <g data-body-id="body4" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (Social Media)</text>
+                    </g>
+                    <g data-body-id="body5" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="20" fill="var(--text-primary)" font-size="9" text-anchor="middle">UOttawa (BA)</text>
+                    </g>
+                    <g data-body-id="body6" class="celestial-body">
+                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
+                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (Media)</text>
+                    </g>
+                    <a href="#mission-logs" data-body-id="body7" class="celestial-body">
+                        <circle class="celestial-icon pulsate" r="10" fill="var(--accent-red)" style="color:var(--accent-red)"/>
+                        <text class="font-mono" y="-20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Personal Projects</text>
+                    </a>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Tech Bay: Skills -->
+        <section class="p-6 md:p-8 border-t border-[var(--border-color)]">
+            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Tech Bay</h2>
+            <div class="flex flex-wrap justify-center items-center gap-8">
+                 <div class="group relative text-center">
+                    <svg class="w-12 h-12 text-[var(--accent-teal)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 11l-.262-2.845a2.002 2.002 0 011.99-2.155h5.07a2.002 2.002 0 011.99 2.155L16.263 11m-7.007 9a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Front-End Designer</span>
+                </div>
+                <div class="group relative text-center">
+                    <svg class="w-12 h-12 text-[var(--accent-pink)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8z"></path></svg>
+                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Social Media Expert</span>
+                </div>
+                <div class="group relative text-center">
+                    <svg class="w-12 h-12 text-[var(--accent-teal)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Media Relations Pro</span>
+                </div>
+                <div class="group relative text-center">
+                    <svg class="w-12 h-12 text-[var(--accent-purple)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Public Relations</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Logs: Projects Only -->
+        <main id="mission-logs" class="p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Mission Logs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="project-noise-machine" class="project-card"></div>
+                <div id="project-japanese-garden" class="project-card"></div>
+                <div id="project-lexicon-app" class="project-card"></div>
+                <div id="project-pomodoro-app" class="project-card"></div>
             </div>
         </main>
+        
+        <!-- Footer: Communications Array -->
+        <footer class="p-6 border-t border-[var(--border-color)] text-center">
+             <div class="flex items-center justify-center space-x-4">
+                <a href="#" class="social-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/cristobal-d-alessio-a4598513a" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://codepen.io/crisdalessio" target="_blank" class="social-link">CodePen</a>
+                <a href="mailto:crisdalessio@gmail.com" class="social-link">Email</a>
+            </div>
+        </footer>
     </div>
     
-    <!-- FIXED: Tooltip moved outside the main container to prevent clipping -->
-    <div id="tooltip-container" class="absolute top-0 left-0 w-max px-3 py-1.5 bg-[var(--text-primary)] text-white text-xs font-semibold rounded-md opacity-0 transition-opacity whitespace-nowrap pointer-events-none z-50">
-        crisdalessio@gmail.com
-    </div>
+    <!-- Tooltip for Star Chart -->
+    <div id="star-chart-tooltip" class="absolute top-0 left-0 w-max max-w-xs p-4 bg-[var(--container-bg)] border border-[var(--border-color)] rounded-lg shadow-lg text-sm opacity-0 transition-opacity pointer-events-none z-50"></div>
 
-    <!-- Local Tailwind Configuration & Component Styles -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            // Your Tailwind extensions would go here in a full project
-          }
-        }
+      // Starfield background effect
+      const starfield = document.getElementById('starfield');
+      const ctx = starfield.getContext('2d');
+      function resizeCanvas() {
+        starfield.width = window.innerWidth;
+        starfield.height = window.innerHeight;
       }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      const stars = Array.from({ length: 300 }, () => ({
+        x: Math.random() * starfield.width,
+        y: Math.random() * starfield.height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.1,
+        vy: (Math.random() - 0.5) * 0.1
+      }));
+      function animateStars() {
+        ctx.clearRect(0, 0, starfield.width, starfield.height);
+        stars.forEach(star => {
+          star.x += star.vx;
+          star.y += star.vy;
+          if (star.x < 0 || star.x > starfield.width) star.vx = -star.vx;
+          if (star.y < 0 || star.y > starfield.height) star.vy = -star.vy;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
+
+      // Populate data and handle interactions
+      document.addEventListener('DOMContentLoaded', () => {
+        const tooltipData = {
+            'body1': { title: 'Mobile App Design & Dev', institution: 'Algonquin College', date: '2015 - 2018', details: ['Understood mobile app creation and UX/UI principles.', 'Proficiency in JavaScript (React), Java, Swift, HTML, and CSS.', '🏅 Acted as project coordinator for the "Simple Split" React-based application.'] },
+            'body2': { title: 'Desktop Support Technician', institution: 'Statistics Canada', date: '2018 - 2020', details: ['Provided IT support for employees, including hardware and UI assistance.', 'Helped lead the migration and training for the Virtual Desktop Interface (VDI) technology.'] },
+            'body3': { title: 'Diploma, Public Relations', institution: 'Algonquin College', date: '2018 - 2020', details: ['Learned to create communication plans, press releases, and social media campaigns.', 'Gained experience in event coordination and fundraising.', '🏅 Designed the winning logo for the "Hope Heals" charity campaign ($22k raised).'] },
+            'body4': { title: 'Communications Advisor (IS-02)', institution: 'Statistics Canada', date: '2020 - 2023', details: ['Oversaw social media publishing for an audience of 600K+.', 'Supported social media campaigns for major economic releases.', 'Reported on social media reception using metric-driven insights.'] },
+            'body5': { title: 'Honours Bachelor of PR', institution: 'University of Ottawa', date: '2020 - 2023', details: ['Enhanced PR skills through virtual group projects.', 'Applied crisis communication strategies and management cycles.', 'Acquired knowledge of audience reception study tools and research principles.'] },
+            'body6': { title: 'Communications Officer (Acting IS-03)', institution: 'Statistics Canada', date: '2023 - Present', details: ['Conduct on-site media lockups for major economic releases.', 'Monitor media hotline and manage journalist requests.', 'Liaise with journalists to negotiate interviews and manage deadlines.'] }
+        };
+
+        const projects = [
+          { id: 'project-noise-machine', title: 'Noise Machine', desc: 'A sleek, themeable sound generator for focus and concentration, built with the Web Audio API.', tags: ['HTML', 'Tailwind CSS', 'JavaScript'], url: 'https://dalecri.github.io/noise-machine/' },
+          { id: 'project-japanese-garden', title: 'Voxel Japanese Garden', desc: 'A living 3D world built with three.js. Add and complete tasks to grow and shape an interactive voxel garden.', tags: ['three.js', 'HTML', 'JavaScript'], url: 'https://dalecri.github.io/japanese-garden/' },
+          { id: 'project-lexicon-app', title: 'Lexicon Luxe', desc: 'A personal dictionary app that finds definitions and translations, saving your vocabulary locally in the browser.', tags: ['HTML', 'CSS', 'JavaScript'], url: 'https://dalecri.github.io/lexicon-app/' },
+          { id: 'project-pomodoro-app', title: 'Pomodoro App', desc: 'A minimal timer app to boost productivity using the Pomodoro Technique.', tags: ['HTML', 'CSS', 'JavaScript'], url: 'https://dalecri.github.io/pomodoro-app/' }
+        ];
+
+        projects.forEach(p => {
+            const card = document.getElementById(p.id);
+            if (card) {
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold text-[var(--text-bright)] mb-2">${p.title}</h3>
+                    <p class="text-sm text-[var(--text-primary)] mb-4 flex-grow">${p.desc}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${p.tags.map(tag => `<span class="tech-pill">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${p.url}" target="_blank" class="text-sm font-bold text-[var(--accent-teal)] hover:underline self-start">Establish Comms &rarr;</a>
+                `;
+            }
+        });
+
+        // Dynamic Constellation Logic
+        const svg = document.getElementById('constellation-svg');
+        const path = document.getElementById('constellation-path');
+        const bodies = document.querySelectorAll('.celestial-body');
+        let isPaused = false;
+        let animationFrameId;
+
+        const pathDefinition = (t) => {
+            const y1 = 125 + 75 * Math.sin(t * 0.8 + 1);
+            const y2 = 100 - 50 * Math.sin(t * 1.2 + 2);
+            const y3 = 125 + 75 * Math.sin(t * 0.7 + 3);
+            const y4 = 100 + 50 * Math.sin(t * 1.5 + 4);
+            return `M 50 ${y1} C 150 ${y1}, 150 ${y2}, 250 ${y2} S 350 ${y3}, 450 ${y3} S 550 ${y4}, 550 ${y4}`;
+        };
+
+        const bodyPositions = [0, 0.25, 0.4, 0.6, 0.8, 0.9, 1];
+        
+        function updateConstellation(time) {
+            if (isPaused) {
+                animationFrameId = requestAnimationFrame(updateConstellation);
+                return;
+            }
+            const t = time * 0.0001;
+            const newD = pathDefinition(t);
+            path.setAttribute('d', newD);
+            
+            const pathLength = path.getTotalLength();
+            bodies.forEach((body, index) => {
+                const point = path.getPointAtLength(bodyPositions[index] * pathLength);
+                body.setAttribute('transform', `translate(${point.x}, ${point.y})`);
+            });
+
+            path.style.strokeDashoffset = 1000 - (time * 0.05 % 1000);
+
+            animationFrameId = requestAnimationFrame(updateConstellation);
+        }
+        
+        animationFrameId = requestAnimationFrame(updateConstellation);
+
+        // Tooltip logic for star chart
+        const tooltip = document.getElementById('star-chart-tooltip');
+        bodies.forEach(body => {
+            const bodyId = body.dataset.bodyId;
+            const data = tooltipData[bodyId];
+
+            body.addEventListener('mouseenter', (event) => {
+                isPaused = true;
+                if (data) {
+                    tooltip.innerHTML = `
+                        <h4 class="font-bold text-[var(--text-bright)]">${data.title}</h4>
+                        <p class="font-mono text-xs text-[var(--accent-teal)]">${data.institution} // ${data.date}</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-xs">
+                            ${data.details.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    `;
+                    tooltip.style.opacity = '1';
+                }
+            });
+
+            body.addEventListener('mousemove', (event) => {
+                // Smart tooltip positioning
+                const tooltipRect = tooltip.getBoundingClientRect();
+                const padding = 20;
+                let left = event.clientX + padding;
+                let top = event.clientY + padding;
+
+                if (left + tooltipRect.width > window.innerWidth) {
+                    left = event.clientX - tooltipRect.width - padding;
+                }
+                if (top + tooltipRect.height > window.innerHeight) {
+                    top = event.clientY - tooltipRect.height - padding;
+                }
+
+                tooltip.style.left = `${left}px`;
+                tooltip.style.top = `${top}px`;
+            });
+
+            body.addEventListener('mouseleave', () => {
+                isPaused = false;
+                if (data) {
+                    tooltip.style.opacity = '0';
+                }
+            });
+        });
+
+        // Intersection Observer for highlighting active planet
+        const missionLogSection = document.getElementById('mission-logs');
+        const observer = new IntersectionObserver((entries) => {
+            const projectsBody = document.querySelector('[data-body-id="body7"]');
+            if (entries[0].isIntersecting) {
+                if(projectsBody) projectsBody.classList.add('active');
+            } else {
+                if(projectsBody) projectsBody.classList.remove('active');
+            }
+        }, { threshold: 0.2 });
+        observer.observe(missionLogSection);
+      });
 
       // Base Styles for Components
       const componentStyles = `
-        .social-link {
-            padding: 0.375rem 0.875rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease-in-out;
-            background-color: var(--app-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-        .social-link:hover {
-            background-color: var(--subtle-bg);
-            border-color: var(--primary-accent);
-            color: var(--primary-accent);
-        }
         .project-card {
             display: flex;
             flex-direction: column;
-            background-color: white;
+            background-color: #0D1117; /* Even darker for contrast */
             border-radius: 0.75rem;
             padding: 1.25rem;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
         .project-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+            box-shadow: 0 10px 15px -3px rgb(45 212 191 / 0.2);
+            border-color: var(--accent-teal);
         }
         .tech-pill {
             display: inline-block;
@@ -193,45 +423,30 @@
             font-size: 0.75rem;
             font-weight: 600;
             border-radius: 9999px;
-            background-color: var(--pill-bg);
-            color: var(--pill-text);
+            background-color: var(--accent-teal);
+            color: var(--page-bg);
+            opacity: 0.8;
+        }
+        .social-link {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .social-link:hover {
+            background-color: var(--accent-teal);
+            border-color: var(--accent-teal);
+            color: white;
         }
       `;
       const styleSheet = document.createElement("style");
       styleSheet.innerText = componentStyles;
       document.head.appendChild(styleSheet);
-      
-      // JavaScript for smooth scrolling and tooltip positioning
-      document.addEventListener('DOMContentLoaded', () => {
-          const jumpLink = document.getElementById('jump-to-projects');
-          if (jumpLink) {
-              jumpLink.addEventListener('click', (event) => {
-                  event.preventDefault();
-                  const targetId = jumpLink.getAttribute('href').substring(1);
-                  const targetElement = document.getElementById(targetId);
-                  if (targetElement) {
-                      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-              });
-          }
-
-          // Tooltip logic
-          const contactButtonWrapper = document.getElementById('contact-button-wrapper');
-          const tooltip = document.getElementById('tooltip-container');
-          if(contactButtonWrapper && tooltip) {
-              contactButtonWrapper.addEventListener('mouseenter', () => {
-                  const rect = contactButtonWrapper.getBoundingClientRect();
-                  tooltip.style.opacity = '1';
-                  // Position tooltip above the button
-                  tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-                  tooltip.style.top = `${rect.top - tooltip.offsetHeight - 8}px`; // 8px spacing
-              });
-              contactButtonWrapper.addEventListener('mouseleave', () => {
-                  tooltip.style.opacity = '0';
-              });
-          }
-      });
     </script>
-
 </body>
 </html>
