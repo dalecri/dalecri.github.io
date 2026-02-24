@@ -1,452 +1,926 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristobal D'Alessio - Mission Portfolio</title>
+import React, { useState, useMemo, useEffect } from 'react';
+import { 
+  Folder, 
+  FileText, 
+  Image as ImageIcon, 
+  Download, 
+  ChevronLeft, 
+  ChevronRight, 
+  Search,
+  LayoutGrid,
+  List as ListIcon,
+  User,
+  Monitor,
+  Share,
+  MoreHorizontal,
+  Cpu,
+  Globe,
+  ExternalLink,
+  Printer,
+  ZoomIn,
+  ZoomOut,
+  Clock,
+  X,
+  Mic
+} from 'lucide-react';
 
-    <!-- 1. Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+/**
+ * MOCK FILE SYSTEM DATA
+ */
+const initialFileSystem = {
+  root: { id: 'root', name: 'Macintosh HD', type: 'folder', children: ['users'] },
+  users: { id: 'users', name: 'Users', type: 'folder', children: ['guest'] },
+  guest: { id: 'guest', name: 'On My iPhone', type: 'folder', children: ['desktop', 'documents', 'pictures'] },
+  
+  // "Sidebar" Shortcuts & Desktop Content
+  desktop: { 
+    id: 'desktop', 
+    name: 'Desktop', 
+    type: 'folder', 
+    children: ['about_me_folder', 'documents', 'resume_pdf'] 
+  },
+  
+  // Documents now houses the 4 specific projects as direct HTML files
+  documents: { 
+    id: 'documents', 
+    name: 'Projects', 
+    type: 'folder', 
+    children: ['project_noise', 'project_voxel', 'project_pomodoro', 'project_lexicon'] 
+  },
+  
+  pictures: { id: 'pictures', name: 'Pictures', type: 'folder', children: ['travel_folder'] },
+  
+  // Specific Folders
+  about_me_folder: { 
+    id: 'about_me_folder', 
+    name: 'About Me', 
+    type: 'folder', 
+    children: ['about_me_txt', 'profile_pic_jpg'] 
+  },
+  
+  // PROJECTS (Now direct files) ---------------------------------------
+  
+  project_noise: { 
+    id: 'project_noise', 
+    name: 'Noise Machine', 
+    type: 'file', 
+    fileType: 'html', 
+    url: 'https://dalecri.github.io/noise-machine/' 
+  },
+  project_voxel: { 
+    id: 'project_voxel', 
+    name: 'Japanese Voxel Todo Garden', 
+    type: 'file', 
+    fileType: 'html', 
+    url: 'https://dalecri.github.io/japanese-garden/' 
+  },
+  project_pomodoro: { 
+    id: 'project_pomodoro', 
+    name: 'Pomodoro App', 
+    type: 'file', 
+    fileType: 'html', 
+    url: 'https://dalecri.github.io/pomodoro-app/' 
+  },
+  project_lexicon: { 
+    id: 'project_lexicon', 
+    name: 'Aesthetic Lexicon', 
+    type: 'file', 
+    fileType: 'html', 
+    url: 'https://dalecri.github.io/lexicon-app/' 
+  },
+  
+  travel_folder: { id: 'travel_folder', name: 'Travels', type: 'folder', children: ['paris_jpg', 'tokyo_jpg'] },
 
-    <!-- 2. Google Fonts: Inter & Space Mono for effect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  // FILES ---------------------------------------------------------
+  
+  resume_pdf: { 
+    id: 'resume_pdf', 
+    name: 'My Resume 2026', 
+    type: 'file', 
+    fileType: 'pdf', 
+    date: '2026-02-13',
+    size: '81 KB',
+    content: `CRIS DALESSIO
+Communications Advisor & Operations Specialist
 
-    <!-- 3. Custom Styles & CSS Variables -->
-    <style>
-        /* "Astro-Explorer" Theme v2 - Final Polish */
-        :root {
-            --page-bg: #0D1117; /* Deep space black */
-            --container-bg: #161B22; /* Dark container */
-            --border-color: #30363D; /* Subtle border */
-            --text-primary: #C9D1D9; /* Light gray for body text */
-            --text-bright: #F0F6FC; /* Bright white for headers */
-            --accent-teal: #2DD4BF; /* Vibrant Teal for accents */
-            --accent-pink: #F778BA; /* Neon pink for highlights */
-            --accent-red: #F87171; /* Red for the project planet */
-            --accent-deep-blue: #2563EB; /* Deep ocean blue for history dots */
-            --font-body: 'Inter', sans-serif;
-            --font-mono: 'Space Mono', monospace;
-        }
+SUMMARY
+Communications Advisor and Operations Specialist with a history of translating technical ideas into clear guidance. Experienced in media relations, social media management, and IT support.
 
-        /* Apply base styles */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: var(--font-body);
-            background-color: var(--page-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-        
-        /* Starfield Background */
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        /* Celestial Body hover/active effects */
-        .celestial-body {
-            cursor: pointer;
-        }
-        .celestial-icon {
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 0 6px currentColor);
-        }
-        .celestial-body:hover .celestial-icon {
-            filter: drop-shadow(0 0 12px var(--accent-pink));
-        }
-        
-        /* Constellation Path Animation */
-        .constellation-path {
-            stroke-dasharray: 4 8; /* Creates the dotted/dashed look */
-            stroke-dashoffset: 0;
-            animation: move-dashes 40s linear infinite;
-        }
-        @keyframes move-dashes {
-            from {
-                stroke-dashoffset: 1000;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        .constellation-path.paused {
-            animation-play-state: paused;
-        }
+EXPERIENCE
 
-        /* Header Cockpit styles */
-        .cockpit-header {
-            background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 1)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
+Media Relations | Current
+• Manage high-volume stakeholder requests using Microsoft Dynamics 365.
+• Coordinate major economic releases with international media agencies.
+• Translate complex statistical data into clear, accessible communications.
 
-        .cockpit-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 50%, var(--container-bg) 100%);
-        }
+Social Media Manager | Previous
+• Managed official channels for a 600K+ audience.
+• Translated data releases into public-facing content.
+• Used social listening tools to track sentiment and performance.
 
-        .hologram {
-            animation: flicker 5s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px var(--accent-teal));
-        }
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
-        }
-        
-        /* Pulsating animation for project planet */
-        .pulsate {
-            animation: slow-pulse 3s infinite ease-in-out;
-            transform-origin: center;
-            transform-box: fill-box; /* Ensures scaling is relative to the element itself */
-        }
-        @keyframes slow-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-    </style>
-</head>
+IT Support | Statistics Canada
+• Assisted with agency-wide VDI migrations and technical onboarding.
+• Troubleshooting for non-technical staff.
 
-<body class="p-4 md:p-8">
-    <canvas id="starfield"></canvas>
+Gymnastics Coach | Nepean Corona School of Gymnastics
+• Translated difficult athletic concepts to students.
+• Handled high-stress situations with empathy.
 
-    <!-- Main Container -->
-    <div class="w-full max-w-5xl mx-auto bg-[var(--container-bg)] rounded-2xl shadow-2xl border border-[var(--border-color)] overflow-hidden">
-        
-        <!-- Header reimagined as a spaceship cockpit -->
-        <header class="cockpit-header p-6 md:p-8 border-b border-[var(--border-color)]">
-            <div class="cockpit-overlay"></div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                <!-- Holographic Portrait -->
-                <div class="relative flex-shrink-0">
-                    <img src="https://placehold.co/150x150/161B22/2DD4BF?text=CD" alt="Portrait of Cristobal D'Alessio" class="hologram rounded-full w-32 h-32 md:w-40 md:h-40 border-2 border-[var(--accent-teal)] bg-black/50">
-                    <span class="absolute bottom-2 right-2 w-4 h-4 bg-[var(--accent-teal)] rounded-full border-2 border-[var(--container-bg)] animate-pulse" title="Status: Online"></span>
-                </div>
-                <!-- HUD Info Display -->
-                <div class="text-center md:text-right">
-                    <p class="font-mono text-lg text-[var(--accent-teal)]">[MISSION COMMANDER]</p>
-                    <h1 class="text-4xl md:text-5xl font-bold text-[var(--text-bright)] mt-1">Cristobal D'Alessio</h1>
-                    <p class="mt-4 text-base max-w-md ml-auto">
-                        Communications Advisor and App Dev Enthusiast on a journey through the cosmos of code.
-                    </p>
-                </div>
-            </div>
-        </header>
+CONTACT
+Email: crisdalessio@gmail.com
+LinkedIn: linkedin.com/in/cdalessio` 
+  },
+  
+  profile_pic_jpg: { 
+    id: 'profile_pic_jpg', 
+    name: 'Cris.jpg', 
+    type: 'file', 
+    fileType: 'image',
+    date: '2025-10-04',
+    size: '1.2 MB',
+    imageUrl: 'https://media.licdn.com/dms/image/v2/C5603AQGXrGxokJ4y3Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1575683998390?e=1773273600&v=beta&t=Aj_CPm6KkdrQwbj-Y7e9OFpaYaT2E-zhPnZs_S3YKak'
+  },
+  
+  about_me_txt: {
+    id: 'about_me_txt',
+    name: 'About Me',
+    type: 'file',
+    fileType: 'text',
+    date: '2026-02-10',
+    size: '4 KB',
+    content: "I’m a Communications Advisor and Operations Specialist who’s been translating technical ideas into clear guidance since my early professional days.\n\nMy foundation in customer service came from coaching gymnastics at Nepean Corona School of Gymnastics, where I learned to translate difficult athletic concepts, handle high-stress situations with empathy, and adapt my approach to different audiences.\n\nThat skillset carried into my IT support role at Statistics Canada, where I assisted with VDI migrations and technical onboarding, as well as troubleshooting for non-technical staff.\n\nI later moved into Social Media, where I managed official channels for a 600K+ audience, translating data releases into public-facing content and using social listening tools to track sentiment and performance. In my current role with Media Relations, I manage high-volume stakeholder requests using Microsoft Dynamics 365, coordinate major economic releases with national media agencies, and translate complex statistical data into clear communications for journalists and the public.\n\nI enjoy the challenge of taking something complicated, understanding the audience, and making it accessible without losing the substance.\n\nTechnical Toolkit:\nMicrosoft Dynamics 365 (CRM), Meltwater/Agility PR, HTML/CSS, Tier-1 IT Support (VDI/System Migrations).\n\n--------------------------------------------------\nCONTACT\nEmail: crisdalessio@gmail.com\nLinkedIn: linkedin.com/in/cdalessio"
+  },
 
-        <!-- Star Chart: Projects as a Journey -->
-        <section class="p-6 md:p-8 text-center">
-            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Constellation Path</h2>
-            <div class="relative w-full max-w-4xl mx-auto">
-                <svg id="constellation-svg" viewBox="0 0 600 200" class="w-full h-auto">
-                    <!-- Path will be drawn by JavaScript -->
-                    <path id="constellation-path" stroke="var(--border-color)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  paris_jpg: { 
+    id: 'paris_jpg', 
+    name: 'Paris.jpg', 
+    type: 'file', 
+    fileType: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1000&auto=format&fit=crop'
+  },
+  tokyo_jpg: { 
+    id: 'tokyo_jpg', 
+    name: 'Tokyo.jpg', 
+    type: 'file', 
+    fileType: 'image',
+    imageUrl: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1000&auto=format&fit=crop'
+  },
+};
 
-                    <!-- Celestial Bodies will be positioned by JavaScript -->
-                    <g data-body-id="body1" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Algonquin (App Dev)</text>
-                    </g>
-                    <g data-body-id="body2" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (IT)</text>
-                    </g>
-                    <g data-body-id="body3" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="-20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Algonquin (PR)</text>
-                    </g>
-                    <g data-body-id="body4" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (Social Media)</text>
-                    </g>
-                    <g data-body-id="body5" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="20" fill="var(--text-primary)" font-size="9" text-anchor="middle">UOttawa (BA)</text>
-                    </g>
-                    <g data-body-id="body6" class="celestial-body">
-                        <circle class="celestial-icon" r="6" fill="var(--accent-deep-blue)" style="color:var(--accent-deep-blue)"/>
-                        <text class="font-mono" y="-18" fill="var(--text-primary)" font-size="9" text-anchor="middle">StatCan (Media)</text>
-                    </g>
-                    <a href="#mission-logs" data-body-id="body7" class="celestial-body">
-                        <circle class="celestial-icon pulsate" r="10" fill="var(--accent-red)" style="color:var(--accent-red)"/>
-                        <text class="font-mono" y="-20" fill="var(--text-primary)" font-size="9" text-anchor="middle">Personal Projects</text>
-                    </a>
-                </svg>
-            </div>
-        </section>
+/**
+ * COMPONENT: FileIcon
+ * Unified to use desktop folders and mobile document previews everywhere.
+ */
+const FileIcon = ({ type, name, size = "large", fileType, imageUrl, item }) => {
+  const isFolder = type === 'folder';
+  
+  const renderIcon = () => {
+    // 1. FOLDERS (Desktop Style Everywhere)
+    if (isFolder) {
+      return (
+        <div className="relative group flex flex-col items-center justify-center">
+          <svg viewBox="0 0 100 85" className={`drop-shadow-sm transition-transform duration-200 ${size === 'large' ? 'w-[76px] h-[64px] md:w-[72px] md:h-[60px]' : 'w-8 h-6 md:w-6 md:h-5'}`}>
+            <path d="M5 15 C5 10 10 10 10 10 L35 10 C40 10 40 15 40 15 L95 15 C100 15 100 20 100 20 L100 80 C100 85 95 85 95 85 L5 85 C0 85 0 80 0 80 L0 20 C0 15 5 15 5 15" fill="#5DA0F0" />
+            <path d="M0 80 C0 85 5 85 5 85 L95 85 C100 85 100 80 100 80 L100 35 C100 30 95 30 95 30 L5 30 C0 30 0 35 0 35 L0 80" fill="url(#folderGradient)" />
+            <defs>
+              <linearGradient id="folderGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#89CFF0" /> 
+                <stop offset="100%" stopColor="#4696EC" /> 
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      );
+    }
 
-        <!-- Tech Bay: Skills -->
-        <section class="p-6 md:p-8 border-t border-[var(--border-color)]">
-            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Tech Bay</h2>
-            <div class="flex flex-wrap justify-center items-center gap-8">
-                 <div class="group relative text-center">
-                    <svg class="w-12 h-12 text-[var(--accent-teal)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 11l-.262-2.845a2.002 2.002 0 011.99-2.155h5.07a2.002 2.002 0 011.99 2.155L16.263 11m-7.007 9a3 3 0 100-6 3 3 0 000 6z"></path></svg>
-                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Front-End Designer</span>
-                </div>
-                <div class="group relative text-center">
-                    <svg class="w-12 h-12 text-[var(--accent-pink)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8z"></path></svg>
-                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Social Media Expert</span>
-                </div>
-                <div class="group relative text-center">
-                    <svg class="w-12 h-12 text-[var(--accent-teal)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Media Relations Pro</span>
-                </div>
-                <div class="group relative text-center">
-                    <svg class="w-12 h-12 text-[var(--accent-purple)] transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--text-bright)] text-[var(--page-bg)] text-xs font-bold px-2 py-1 rounded-md">Public Relations</span>
-                </div>
-            </div>
-        </section>
+    // 2. IMAGES
+    if (fileType === 'image' && imageUrl) {
+       return (
+         <div className={`bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-100/50 flex items-center justify-center overflow-hidden ${size === 'large' ? 'w-[72px] h-[90px] md:w-[64px] md:h-[80px] rounded-lg' : 'w-8 h-10 md:w-6 md:h-8 rounded-sm'}`}>
+           <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
+         </div>
+       );
+    }
 
-        <!-- Mission Logs: Projects Only -->
-        <main id="mission-logs" class="p-6 md:p-8">
-            <h2 class="text-2xl font-bold text-center mb-6 text-[var(--text-bright)] font-mono">Mission Logs</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div id="project-noise-machine" class="project-card"></div>
-                <div id="project-japanese-garden" class="project-card"></div>
-                <div id="project-lexicon-app" class="project-card"></div>
-                <div id="project-pomodoro-app" class="project-card"></div>
-            </div>
-        </main>
-        
-        <!-- Footer: Communications Array -->
-        <footer class="p-6 border-t border-[var(--border-color)] text-center">
-             <div class="flex items-center justify-center space-x-4">
-                <a href="#" class="social-link">GitHub</a>
-                <a href="https://www.linkedin.com/in/cristobal-d-alessio-a4598513a" target="_blank" class="social-link">LinkedIn</a>
-                <a href="https://codepen.io/crisdalessio" target="_blank" class="social-link">CodePen</a>
-                <a href="mailto:crisdalessio@gmail.com" class="social-link">Email</a>
-            </div>
-        </footer>
+    // 3. OTHER FILES (Mockup Style for Large, Icon for Small)
+    if (size === 'large') {
+       return (
+          <div className="w-[72px] h-[90px] md:w-[64px] md:h-[80px] bg-white rounded-lg shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-100/50 flex flex-col pt-3 md:pt-2 px-2 overflow-hidden relative">
+             <div className="text-[7px] md:text-[6px] font-bold text-gray-800 uppercase tracking-tighter mb-1.5 md:mb-1 w-full text-center truncate">{name}</div>
+             <div className="space-y-[4px] md:space-y-[3px] w-full flex-col flex items-center mt-1">
+                <div className="h-[2px] bg-gray-200 w-full rounded-full"></div>
+                <div className="h-[2px] bg-gray-200 w-[85%] rounded-full"></div>
+                <div className="h-[2px] bg-gray-200 w-full rounded-full"></div>
+                <div className="h-[2px] bg-gray-200 w-[60%] rounded-full"></div>
+                <div className="h-[2px] bg-gray-200 w-[90%] rounded-full"></div>
+                <div className="h-[2px] bg-gray-200 w-[70%] rounded-full"></div>
+             </div>
+             {fileType === 'pdf' && <div className="absolute bottom-2 right-2 text-[6px] md:text-[5px] font-bold text-red-500 bg-white/80 px-1 rounded">PDF</div>}
+             {fileType === 'html' && <div className="absolute bottom-2 right-2 text-[6px] md:text-[5px] font-bold text-blue-500 bg-white/80 px-1 rounded">HTML</div>}
+             {fileType === 'text' && <div className="absolute bottom-2 right-2 text-[6px] md:text-[5px] font-bold text-gray-500 bg-white/80 px-1 rounded">TXT</div>}
+          </div>
+       );
+    }
+
+    // Small fallback for list view
+    const getSmallIcon = () => {
+      if (fileType === 'pdf') return <FileText className="text-red-500 w-full h-full" />;
+      if (fileType === 'html') return <Globe className="text-blue-500 w-full h-full" />;
+      return <FileText className="text-gray-500 w-full h-full" />;
+    };
+
+    return (
+      <div className="bg-white border border-gray-200 shadow-sm flex items-center justify-center rounded-sm relative w-6 h-8 md:w-5 md:h-6 p-1">
+        {getSmallIcon()}
+      </div>
+    );
+  };
+
+  return (
+    <div className={`flex items-center justify-center ${size === 'large' ? 'h-[100px] md:h-[90px]' : ''}`}>
+       {renderIcon()}
     </div>
-    
-    <!-- Tooltip for Star Chart -->
-    <div id="star-chart-tooltip" class="absolute top-0 left-0 w-max max-w-xs p-4 bg-[var(--container-bg)] border border-[var(--border-color)] rounded-lg shadow-lg text-sm opacity-0 transition-opacity pointer-events-none z-50"></div>
+  );
+};
 
-    <script>
-      // Starfield background effect
-      const starfield = document.getElementById('starfield');
-      const ctx = starfield.getContext('2d');
-      function resizeCanvas() {
-        starfield.width = window.innerWidth;
-        starfield.height = window.innerHeight;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      const stars = Array.from({ length: 300 }, () => ({
-        x: Math.random() * starfield.width,
-        y: Math.random() * starfield.height,
-        radius: Math.random() * 1.5,
-        alpha: Math.random() * 0.5 + 0.2,
-        vx: (Math.random() - 0.5) * 0.1,
-        vy: (Math.random() - 0.5) * 0.1
-      }));
-      function animateStars() {
-        ctx.clearRect(0, 0, starfield.width, starfield.height);
-        stars.forEach(star => {
-          star.x += star.vx;
-          star.y += star.vy;
-          if (star.x < 0 || star.x > starfield.width) star.vx = -star.vx;
-          if (star.y < 0 || star.y > starfield.height) star.vy = -star.vy;
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(animateStars);
-      }
-      animateStars();
+/**
+ * COMPONENT: PdfPreviewModal
+ */
+const PdfPreviewModal = ({ file, onClose }) => {
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 md:p-6" onClick={onClose}>
+      <div 
+        className="w-full h-full md:w-[95vw] md:max-w-[1400px] bg-[#3C3C3C] rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Toolbar */}
+        <div className="h-14 md:h-12 bg-[#2D2D2D] border-b border-black/20 flex items-center justify-between px-4 text-gray-300 shrink-0">
+           <div className="flex items-center space-x-2 md:space-x-4">
+              <span className="font-medium text-sm text-gray-200 truncate max-w-[200px]">{file.name}</span>
+           </div>
+           <div className="hidden md:flex items-center space-x-2">
+              <button className="p-1.5 hover:bg-white/10 rounded"><ZoomOut size={18} /></button>
+              <button className="p-1.5 hover:bg-white/10 rounded"><ZoomIn size={18} /></button>
+              <div className="w-[1px] h-4 bg-gray-500 mx-2"></div>
+              <button className="p-1.5 hover:bg-white/10 rounded"><Share size={18} /></button>
+              <button className="p-1.5 hover:bg-white/10 rounded"><Printer size={18} /></button>
+           </div>
+           <button 
+             onClick={onClose}
+             className="px-4 py-1.5 bg-[#4D4D4D] hover:bg-[#5D5D5D] rounded-lg text-sm font-medium border border-black/20 text-white transition-colors"
+           >
+             Done
+           </button>
+        </div>
 
-      // Populate data and handle interactions
-      document.addEventListener('DOMContentLoaded', () => {
-        const tooltipData = {
-            'body1': { title: 'Mobile App Design & Dev', institution: 'Algonquin College', date: '2015 - 2018', details: ['Understood mobile app creation and UX/UI principles.', 'Proficiency in JavaScript (React), Java, Swift, HTML, and CSS.', '🏅 Acted as project coordinator for the "Simple Split" React-based application.'] },
-            'body2': { title: 'Desktop Support Technician', institution: 'Statistics Canada', date: '2018 - 2020', details: ['Provided IT support for employees, including hardware and UI assistance.', 'Helped lead the migration and training for the Virtual Desktop Interface (VDI) technology.'] },
-            'body3': { title: 'Diploma, Public Relations', institution: 'Algonquin College', date: '2018 - 2020', details: ['Learned to create communication plans, press releases, and social media campaigns.', 'Gained experience in event coordination and fundraising.', '🏅 Designed the winning logo for the "Hope Heals" charity campaign ($22k raised).'] },
-            'body4': { title: 'Communications Advisor (IS-02)', institution: 'Statistics Canada', date: '2020 - 2023', details: ['Oversaw social media publishing for an audience of 600K+.', 'Supported social media campaigns for major economic releases.', 'Reported on social media reception using metric-driven insights.'] },
-            'body5': { title: 'Honours Bachelor of PR', institution: 'University of Ottawa', date: '2020 - 2023', details: ['Enhanced PR skills through virtual group projects.', 'Applied crisis communication strategies and management cycles.', 'Acquired knowledge of audience reception study tools and research principles.'] },
-            'body6': { title: 'Communications Officer (Acting IS-03)', institution: 'Statistics Canada', date: '2023 - Present', details: ['Conduct on-site media lockups for major economic releases.', 'Monitor media hotline and manage journalist requests.', 'Liaise with journalists to negotiate interviews and manage deadlines.'] }
-        };
+        {/* PDF Content Area */}
+        <div className="flex-1 overflow-y-auto p-4 md:p-8 flex justify-center bg-[#525659] touch-pan-y">
+           <div className="bg-white w-full max-w-[800px] h-fit min-h-full md:min-h-[1000px] shadow-lg p-6 md:p-12 text-gray-800 font-serif">
+              {/* Render Resume Content styled like a PDF */}
+              <div className="whitespace-pre-wrap leading-relaxed text-sm md:text-base">
+                 <div className="text-center border-b-2 border-gray-800 pb-6 mb-8">
+                    <h1 className="text-2xl md:text-3xl font-bold tracking-wide uppercase">Cris Dalessio</h1>
+                    <p className="text-gray-600 mt-2 font-sans text-xs md:text-sm tracking-widest">Communications Advisor & Operations Specialist</p>
+                 </div>
+                 
+                 <div className="mb-6">
+                    <h2 className="text-sm font-bold uppercase border-b border-gray-300 pb-1 mb-3 text-gray-900 tracking-wider">Summary</h2>
+                    <p className="text-sm">Communications Advisor and Operations Specialist with a history of translating technical ideas into clear guidance. Experienced in media relations, social media management, and IT support.</p>
+                 </div>
 
-        const projects = [
-          { id: 'project-noise-machine', title: 'Noise Machine', desc: 'A sleek, themeable sound generator for focus and concentration, built with the Web Audio API.', tags: ['HTML', 'Tailwind CSS', 'JavaScript'], url: 'https://dalecri.github.io/noise-machine/' },
-          { id: 'project-japanese-garden', title: 'Voxel Japanese Garden', desc: 'A living 3D world built with three.js. Add and complete tasks to grow and shape an interactive voxel garden.', tags: ['three.js', 'HTML', 'JavaScript'], url: 'https://dalecri.github.io/japanese-garden/' },
-          { id: 'project-lexicon-app', title: 'Lexicon Luxe', desc: 'A personal dictionary app that finds definitions and translations, saving your vocabulary locally in the browser.', tags: ['HTML', 'CSS', 'JavaScript'], url: 'https://dalecri.github.io/lexicon-app/' },
-          { id: 'project-pomodoro-app', title: 'Pomodoro App', desc: 'A minimal timer app to boost productivity using the Pomodoro Technique.', tags: ['HTML', 'CSS', 'JavaScript'], url: 'https://dalecri.github.io/pomodoro-app/' }
-        ];
-
-        projects.forEach(p => {
-            const card = document.getElementById(p.id);
-            if (card) {
-                card.innerHTML = `
-                    <h3 class="text-xl font-bold text-[var(--text-bright)] mb-2">${p.title}</h3>
-                    <p class="text-sm text-[var(--text-primary)] mb-4 flex-grow">${p.desc}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        ${p.tags.map(tag => `<span class="tech-pill">${tag}</span>`).join('')}
+                 <div className="mb-6">
+                    <h2 className="text-sm font-bold uppercase border-b border-gray-300 pb-1 mb-3 text-gray-900 tracking-wider">Experience</h2>
+                    
+                    <div className="mb-4">
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="font-bold text-sm">Media Relations</h3>
+                        <span className="text-xs text-gray-500 italic">Current</span>
+                      </div>
+                      <ul className="list-disc list-inside text-sm mt-1 space-y-1 ml-2 text-gray-700">
+                        <li>Manage high-volume stakeholder requests using Microsoft Dynamics 365.</li>
+                        <li>Coordinate major economic releases with international media agencies.</li>
+                        <li>Translate complex statistical data into clear, accessible communications.</li>
+                      </ul>
                     </div>
-                    <a href="${p.url}" target="_blank" class="text-sm font-bold text-[var(--accent-teal)] hover:underline self-start">Establish Comms &rarr;</a>
-                `;
-            }
-        });
 
-        // Dynamic Constellation Logic
-        const svg = document.getElementById('constellation-svg');
-        const path = document.getElementById('constellation-path');
-        const bodies = document.querySelectorAll('.celestial-body');
-        let isPaused = false;
-        let animationFrameId;
+                    <div className="mb-4">
+                      <div className="flex justify-between items-baseline">
+                         <h3 className="font-bold text-sm">Social Media Manager</h3>
+                         <span className="text-xs text-gray-500 italic">Previous</span>
+                      </div>
+                      <ul className="list-disc list-inside text-sm mt-1 space-y-1 ml-2 text-gray-700">
+                        <li>Managed official channels for a 600K+ audience.</li>
+                        <li>Translated data releases into public-facing content.</li>
+                        <li>Used social listening tools to track sentiment and performance.</li>
+                      </ul>
+                    </div>
 
-        const pathDefinition = (t) => {
-            const y1 = 125 + 75 * Math.sin(t * 0.8 + 1);
-            const y2 = 100 - 50 * Math.sin(t * 1.2 + 2);
-            const y3 = 125 + 75 * Math.sin(t * 0.7 + 3);
-            const y4 = 100 + 50 * Math.sin(t * 1.5 + 4);
-            return `M 50 ${y1} C 150 ${y1}, 150 ${y2}, 250 ${y2} S 350 ${y3}, 450 ${y3} S 550 ${y4}, 550 ${y4}`;
-        };
+                    <div className="mb-4">
+                      <div className="flex justify-between items-baseline">
+                         <h3 className="font-bold text-sm">IT Support | Statistics Canada</h3>
+                         <span className="text-xs text-gray-500 italic">Previous</span>
+                      </div>
+                      <ul className="list-disc list-inside text-sm mt-1 space-y-1 ml-2 text-gray-700">
+                        <li>Assisted with agency-wide VDI migrations and technical onboarding.</li>
+                        <li>Troubleshooting for non-technical staff.</li>
+                      </ul>
+                    </div>
+                 </div>
 
-        const bodyPositions = [0, 0.25, 0.4, 0.6, 0.8, 0.9, 1];
+                 <div>
+                    <h2 className="text-sm font-bold uppercase border-b border-gray-300 pb-1 mb-3 text-gray-900 tracking-wider">Contact</h2>
+                    <p className="text-sm font-sans">
+                      <span className="font-bold">Email:</span> crisdalessio@gmail.com <br/>
+                      <span className="font-bold">LinkedIn:</span> linkedin.com/in/cdalessio
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * COMPONENT: AppleNoteModal
+ */
+const AppleNoteModal = ({ file, onClose }) => {
+  if (!file) return null;
+
+  const renderTextWithLinks = (text) => {
+    const parts = text.split(/((?:[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)|(?:linkedin\.com\/in\/[a-zA-Z0-9-]+))/g);
+    
+    return parts.map((part, index) => {
+        if (part.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+$/)) {
+            return <a key={index} href={`mailto:${part}`} className="text-[#eeb223] hover:underline cursor-pointer">{part}</a>;
+        }
+        if (part.match(/^linkedin\.com\/in\/[a-zA-Z0-9-]+$/)) {
+            return <a key={index} href={`https://${part}`} target="_blank" rel="noopener noreferrer" className="text-[#eeb223] hover:underline cursor-pointer">{part}</a>;
+        }
+        return part;
+    });
+  };
+
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 md:p-8" onClick={onClose}>
+      <div 
+        className="w-full h-full md:max-w-2xl bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col border border-gray-100"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="h-14 flex items-center justify-between px-4 bg-white/95 backdrop-blur z-10 shrink-0 border-b border-gray-50 md:border-none">
+          <button onClick={onClose} className="flex items-center text-[#eeb223] font-medium text-base hover:opacity-80 transition-opacity p-2 -ml-2">
+            <ChevronLeft size={24} strokeWidth={2.5} />
+            <span className="-ml-1">All iCloud</span>
+          </button>
+          <div className="flex items-center space-x-4">
+             <Share size={20} className="text-[#eeb223]" />
+             <MoreHorizontal size={22} className="text-[#eeb223] border border-[#eeb223] rounded-full p-0.5" />
+          </div>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-4 bg-white touch-pan-y">
+          <div className="text-gray-400 text-xs font-medium text-center mb-6">October 13, 2026 at 9:41 PM</div>
+          
+          {/* Linked In Photo Render Logic - SOFT SQUARE */}
+          {file.imageUrl && (
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-gray-100 shadow-md">
+                <img src={file.imageUrl} alt="Profile" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          )}
+          
+          <h1 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">{file.name.replace('.txt', '').replace('.md', '').replace('.pdf', '')}</h1>
+          <div className="space-y-4 text-gray-800 text-[17px] leading-relaxed font-sans whitespace-pre-wrap pb-10">
+             {renderTextWithLinks(file.content)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * MAIN APP COMPONENT
+ */
+export default function App() {
+  const [currentPath, setCurrentPath] = useState(['guest']);
+  const [history, setHistory] = useState([['guest']]);
+  const [historyIndex, setHistoryIndex] = useState(0);
+  const [selection, setSelection] = useState(null);
+  const [viewMode, setViewMode] = useState('grid');
+  const [previewFile, setPreviewFile] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [activeMobileTab, setActiveMobileTab] = useState('browse');
+
+  // Clock for List View
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatListDate = (date) => {
+    return date.toLocaleString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric',
+        hour12: true 
+    });
+  };
+
+  const getCurrentDir = () => {
+    const dirId = currentPath[currentPath.length - 1];
+    return initialFileSystem[dirId] || initialFileSystem['guest'];
+  };
+
+  const currentDir = getCurrentDir();
+
+  // Search Logic
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    
+    // Flatten all files for searching
+    const allFiles = Object.keys(initialFileSystem).filter(key => {
+      // Exclude structural folders from raw search result if we only want end-nodes, 
+      // but showing folders matches Mac behavior
+      const item = initialFileSystem[key];
+      return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    
+    return allFiles;
+  }, [searchQuery]);
+
+  const navigateTo = (folderId) => {
+    if (searchQuery) setSearchQuery('');
+    const newPath = currentPath.slice();
+    newPath.push(folderId);
+    
+    const newHistory = history.slice(0, historyIndex + 1);
+    newHistory.push(newPath);
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+    setCurrentPath(newPath);
+    setSelection(null);
+  };
+
+  const navigateBack = () => {
+    if (historyIndex > 0) {
+      setHistoryIndex(historyIndex - 1);
+      setCurrentPath(history[historyIndex - 1]);
+      setSelection(null);
+      setSearchQuery('');
+    }
+  };
+
+  const handleSidebarClick = (folderId) => {
+    setSearchQuery('');
+    const newPath = ['guest', folderId];
+    if (currentPath[currentPath.length-1] === folderId) return;
+    const newHistory = [...history, newPath];
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+    setCurrentPath(newPath);
+    setSelection(null);
+  };
+
+  // Unified click handler for both mobile and desktop: single tap opens items
+  const handleItemAction = (e, itemId) => {
+    e.stopPropagation();
+    setSelection(itemId);
+    
+    const item = initialFileSystem[itemId];
+
+    if (item.type === 'folder') {
+      navigateTo(itemId);
+    } else {
+      setPreviewFile(item);
+    }
+  };
+
+  const closeModal = () => setPreviewFile(null);
+
+  // Content to display (Directory or Search Results)
+  const contentIds = searchQuery ? searchResults : currentDir.children;
+
+  // iOS Subtitle Logic
+  const getItemSubtitle = (item) => {
+    if (item.type === 'folder') {
+       const count = item.children?.length || 0;
+       return `${count} item${count === 1 ? '' : 's'}`;
+    }
+    const date = item.date || '2026-02-13';
+    const size = item.size || '15 KB';
+    return `${date}\n${size}`;
+  };
+
+  return (
+    <div className="h-[100dvh] w-full font-sans overflow-hidden select-none bg-white md:bg-[#E5E5E5] flex flex-col md:items-center md:justify-center relative md:p-4">
+      
+      {/* --- MOBILE LAYOUT --- */}
+      <div className="md:hidden flex flex-col h-full w-full relative">
         
-        function updateConstellation(time) {
-            if (isPaused) {
-                animationFrameId = requestAnimationFrame(updateConstellation);
-                return;
-            }
-            const t = time * 0.0001;
-            const newD = pathDefinition(t);
-            path.setAttribute('d', newD);
-            
-            const pathLength = path.getTotalLength();
-            bodies.forEach((body, index) => {
-                const point = path.getPointAtLength(bodyPositions[index] * pathLength);
-                body.setAttribute('transform', `translate(${point.x}, ${point.y})`);
-            });
+        {/* MOBILE HEADER (iOS Files Style) */}
+        <div className="w-full bg-white z-20 px-4 pt-14 pb-1 shrink-0">
+           <div className="flex justify-between items-center mb-1">
+              <button 
+                  onClick={navigateBack} 
+                  className={`w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-[#0066FF] transition-opacity ${historyIndex > 0 ? 'active:opacity-60' : 'opacity-0 pointer-events-none'}`}
+              >
+                 <ChevronLeft size={22} className="-ml-0.5" strokeWidth={2.5} />
+              </button>
+              
+              <h1 className="text-[17px] font-semibold text-black tracking-tight truncate flex-1 text-center px-2">
+                  {searchQuery ? 'Search' : currentDir.name}
+              </h1>
+              
+              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-800 active:opacity-60 transition-opacity">
+                 <MoreHorizontal size={20} />
+              </button>
+           </div>
+           
+           <div className="relative group mt-3 mb-2">
+               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+               <input 
+                 type="text"
+                 placeholder="Search"
+                 value={searchQuery}
+                 onChange={(e) => setSearchQuery(e.target.value)}
+                 className="pl-9 pr-10 py-2 bg-gray-100/80 rounded-[10px] text-[17px] w-full outline-none placeholder-gray-500 text-gray-900"
+               />
+               <Mic size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+           </div>
+        </div>
 
-            path.style.strokeDashoffset = 1000 - (time * 0.05 % 1000);
+        {/* MOBILE CONTENT AREA */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 pb-[120px] touch-pan-y" onClick={() => setSelection(null)}>
+          {contentIds.length === 0 ? (
+               <div className="w-full h-[60vh] flex flex-col items-center justify-center text-gray-300">
+                  {searchQuery ? <Search size={64} strokeWidth={1} /> : <Folder size={64} strokeWidth={1} />}
+                  <span className="mt-4 font-medium text-lg">{searchQuery ? 'No results found' : 'Empty Folder'}</span>
+               </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-y-8 gap-x-2">
+                {contentIds.map(childId => {
+                  const item = initialFileSystem[childId];
+                  if (!item) return null; 
+                  const isSelected = selection === childId;
+                  
+                  return (
+                    <div 
+                      key={childId}
+                      onClick={(e) => handleItemAction(e, childId)}
+                      className="flex flex-col items-center group cursor-pointer active:opacity-60 transition-opacity"
+                    >
+                      <div>
+                        <FileIcon type={item.type} name={item.name} size="large" fileType={item.fileType} imageUrl={item.imageUrl} item={item} />
+                      </div>
+                      <span className="mt-2 text-[14px] text-gray-900 font-medium text-center leading-tight line-clamp-2 w-full px-1">
+                        {item.name}
+                      </span>
+                      <div className="mt-[2px] text-[12px] text-gray-400 text-center leading-[1.3] whitespace-pre-line">
+                         {getItemSubtitle(item)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+        </div>
 
-            animationFrameId = requestAnimationFrame(updateConstellation);
-        }
-        
-        animationFrameId = requestAnimationFrame(updateConstellation);
+        {/* MOBILE BOTTOM TAB BAR (iOS Pill Style) */}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/90 backdrop-blur-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-[2rem] flex justify-around py-2 px-2 z-30">
+           
+           <div 
+              className={`flex flex-col items-center justify-center w-[72px] h-[52px] rounded-2xl transition-colors ${activeMobileTab === 'recents' ? 'text-[#0066FF]' : 'text-gray-400 active:bg-gray-100/50'}`}
+              onClick={() => { setActiveMobileTab('recents'); handleSidebarClick('about_me_folder'); }}
+           >
+              {activeMobileTab === 'recents' ? (
+                 <div className="bg-[#E5F0FF] w-full h-[52px] rounded-2xl flex flex-col items-center justify-center text-[#0066FF]">
+                    <Clock size={24} strokeWidth={2.5} className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Recents</span>
+                 </div>
+              ) : (
+                 <div className="w-full h-[52px] flex flex-col items-center justify-center">
+                    <Clock size={24} className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Recents</span>
+                 </div>
+              )}
+           </div>
 
-        // Tooltip logic for star chart
-        const tooltip = document.getElementById('star-chart-tooltip');
-        bodies.forEach(body => {
-            const bodyId = body.dataset.bodyId;
-            const data = tooltipData[bodyId];
+           <div 
+              className={`flex flex-col items-center justify-center w-[72px] h-[52px] rounded-2xl transition-colors ${activeMobileTab === 'shared' ? 'text-[#0066FF]' : 'text-gray-400 active:bg-gray-100/50'}`}
+              onClick={() => { setActiveMobileTab('shared'); handleSidebarClick('documents'); }}
+           >
+              {activeMobileTab === 'shared' ? (
+                 <div className="bg-[#E5F0FF] w-full h-[52px] rounded-2xl flex flex-col items-center justify-center text-[#0066FF]">
+                    <User size={24} fill="currentColor" className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Shared</span>
+                 </div>
+              ) : (
+                 <div className="w-full h-[52px] flex flex-col items-center justify-center">
+                    <User size={24} className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Shared</span>
+                 </div>
+              )}
+           </div>
 
-            body.addEventListener('mouseenter', (event) => {
-                isPaused = true;
-                if (data) {
-                    tooltip.innerHTML = `
-                        <h4 class="font-bold text-[var(--text-bright)]">${data.title}</h4>
-                        <p class="font-mono text-xs text-[var(--accent-teal)]">${data.institution} // ${data.date}</p>
-                        <ul class="list-disc list-inside mt-2 space-y-1 text-xs">
-                            ${data.details.map(d => `<li>${d}</li>`).join('')}
-                        </ul>
-                    `;
-                    tooltip.style.opacity = '1';
-                }
-            });
+           <div 
+              className={`flex flex-col items-center justify-center w-[72px] h-[52px] rounded-2xl transition-colors ${activeMobileTab === 'browse' ? 'text-[#0066FF]' : 'text-gray-400 active:bg-gray-100/50'}`}
+              onClick={() => { setActiveMobileTab('browse'); handleSidebarClick('guest'); }}
+           >
+              {activeMobileTab === 'browse' ? (
+                 <div className="bg-[#E5F0FF] w-full h-[52px] rounded-2xl flex flex-col items-center justify-center text-[#0066FF]">
+                    <Folder size={24} fill="currentColor" className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Browse</span>
+                 </div>
+              ) : (
+                 <div className="w-full h-[52px] flex flex-col items-center justify-center">
+                    <Folder size={24} className="mb-0.5" />
+                    <span className="text-[10px] font-medium mt-0.5">Browse</span>
+                 </div>
+              )}
+           </div>
 
-            body.addEventListener('mousemove', (event) => {
-                // Smart tooltip positioning
-                const tooltipRect = tooltip.getBoundingClientRect();
-                const padding = 20;
-                let left = event.clientX + padding;
-                let top = event.clientY + padding;
+        </div>
 
-                if (left + tooltipRect.width > window.innerWidth) {
-                    left = event.clientX - tooltipRect.width - padding;
-                }
-                if (top + tooltipRect.height > window.innerHeight) {
-                    top = event.clientY - tooltipRect.height - padding;
-                }
+      </div>
 
-                tooltip.style.left = `${left}px`;
-                tooltip.style.top = `${top}px`;
-            });
+      {/* --- DESKTOP LAYOUT --- */}
+      <div 
+        className="hidden relative z-10 w-full flex-1 md:w-[98vw] md:max-w-[1800px] md:h-[94vh] md:rounded-2xl md:shadow-xl md:flex flex-col md:flex-row overflow-hidden md:ring-1 md:ring-black/5 bg-white"
+        onClick={(e) => { e.stopPropagation(); setSelection(null); }}
+      >
+        {/* LEFT SIDEBAR (Desktop Only) */}
+        <div className="hidden md:flex w-[240px] bg-[#F6F6F6] flex-col shrink-0 border-r border-gray-200">
+          
+          {/* Traffic Lights */}
+          <div className="h-14 flex items-center px-5 space-x-2">
+            <div className="w-3 h-3 rounded-full bg-[#FF5F57] border border-[#E0443E] shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-[#FEBC2E] border border-[#D89E24] shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-[#28C840] border border-[#1AAB29] shadow-sm"></div>
+          </div>
 
-            body.addEventListener('mouseleave', () => {
-                isPaused = false;
-                if (data) {
-                    tooltip.style.opacity = '0';
-                }
-            });
-        });
+          {/* Navigation Items */}
+          <div className="flex-1 overflow-y-auto py-2 px-3 space-y-1">
+             <div className="px-3 mb-1 mt-2">
+                <span className="text-[11px] font-bold text-gray-500/80 uppercase tracking-wide">Favorites</span>
+             </div>
+             <SidebarItem 
+                label="Desktop" 
+                icon={<Monitor size={18} />}
+                active={currentPath[currentPath.length-1] === 'desktop' && !searchQuery} 
+                color="text-purple-600"
+                onClick={() => handleSidebarClick('desktop')}
+             />
+             <SidebarItem 
+                label="About Me" 
+                icon={<User size={18} />}
+                active={currentPath.includes('about_me_folder') && !searchQuery} 
+                color="text-blue-600"
+                onClick={() => handleSidebarClick('about_me_folder')}
+             />
+             <SidebarItem 
+                label="Documents" 
+                icon={<FileText size={18} />}
+                active={currentPath[currentPath.length-1] === 'documents' && !searchQuery} 
+                color="text-blue-500"
+                onClick={() => handleSidebarClick('documents')}
+             />
+          </div>
+        </div>
 
-        // Intersection Observer for highlighting active planet
-        const missionLogSection = document.getElementById('mission-logs');
-        const observer = new IntersectionObserver((entries) => {
-            const projectsBody = document.querySelector('[data-body-id="body7"]');
-            if (entries[0].isIntersecting) {
-                if(projectsBody) projectsBody.classList.add('active');
-            } else {
-                if(projectsBody) projectsBody.classList.remove('active');
-            }
-        }, { threshold: 0.2 });
-        observer.observe(missionLogSection);
-      });
+        {/* RIGHT CONTENT AREA (Desktop) */}
+        <div className="flex-1 md:bg-white/40 md:backdrop-blur-xl flex flex-col relative h-full w-full overflow-hidden">
+          
+          {/* Desktop Content Header */}
+          <div className="hidden md:flex h-14 items-center justify-between px-6 shrink-0 border-b border-gray-200/50 bg-white/50 backdrop-blur-md">
+             <div className="flex items-center space-x-4">
+                <div className="flex space-x-2 text-gray-500">
+                    <button onClick={navigateBack} className={`hover:bg-gray-200/50 p-1 rounded ${historyIndex === 0 && !searchQuery && 'opacity-30'}`}><ChevronLeft size={20} /></button>
+                    <button className="opacity-30 p-1"><ChevronRight size={20} /></button>
+                </div>
+                <span className="text-xl font-bold text-gray-800 tracking-tight">
+                  {searchQuery ? `Searching "${searchQuery}"` : currentDir.name}
+                </span>
+             </div>
+             
+             <div className="flex items-center space-x-4">
+               <div className="flex bg-gray-200/50 p-0.5 rounded-lg border border-gray-200/50">
+                  <button onClick={() => setViewMode('grid')} className={`p-1 rounded-md transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm' : 'text-gray-400'}`}><LayoutGrid size={14} /></button>
+                  <button onClick={() => setViewMode('list')} className={`p-1 rounded-md transition-all ${viewMode === 'list' ? 'bg-white shadow-sm' : 'text-gray-400'}`}><ListIcon size={14} /></button>
+               </div>
+               
+               {/* Functional Search Bar Desktop */}
+               <div className="relative group">
+                 <Search size={16} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 pointer-events-none" />
+                 <input 
+                   type="text"
+                   placeholder="Search"
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                   className="pl-8 pr-3 py-1 bg-gray-200/50 border border-transparent focus:bg-white focus:border-blue-400/50 rounded-md text-sm outline-none transition-all w-32 focus:w-48 placeholder-gray-400 text-gray-700"
+                 />
+               </div>
+             </div>
+          </div>
 
-      // Base Styles for Components
-      const componentStyles = `
-        .project-card {
-            display: flex;
-            flex-direction: column;
-            background-color: #0D1117; /* Even darker for contrast */
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgb(45 212 191 / 0.2);
-            border-color: var(--accent-teal);
-        }
-        .tech-pill {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 9999px;
-            background-color: var(--accent-teal);
-            color: var(--page-bg);
-            opacity: 0.8;
-        }
-        .social-link {
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease-in-out;
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        .social-link:hover {
-            background-color: var(--accent-teal);
-            border-color: var(--accent-teal);
-            color: white;
-        }
-      `;
-      const styleSheet = document.createElement("style");
-      styleSheet.innerText = componentStyles;
-      document.head.appendChild(styleSheet);
-    </script>
-</body>
-</html>
+          {/* Desktop Grid/List Content */}
+          <div className="flex-1 overflow-y-auto px-6 py-6 pb-8" onClick={() => setSelection(null)}>
+            {contentIds.length === 0 ? (
+                 <div className="w-full h-full flex flex-col items-center justify-center text-gray-300">
+                    {searchQuery ? <Search size={64} strokeWidth={1} /> : <Folder size={64} strokeWidth={1} />}
+                    <span className="mt-4 font-medium text-lg">{searchQuery ? 'No results found' : 'Empty Folder'}</span>
+                 </div>
+              ) : (
+                <div className={viewMode === 'grid' ? "grid md:grid-cols-4 lg:grid-cols-5 gap-y-8 gap-x-6" : "flex flex-col space-y-1"}>
+                  {contentIds.map(childId => {
+                    const item = initialFileSystem[childId];
+                    if (!item) return null; 
+                    const isSelected = selection === childId;
+                    
+                    if (viewMode === 'grid') {
+                      return (
+                        <div 
+                          key={childId}
+                          onClick={(e) => handleItemAction(e, childId)}
+                          className="flex flex-col items-center group cursor-pointer active:opacity-60 transition-opacity"
+                        >
+                          <div className={`transition-colors duration-100 ${isSelected ? 'md:bg-blue-100/50 mix-blend-multiply rounded-xl' : ''}`}>
+                            <FileIcon type={item.type} name={item.name} size="large" fileType={item.fileType} imageUrl={item.imageUrl} item={item} />
+                          </div>
+                          <span className={`mt-1 text-[12px] text-gray-600 font-medium text-center px-1 rounded-md leading-tight line-clamp-2 select-none w-full max-w-[100px] break-words
+                            ${isSelected ? 'md:bg-blue-600 md:text-white' : ''}
+                          `}>
+                            {item.name}
+                          </span>
+                        </div>
+                      );
+                    } else {
+                      return (
+                         <div 
+                          key={childId}
+                          onClick={(e) => handleItemAction(e, childId)}
+                          className={`flex items-center space-x-3 p-1.5 px-3 rounded-lg text-[13px] cursor-pointer active:bg-gray-100 transition-colors border-none
+                             ${isSelected ? 'bg-[#0061D6] text-white' : 'hover:bg-gray-50 text-gray-700'}
+                          `}
+                        >
+                           <div className="w-6 flex items-center justify-center flex-shrink-0">
+                             <FileIcon type={item.type} name={item.name} size="small" fileType={item.fileType} imageUrl={item.imageUrl} />
+                           </div>
+                           <span className="flex-1 font-medium truncate">{item.name}</span>
+                           <span className={`text-[11px] flex-shrink-0 w-20 text-right ${isSelected ? 'text-blue-100' : 'opacity-50'}`}>--</span>
+                           <span className={`text-[11px] flex-shrink-0 w-32 text-right ${isSelected ? 'text-blue-100' : 'opacity-50 text-gray-400'}`}>
+                             {formatListDate(currentTime)}
+                           </span>
+                         </div>
+                      );
+                    }
+                  })}
+                </div>
+              )}
+          </div>
+          
+           {/* Desktop Footer Status Bar */}
+           <div className="hidden md:flex h-6 bg-white/50 backdrop-blur-md border-t border-gray-200/50 items-center justify-center text-[10px] text-gray-400 select-none shrink-0">
+              <span>{contentIds.length} items</span>
+              <span className="mx-2 text-gray-300">|</span>
+              <span className="tracking-wider font-medium text-gray-500">{"CRISTOBAL D'ALESSIO"}</span>
+           </div>
+        </div>
+      </div>
+
+      {/* MODALS */}
+      {previewFile && previewFile.fileType === 'pdf' && (
+        <PdfPreviewModal file={previewFile} onClose={closeModal} />
+      )}
+
+      {previewFile && previewFile.fileType === 'text' && (
+        <AppleNoteModal file={previewFile} onClose={closeModal} />
+      )}
+
+      {/* DEDICATED IMAGE PREVIEW (iOS / macOS Quick Look Style) */}
+      {previewFile && previewFile.fileType === 'image' && (
+        <div 
+          className="fixed inset-0 z-[300] bg-black flex flex-col animate-in fade-in duration-200" 
+          onClick={closeModal}
+        >
+          {/* Top Navbar */}
+          <div 
+            className="h-14 md:h-16 flex items-center justify-between px-4 bg-black/60 backdrop-blur-md z-10 shrink-0" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button onClick={closeModal} className="text-white hover:text-gray-300 transition-colors flex items-center p-2 -ml-2">
+              <span className="md:hidden"><ChevronLeft size={28} strokeWidth={2} /></span>
+              <span className="hidden md:inline font-medium text-base ml-1">Done</span>
+            </button>
+            <div className="flex flex-col items-center">
+              <span className="text-white font-semibold text-[15px]">{previewFile.name}</span>
+              <span className="text-gray-400 text-[11px]">{previewFile.date} &middot; {previewFile.size}</span>
+            </div>
+            <button className="text-white p-2 -mr-2">
+              <MoreHorizontal size={24} />
+            </button>
+          </div>
+
+          {/* Image */}
+          <div className="flex-1 flex items-center justify-center overflow-hidden w-full h-full relative p-0 md:p-8 touch-pan-y touch-pan-x" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={previewFile.imageUrl} 
+              alt={previewFile.name} 
+              className="max-w-full max-h-full object-contain" 
+            />
+          </div>
+
+          {/* Bottom Toolbar (Mobile Only) */}
+          <div 
+            className="h-16 md:hidden flex items-center justify-between px-6 bg-black/60 backdrop-blur-md z-10 shrink-0 pb-safe"
+            onClick={(e) => e.stopPropagation()}
+          >
+             <Share size={24} className="text-[#0066FF]" />
+             <button onClick={closeModal} className="text-white font-medium text-[17px]">Done</button>
+             <div className="w-6"></div> {/* Spacer for balance */}
+          </div>
+        </div>
+      )}
+
+      {/* GENERIC PREVIEW FOR OTHER FILES (HTML, etc.) */}
+      {previewFile && previewFile.fileType !== 'text' && previewFile.fileType !== 'pdf' && previewFile.fileType !== 'image' && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={closeModal}>
+           <div className="bg-white/90 backdrop-blur-2xl rounded-2xl md:rounded-3xl shadow-2xl animate-in fade-in zoom-in duration-200 w-full max-w-sm relative overflow-hidden border border-white/20" onClick={(e) => e.stopPropagation()}>
+              
+              {/* Close Button for touch screens */}
+              <button 
+                onClick={closeModal} 
+                className="absolute top-3 right-3 z-10 bg-black/10 backdrop-blur-md p-2 rounded-full text-gray-700 hover:bg-black/20 active:bg-black/30 transition-colors"
+                aria-label="Close modal"
+              >
+                 <X size={18} />
+              </button>
+
+              <div className="w-full flex flex-col">
+                 <div className="h-48 md:h-64 flex items-center justify-center bg-gray-100/50 relative">
+                    {/* HTML / Generic Icon Preview */}
+                    <div className="flex flex-col items-center opacity-80">
+                      {previewFile.fileType === 'html' ? (
+                        <Globe size={72} className="text-blue-500 mb-2 drop-shadow-sm" />
+                      ) : (
+                        <ImageIcon size={56} className="text-gray-400" />
+                      )}
+                    </div>
+                 </div>
+                 
+                 <div className="p-6 md:p-8 flex flex-col items-center text-center">
+                    <h3 className="font-bold text-gray-900 text-xl tracking-tight mb-2">{previewFile.name}</h3>
+                    
+                    {/* HTML File Action */}
+                    {previewFile.fileType === 'html' && previewFile.url && (
+                      <div className="mt-3 w-full">
+                        <p className="text-[15px] text-gray-500 mb-5 leading-snug">This is a web project. Tap below to view it live.</p>
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(previewFile.url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="flex items-center justify-center w-full px-4 py-3.5 bg-blue-600 active:bg-blue-700 text-white rounded-xl font-semibold transition-colors shadow-sm"
+                        >
+                          Visit Website
+                          <ExternalLink size={18} className="ml-2" />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Generic Fallback Text */}
+                    {previewFile.fileType !== 'image' && previewFile.fileType !== 'html' && (
+                      <p className="text-[15px] text-gray-500 mt-2">Preview not available for this file type.</p>
+                    )}
+                 </div>
+              </div>
+           </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+/**
+ * SUBCOMPONENT: Sidebar Item
+ */
+const SidebarItem = ({ icon, label, active, color, onClick }) => (
+  <div 
+    onClick={onClick}
+    className={`group flex items-center space-x-3 px-3 py-1.5 rounded-md cursor-pointer select-none transition-all duration-200
+      ${active ? 'bg-gray-200/80' : 'hover:bg-gray-200/50'}
+    `}
+  >
+    <div className={`${active ? color : 'text-gray-500/80 group-hover:text-gray-600'}`}>
+      {icon}
+    </div>
+    <span className={`text-sm font-medium tracking-wide ${active ? 'text-gray-900' : 'text-gray-600 group-hover:text-gray-800'}`}>
+      {label}
+    </span>
+  </div>
+);
