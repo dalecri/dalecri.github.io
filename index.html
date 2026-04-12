@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cristobal D'Alessio | Project Archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f9f9f9;
-            --text-main: #333;
-            --text-muted: #666;
+            --bg-color: #e5e3dd; 
+            --card-paper: #efedea;
+            --text-main: #1a1a1a;
+            --text-muted: #555;
             --text-accent: #999;
             --pack-step: 20px;
             --spread-gap: 600px;
@@ -27,49 +28,55 @@
             width: 100vw;
             height: 100vh;
             background-color: var(--bg-color);
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             overflow: hidden;
         }
 
         /* --- UI OVERLAYS --- */
         .header-left {
             position: absolute;
-            top: 40px;
-            left: 50px;
+            top: 50px;
+            left: 60px;
             z-index: 100;
         }
 
         .header-left .name {
-            font-weight: 700;
-            font-size: 16px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 42px;
+            line-height: 0.9;
             color: var(--text-main);
-            letter-spacing: 0.5px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
         }
 
         .header-left .stats {
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #888;
+            margin-top: 10px;
+            letter-spacing: 1px;
         }
 
         .header-right {
             position: absolute;
-            top: 40px;
-            right: 50px;
+            top: 50px;
+            right: 60px;
             z-index: 100;
             font-family: 'Space Mono', monospace;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-main);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-transform: lowercase;
         }
 
         /* --- ISOMETRIC SCENE --- */
         .viewport {
             position: absolute;
             inset: 0;
-            top: 35%; /* Shifted down by 15% from previous 20% */
+            top: 35%; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,10 +97,9 @@
         .ground-line {
             position: absolute;
             width: 1px;
-            background: #d0d0d0;
+            background: rgba(0,0,0,0.1);
             left: 0;
             transform: translateX(-50%);
-            transition: height 0.65s, top 0.65s;
         }
 
         .label {
@@ -101,8 +107,8 @@
             left: 0;
             transform-style: preserve-3d;
             transform-origin: bottom center;
-            color: #bbb;
-            font-size: 16px;
+            color: #999;
+            font-size: 14px;
             font-weight: 400;
             letter-spacing: 2px;
             font-family: 'Silkscreen', cursive;
@@ -125,88 +131,72 @@
             width: 100%;
             height: 100%;
             position: relative;
-            background: #fff;
-            padding: 6px;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            background: var(--card-paper);
+            padding: 16px;
+            border-radius: 11px;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.03),
+                inset 0 1px 0 rgba(255,255,255,0.5);
             transform-origin: bottom center;
             transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.65s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .card-content {
             position: relative;
             width: 100%;
-            height: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: 4px;
+            background: #d6d4cf; 
             transition: filter 0.6s ease, opacity 0.6s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 70%;
-            transition: opacity 0.4s;
+        .card-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s;
         }
 
         .card-info {
-            position: absolute;
-            bottom: 12px;
-            left: 12px;
-            right: 12px;
-            color: #fff;
+            width: 100%;
+            padding-top: 14px;
+            text-align: center;
         }
 
         .card-title {
-            font-size: 17px;
-            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            line-height: 1.2;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-            margin-bottom: 6px;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 2px;
         }
 
         .card-desc {
-            font-size: 12px;
-            line-height: 1.4;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease 0.15s;
-        }
-
-        .card-tech {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            margin-top: 6px;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease 0.2s;
-        }
-
-        .tech-tag {
-            font-size: 9px;
-            font-family: 'JetBrains Mono', monospace;
-            padding: 3px 6px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 2px;
-            text-transform: uppercase;
+            font-size: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-style: italic;
+            color: #888;
         }
 
         /* --- ACTIVE STATE --- */
         .card-container.active .card-frame {
-            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+            box-shadow: 
+                0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
             transform: scale(1.2);
-        }
-
-        .card-container.active .card-desc,
-        .card-container.active .card-tech {
-            opacity: 1;
-            max-height: 80px;
         }
 
         .anchor-elements {
@@ -226,24 +216,24 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            border: 1px solid #aaa;
-            background: #fff;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--card-paper);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             color: #666;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .anchor-line {
             position: absolute;
             left: 50%;
             width: 1px;
-            border-left: 1px dashed #aaa;
+            border-left: 1px dashed rgba(0,0,0,0.15);
             transform: translateX(-50%);
         }
 
@@ -252,17 +242,19 @@
             left: 50%;
             transform: translateX(-50%) translateY(16px);
             color: var(--text-muted);
-            font-size: 10px;
+            font-size: 9px;
             text-align: center;
             font-family: 'JetBrains Mono', monospace;
             white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* --- CONTROLS --- */
         .controls-panel {
             position: absolute;
             bottom: 40px;
-            left: 50px;
+            left: 60px;
             z-index: 200;
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
@@ -283,12 +275,6 @@
 
         .controls-card.open { display: flex; }
 
-        .control-group { display: flex; flex-direction: column; gap: 4px; }
-        .control-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 4px; }
-        .slider-row { display: flex; justify-content: space-between; }
-
-        input[type="range"] { width: 100%; cursor: pointer; }
-
         .adjust-btn {
             background: rgba(255,255,255,0.9);
             border: 1px solid rgba(0,0,0,0.05);
@@ -304,8 +290,8 @@
 <body>
 
     <div class="header-left">
-        <div class="name">Cristobal D'Alessio</div>
-        <div class="stats">Total Projects: <span id="project-count">0</span></div>
+        <div class="name">Cristobal<br>D'Alessio</div>
+        <div class="stats">TOTAL PROJECTS : <span id="project-count">0</span></div>
     </div>
 
     <div class="header-right">project : archive</div>
@@ -322,48 +308,30 @@
     </div>
 
     <div class="controls-panel">
-        <button class="adjust-btn" id="toggle-controls">⚙️ Adjust View</button>
+        <button class="adjust-btn" id="toggle-controls">⚙️ ADJUST VIEW</button>
         <div class="controls-card" id="controls-card">
-            <div class="control-header">
-                <span>Adjustments</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700">
+                <span>VIEW</span>
                 <span style="cursor:pointer; color:#999" id="close-controls">✕</span>
             </div>
             
-            <div class="control-group">
-                <div class="slider-row"><span>Pitch</span><span id="val-pitch">80°</span></div>
-                <input type="range" id="input-pitch" min="30" max="85" value="80">
-            </div>
-
-            <div class="control-group">
-                <div class="slider-row"><span>Angle Z</span><span id="val-angle">45°</span></div>
-                <input type="range" id="input-angle" min="0" max="90" value="45">
-            </div>
-
-            <div class="control-group">
-                <div class="slider-row"><span>Card Tilt</span><span id="val-tilt">-90°</span></div>
-                <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
-            </div>
-
-            <div class="control-group">
-                <div class="slider-row"><span>Card Rotate</span><span id="val-rotate">4°</span></div>
-                <input type="range" id="input-rotate" min="-45" max="45" value="4">
-            </div>
-
-            <div class="control-group">
-                <div class="slider-row"><span>Card Size</span><span id="val-size">240px</span></div>
-                <input type="range" id="input-size" min="150" max="400" value="240">
-            </div>
+            <input type="range" id="input-pitch" min="30" max="85" value="80">
+            <input type="range" id="input-angle" min="0" max="90" value="45">
+            <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
+            <input type="range" id="input-rotate" min="-45" max="45" value="4">
+            <input type="range" id="input-size" min="150" max="400" value="280">
         </div>
     </div>
 
     <script>
         // --- DATA ---
+        // Using Microlink API to grab high-quality static screenshots of the GitHub pages
         const PROJECTS = [
-            { id: 1, title: "Voxel Japanese Todo Garden", description: "Three.js voxel scene with ambient lighting.", category: "creative-coding", tech: ["Three.js", "productivity"], color: "#4a7c59", accent: "#8fbc8f", url: "https://dalecri.github.io/japanese-garden/" },
-            { id: 2, title: "Pixel Art Object Maker", description: "Simple pixel art maker", category: "apps", tech: ["Pixel", "Canvas"], color: "#8B6914", accent: "#DAA520", url: "https://dalecri.github.io/pixel-art-generator/" },
-            { id: 3, title: "PolyGrade Wallpaper Generator", description: "Simple polygon gradient wallpaper generator.", category: "wallpaper", tech: ["generator", "Polygon"], color: "#6B4C9A", accent: "#9B72CF", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 4, title: "IsoCube Wallpaper Generator", description: "Full-screen isometric cube generator.", category: "creative-coding", tech: ["Canvas", "generator"], color: "#1a1a2e", accent: "#e94560", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 5, title: "Pastel Monster Maker", description: "Random pixel monster generator.", category: "apps", tech: ["Pixel", "generator"], color: "#0d3b66", accent: "#faf0ca", url: "https://dalecri.github.io/pixel-monster-creator/" }
+            { id: 1, title: "Todo Garden", description: "Voxel productivity scene", category: "creative-coding", url: "https://dalecri.github.io/japanese-garden/" },
+            { id: 2, title: "Pixel Maker", description: "Minimalist art canvas", category: "apps", url: "https://dalecri.github.io/pixel-art-generator/" },
+            { id: 3, title: "PolyGrade", description: "Polygon gradient tool", category: "wallpaper", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
+            { id: 4, title: "IsoCube", description: "Isometric cube engine", category: "creative-coding", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
+            { id: 5, title: "Pastel Monster", description: "Generative creature tool", category: "apps", url: "https://dalecri.github.io/pixel-monster-creator/" }
         ].sort((a, b) => a.title.localeCompare(b.title));
 
         // --- STATE ---
@@ -373,7 +341,7 @@
             angle: 45,
             tilt: -90,
             rotate: 4,
-            size: 240
+            size: 280
         };
 
         const PACK_STEP = 20;
@@ -397,24 +365,31 @@
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
+                // Screenshot Proxy URL
+                const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
+
                 container.innerHTML = `
                     <div class="card-frame">
                         <div class="card-content">
-                            <div class="card-gradient" style="position:absolute; inset:0; background: linear-gradient(135deg, ${p.color} 0%, ${p.accent} 100%)"></div>
-                            <div class="card-overlay" style="background: linear-gradient(to top, ${p.color}ff 0%, ${p.color}aa 45%, transparent 100%)"></div>
-                            <div class="card-info">
-                                <div class="card-title">${p.title}</div>
-                                <div class="card-desc">${p.description}</div>
-                                <div class="card-tech">${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div>
-                            </div>
+                            <!-- Static Image Preview is significantly faster than iFrames -->
+                            <img class="card-preview-img" 
+                                 src="${previewUrl}" 
+                                 alt="${p.title}" 
+                                 loading="lazy"
+                                 onload="this.style.opacity=1"
+                                 style="opacity:0">
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">${p.title}</div>
+                            <div class="card-desc">rendering ${p.category}</div>
                         </div>
                     </div>
                     <div class="anchor-elements">
                         <div class="plus-icon" style="top: -${config.size + 40}px">+</div>
                         <div class="anchor-line" style="bottom: -${POP_Z}px; height: ${POP_Z}px;"></div>
                         <div class="focused-label" style="bottom: -${POP_Z}px;">
-                            focused<br/>
-                            <span style="font-weight:700; font-size:12px; color:#333">${String(i + 1).padStart(2, '0')} / ${PROJECTS.length}</span>
+                            focused project<br/>
+                            <span style="font-weight:700; font-size:11px; color:#1a1a1a">${String(i + 1).padStart(2, '0')} — ${PROJECTS.length}</span>
                         </div>
                     </div>
                 `;
@@ -434,11 +409,8 @@
 
         function updateScene() {
             const totalLength = PROJECTS.length * PACK_STEP;
-            
-            // 1. Scene Rotation
             scene.style.transform = `rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
 
-            // 2. Timeline Offset
             const getCardY = (i) => {
                 const base = (totalLength / 2) - (i * PACK_STEP);
                 if (focusIdx < 0) return base;
@@ -450,7 +422,6 @@
             const focusY = getCardY(focusIdx);
             timeline.style.transform = `translateY(${-focusY}px)`;
 
-            // 3. Ground Line & Labels
             const lineH = totalLength + (focusIdx >= 0 ? SPREAD_GAP : 0);
             groundLine.style.height = `${lineH}px`;
             groundLine.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0)}px`;
@@ -462,7 +433,6 @@
             labelOldest.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) - 20}px`;
             labelOldest.style.transform = labelTransform;
 
-            // 4. Update Cards
             PROJECTS.forEach((_, i) => {
                 const el = document.getElementById(`card-${i}`);
                 const isFocused = i === focusIdx;
@@ -473,22 +443,24 @@
                 const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
                 const currentTilt = isFocused ? config.tilt : -90;
 
+                const cardHeight = config.size * 1.15;
                 el.style.width = `${config.size}px`;
-                el.style.height = `${config.size}px`;
-                el.style.top = `-${config.size}px`;
+                el.style.height = `${cardHeight}px`; 
+                el.style.top = `-${cardHeight}px`;
                 el.style.zIndex = zIndex;
                 el.style.transform = `translate3d(${-config.size/2}px, ${y}px, ${z}px) rotateZ(${cardZRot}deg) rotateX(${currentTilt}deg)`;
                 
                 el.classList.toggle('active', isFocused);
                 
-                // Sub-elements for scale and blur
-                const frame = el.querySelector('.card-frame');
                 const content = el.querySelector('.card-content');
+                const info = el.querySelector('.card-info');
                 const plus = el.querySelector('.plus-icon');
                 
-                content.style.filter = isNotFocused ? 'blur(3px)' : 'none';
-                content.style.opacity = isNotFocused ? '0.6' : '1';
-                if(plus) plus.style.top = `-${config.size + 40}px`;
+                content.style.filter = isNotFocused ? 'blur(2px) grayscale(0.5)' : 'none';
+                content.style.opacity = isNotFocused ? '0.5' : '1';
+                info.style.opacity = isNotFocused ? '0.3' : '1';
+                
+                if(plus) plus.style.top = `-${cardHeight + 40}px`;
             });
         }
 
@@ -500,21 +472,14 @@
         toggleBtn.onclick = () => controlsCard.classList.add('open');
         closeBtn.onclick = () => controlsCard.classList.remove('open');
 
-        function setupSlider(id, key, suffix = '°') {
+        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
+        inputs.forEach(id => {
             const input = document.getElementById(`input-${id}`);
-            const disp = document.getElementById(`val-${id}`);
             input.oninput = (e) => {
-                config[key] = Number(e.target.value);
-                disp.textContent = config[key] + suffix;
+                config[id] = Number(e.target.value);
                 updateScene();
             };
-        }
-
-        setupSlider('pitch', 'pitch');
-        setupSlider('angle', 'angle');
-        setupSlider('tilt', 'tilt');
-        setupSlider('rotate', 'rotate');
-        setupSlider('size', 'size', 'px');
+        });
 
         // --- NAVIGATION ---
         window.addEventListener('keydown', (e) => {
