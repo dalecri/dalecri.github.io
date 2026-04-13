@@ -164,8 +164,8 @@
             height: 100%;
             object-fit: cover;
             pointer-events: none;
-            opacity: 1;
-            transition: opacity 0.3s;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .card-info {
@@ -250,40 +250,94 @@
             letter-spacing: 1px;
         }
 
-        /* --- CONTROLS --- */
+        /* --- ADJUST VIEW PANEL --- */
         .controls-panel {
             position: absolute;
             bottom: 40px;
             left: 60px;
             z-index: 200;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
         }
 
         .controls-card {
-            background: rgba(255,255,255,0.9);
-            padding: 16px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--card-paper);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(0,0,0,0.05);
             display: none;
             flex-direction: column;
-            gap: 12px;
-            width: 200px;
-            backdrop-filter: blur(8px);
+            gap: 16px;
+            width: 260px;
+            backdrop-filter: blur(12px);
         }
 
         .controls-card.open { display: flex; }
 
-        .adjust-btn {
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.05);
-            padding: 8px 12px;
-            border-radius: 4px;
+        .controls-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .controls-header span {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .control-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-label-group {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            letter-spacing: 0.8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            background: #d6d4cf;
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #1a1a1a;
+            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            font-weight: 600;
-            color: #666;
+        }
+
+        .adjust-btn {
+            background: var(--card-paper);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: #444;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -310,23 +364,40 @@
     <div class="controls-panel">
         <button class="adjust-btn" id="toggle-controls">⚙️ ADJUST VIEW</button>
         <div class="controls-card" id="controls-card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700">
-                <span>VIEW</span>
-                <span style="cursor:pointer; color:#999" id="close-controls">✕</span>
+            <div class="controls-header">
+                <span>Viewport config</span>
+                <span style="cursor:pointer; color:#999; font-size: 18px;" id="close-controls">✕</span>
             </div>
             
-            <input type="range" id="input-pitch" min="30" max="85" value="80">
-            <input type="range" id="input-angle" min="0" max="90" value="45">
-            <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
-            <input type="range" id="input-rotate" min="-45" max="45" value="4">
-            <input type="range" id="input-size" min="150" max="400" value="280">
+            <div class="control-row">
+                <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">80°</span></div>
+                <input type="range" id="input-pitch" min="30" max="85" value="80">
+            </div>
+
+            <div class="control-row">
+                <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">45°</span></div>
+                <input type="range" id="input-angle" min="0" max="90" value="45">
+            </div>
+
+            <div class="control-row">
+                <div class="control-label-group"><span>Active Tilt</span><span id="val-tilt">-90°</span></div>
+                <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
+            </div>
+
+            <div class="control-row">
+                <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">4°</span></div>
+                <input type="range" id="input-rotate" min="-45" max="45" value="4">
+            </div>
+
+            <div class="control-row">
+                <div class="control-label-group"><span>Card Size</span><span id="val-size">280px</span></div>
+                <input type="range" id="input-size" min="150" max="400" value="280">
+            </div>
         </div>
     </div>
 
     <script>
         // --- DATA ---
-        // Using Microlink API to grab high-quality static screenshots of the GitHub pages
-        //  { id: 6, title: "Japaneasy", description: "Japanese Cue Cards", category: "productivity", url: "https://dalecri.github.io/japanese-casual-card-learning/" },
         const PROJECTS = [
             { id: 1, title: "Todo Garden", description: "Voxel Garden Todo App", category: "productivity", url: "https://dalecri.github.io/japanese-garden/" },
             { id: 2, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
@@ -344,7 +415,6 @@
             { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
             { id: 15, title: "Chroma Flux", description: "Color Grid Finder", category: "game", url: "https://dalecri.github.io/chroma-flux/" },
             { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", category: "productivity", url: "https://dalecri.github.io/cozy-2048/" }
-            
         ].sort((a, b) => a.title.localeCompare(b.title));
 
         // --- STATE ---
@@ -361,7 +431,6 @@
         const SPREAD_GAP = 600;
         const POP_Z = 180;
 
-        // --- DOM ELEMENTS ---
         const cardsLayer = document.getElementById('cards-container');
         const timeline = document.getElementById('timeline');
         const scene = document.getElementById('scene');
@@ -378,13 +447,13 @@
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
-                // Screenshot Proxy URL
+                // Reverted exactly to the static preview logic that worked perfectly.
+                // Removed the cacheBuster parameter that was causing rendering timeouts.
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
                     <div class="card-frame">
                         <div class="card-content">
-                            <!-- Static Image Preview is significantly faster than iFrames -->
                             <img class="card-preview-img" 
                                  src="${previewUrl}" 
                                  alt="${p.title}" 
@@ -394,7 +463,7 @@
                         </div>
                         <div class="card-info">
                             <div class="card-title">${p.title}</div>
-                            <div class="card-desc">rendering ${p.category}</div>
+                            <div class="card-desc">${p.description}</div>
                         </div>
                     </div>
                     <div class="anchor-elements">
@@ -448,6 +517,7 @@
 
             PROJECTS.forEach((_, i) => {
                 const el = document.getElementById(`card-${i}`);
+                if (!el) return;
                 const isFocused = i === focusIdx;
                 const isNotFocused = !isFocused;
                 const y = getCardY(i);
@@ -488,8 +558,11 @@
         const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
         inputs.forEach(id => {
             const input = document.getElementById(`input-${id}`);
+            const display = document.getElementById(`val-${id}`);
             input.oninput = (e) => {
-                config[id] = Number(e.target.value);
+                const val = Number(e.target.value);
+                config[id] = val;
+                display.textContent = val + (id === 'size' ? 'px' : '°');
                 updateScene();
             };
         });
