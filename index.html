@@ -262,15 +262,13 @@
             background: var(--card-paper);
             padding: 24px;
             border-radius: 12px;
-            box-shadow: 
-                0 10px 15px -3px rgba(0, 0, 0, 0.1), 
-                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid rgba(0,0,0,0.05);
             display: none;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             width: 260px;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(8px);
         }
 
         .controls-card.open { display: flex; }
@@ -398,34 +396,33 @@
 
     <script>
         // --- DATA ---
+        // Strictly ordered as requested: ASCII Mapper, Polygrade, Todo Garden, IsoCube, 
+        // Pixel Artist, Isometric Todo, Gameboy Profile, Pastel Monster, Lofi Bedroom, 
+        // Lively Pomodoro, Cupid Message, Cosmic Mather, Mac Finder, Luxe Dictionary, 
+        // Noise Machine, Chroma Flux, Cozy 2048.
         const PROJECTS = [
-            { id: 1, title: "Todo Garden", description: "Voxel Garden Todo App", category: "productivity", url: "https://dalecri.github.io/japanese-garden/" },
-            { id: 2, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
-            { id: 3, title: "PolyGrade", description: "Polygon Wallpapers", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 4, title: "IsoCube", description: "Isometric Wallpapers", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 5, title: "Pastel Monster", description: "Soft Pixel Creatures", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
-            { id: 6, title: "Noise Machine", description: "White Noise Machine", category: "productivity", url: "https://dalecri.github.io/noise-machine/" },
-            { id: 7, title: "Lively Pomodoro", description: "Cute Pomodoro App", category: "productivity", url: "https://dalecri.github.io/pomodoro-app/" },
-            { id: 8, title: "Mac Finder", description: "About me, in Mac", category: "art", url: "https://dalecri.github.io/apple-finder-aboutme/" },
-            { id: 9, title: "IsoCity Todo", description: "Isometric Todo App", category: "productivity", url: "https://dalecri.github.io/isocity-todo-app/" },
-            { id: 10, title: "Lofi Bedroom", description: "Voxel Lofi Room", category: "art", url: "https://dalecri.github.io/Voxel-lofi-room/" },
-            { id: 11, title: "Cosmic Mather", description: "Fancy Cosmic Calculator", category: "productivity", url: "https://dalecri.github.io/cosmic-calculator/" },
-            { id: 12, title: "Cupid Message", description: "Cute Custom Message", category: "art", url: "https://dalecri.github.io/cute-love-message/" },
-            { id: 13, title: "Gameboy Profile", description: "Gamify - About Me", category: "art", url: "https://dalecri.github.io/Gameboy-about-me/" },
-            { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
-            { id: 15, title: "Chroma Flux", description: "Color Grid Finder", category: "game", url: "https://dalecri.github.io/chroma-flux/" },
-            { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", category: "productivity", url: "https://dalecri.github.io/cozy-2048/" }
-        ].sort((a, b) => a.title.localeCompare(b.title));
+            { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", url: "https://dalecri.github.io/ASCII-Map-generator/" },
+            { id: 3, title: "Polygrade", description: "Polygon Wallpapers", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
+            { id: 1, title: "Todo Garden", description: "Voxel Garden Todo App", url: "https://dalecri.github.io/japanese-garden/" },
+            { id: 4, title: "IsoCube", description: "Isometric Wallpapers", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
+            { id: 2, title: "Pixel Artist", description: "Simple Pixel Art", url: "https://dalecri.github.io/pixel-art-generator/" },
+            { id: 9, title: "Isometric Todo", description: "Isometric Todo App", url: "https://dalecri.github.io/isocity-todo-app/" },
+            { id: 13, title: "Gameboy Profile", description: "Gamify - About Me", url: "https://dalecri.github.io/Gameboy-about-me/" },
+            { id: 5, title: "Pastel Monster", description: "Soft Pixel Creatures", url: "https://dalecri.github.io/pixel-monster-creator/" },
+            { id: 10, title: "Lofi Bedroom", description: "Voxel Lofi Room", url: "https://dalecri.github.io/Voxel-lofi-room/" },
+            { id: 7, title: "Lively Pomodoro", description: "Cute Pomodoro App", url: "https://dalecri.github.io/pomodoro-app/" },
+            { id: 12, title: "Cupid Message", description: "Cute Custom Message", url: "https://dalecri.github.io/cute-love-message/" },
+            { id: 11, title: "Cosmic Mather", description: "Fancy Cosmic Calculator", url: "https://dalecri.github.io/cosmic-calculator/" },
+            { id: 8, title: "Mac Finder", description: "About me, in Mac", url: "https://dalecri.github.io/apple-finder-aboutme/" },
+            { id: 17, title: "Luxe Dictionary", description: "Personal Dictionary", url: "https://dalecri.github.io/lexicon-app/" },
+            { id: 6, title: "Noise Machine", description: "White Noise Machine", url: "https://dalecri.github.io/noise-machine/" },
+            { id: 15, title: "Chroma Flux", description: "Color Grid Finder", url: "https://dalecri.github.io/chroma-flux/" },
+            { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", url: "https://dalecri.github.io/cozy-2048/" }
+        ];
 
         // --- STATE ---
         let focusIdx = 0;
-        let config = {
-            pitch: 80,
-            angle: 45,
-            tilt: -90,
-            rotate: 4,
-            size: 280
-        };
+        let config = { pitch: 80, angle: 45, tilt: -90, rotate: 4, size: 280 };
 
         const PACK_STEP = 20;
         const SPREAD_GAP = 600;
@@ -447,8 +444,8 @@
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
-                // Reverted exactly to the static preview logic that worked perfectly.
-                // Removed the cacheBuster parameter that was causing rendering timeouts.
+                // Using the api.microlink.io format you identified as rendering correctly.
+                // Removed the cache buster logic to ensure screenshots load from cache instantly without timeouts.
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
@@ -511,7 +508,6 @@
             const labelTransform = `translate3d(-50%, 0, 0) rotateZ(${config.rotate - config.angle}deg) rotateX(${config.tilt}deg)`;
             labelLatest.style.top = `${totalLength / 2 + (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) + 40}px`;
             labelLatest.style.transform = labelTransform;
-            
             labelOldest.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) - 20}px`;
             labelOldest.style.transform = labelTransform;
 
