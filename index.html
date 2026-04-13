@@ -72,6 +72,46 @@
             text-transform: lowercase;
         }
 
+        /* --- FILTERING UI --- */
+        .filter-panel {
+            position: absolute;
+            bottom: 50px;
+            right: 60px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn sup {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: #888;
+        }
+
         /* --- ISOMETRIC SCENE --- */
         .viewport {
             position: absolute;
@@ -250,7 +290,7 @@
             letter-spacing: 1px;
         }
 
-        /* --- UPDATED ADJUST VIEW PANEL --- */
+        /* --- ADJUST VIEW PANEL --- */
         .controls-panel {
             position: absolute;
             bottom: 40px;
@@ -329,10 +369,17 @@
 
     <div class="header-left">
         <div class="name">Cristobal<br>D'Alessio</div>
-        <div class="stats">TOTAL PROJECTS : <span id="project-count">0</span></div>
+        <div class="stats">FILTERED : <span id="project-count">0</span></div>
     </div>
 
     <div class="header-right">project : archive</div>
+
+    <div class="filter-panel">
+        <button class="filter-btn active" data-cat="all">all <sup id="count-all">0</sup></button>
+        <button class="filter-btn" data-cat="art">art <sup id="count-art">0</sup></button>
+        <button class="filter-btn" data-cat="productivity">productivity <sup id="count-productivity">0</sup></button>
+        <button class="filter-btn" data-cat="game">game <sup id="count-game">0</sup></button>
+    </div>
 
     <div class="viewport">
         <div class="scene" id="scene">
@@ -347,7 +394,6 @@
 
     <div class="controls-panel">
         <div class="controls-card" id="controls-card">
-            <!-- HEADER CONTAINER REMOVED AS REQUESTED -->
             <div class="control-row">
                 <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">72°</span></div>
                 <input type="range" id="input-pitch" min="30" max="85" value="72">
@@ -378,37 +424,36 @@
 
     <script>
         // --- DATA ---
-        // Project list ordered as requested. 
-        // Previews use api.microlink.io with embed params for reliability.
         const PROJECTS = [
-            { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", url: "https://dalecri.github.io/ASCII-Map-generator/" },
-            { id: 3, title: "Polygrade", description: "Polygon Wallpapers", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 1, title: "Todo Garden", description: "Voxel Garden Todo App", url: "https://dalecri.github.io/japanese-garden/" },
-            { id: 4, title: "IsoCube", description: "Isometric Wallpapers", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 2, title: "Pixel Artist", description: "Simple Pixel Art", url: "https://dalecri.github.io/pixel-art-generator/" },
-            { id: 9, title: "Isometric Todo", description: "Isometric Todo App", url: "https://dalecri.github.io/isocity-todo-app/" },
-            { id: 13, title: "Gameboy Profile", description: "Gamify - About Me", url: "https://dalecri.github.io/Gameboy-about-me/" },
-            { id: 5, title: "Pastel Monster", description: "Soft Pixel Creatures", url: "https://dalecri.github.io/pixel-monster-creator/" },
-            { id: 10, title: "Lofi Bedroom", description: "Voxel Lofi Room", url: "https://dalecri.github.io/Voxel-lofi-room/" },
-            { id: 7, title: "Lively Pomodoro", description: "Cute Pomodoro App", url: "https://dalecri.github.io/pomodoro-app/" },
-            { id: 12, title: "Cupid Message", description: "Cute Custom Message", url: "https://dalecri.github.io/cute-love-message/" },
-            { id: 11, title: "Cosmic Mather", description: "Fancy Cosmic Calculator", url: "https://dalecri.github.io/cosmic-calculator/" },
-            { id: 8, title: "Mac Finder", description: "About me, in Mac", url: "https://dalecri.github.io/apple-finder-aboutme/" },
-            { id: 17, title: "Luxe Dictionary", description: "Personal Dictionary", url: "https://dalecri.github.io/lexicon-app/" },
-            { id: 6, title: "Noise Machine", description: "White Noise Machine", url: "https://dalecri.github.io/noise-machine/" },
-            { id: 15, title: "Chroma Flux", description: "Color Grid Finder", url: "https://dalecri.github.io/chroma-flux/" },
-            { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", url: "https://dalecri.github.io/cozy-2048/" }
+            { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
+            { id: 3, title: "Polygrade", description: "Polygon Wallpapers", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
+            { id: 1, title: "Todo Garden", description: "Voxel Garden Todo App", category: "productivity", url: "https://dalecri.github.io/japanese-garden/" },
+            { id: 4, title: "IsoCube", description: "Isometric Wallpapers", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
+            { id: 2, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
+            { id: 9, title: "Isometric Todo", description: "Isometric Todo App", category: "productivity", url: "https://dalecri.github.io/isocity-todo-app/" },
+            { id: 13, title: "Gameboy Profile", description: "Gamify - About Me", category: "game", url: "https://dalecri.github.io/Gameboy-about-me/" },
+            { id: 5, title: "Pastel Monster", description: "Soft Pixel Creatures", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
+            { id: 10, title: "Lofi Bedroom", description: "Voxel Lofi Room", category: "art", url: "https://dalecri.github.io/Voxel-lofi-room/" },
+            { id: 7, title: "Lively Pomodoro", description: "Cute Pomodoro App", category: "productivity", url: "https://dalecri.github.io/pomodoro-app/" },
+            { id: 12, title: "Cupid Message", description: "Cute Custom Message", category: "art", url: "https://dalecri.github.io/cute-love-message/" },
+            { id: 11, title: "Cosmic Mather", description: "Fancy Cosmic Calculator", category: "productivity", url: "https://dalecri.github.io/cosmic-calculator/" },
+            { id: 8, title: "Mac Finder", description: "About me, in Mac", category: "productivity", url: "https://dalecri.github.io/apple-finder-aboutme/" },
+            { id: 17, title: "Luxe Dictionary", description: "Personal Dictionary", category: "productivity", url: "https://dalecri.github.io/lexicon-app/" },
+            { id: 6, title: "Noise Machine", description: "White Noise Machine", category: "productivity", url: "https://dalecri.github.io/noise-machine/" },
+            { id: 15, title: "Chroma Flux", description: "Color Grid Finder", category: "game", url: "https://dalecri.github.io/chroma-flux/" },
+            { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", category: "game", url: "https://dalecri.github.io/cozy-2048/" }
         ];
 
         // --- STATE & SETTINGS ---
-        // EDIT THESE VALUES MANUALLY TO CHANGE DEFAULTS
+        // [MANUAL EDIT]: Change these values to set your preferred camera defaults permanently
         let focusIdx = 0;
+        let currentFilter = "all";
         let config = { 
-            pitch: 72,      // Default Pitch (X-axis)
-            angle: 42,      // Default Z-angle
-            tilt: -90,      // Default Tilt of focused card
-            rotate: 0,      // Default Rotate of focused card
-            size: 260       // Default Card Width in pixels
+            pitch: 72,      // Camera Pitch (X-axis)
+            angle: 42,      // Timeline Angle (Z-axis)
+            tilt: -90,      // Vertical tilt of the focused card
+            rotate: 0,      // Fine Z-rotation of the focused card
+            size: 260       // Width of all cards in pixels
         };
 
         const PACK_STEP = 20;
@@ -423,16 +468,21 @@
         const labelOldest = document.getElementById('label-oldest');
         const projectCountDisp = document.getElementById('project-count');
 
+        function getFilteredItems() {
+            return currentFilter === "all" ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
+        }
+
         // --- RENDER ---
         function createCards() {
             cardsLayer.innerHTML = '';
-            PROJECTS.forEach((p, i) => {
+            const items = getFilteredItems();
+            
+            items.forEach((p, i) => {
                 const container = document.createElement('div');
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
-                // Using working Microlink embed logic. 
-                // Removed all cache-busting logic to ensure previews like Cozy 2048 render correctly.
+                // Working Microlink embed logic. 
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
@@ -455,7 +505,7 @@
                         <div class="anchor-line" style="bottom: -${POP_Z}px; height: ${POP_Z}px;"></div>
                         <div class="focused-label" style="bottom: -${POP_Z}px;">
                             focused project<br/>
-                            <span style="font-weight:700; font-size:11px; color:#1a1a1a">${String(i + 1).padStart(2, '0')} — ${PROJECTS.length}</span>
+                            <span style="font-weight:700; font-size:11px; color:#1a1a1a">${String(i + 1).padStart(2, '0')} — ${items.length}</span>
                         </div>
                     </div>
                 `;
@@ -470,11 +520,21 @@
                 };
                 cardsLayer.appendChild(container);
             });
-            projectCountDisp.textContent = PROJECTS.length;
+            
+            projectCountDisp.textContent = items.length;
+            updateCounts();
+        }
+
+        function updateCounts() {
+            document.getElementById('count-all').textContent = PROJECTS.length;
+            document.getElementById('count-art').textContent = PROJECTS.filter(p => p.category === "art").length;
+            document.getElementById('count-productivity').textContent = PROJECTS.filter(p => p.category === "productivity").length;
+            document.getElementById('count-game').textContent = PROJECTS.filter(p => p.category === "game").length;
         }
 
         function updateScene() {
-            const totalLength = PROJECTS.length * PACK_STEP;
+            const items = getFilteredItems();
+            const totalLength = items.length * PACK_STEP;
             scene.style.transform = `rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
 
             const getCardY = (i) => {
@@ -498,14 +558,14 @@
             labelOldest.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) - 20}px`;
             labelOldest.style.transform = labelTransform;
 
-            PROJECTS.forEach((_, i) => {
+            items.forEach((_, i) => {
                 const el = document.getElementById(`card-${i}`);
                 if (!el) return;
                 const isFocused = i === focusIdx;
                 const isNotFocused = !isFocused;
                 const y = getCardY(i);
                 const z = isFocused ? POP_Z : 0;
-                const zIndex = isFocused ? 1000 : PROJECTS.length - i;
+                const zIndex = isFocused ? 1000 : items.length - i;
                 const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
                 const currentTilt = isFocused ? config.tilt : -90;
 
@@ -528,14 +588,11 @@
             });
         }
 
-        // --- CONTROLS LOGIC ---
+        // --- INTERACTION LOGIC ---
         const toggleBtn = document.getElementById('toggle-controls');
         const controlsCard = document.getElementById('controls-card');
 
-        toggleBtn.onclick = () => {
-            // Simple toggle for the expanded view settings
-            controlsCard.classList.toggle('open');
-        };
+        toggleBtn.onclick = () => controlsCard.classList.toggle('open');
 
         const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
         inputs.forEach(id => {
@@ -549,10 +606,23 @@
             };
         });
 
-        // --- NAVIGATION ---
+        // Filtering logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.closest('button').classList.add('active');
+                currentFilter = e.target.closest('button').dataset.cat;
+                focusIdx = 0;
+                createCards();
+                updateScene();
+            };
+        });
+
+        // Navigation
         window.addEventListener('keydown', (e) => {
+            const items = getFilteredItems();
             if (e.key === 'ArrowRight') {
-                focusIdx = Math.min(PROJECTS.length - 1, focusIdx + 1);
+                focusIdx = Math.min(items.length - 1, focusIdx + 1);
                 updateScene();
             } else if (e.key === 'ArrowLeft') {
                 focusIdx = Math.max(0, focusIdx - 1);
@@ -564,9 +634,10 @@
         window.addEventListener('wheel', (e) => {
             const now = Date.now();
             if (now - lastScroll < 60) return;
+            const items = getFilteredItems();
             if (Math.abs(e.deltaY) > 10 || Math.abs(e.deltaX) > 10) {
                 if (e.deltaY > 0 || e.deltaX > 0) {
-                    focusIdx = Math.min(PROJECTS.length - 1, focusIdx + 1);
+                    focusIdx = Math.min(items.length - 1, focusIdx + 1);
                 } else {
                     focusIdx = Math.max(0, focusIdx - 1);
                 }
