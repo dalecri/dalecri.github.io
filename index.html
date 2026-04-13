@@ -164,8 +164,8 @@
             height: 100%;
             object-fit: cover;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            opacity: 1;
+            transition: opacity 0.3s;
         }
 
         .card-info {
@@ -250,7 +250,7 @@
             letter-spacing: 1px;
         }
 
-        /* --- ADJUST VIEW PANEL --- */
+        /* --- UPDATED ADJUST VIEW PANEL --- */
         .controls-panel {
             position: absolute;
             bottom: 40px;
@@ -260,34 +260,19 @@
 
         .controls-card {
             background: var(--card-paper);
-            padding: 24px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid rgba(0,0,0,0.05);
             display: none;
             flex-direction: column;
-            gap: 12px;
-            width: 260px;
-            backdrop-filter: blur(8px);
+            gap: 14px;
+            width: 240px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 12px;
         }
 
         .controls-card.open { display: flex; }
-
-        .controls-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .controls-header span {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 14px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-main);
-        }
 
         .control-row {
             display: flex;
@@ -336,6 +321,7 @@
             font-size: 12px;
             color: #444;
             letter-spacing: 1px;
+            transition: all 0.2s;
         }
     </style>
 </head>
@@ -360,21 +346,16 @@
     </div>
 
     <div class="controls-panel">
-        <button class="adjust-btn" id="toggle-controls">⚙️ ADJUST VIEW</button>
         <div class="controls-card" id="controls-card">
-            <div class="controls-header">
-                <span>Viewport config</span>
-                <span style="cursor:pointer; color:#999; font-size: 18px;" id="close-controls">✕</span>
-            </div>
-            
+            <!-- HEADER CONTAINER REMOVED AS REQUESTED -->
             <div class="control-row">
-                <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">80°</span></div>
-                <input type="range" id="input-pitch" min="30" max="85" value="80">
+                <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">72°</span></div>
+                <input type="range" id="input-pitch" min="30" max="85" value="72">
             </div>
 
             <div class="control-row">
-                <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">45°</span></div>
-                <input type="range" id="input-angle" min="0" max="90" value="45">
+                <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">42°</span></div>
+                <input type="range" id="input-angle" min="0" max="90" value="42">
             </div>
 
             <div class="control-row">
@@ -383,23 +364,22 @@
             </div>
 
             <div class="control-row">
-                <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">4°</span></div>
-                <input type="range" id="input-rotate" min="-45" max="45" value="4">
+                <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">0°</span></div>
+                <input type="range" id="input-rotate" min="-45" max="45" value="0">
             </div>
 
             <div class="control-row">
-                <div class="control-label-group"><span>Card Size</span><span id="val-size">280px</span></div>
-                <input type="range" id="input-size" min="150" max="400" value="280">
+                <div class="control-label-group"><span>Card Size</span><span id="val-size">260px</span></div>
+                <input type="range" id="input-size" min="150" max="400" value="260">
             </div>
         </div>
+        <button class="adjust-btn" id="toggle-controls">⚙️ ADJUST VIEW</button>
     </div>
 
     <script>
         // --- DATA ---
-        // Strictly ordered as requested: ASCII Mapper, Polygrade, Todo Garden, IsoCube, 
-        // Pixel Artist, Isometric Todo, Gameboy Profile, Pastel Monster, Lofi Bedroom, 
-        // Lively Pomodoro, Cupid Message, Cosmic Mather, Mac Finder, Luxe Dictionary, 
-        // Noise Machine, Chroma Flux, Cozy 2048.
+        // Project list ordered as requested. 
+        // Previews use api.microlink.io with embed params for reliability.
         const PROJECTS = [
             { id: 14, title: "ASCII Mapper", description: "ASCII Map Generator", url: "https://dalecri.github.io/ASCII-Map-generator/" },
             { id: 3, title: "Polygrade", description: "Polygon Wallpapers", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
@@ -420,9 +400,16 @@
             { id: 16, title: "Cozy 2048", description: "Soft Palette 2048", url: "https://dalecri.github.io/cozy-2048/" }
         ];
 
-        // --- STATE ---
+        // --- STATE & SETTINGS ---
+        // EDIT THESE VALUES MANUALLY TO CHANGE DEFAULTS
         let focusIdx = 0;
-        let config = { pitch: 80, angle: 45, tilt: -90, rotate: 4, size: 280 };
+        let config = { 
+            pitch: 72,      // Default Pitch (X-axis)
+            angle: 42,      // Default Z-angle
+            tilt: -90,      // Default Tilt of focused card
+            rotate: 0,      // Default Rotate of focused card
+            size: 260       // Default Card Width in pixels
+        };
 
         const PACK_STEP = 20;
         const SPREAD_GAP = 600;
@@ -444,8 +431,8 @@
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
-                // Using the api.microlink.io format you identified as rendering correctly.
-                // Removed the cache buster logic to ensure screenshots load from cache instantly without timeouts.
+                // Using working Microlink embed logic. 
+                // Removed all cache-busting logic to ensure previews like Cozy 2048 render correctly.
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
@@ -530,7 +517,6 @@
                 el.style.transform = `translate3d(${-config.size/2}px, ${y}px, ${z}px) rotateZ(${cardZRot}deg) rotateX(${currentTilt}deg)`;
                 
                 el.classList.toggle('active', isFocused);
-                
                 const content = el.querySelector('.card-content');
                 const info = el.querySelector('.card-info');
                 const plus = el.querySelector('.plus-icon');
@@ -538,18 +524,18 @@
                 content.style.filter = isNotFocused ? 'blur(2px) grayscale(0.5)' : 'none';
                 content.style.opacity = isNotFocused ? '0.5' : '1';
                 info.style.opacity = isNotFocused ? '0.3' : '1';
-                
                 if(plus) plus.style.top = `-${cardHeight + 40}px`;
             });
         }
 
         // --- CONTROLS LOGIC ---
         const toggleBtn = document.getElementById('toggle-controls');
-        const closeBtn = document.getElementById('close-controls');
         const controlsCard = document.getElementById('controls-card');
 
-        toggleBtn.onclick = () => controlsCard.classList.add('open');
-        closeBtn.onclick = () => controlsCard.classList.remove('open');
+        toggleBtn.onclick = () => {
+            // Simple toggle for the expanded view settings
+            controlsCard.classList.toggle('open');
+        };
 
         const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
         inputs.forEach(id => {
