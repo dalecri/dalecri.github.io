@@ -204,8 +204,8 @@
             height: 100%;
             object-fit: cover;
             pointer-events: none;
-            opacity: 1;
-            transition: opacity 0.3s;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .card-info {
@@ -363,6 +363,80 @@
             letter-spacing: 1px;
             transition: all 0.2s;
         }
+
+        /* --- MOBILE VIEW ADAPTATIONS --- */
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto !important;
+                height: auto !important;
+                min-height: 100vh;
+            }
+            .header-left {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                padding: 30px 20px 10px 20px !important;
+            }
+            .header-left .name {
+                font-size: 32px !important;
+            }
+            .header-right {
+                display: none !important;
+            }
+            .filter-panel {
+                position: relative !important;
+                bottom: auto !important;
+                right: auto !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                padding: 10px 20px 30px 20px !important;
+                justify-content: flex-start !important;
+            }
+            .viewport {
+                position: relative !important;
+                top: 0 !important;
+                height: auto !important;
+                padding: 0 20px 60px 20px !important;
+                display: block !important;
+                perspective: none !important;
+            }
+            .scene, .timeline {
+                transform: none !important;
+                position: static !important;
+            }
+            .ground-line, .label, .anchor-elements, .controls-panel {
+                display: none !important;
+            }
+            #cards-container {
+                transform: none !important;
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+                padding-bottom: 40px !important;
+            }
+            .card-container {
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: 360px !important;
+                transform: none !important;
+                z-index: 1 !important;
+                margin: 0 auto !important;
+                max-width: 400px !important;
+            }
+            .card-frame {
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+                transform: none !important;
+            }
+            .card-content {
+                filter: none !important;
+                opacity: 1 !important;
+            }
+            .card-info {
+                opacity: 1 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -431,7 +505,6 @@
             { id: 3, title: "Cartography Canvas", description: "Hand-crafted ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
             { id: 4, title: "Atmospheric Loom", description: "Weaving seven-day forecasts into silk", category: "productivity", url: "https://dalecri.github.io/typographic-weather-loom/" },
             { id: 6, title: "Isometric Cubewall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-           
             { id: 8, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
             { id: 9, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
             { id: 10, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
@@ -453,7 +526,6 @@
         ];
 
         // --- STATE & SETTINGS ---
-        // [MANUAL EDIT]: Change these values to set your preferred camera defaults permanently
         let focusIdx = 0;
         let currentFilter = "all";
         let config = { 
@@ -490,7 +562,6 @@
                 container.className = 'card-container';
                 container.id = `card-${i}`;
                 
-                // Working Microlink embed logic. 
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
@@ -519,11 +590,18 @@
                 `;
 
                 container.onclick = () => {
-                    if (focusIdx === i) {
+                    // Mobile Behavior: Tapping a card immediately opens the project
+                    if (window.innerWidth <= 768) {
                         window.open(p.url, '_blank');
-                    } else {
-                        focusIdx = i;
-                        updateScene();
+                    } 
+                    // Desktop Behavior: Tapping focuses the card, tapping again opens
+                    else {
+                        if (focusIdx === i) {
+                            window.open(p.url, '_blank');
+                        } else {
+                            focusIdx = i;
+                            updateScene();
+                        }
                     }
                 };
                 cardsLayer.appendChild(container);
@@ -541,6 +619,8 @@
         }
 
         function updateScene() {
+            if (window.innerWidth <= 768) return; // Skip 3D transform calculations on mobile
+
             const items = getFilteredItems();
             const totalLength = items.length * PACK_STEP;
             scene.style.transform = `rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
@@ -628,6 +708,7 @@
 
         // Navigation
         window.addEventListener('keydown', (e) => {
+            if (window.innerWidth <= 768) return; // Disable arrow nav on mobile
             const items = getFilteredItems();
             if (e.key === 'ArrowRight') {
                 focusIdx = Math.min(items.length - 1, focusIdx + 1);
@@ -640,6 +721,8 @@
 
         let lastScroll = 0;
         window.addEventListener('wheel', (e) => {
+            if (window.innerWidth <= 768) return; // Allow native scrolling on mobile
+            
             const now = Date.now();
             if (now - lastScroll < 60) return;
             const items = getFilteredItems();
@@ -653,6 +736,11 @@
                 updateScene();
             }
         }, { passive: false });
+
+        // Handle resize events to correct visual states if rotating device
+        window.addEventListener('resize', () => {
+            updateScene();
+        });
 
         // --- INIT ---
         createCards();
