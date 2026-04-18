@@ -409,10 +409,12 @@
             }
             #cards-container {
                 transform: none !important;
-                display: grid !important;
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 40px !important;
                 padding-bottom: 40px !important;
+                padding-top: 20px !important;
             }
             .card-container {
                 position: relative !important;
@@ -420,14 +422,25 @@
                 top: 0 !important;
                 width: 100% !important;
                 height: 360px !important;
-                transform: none !important;
-                z-index: 1 !important;
                 margin: 0 auto !important;
                 max-width: 400px !important;
+                
+                /* Mac Dock Scale Logic Injection via JS */
+                --mobile-scale: 1;
+                --mobile-z: 1;
+                transform: scale(var(--mobile-scale)) !important;
+                z-index: var(--mobile-z) !important;
+                transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+                will-change: transform;
             }
             .card-frame {
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+                /* Mac Dock Shadow Logic Injection via JS */
+                --m-shadow-y: 10px;
+                --m-shadow-b: 15px;
+                --m-shadow-a: 0.05;
+                box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px rgba(0, 0, 0, var(--m-shadow-a)), 0 5px 10px -5px rgba(0, 0, 0, 0.03) !important;
                 transform: none !important;
+                transition: box-shadow 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
             }
             .card-content {
                 filter: none !important;
@@ -529,11 +542,11 @@
         let focusIdx = 0;
         let currentFilter = "all";
         let config = { 
-            pitch: 72,      // Camera Pitch (X-axis)
-            angle: 42,      // Timeline Angle (Z-axis)
-            tilt: -90,      // Vertical tilt of the focused card
-            rotate: 0,      // Fine Z-rotation of the focused card
-            size: 260       // Width of all cards in pixels
+            pitch: 72,      
+            angle: 42,      
+            tilt: -90,      
+            rotate: 0,      
+            size: 260       
         };
 
         const PACK_STEP = 20;
@@ -590,12 +603,9 @@
                 `;
 
                 container.onclick = () => {
-                    // Mobile Behavior: Tapping a card immediately opens the project
                     if (window.innerWidth <= 768) {
                         window.open(p.url, '_blank');
-                    } 
-                    // Desktop Behavior: Tapping focuses the card, tapping again opens
-                    else {
+                    } else {
                         if (focusIdx === i) {
                             window.open(p.url, '_blank');
                         } else {
@@ -609,6 +619,11 @@
             
             projectCountDisp.textContent = items.length;
             updateCounts();
+
+            // Run mobile scale logic once upon creation if applicable
+            if (window.innerWidth <= 768) {
+                setTimeout(handleMobileScroll, 50);
+            }
         }
 
         function updateCounts() {
@@ -619,7 +634,10 @@
         }
 
         function updateScene() {
-            if (window.innerWidth <= 768) return; // Skip 3D transform calculations on mobile
+            if (window.innerWidth <= 768) {
+                handleMobileScroll();
+                return;
+            }
 
             const items = getFilteredItems();
             const totalLength = items.length * PACK_STEP;
@@ -676,6 +694,59 @@
             });
         }
 
+        // --- FLUID MOBILE "MAC DOCK" SCROLL LOGIC ---
+        function handleMobileScroll() {
+            if (window.innerWidth > 768) return;
+            const centerY = window.innerHeight / 2;
+            
+            document.querySelectorAll('.card-container').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.height === 0) return; // Skip unmounted
+                
+                const cardCenter = rect.top + rect.height / 2;
+                const dist = Math.abs(centerY - cardCenter);
+                
+                // Maximum distance from center where scaling effect occurs
+                const maxDist = window.innerHeight * 0.5; 
+                let scale = 1;
+                let zIndex = 1;
+                let shadowY = 10;
+                let shadowBlur = 15;
+                let shadowAlpha = 0.05;
+                
+                if (dist < maxDist) {
+                    const intensity = 1 - (dist / maxDist);
+                    const eased = Math.pow(intensity, 1.8); // Snappy pop curve
+                    
+                    scale = 1 + (0.12 * eased); // Max scale roughly 1.12x
+                    zIndex = Math.round(10 + (eased * 100));
+                    
+                    // Shadow deepens physically as it magnifies
+                    shadowY = 10 + (12 * eased);
+                    shadowBlur = 15 + (15 * eased);
+                    shadowAlpha = 0.05 + (0.1 * eased); 
+                }
+                
+                // Injecting CSS variables handles smooth animation without fighting media queries
+                card.style.setProperty('--mobile-scale', scale.toFixed(3));
+                card.style.setProperty('--mobile-z', zIndex);
+                
+                const frame = card.querySelector('.card-frame');
+                if (frame) {
+                    frame.style.setProperty('--m-shadow-y', `${shadowY.toFixed(1)}px`);
+                    frame.style.setProperty('--m-shadow-b', `${shadowBlur.toFixed(1)}px`);
+                    frame.style.setProperty('--m-shadow-a', shadowAlpha.toFixed(3));
+                }
+            });
+        }
+
+        // Dedicated fluid scroll event for mobile
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                requestAnimationFrame(handleMobileScroll);
+            }
+        }, { passive: true });
+
         // --- INTERACTION LOGIC ---
         const toggleBtn = document.getElementById('toggle-controls');
         const controlsCard = document.getElementById('controls-card');
@@ -708,7 +779,7 @@
 
         // Navigation
         window.addEventListener('keydown', (e) => {
-            if (window.innerWidth <= 768) return; // Disable arrow nav on mobile
+            if (window.innerWidth <= 768) return; 
             const items = getFilteredItems();
             if (e.key === 'ArrowRight') {
                 focusIdx = Math.min(items.length - 1, focusIdx + 1);
@@ -721,7 +792,7 @@
 
         let lastScroll = 0;
         window.addEventListener('wheel', (e) => {
-            if (window.innerWidth <= 768) return; // Allow native scrolling on mobile
+            if (window.innerWidth <= 768) return; 
             
             const now = Date.now();
             if (now - lastScroll < 60) return;
@@ -737,7 +808,6 @@
             }
         }, { passive: false });
 
-        // Handle resize events to correct visual states if rotating device
         window.addEventListener('resize', () => {
             updateScene();
         });
