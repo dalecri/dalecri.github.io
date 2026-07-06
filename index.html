@@ -198,7 +198,7 @@
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
-
+    
     /* The Info Curtain (slides down over the front face on mobile) */
     .card-info-curtain {
       position: absolute;
@@ -212,7 +212,7 @@
       justify-content: space-between;
       overflow: hidden;
     }
-
+    
     .card-info-curtain.show-curtain {
       transform: translateY(0);
     }
@@ -747,6 +747,7 @@
         cardColors: ["#ff73b3", "#c084fc", "#f472b6", "#a855f7"]
       }
     };
+    
     // Helpers
     function darken(h, a) {
       let c = parseInt(h.replace("#", ""), 16);
@@ -775,12 +776,14 @@
       const size = 20 + ((id * 13) % 60);
       return `repeating-linear-gradient(${angle}deg, ${c1} 0%, ${c1} ${size}px, ${c2} ${size}px, ${c2} ${size}px)`;
     }
+
     // Dynamic state
     let filter = "all";
     let focusIdx = 0;
     let flippedIdx = -1; // Mobile/Desktop active flipped card back
     let shuffleMode = "fan";
     let currentTheme = "solar";
+
     // Layout properties
     const layout = {
       offsetX: 0,
@@ -799,6 +802,44 @@
       cardH: '--card-h',
       cardRadius: '--card-radius'
     };
+
+    // LOCAL STORAGE FUNCTIONS
+    const STORAGE_KEY = 'cristobal_archive_prefs';
+
+    function savePreferences() {
+      const prefs = {
+        offsetX: layout.offsetX,
+        yAdjustment: layout.yAdjustment,
+        radius: layout.radius,
+        cardW: layout.cardW,
+        cardRadius: layout.cardRadius,
+        shuffleMode: shuffleMode,
+        currentTheme: currentTheme
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    }
+
+    function loadPreferences() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const prefs = JSON.parse(saved);
+          if (prefs.offsetX !== undefined) layout.offsetX = prefs.offsetX;
+          if (prefs.yAdjustment !== undefined) layout.yAdjustment = prefs.yAdjustment;
+          if (prefs.radius !== undefined) layout.radius = prefs.radius;
+          if (prefs.cardW !== undefined) {
+            layout.cardW = prefs.cardW;
+            layout.cardH = Math.round(layout.cardW * 1.4);
+          }
+          if (prefs.cardRadius !== undefined) layout.cardRadius = prefs.cardRadius;
+          if (prefs.shuffleMode) shuffleMode = prefs.shuffleMode;
+          if (prefs.currentTheme) currentTheme = prefs.currentTheme;
+        } catch (e) {
+          console.error("Failed to parse saved preferences", e);
+        }
+      }
+    }
+
     // DOM Elements Cache
     const sceneOrienter = document.getElementById("scene-orienter");
     const projectCountEl = document.getElementById("project-count");
@@ -860,6 +901,7 @@
         }
       }
     }
+
     // Settings panel toggle
     togglePanelBtn.addEventListener("click", () => {
       settingsPanel.classList.toggle("hidden");
@@ -867,17 +909,23 @@
     closePanelBtn.addEventListener("click", () => {
       settingsPanel.classList.add("hidden");
     });
+
     // Reset layout attributes
     resetBtn.addEventListener("click", () => {
       updateLayoutProp("offsetX", 0);
       updateLayoutProp("yAdjustment", 0);
       updateLayoutProp("radius", 500);
       updateLayoutProp("cardRadius", 8);
+      
+      const targetW = getResponsiveCardWidth();
+      updateLayoutProp("cardW", targetW);
+
       setShuffleMode("fan");
       applyTheme("solar");
-      applyResponsiveCardWidth();
       syncSlidersToState();
+      savePreferences();
     });
+
     // Set Theme
     function applyTheme(key) {
       currentTheme = key;
@@ -893,6 +941,7 @@
         }
       });
       rebuildCardsDOM();
+      savePreferences();
     }
     Object.keys(THEMES).forEach(key => {
       const btn = document.getElementById(`theme-${key}`);
@@ -900,6 +949,7 @@
         btn.addEventListener("click", () => applyTheme(key));
       }
     });
+
     // Layout Mode Shuffling
     function setShuffleMode(mode) {
       shuffleMode = mode;
@@ -912,10 +962,12 @@
         }
       });
       renderActiveCards();
+      savePreferences();
     }
     ["circular", "deck", "fan"].forEach(mode => {
       document.getElementById(`layout-${mode}`).addEventListener("click", () => setShuffleMode(mode));
     });
+
     // Slider inputs mapping
     ["offsetX", "yAdjustment", "radius", "cardW", "cardRadius"].forEach(prop => {
       const slider = document.getElementById(`slider-${prop}`);
@@ -940,6 +992,7 @@
         document.documentElement.style.setProperty(cssVar, value + 'px');
       }
       renderActiveCards();
+      savePreferences();
     }
 
     function syncSlidersToState() {
@@ -987,6 +1040,7 @@
         filterSidebar.appendChild(btn);
       });
     }
+
     // Generate all 3D cards DOM elements
     function rebuildCardsDOM() {
       const items = getFilteredItems();
@@ -1001,6 +1055,7 @@
         const card = document.createElement("div");
         card.className = "card-3d";
         card.setAttribute("data-id", project.id);
+
         // Front Face
         const frontFace = document.createElement("div");
         frontFace.className = "front-face absolute inset-0 overflow-hidden transition-shadow duration-300";
@@ -1009,15 +1064,18 @@
         frontFace.style.height = "var(--card-h)";
         frontFace.style.transform = `translateZ(calc(var(--depth) / 2 + 0.1px))`;
         frontFace.style.background = face;
+
         const patternCover = document.createElement("div");
         patternCover.className = "absolute inset-0 opacity-[0.12] transition-all duration-300 pattern-cover";
         patternCover.style.background = getGeometricPattern(project.id, lighten(color, 25), accent, face);
         patternCover.style.top = "6px";
         frontFace.appendChild(patternCover);
+
         // Content Area
         const contentContainer = document.createElement("div");
         contentContainer.className = "absolute inset-0 flex flex-col justify-between box-border text-layer transition-all duration-400";
         contentContainer.style.padding = "calc(16px * var(--ts)) calc(14px * var(--ts)) calc(14px * var(--ts))";
+
         const headerSec = document.createElement("div");
         headerSec.className = "flex justify-between items-baseline z-10";
         headerSec.innerHTML = `
@@ -1025,8 +1083,10 @@
           <span style="font-size: max(7px, calc(9px * var(--ts))); font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-weight: 500;" class="card-year-text">${project.year}</span>
         `;
         contentContainer.appendChild(headerSec);
+
         const middleSec = document.createElement("div");
         middleSec.className = "flex flex-col flex-1 justify-center gap-1.5 overflow-hidden";
+
         const titleEl = document.createElement("div");
         titleEl.style.fontSize = "max(9px, calc(18px * var(--ts)))";
         titleEl.style.fontWeight = "700";
@@ -1037,6 +1097,7 @@
         titleEl.className = "card-title-clamp font-sans card-title-text";
         titleEl.textContent = project.title;
         middleSec.appendChild(titleEl);
+
         const descEl = document.createElement("div");
         descEl.style.fontSize = "max(8px, calc(10px * var(--ts)))";
         descEl.style.color = "var(--text-secondary)";
@@ -1047,26 +1108,32 @@
         descEl.textContent = project.description;
         middleSec.appendChild(descEl);
         contentContainer.appendChild(middleSec);
+
         const techSec = document.createElement("div");
         techSec.className = "flex flex-wrap gap-1 overflow-hidden card-tech";
         techSec.style.maxHeight = "calc(22px * var(--ts))";
         contentContainer.appendChild(techSec);
+
         frontFace.appendChild(contentContainer);
+        
         // ---- The Curtain Overlay (Mobile Only) ----
         const curtain = document.createElement("div");
         curtain.className = "card-info-curtain";
         curtain.style.background = `linear-gradient(135deg, ${color}, ${darken(color, 25)})`;
         curtain.style.padding = "calc(18px * var(--ts)) calc(16px * var(--ts))";
         curtain.style.color = "#ffffff";
+
         const techTags = project.tech.map(t =>
           `<span class="font-mono font-semibold uppercase rounded" style="font-size: max(7px, calc(8px * var(--ts))); padding: calc(3px * var(--ts)) calc(7px * var(--ts)); background: rgba(255,255,255,0.2); color: #fff;">${t}</span>`
         ).join("");
+
         const launchBtn = (project.link && project.link !== "#") ?
           `<a href="${project.link}" target="_blank" onclick="event.stopPropagation();" class="flex items-center justify-center gap-2 w-full rounded-xl font-mono font-bold transition-all active:scale-95" style="font-size: max(8px, calc(11px * var(--ts))); padding: calc(10px * var(--ts)); background: rgba(255,255,255,0.95); color: ${darken(color, 30)};">
             <span>Launch Project</span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>` :
           `<div class="text-center font-mono opacity-70" style="font-size: max(8px, calc(10px * var(--ts)));">No live link yet</div>`;
+
         curtain.innerHTML = `
           <!-- Close button -->
           <button class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all text-white border border-white/10 active:scale-95 z-30 cursor-pointer curtain-close-btn" onclick="event.stopPropagation();">
@@ -1087,6 +1154,7 @@
         `;
         frontFace.appendChild(curtain);
         card.appendChild(frontFace);
+
         // Attach event listener to close button
         const closeBtn = curtain.querySelector(".curtain-close-btn");
         if (closeBtn) {
@@ -1096,6 +1164,7 @@
             renderActiveCards();
           });
         }
+
         // Spines
         const rightSpine = document.createElement("div");
         rightSpine.className = "right-spine";
@@ -1106,6 +1175,7 @@
         rightSpine.style.transformOrigin = "left center";
         rightSpine.style.background = `linear-gradient(180deg, ${lighten(color, 25)}, ${color} 50%, ${darken(color, 15)})`;
         card.appendChild(rightSpine);
+
         const leftSpine = document.createElement("div");
         leftSpine.className = "left-spine";
         leftSpine.style.top = "var(--card-radius)";
@@ -1115,6 +1185,7 @@
         leftSpine.style.transformOrigin = "left center";
         leftSpine.style.background = `linear-gradient(180deg, ${lighten(color, 15)}, ${darken(color, 10)})`;
         card.appendChild(leftSpine);
+
         const topSpine = document.createElement("div");
         topSpine.className = "top-spine";
         topSpine.style.left = "var(--card-radius)";
@@ -1124,6 +1195,7 @@
         topSpine.style.transformOrigin = "center top";
         topSpine.style.background = `linear-gradient(90deg, ${lighten(color, 30)}, ${lighten(color, 40)}, ${lighten(color, 25)})`;
         card.appendChild(topSpine);
+
         const bottomSpine = document.createElement("div");
         bottomSpine.className = "bottom-spine";
         bottomSpine.style.left = "var(--card-radius)";
@@ -1133,6 +1205,7 @@
         bottomSpine.style.transformOrigin = "center top";
         bottomSpine.style.background = darken(color, 25);
         card.appendChild(bottomSpine);
+
         card.addEventListener("click", () => {
           // On mobile, tapping the focused card triggers the curtain.
           if (i === focusIdx && isMobile()) {
@@ -1157,24 +1230,27 @@
       }
       updateThemeStyles();
       updateDynamicOffsets();
+
       const ts = Math.min(layout.cardW / 200, layout.cardH / 280);
       document.documentElement.style.setProperty('--ts', ts);
       const isDarkFace = THEMES[currentTheme].darkFace;
       const cards = document.querySelectorAll(".card-3d");
+
       cards.forEach((card, i) => {
         const project = items[i];
         if (!project) return;
-        const {
-          color
-        } = getProjectColors(project);
+        const { color } = getProjectColors(project);
         let diff = i - focusIdx;
         if (diff > n / 2) diff -= n;
         if (diff < -n / 2) diff += n;
+
         const isFront = i === focusIdx;
         const isFlipped = isFront && flippedIdx === i;
+
         let x, z, rx, rz;
         let cardScale = isFront ? 1 : 0.85;
         let normZ;
+
         if (shuffleMode === "circular") {
           const angleStep = (2 * Math.PI) / n;
           const angle = angleStep * (i - focusIdx);
@@ -1201,8 +1277,10 @@
           rx = 'var(--card-rx)';
           rz = `calc(var(--card-rz) + ${diff * 5.5}deg)`;
         }
+
         card.style.zIndex = isFront ? 1000 : Math.round(normZ * 100);
         card.style.opacity = 0.3 + normZ * 0.7;
+
         // Normal 3D carousel presentation styling is always maintained
         card.style.transform = `
           translateX(var(--offset-x))
@@ -1217,6 +1295,7 @@
           rotateZ(${rz})
           scale(${cardScale})
         `;
+
         // Toggle Curtain Overlay
         const curtainOverlay = card.querySelector(".card-info-curtain");
         if (curtainOverlay) {
@@ -1226,6 +1305,7 @@
             curtainOverlay.classList.remove("show-curtain");
           }
         }
+
         const textLayer = card.querySelector(".text-layer");
         if (textLayer) {
           const categoryText = textLayer.querySelector(".card-category-text");
@@ -1245,15 +1325,18 @@
             descText.style.color = isDarkFace ? "rgba(255, 255, 255, 0.85)" : "var(--text-secondary)";
           }
         }
+
         const frontBoxShadow = card.querySelector(".front-face");
         if (frontBoxShadow) {
           frontBoxShadow.style.boxShadow = isFront ?
             `0 20px 40px ${color}33, 0 8px 16px ${color}1a` :
             "0 4px 12px rgba(0,0,0,0.03)";
         }
+
         const descText = card.querySelector(".card-desc");
         const techBox = card.querySelector(".card-tech");
         const titleText = card.querySelector(".card-title-clamp");
+
         if (descText) descText.style.display = (layout.cardH >= 150 && isFront) ? "block" : "none";
         if (techBox) {
           techBox.style.display = (layout.cardH >= 170 && isFront) ? "flex" : "none";
@@ -1273,6 +1356,7 @@
         }
         if (titleText) titleText.style.webkitLineClamp = (layout.cardH >= 150) ? "2" : "3";
       });
+
       // Update Info Panel
       const fp = items[focusIdx];
       if (fp) {
@@ -1310,6 +1394,7 @@
         infoPanel.classList.add("hidden");
       }
     }
+
     // Navigation buttons
     document.getElementById("prev-btn").addEventListener("click", () => {
       const items = getFilteredItems();
@@ -1323,6 +1408,7 @@
       flippedIdx = -1;
       renderActiveCards();
     });
+
     // Throttled mousewheel navigation
     let lastTime = 0;
     window.addEventListener("wheel", (e) => {
@@ -1342,6 +1428,7 @@
     }, {
       passive: false
     });
+
     // Keyboard handlers
     window.addEventListener("keydown", (e) => {
       const items = getFilteredItems();
@@ -1357,6 +1444,7 @@
         renderActiveCards();
       }
     });
+
     // Touch swiping navigation
     let touchStartX = 0;
     window.addEventListener("touchstart", (e) => {
@@ -1377,6 +1465,7 @@
         renderActiveCards();
       }
     });
+
     // Handle screen resize events dynamically
     let resizeTimer = null;
     window.addEventListener("resize", () => {
@@ -1388,16 +1477,29 @@
         renderActiveCards();
       }, 150);
     });
+
     // Initialize
     document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.style.setProperty(`--offset-x`, "0px");
       document.documentElement.style.setProperty(`--radius`, "500px");
       document.documentElement.style.setProperty(`--card-radius`, "8px");
+
+      // Set initial defaults
       layout.cardW = getResponsiveCardWidth();
       layout.cardH = Math.round(layout.cardW * 1.4);
+
+      // Load saved preferences if available (this overrides the above defaults)
+      loadPreferences();
+
+      // Apply loaded or default properties to CSS
       document.documentElement.style.setProperty('--card-w', layout.cardW + 'px');
       document.documentElement.style.setProperty('--card-h', layout.cardH + 'px');
-      applyTheme("solar");
+      document.documentElement.style.setProperty('--offset-x', layout.offsetX + 'px');
+      document.documentElement.style.setProperty('--radius', layout.radius + 'px');
+      document.documentElement.style.setProperty('--card-radius', layout.cardRadius + 'px');
+
+      applyTheme(currentTheme);
+      setShuffleMode(shuffleMode);
       syncSlidersToState();
       renderCategoryFilters();
       rebuildCardsDOM();
