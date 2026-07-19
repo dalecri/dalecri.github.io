@@ -275,8 +275,8 @@
         .esrb-logo {
             position: absolute;
             bottom: 4%;
-            left: 3%;
-            width: 15%;
+            left: 4%;
+            width: 11%;
             background: white;
             border: min(2px, 0.4cqw) solid black;
             display: flex;
@@ -290,7 +290,7 @@
             background: black;
             color: white;
             font-family: 'Arial', sans-serif;
-            font-size: min(5px, 1.2cqw);
+            font-size: min(4px, 1cqw);
             font-weight: 900;
             text-align: center;
             padding: 1px 0;
@@ -304,7 +304,7 @@
             justify-content: center;
             color: black;
             font-family: 'Arial', sans-serif;
-            font-size: min(20px, 6cqw);
+            font-size: min(18px, 5cqw);
             font-weight: 900;
             line-height: 1;
             padding: 2px 0;
@@ -312,7 +312,7 @@
 
         .esrb-bottom {
             font-family: 'Arial', sans-serif;
-            font-size: min(4px, 0.9cqw);
+            font-size: min(3.5px, 0.8cqw);
             font-weight: 700;
             color: black;
             text-align: center;
@@ -375,14 +375,46 @@
             transform: scale(1.05);
         }
 
+        /* --- Click & Enter Animation: Insert Cartridge & Screen Glare --- */
+        .card-container.insert-cartridge .card-frame {
+            animation: cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes cartridge-bounce {
+            0% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+            50% { transform: scale(0.95) translateY(80px); box-shadow: 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.6); }
+            100% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+        }
+
+        .screen-glare {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(-25deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .card-container.insert-cartridge .screen-glare {
+            animation: glare-flash 0.3s ease-out forwards;
+        }
+
+        @keyframes glare-flash {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
         .controls-panel {
             position: absolute;
             bottom: 40px;
-            left: 60px;
+            right: 60px;
             z-index: 200;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: flex-end;
             gap: 15px;
         }
 
@@ -481,17 +513,17 @@
         }
         
         .adjust-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
+            width: 22px;
+            height: 22px;
             stroke: currentColor;
             stroke-width: 2;
+            fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
         .adjust-btn:hover {
-            transform: translateY(-3px) rotate(30deg);
+            transform: translateY(-3px) rotate(10deg);
             box-shadow: 0 6px 15px var(--shadow-color);
         }
 
@@ -573,6 +605,14 @@
                 filter: none !important;
                 opacity: 1 !important;
             }
+            .card-container.insert-cartridge .card-frame {
+                animation: mobile-cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+            }
+            @keyframes mobile-cartridge-bounce {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(40px) scale(0.95); }
+                100% { transform: translateY(0); }
+            }
         }
     </style>
 </head>
@@ -586,11 +626,11 @@
     <div class="filter-panel">
         <button class="filter-btn active" data-cat="all">all <sup id="count-all">0</sup></button>
         <button class="filter-btn" data-cat="art">art <sup id="count-art">0</sup></button>
+        <button class="filter-btn" data-cat="interactive">interactive <sup id="count-interactive">0</sup></button>
         <button class="filter-btn" data-cat="productivity">productivity <sup id="count-productivity">0</sup></button>
         <button class="filter-btn" data-cat="game">game <sup id="count-game">0</sup></button>
     </div>
 
-    <!-- Ensure all of these nodes exist perfectly for the Javascript -->
     <div class="viewport">
         <div class="scene" id="scene">
             <div class="timeline" id="timeline">
@@ -627,11 +667,18 @@
                 <div class="control-label-group"><span>Cartridge Size</span><span id="val-size">280px</span></div>
                 <input type="range" id="input-size" min="180" max="400" value="280">
             </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">250px</span></div>
+                <input type="range" id="input-offsetY" min="-300" max="300" value="250">
+            </div>
         </div>
         <button class="adjust-btn" id="toggle-controls" title="Adjust View">
             <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                <rect x="2" y="6" width="20" height="12" rx="4" ry="4"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                <line x1="18" y1="11" x2="18.01" y2="11"></line>
             </svg>
         </button>
     </div>
@@ -678,7 +725,8 @@
             angle: 42,      
             tilt: -90,      
             rotate: 0,      
-            size: 280       
+            size: 280,
+            offsetY: 250
         };
 
         const PACK_STEP = 30;
@@ -697,14 +745,33 @@
             return currentFilter === "all" ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
         }
 
+        // Handles the animation delay and same-tab routing
+        function playAndNavigate(index, url) {
+            const el = document.getElementById(`card-${index}`);
+            if (!el) return;
+            
+            el.classList.add('insert-cartridge');
+            
+            // Wait for the bounce animation to finish, then navigate current tab
+            setTimeout(() => {
+                window.location.assign(url);
+                
+                // Clean up in case the user uses the browser 'Back' button
+                setTimeout(() => {
+                    el.classList.remove('insert-cartridge');
+                }, 100);
+            }, 300);
+        }
+
         function createCards() {
             cardsLayer.innerHTML = '';
             const items = getFilteredItems();
             
             items.forEach((p, i) => {
-                const container = document.createElement('div');
+                const container = document.createElement('a');
                 container.className = 'card-container';
                 container.id = `card-${i}`;
+                container.href = p.url;
                 
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
@@ -723,6 +790,7 @@
                                      loading="lazy"
                                      onload="this.style.opacity=1"
                                      style="opacity:0">
+                                <div class="screen-glare"></div>
                                 <div class="esrb-logo">
                                     <div class="esrb-top">EVERYONE</div>
                                     <div class="esrb-e">E</div>
@@ -737,15 +805,19 @@
                     </div>
                 `;
 
-                container.onclick = () => {
-                    if (window.innerWidth <= 768) {
-                        window.open(p.url, '_blank');
-                    } else {
-                        if (focusIdx === i) {
-                            window.open(p.url, '_blank');
+                container.onclick = (e) => {
+                    // Only intercept normal left clicks (allow ctrl/cmd clicks to open in new tabs naturally)
+                    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                        e.preventDefault(); // Stop instant navigation
+                        if (window.innerWidth <= 768) {
+                            playAndNavigate(i, p.url);
                         } else {
-                            focusIdx = i;
-                            updateScene();
+                            if (focusIdx === i) {
+                                playAndNavigate(i, p.url);
+                            } else {
+                                focusIdx = i;
+                                updateScene();
+                            }
                         }
                     }
                 };
@@ -763,6 +835,7 @@
         function updateCounts() {
             document.getElementById('count-all').textContent = PROJECTS.length;
             document.getElementById('count-art').textContent = PROJECTS.filter(p => p.category === "art").length;
+            document.getElementById('count-interactive').textContent = PROJECTS.filter(p => p.category === "interactive").length;
             document.getElementById('count-productivity').textContent = PROJECTS.filter(p => p.category === "productivity").length;
             document.getElementById('count-game').textContent = PROJECTS.filter(p => p.category === "game").length;
         }
@@ -775,7 +848,7 @@
 
             const items = getFilteredItems();
             const totalLength = items.length * PACK_STEP;
-            scene.style.transform = `rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
+            scene.style.transform = `translateY(${config.offsetY}px) rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
 
             const getCardY = (i) => {
                 const base = (totalLength / 2) - (i * PACK_STEP);
@@ -874,7 +947,7 @@
 
         toggleBtn.onclick = () => controlsCard.classList.toggle('open');
 
-        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
+        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size', 'offsetY'];
         inputs.forEach(id => {
             const input = document.getElementById(`input-${id}`);
             const display = document.getElementById(`val-${id}`);
@@ -882,7 +955,7 @@
                 input.oninput = (e) => {
                     const val = Number(e.target.value);
                     config[id] = val;
-                    display.textContent = val + (id === 'size' ? 'px' : '°');
+                    display.textContent = val + (id === 'size' || id === 'offsetY' ? 'px' : '°');
                     updateScene();
                 };
             }
@@ -916,7 +989,12 @@
         window.addEventListener('keydown', (e) => {
             if (window.innerWidth <= 768) return; 
             const items = getFilteredItems();
-            if (e.key === 'ArrowRight') {
+            
+            if (e.key === 'Enter') {
+                if(items[focusIdx]) {
+                    playAndNavigate(focusIdx, items[focusIdx].url);
+                }
+            } else if (e.key === 'ArrowRight') {
                 focusIdx = Math.min(items.length - 1, focusIdx + 1);
                 updateScene();
             } else if (e.key === 'ArrowLeft') {
