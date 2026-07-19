@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- Light Theme --- */
+            /* Light Theme */
             --bg-color: #dcd6ce; 
-            --card-paper: #8a8d91; /* Cartridge grey */
+            --card-paper: #8a8d91; 
             --card-indent: #75787c;
             --card-content-bg: #111;
             --text-main: #36322e;
@@ -22,7 +22,7 @@
         }
 
         [data-theme="dark"] {
-            /* --- Dark Theme (Default) --- */
+            /* Dark Theme (Default) */
             --bg-color: #292623; 
             --card-paper: #4a4d51; 
             --card-indent: #3a3d41;
@@ -77,6 +77,54 @@
             color: var(--text-muted);
             margin-top: 10px;
             letter-spacing: 1px;
+        }
+
+        /* --- Mechanical Keyboard Keys --- */
+        .mech-keys-container {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
+            align-items: center;
+        }
+
+        .mech-key {
+            background: #fdfcee;
+            color: #111;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            height: 48px;
+            min-width: 48px;
+            border: 2px solid #111;
+            border-radius: 8px;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset -2px -4px 0 rgba(0,0,0,0.1),
+                0 6px 0 #111,
+                0 10px 10px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+            text-transform: uppercase;
+            padding: 0 12px;
+        }
+
+        .mech-key:active, .mech-key.pressed {
+            transform: translateY(4px);
+            background: #f4f3e6;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset -2px -2px 0 rgba(0,0,0,0.1),
+                0 2px 0 #111,
+                0 4px 5px var(--shadow-color);
+        }
+
+        .mech-key.wide {
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 0 16px;
         }
 
         .filter-panel {
@@ -169,6 +217,10 @@
             transform-origin: bottom center;
             transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.65s;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            outline: none;
         }
 
         .card-frame {
@@ -192,7 +244,6 @@
             container-type: inline-size;
         }
 
-        /* Cartridge Top Lip */
         .gba-lip {
             width: 108.7%;
             align-self: center;
@@ -237,7 +288,6 @@
             transition: all 0.4s ease;
         }
 
-        /* Recessed Indent for Sticker */
         .gba-label-recess {
             width: 88%;
             flex: 1;
@@ -320,7 +370,6 @@
             padding-bottom: 2px;
         }
 
-        /* Bottom Grip Grooves */
         .gba-bottom-grip {
             position: absolute;
             bottom: 6%;
@@ -375,7 +424,6 @@
             transform: scale(1.05);
         }
 
-        /* --- Click & Enter Animation: Insert Cartridge & Screen Glare --- */
         .card-container.insert-cartridge .card-frame {
             animation: cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
@@ -470,7 +518,6 @@
             transition: background-color 0.4s ease;
         }
 
-        /* Modernize Theme Toggle */
         .modern-theme-btn {
             background: var(--bg-color);
             border: 1px solid var(--border-color);
@@ -527,12 +574,17 @@
             box-shadow: 0 6px 15px var(--shadow-color);
         }
 
+        .mobile-only-btn { display: none; }
+
         @media (max-width: 768px) {
             body {
                 overflow-y: auto !important;
                 height: auto !important;
                 min-height: 100vh;
             }
+            .hide-mobile { display: none !important; }
+            .mobile-only-btn { display: flex; align-items: center; justify-content: center; }
+            
             .header-left {
                 position: relative !important;
                 top: 0 !important;
@@ -541,6 +593,9 @@
             }
             .header-left .name {
                 font-size: 32px !important;
+            }
+            .mech-keys-container {
+                margin-top: 15px !important;
             }
             .filter-panel {
                 position: relative !important;
@@ -580,15 +635,15 @@
                 left: 0 !important;
                 top: 0 !important;
                 width: 100% !important;
-                height: 240px !important; /* GBA aspect ratio for mobile */
+                height: 216px !important; 
                 margin: 0 auto !important;
-                max-width: 380px !important;
+                max-width: 342px !important;
                 
                 --mobile-scale: 1;
                 --mobile-z: 1;
                 transform: scale(var(--mobile-scale)) !important;
                 z-index: var(--mobile-z) !important;
-                transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+                transition: none !important; 
                 will-change: transform;
             }
             .card-frame {
@@ -596,7 +651,7 @@
                 --m-shadow-b: 15px;
                 box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px var(--shadow-color), 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4) !important;
                 transform: none !important;
-                transition: box-shadow 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease !important;
+                transition: background-color 0.4s ease !important;
             }
             .gba-lip {
                 box-shadow: 0 calc(var(--m-shadow-y) * 0.5) calc(var(--m-shadow-b) * 0.5) -2px rgba(0,0,0,0.2), inset 0 2px 4px var(--highlight) !important;
@@ -619,8 +674,19 @@
 <body>
 
     <div class="header-left">
-        <div class="name">Cristobal<br>D'Alessio</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            <div class="name">Cristobal<br>D'Alessio</div>
+            <button id="mobile-theme-toggle" class="mobile-only-btn adjust-btn" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
         <div class="stats">FILTERED : <span id="project-count">0</span></div>
+        
+        <div class="mech-keys-container hide-mobile">
+            <button class="mech-key" id="key-left">←</button>
+            <button class="mech-key" id="key-right">→</button>
+            <button class="mech-key wide" id="key-enter">Enter</button>
+        </div>
     </div>
 
     <div class="filter-panel">
@@ -642,7 +708,7 @@
         </div>
     </div>
 
-    <div class="controls-panel">
+    <div class="controls-panel hide-mobile">
         <div class="controls-card" id="controls-card">
             <button id="theme-toggle" class="modern-theme-btn">
                 <span>Toggle Theme</span>
@@ -668,8 +734,8 @@
                 <input type="range" id="input-size" min="180" max="400" value="280">
             </div>
             <div class="control-row">
-                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">250px</span></div>
-                <input type="range" id="input-offsetY" min="-300" max="300" value="250">
+                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">165px</span></div>
+                <input type="range" id="input-offsetY" min="-300" max="300" value="165">
             </div>
         </div>
         <button class="adjust-btn" id="toggle-controls" title="Adjust View">
@@ -726,7 +792,7 @@
             tilt: -90,      
             rotate: 0,      
             size: 280,
-            offsetY: 250
+            offsetY: 165
         };
 
         const PACK_STEP = 30;
@@ -806,9 +872,9 @@
                 `;
 
                 container.onclick = (e) => {
-                    // Only intercept normal left clicks (allow ctrl/cmd clicks to open in new tabs naturally)
+                    // Only intercept normal left clicks
                     if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-                        e.preventDefault(); // Stop instant navigation
+                        e.preventDefault(); 
                         if (window.innerWidth <= 768) {
                             playAndNavigate(i, p.url);
                         } else {
@@ -882,7 +948,7 @@
                 const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
                 const currentTilt = isFocused ? config.tilt : -90;
 
-                const cardHeight = config.size * 0.9; /* Slightly squatter for GBA ratio */
+                const cardHeight = config.size * 0.9; 
                 el.style.width = `${config.size}px`;
                 el.style.height = `${cardHeight}px`; 
                 el.style.top = `-${cardHeight}px`;
@@ -961,19 +1027,22 @@
             }
         });
 
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                if (isDark) {
-                    document.documentElement.removeAttribute('data-theme');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
         }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = (e) => {
@@ -986,21 +1055,47 @@
             };
         });
 
+        // --- Mechanical Keyboard & On-Screen Button Mapping ---
+        const keyLeft = document.getElementById('key-left');
+        const keyRight = document.getElementById('key-right');
+        const keyEnter = document.getElementById('key-enter');
+        
+        const keyMap = {
+            'ArrowLeft': keyLeft,
+            'ArrowRight': keyRight,
+            'Enter': keyEnter,
+            ' ': keyEnter
+        };
+
+        const handleLeft = () => { focusIdx = Math.max(0, focusIdx - 1); updateScene(); };
+        const handleRight = () => { focusIdx = Math.min(getFilteredItems().length - 1, focusIdx + 1); updateScene(); };
+        const handleAction = () => {
+            const items = getFilteredItems();
+            if(items[focusIdx]) playAndNavigate(focusIdx, items[focusIdx].url);
+        };
+
+        // Click Handlers for physical feeling buttons
+        if (keyLeft) keyLeft.onmousedown = handleLeft;
+        if (keyRight) keyRight.onmousedown = handleRight;
+        if (keyEnter) keyEnter.onmousedown = handleAction;
+
         window.addEventListener('keydown', (e) => {
             if (window.innerWidth <= 768) return; 
-            const items = getFilteredItems();
             
-            if (e.key === 'Enter') {
-                if(items[focusIdx]) {
-                    playAndNavigate(focusIdx, items[focusIdx].url);
-                }
+            // Add visual pressed effect
+            if (keyMap[e.key]) keyMap[e.key].classList.add('pressed');
+
+            if (e.key === 'Enter' || e.key === ' ') {
+                handleAction();
             } else if (e.key === 'ArrowRight') {
-                focusIdx = Math.min(items.length - 1, focusIdx + 1);
-                updateScene();
+                handleRight();
             } else if (e.key === 'ArrowLeft') {
-                focusIdx = Math.max(0, focusIdx - 1);
-                updateScene();
+                handleLeft();
             }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keyMap[e.key]) keyMap[e.key].classList.remove('pressed');
         });
 
         let lastScroll = 0;
