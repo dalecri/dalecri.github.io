@@ -1,1170 +1,1130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lamplight</title>
-  <link rel="icon" type="image/png" href="newlogo.png">
-  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAASd0lEQVR42u2dz6/c1nXH77nkzJBDDskZzjxZqvT0LLvPebEtuUhcB2iT1AXqNA4iuYDTyDXgtECNwkaLtt510XVRBF017a4tUHTRv6KLeNFFHaOwYyQyLDWJIzmQZNl6P+YHyXtPF5z33vwgOSSHM7wzcw9mIc3jcDj3fnjO95z7g7C38yyRJi3KqGwCaRIOaRIOaRIOaRIOaRIOaRIOaRIOaRIOaetuKiEoW0FaNBwSDWkyrEiTcEiTcEiTcEiTcEgTNJWV6Yo06TmkSTikFRhWZFyRJj2HNAmHtOLCigwq0hI0x4bb2N2BSABG34BNbhql7ZzbTBRO/gUAjDHTtP/ku2/97m9/++HBZx/fuVWp1hAxBhCQnmOdgZg6AilVzm6dbzqdet3kyGN9CyEwwpWEY7WZwDRHISGInu953oAzRpAMX5DE2tpTom4WE4mkAAAAjPX09PGwQZSoG4EFFv4lYyRMUQJrA8d6JLM4HxM4cjSOvNKBMk4JxAUk6TnKx2L5tOM0IgirH2hWukKKk2RgDjIinQTmOdf4J7A0VAv0HLgWDgMz3ePx/QoTbCQq0lleBFdciKxi+Xyq0zAvEzPZSCM0MiACq+Y51tlh4KIZnUEJjgmRleODrikZuMRgn/hdOKE+UMKxYDKSugNL6oBZiIzxgRKOxWQlwmGR7hpw9bIYugpkkHRkzNmjWBxks/lYiRAjfoUUF0DG1DhrBBycEJ4tiY3TovFZjOASVV1xMnDeuzknUpD6eJhFjrh80A0gYxFaBLN8e+zbgusPutZk4OJLHfNehshBna4pGcLUORKuWfj6h4Dl85H0JD8Z+bsX8w+7kczqAYUWpyJ6jjnIKL3Ukf3ycC6sNwoOnI8MgdjO+gkB4woVkQyyZDIwalx2of5jNSARdT4HLpqM8aJFhOjAKVYh+/lhhtYQ28SpkCLm73uc+86OLJ/P2TKQeAacnMkunjKlIjoKnLOns0hCGHnFvRMRfQq5MBQ8uIhSPseFBxTMEyIgLqeA1F8KGS5QsFAjgufIHVCyl8+jXUI6SmBiQASL8B9COw/BUlks/FBM4y0io8rsQ4vhQ9gyh9CjssWNoyauk4dZISXiUmCiVAcpriRb5iKCMi29fJ5mukY+bsbIgMTPZy2f42QuUlwviqQ86Aq6jdSjbinlxWggQZL5gwXk2zjfbbCecOASfnpsRx8zEZfJJqiPsbeh6I4UZpYHFdJTzOk2YqPJaN/OTFwmKUkQJZDnRwqtRY8FKQpCRLo/4VxkxBIzoTHGVMcw4EB0uQTH/jVTMsQdAHF7R8BGeo4cUnRBZBCA4T5xodI8+W9EKJm9QRgWfddgiZ5jvSw+MaXDjXvGjwUCAIiUAj0GBSillFJCkOBUXoOEEx7tP2CefhRxKE5MODC/24gkBAgF8H3PD7yQj1FIACAI/FpND//t+YOj7iEA5ZxNeDlEoipKtarxaWoyBJeVWTGrrp/biCCDUs/rn+1snz2zHQQ+0En/wTgz6halShD42+cef/aZr2vV+uSegogKVT/bv/+zj29UK9qE/4DCvf/YOG1Jzfn4hSviCY6sniNKbRw3KqUQBL5p2H/5p3+35Z4NAn9aUAAhiDjw+ohYqVRVpYJR8/kohYE3+MG//e3Pf/mhVjPYiGshEbMbIWPwi5UzkCUjKtCUlvWIYDEkR0yZaMcJRwJ+4L/28l/vXNg9OHzIeBAE/sTLD3zG/HA3QcaY73sBmzwmYL7n9auV2qWLez967+0g8Cmlo1cHk9cL2cURpHeImwFHoTp0ovagUOWwu//N569/7bkXj7r7iqJCvJ1IkDijlAaB57bOOA333fffrqg1jKMWinAepXuOZqlwFJP2QXTiqlCl2zt8cvdL16++0R90T2/0eSAE6nn9nQtPHPYOPrz1nlbTedI+hvPCAbPTsPWscyzWkVAA3x807fb1a29w5AXqRaC01z+6+nuvPbbzxW7/SKE0V8dhxoNKqHYoLeuMYC4je20URvcQPokNxA+8733nrYvndweDLqVKceAB57xarV7a3vvR+z8cio/Ms5Eh1W+EjauQjuj6xewhqlB61D34xte/c3nvuW7voEAyhq1GaX/QO3dm5+Vvve75fZjqQyC4BtvUluU5ivM0U26DKkq3d/jU7pevX32zKKkRwQdQz+s9euELR92DG7feq9V0zOY8INX7pcqOddMcAOD7g5bdvn7tDSxUakSKj37/6NoLrz2+82Svf7QgCku0NRSkjLPvXn2j5Zzx/AHAAn8gEGDIFUX9o5f+3NDNgAUAIOEQNUZSZaFSIzK4DLzeuTMXX/7W6543gPV6pMaqaI7E+3coEpVu7+DJ3S+/8tKb/X5mqRGWwQDI1NhtqsrHo9vT4mPlNceawAEAQeDZjdbrr/5NrVLjnKfvYQBARG8QECQc0fcZEEIVmgkQFvhP/PozH/3fB/cefFKtVBFRwiEIHGFVw//jP3xr58JupgwFAAKf1fTqE1fO7V05v7O71XSN7qHXPRqoqpL+Ejjn1Ur10sW9d9972w98Smna0SCR4WiWBwcWBAdVlMOj/Refv/61r7x42N1XUkuNkAzbNb76+3sXH2vVzZrRqHXONrYf6xx83n/44EhRM5zKDzy3eca2Wu+8/3alUuNYDBykVDi2RKIi8+LB46rGl165lrmqgUjUCv2tF/bsptbvIkfCOQl8olbo2QvOJz//bND3JiZ/zKp89C9t7x129396MxQfPCMZsYpqc7KVkSFLyNtqI1WNpt1+5aU343siwW0E5y62mm1t0EeqnAy9QuCjpis7u1uBzzP1DqVKr3947YXvJVY+ViajoWMrvFbthYhBEFy/+mctZ2vg9QkhiBxTG+fccQ1CJmf/ABDOid2qUwqYwTgiMsYURXn1pTfrNcMPfDjZGSbVCyYX3JXavCs8TRAo7fWOrn3jtWcv/87B4cNazcikaACAVxQKFYwcc0cEUCuqpqoKYgZxCYQwxnbOf+HVP/iLf/nP78/pmssdsl9VOADA8wYXLzx65emnbn78To7YDEA9z/vpjf3dy89zzhXl9ASc82pVufnRjdt3P9DrGufZAhYS8qsHfHv7kctffOZ/f/yuXtN5xpAniK0WHKPTeJGCYtvV//rv//CDYLpwNR0ppuQNEEJ++D/s3I7z3Fd/4+BTdqJSLUf52a07//rvf9/tHlJFiXjKIE4K29FL5EP9AZUa0aq1FSWjfDggcgpDiiSXMTTqmmXpQGi1okZ6XhjfRGHiYdMECVBK0Pvnf/o+4l8995XfPDn+xk8++sE//sPRUVfTDOR84rwJZITohOkvcqLrYNnmgwf7qkoRZ0YH4YQqXPq1p8stc2Sc1YHHSUpwcfuRCxe2fD84yTYhInYk/TcMLkHgcU4uX3lmb+9pVVFv3rzx7rvvDAZ9TYsIKMlkjF46IqqK+umnD298+IsR4ZIBDoCS0Vk5OMJmJ5TC009d0rQq55gs21LwAYSQXq8bBIwQpFTRdV1RlJlkJMMx3LsJ8ccf3Or1PEohW0G97AmkwmqOpMgSrh5oNS1drwUBA8i2AU7YnaOIhPd0vW6ElIQp7gQZkflKGjIqFdVtWb/4+K6iqLhqj2lVUYBV9pi9VOq2ndBjYAoaAEbPCeNvHouY+JQEo7YSxFmPnQ0ZZBxbrn3nV/f5DDQS7gcoay01LdtDZPOaQAhjXK9rtm0yxk57GGfwgaerjHD0zaSdDCcPwLRk4KhwZvW6ZlkmYyzDVAAxJoYIO9kH4oIK59h27Yja1Kz9GY/5mHii2ykEE6+J7DX8bAJPCW6w03byOgCQcKRthDCKt1w7YcbGLD4mEEnOjE6xILk2TAUAxrhtN3S9xjmuShIrCByQ4CWm8w7GuG0bdV1jjCd0Ec4KMSNeBOJHF2AUi1RkYBzQiutajKWbggTZw+2GhZVYXNptJ2lfgtS7rUVRMvaKCTHZyAidB+fcjQyFArsNgeCAFK3EGK/XNcc2GeMAs7sr7f7CszVHfjJOrtwYiuhZzkOkOcpUEDBm/mnW/RfLx+KywIx7mkFn6PMy//bS6hzi7HEI0YL/eCclxIoaRm5MFblxqjSxCCxS/jQAxliolvr9mNU04UYLIhXKqDBgJN0zx41r1nWNj++nk747sSAs8p1nmGe17BG4RR+EE+pZ9giJD3DudJw5H7KBczQ85gN9PCy229Ynn9w7DouTT3QQTZoK+FzZyW0bgRDGsG7otm3MEnSpCk2L/MlJ/cs5r9c12zY/fXAwMoh/SgaK5DZES2VjggsA47zTcVRVnS1Fcz5sZ+FkEEIQgRCydaZFkuppArkPEescMBWtq1XVbaUuIpXQxKmIHBbxLMMwtNNqqZABRUw4puY0AAQBd5yw/MwLvI+X5jAmQFdVpd0+Lv+DuG5DTM8xVg9DgpSSTsdBxAXd0It2GFNpF3dbVqWinswtBSHJICKXz8OG55wbhm5b9SwxZQmI5D8n51zXa45jhs5D5BVOVFQwTtI/bLdtRVEQsYjuBAFOQgghnY49Pt0IJBzZ+EDEWrWSUYqm72BIt+cfFMjESWSxLdOsa3w4SCSH7LM3YsCY45i6llWKzsNK8TTEyVLXtTnnIo/KqmI+QCrUohSg3bYx07MgBc3HJ7nnnLst686d+yjwtGNxPQfjaNR1q2GkiykgzC2Y6koY47pemz39QMIRe2+10w3QC4RIpm+Hdschy3lGZr6wIuaFcc4r1UorSopiqh5CAbGASVnKbMuo17Vury/mHqZils+BM+44pq5Vp6UoCOdCICsZo7K07dqco5j1DlVEPQqEEHo8nT+2oVNMxIJFylVI/3eIDZ3outbtO/eRo/QcadQGYYyZpmY16skLgbI887fA1DTdqSCVV2GM6brmOBmXPG1wWBlWRdNIURjdXwwydW16VjJ+BLIOlmCn45S45nGV4EDEasaqKORXGpDilUd7pPzkcbXUMAyNMQnHrJgSBKzpmFrGqihMI7JMJ50diyhZykWLLGJVSBEBYNaypZiPRghVWJgYjQobkKvgcbzkwrp95x7nYhXExPIcnHPT1K3hAH3OjoI4R1KsHoWEXDbbNw2rpU6Dc7FkqUBwDOdnu1mrorF9BAlvZWIl5iPx7+X59Z22LWeCxbsN5NWq2nLt+QboY5HIqUchTS47l2s6WZVjGBpjTBxCRCmfA0AQsFbL1rRaEBTyyKNFVcAwb/hIlqWViuq69sFhjyqAYghBcTwHAoGtiNWkBcoEYU94uhK4UlHFGcQXBQ7G0DT1hmUWOukrOYos4YNZZWlYLRUlZxECjuOlgraq0iXeN5BTdCzwesJq6XD5k4QjzGDDZUv2It2G6Ha85Mk0DG2R0yJXCo7QbThOQ1vsXNEVsMklT6VnK6VXSBEJAHY69sgjRsgmOw+3Zd25fU+E7fRLns8BhDDODEO3TIMFDDaajTDCMl3TbNu8f//zdAvH1zisDPcVdfJWRdczvHTaTREG8UuGY7iC3rUEHJMsS4GF22mKMIhPy22IIGBNp6Hrteh9RTdZlrpO6TdMyeVzoOC2HY6IRLqN05uGMd4KB/E3VnMwxo3TzZwkFCMtw7mu12zHLLfwQ8u7PYBz3mk7RaygX0/b6jQBSImNUxocnPNareK6G10VnSVLTdPUSywM0hLdRrNp1aKWLUkLZamiUNd1SlzyVFqFFAA6bYtgqDZkWJluH8IYc1uN27fVsu4fWsrPDgJmNvRGw5AZbHLk1fVas2kOH2W3GWEFELHjOopCpRSd3VBth1IopaFoGTcE1mrRK+ilTUUWblmGaeicbwAc4WTaptPQpBRNK0uVdrucaild/q+lCnQ6TUQksiqaLqdttaxqtbL8e2mp5XMghHHeMOuNRj1gnIDMUlLJUk2vOs3G3bsPljyIv9z5HMcD9EAp+oEUHGndLYeO69y7+/linzxVbljhnNeq1VbL4lKKZnC3wBizrLpp6IyxZTYbXaLXAMZ4symlaG5ZanO+VKG2zAopUgqdto3IZUk0e07LWq3GL5dbLaVL+3lBwBum3mjUZXkjpyzVas1mY5nV0qWFFUBEt+0oCuVcuo2crrft2gDLq5aqSwS/2mnb4Rw42c/5lEfTaVhW/eCgu5x9S5cBRyhFTbMeBGww8GXpKzccFVVtNOr7+0fL8R9w/szu0rIVOcy2Ws1Ilwm+7NrVakYqm1tarOaQt7M06Tmk5clWpO+QJj2HNAmHNAmHtCVoDik5pEnPIU3CIU3CIU3CIa1MQSr1qLT4bEWmK9JkWJEm4ZAm4ZAm4ZAm4ZAm4ZAm4ZAm4ZAm4ZC2qfb/jq6Fspm+2TAAAAAASUVORK5CYII=">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Lamplight">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Dancing+Script:wght@500;700&family=Space+Grotesk:wght@500;600;700;800&family=Outfit:wght@200;300;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Cinzel+Decorative:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=Playfair+Display:wght@400;500;600;700&family=Abril+Fatface&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristobal D'Alessio | Project Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #dcd6ce; 
+            --card-paper: #8a8d91; 
+            --card-indent: #75787c;
+            --card-content-bg: #111;
+            --text-main: #36322e;
+            --text-muted: #736d65;
+            --text-accent: #9c958b;
+            --border-color: rgba(54, 50, 46, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --slider-bg: #c9c2b8;
+            --highlight: rgba(255, 255, 255, 0.4);
+        }
 
-  <script src="https://cdn.tailwindcss.com"></script>
+        [data-theme="dark"] {
+            /* Dark Theme (Default) */
+            --bg-color: #292623; 
+            --card-paper: #4a4d51; 
+            --card-indent: #3a3d41;
+            --card-content-bg: #000;
+            --text-main: #e8e2d9;
+            --text-muted: #a39b91;
+            --text-accent: #756f67;
+            --border-color: rgba(232, 226, 217, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --slider-bg: #4a453f;
+            --highlight: rgba(255, 255, 255, 0.1);
+        }
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
 
-  <style>
-    :root {
-      --ink: #211f30;
-      --paper: #e9e4f0;
-      --surface: #29273c;
-      --surface-2: #302d46;
-      --amber: #a893c9;
-      --amber-soft: #a893c9;
-      --muted: #9089ab;
-      --line: rgba(168,147,201,0.18);
-    }
-    * { -webkit-tap-highlight-color: transparent; }
-    html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
-    #root { height: 100%; overflow: hidden; }
-    body {
-      margin: 0; padding: 0;
-      background: linear-gradient(160deg, #2a2136 0%, #241e30 100%);
-      background-attachment: fixed;
-      color: var(--paper);
-      font-family: 'Inter', sans-serif;
-      position: relative;
-    }
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      pointer-events: none;
-      opacity: 0.05;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    .font-display { font-family: var(--font-display, 'Fraunces', serif); }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+        .header-left {
+            position: absolute;
+            top: 50px;
+            left: 60px;
+            z-index: 100;
+        }
 
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .header-left .name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 42px;
+            line-height: 0.9;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
 
-    .auth-input::placeholder { color: rgba(255,255,255,0.6); }
+        .header-left .stats {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
 
-    .spine-lift {
-      transform: rotate(var(--tilt, 0deg));
-      transition: transform 0.15s ease;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .spine-lift:hover { transform: rotate(var(--tilt, 0deg)) translateY(-10px); }
-    }
+        /* --- Mechanical Keyboard Keys --- */
+        .mech-keys-container {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
+            align-items: center;
+        }
 
-    .spine-mobile-wrap {
-      position: relative;
-      width: var(--sw);
-      height: var(--sh);
-    }
-    .spine-mobile-wrap.stack-mode {
-      width: var(--ml) !important;
-      height: var(--swm) !important;
-    }
-    .spine-mobile-wrap.stack-mode .spine-lift {
-      position: absolute !important;
-      top: 50% !important;
-      left: 50% !important;
-      width: var(--swm) !important;
-      height: var(--ml) !important;
-      transform: translate(-50%, -50%) rotate(-90deg) !important;
-      transform-origin: center !important;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .spine-mobile-wrap.stack-mode .spine-lift:hover {
-        transform: translate(-50%, -50%) rotate(-90deg) translateY(-10px) !important;
-      }
-    }
-    .spine-mobile-wrap.stack-mode .icon-upright {
-      --tw-rotate: 90deg !important;
-    }
+        .mech-key {
+            background: #fdfcee;
+            color: #111;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            height: 48px;
+            min-width: 48px;
+            border: 2px solid #111;
+            border-radius: 8px;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset -2px -4px 0 rgba(0,0,0,0.1),
+                0 6px 0 #111,
+                0 10px 10px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+            text-transform: uppercase;
+            padding: 0 12px;
+        }
 
-    @keyframes cloudFloat {
-      0% { transform: translateX(-30vw); opacity: 0; }
-      10% { opacity: var(--cloud-op, 1); }
-      90% { opacity: var(--cloud-op, 1); }
-      100% { transform: translateX(130vw); opacity: 0; }
-    }
-    .sky-cloud-anim { animation-name: cloudFloat; animation-timing-function: linear; animation-iteration-count: infinite; }
+        .mech-key:active, .mech-key.pressed {
+            transform: translateY(4px);
+            background: #f4f3e6;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset -2px -2px 0 rgba(0,0,0,0.1),
+                0 2px 0 #111,
+                0 4px 5px var(--shadow-color);
+        }
 
-    @keyframes starTwinkle {
-      0%, 100% { opacity: var(--star-op, 0.6); }
-      15% { opacity: calc(var(--star-op, 0.6) * 0.15); }
-      30% { opacity: var(--star-op, 0.6); }
-      45% { opacity: calc(var(--star-op, 0.6) * 0.35); }
-      60% { opacity: var(--star-op, 0.6); }
-    }
-    .sky-star-anim { animation: starTwinkle 2.6s ease-in-out infinite; }
-    .sky-star-anim:nth-of-type(2n) { animation-delay: -0.7s; }
-    .sky-star-anim:nth-of-type(3n) { animation-delay: -1.3s; }
-    .sky-star-anim:nth-of-type(4n) { animation-delay: -0.4s; }
+        .mech-key.wide {
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 0 16px;
+        }
 
-    /* Shooting star: one smooth linear travel-and-fade per loop, occupying only the first
-       slice of the animation's total duration — the rest of the duration is an invisible
-       pause, so with varied per-instance durations/delays they each streak by "every so
-       often" rather than all constantly. No stepping: transform and opacity animate together
-       on the same element as one continuous motion, matching whatever angle the wrapper div
-       is rotated to (the sprite artwork itself is drawn as a pure horizontal streak, so it
-       always visually points the same way it travels). */
-    @keyframes shootMove {
-      0% { opacity: 0; transform: translateX(-8vw); }
-      2% { opacity: 1; }
-      13% { opacity: 1; transform: translateX(55vw); }
-      17% { opacity: 0; transform: translateX(70vw); }
-      17.01% { opacity: 0; transform: translateX(-8vw); }
-      100% { opacity: 0; transform: translateX(-8vw); }
-    }
-    .sky-shoot-move {
-      animation-name: shootMove;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
+        .filter-panel {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
 
-    .cute-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 20px;
-      background: transparent;
-      cursor: pointer;
-      margin: 0;
-    }
-    .cute-slider::-webkit-slider-runnable-track {
-      height: 6px;
-      border-radius: 9999px;
-      background: linear-gradient(to right, #ffd77a var(--pct, 50%), rgba(255,255,255,0.18) var(--pct, 50%));
-    }
-    .cute-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 9999px;
-      background: #ffffff;
-      margin-top: -6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.45);
-    }
-    .cute-slider::-moz-range-track {
-      height: 6px;
-      border-radius: 9999px;
-      background: rgba(255,255,255,0.18);
-    }
-    .cute-slider::-moz-range-progress {
-      height: 6px;
-      border-radius: 9999px;
-      background: #ffd77a;
-    }
-    .cute-slider::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      border-radius: 9999px;
-      background: #ffffff;
-      border: none;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.45);
-    }
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            opacity: 0.4;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .reading-page { width: 100%; max-width: 640px; }
-    ::selection { background: var(--selection-bg, rgba(168,147,201,0.35)); }
-    .select-text {
-      -webkit-touch-callout: none;
-      -webkit-user-select: text;
-      user-select: text;
-    }
-    @media (min-width: 768px) {
-      .reading-page { max-width: 760px; }
-    }
-    @media (min-width: 1100px) {
-      .reading-page { max-width: 860px; }
-    }
+        .filter-btn.active {
+            opacity: 1;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
 
-    @keyframes page-anim-slide {
-      from { opacity: 0; transform: translateX(calc(28px * var(--page-dir, 1))) scale(0.985); }
-      to { opacity: 1; transform: translateX(0) scale(1); }
-    }
-    @keyframes page-anim-fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes page-anim-curl {
-      from { opacity: 0.55; transform: perspective(1400px) rotateY(calc(75deg * var(--page-dir, 1))); }
-      to { opacity: 1; transform: perspective(1400px) rotateY(0deg); }
-    }
-    .page-anim-slide { animation: page-anim-slide 0.26s cubic-bezier(0.22, 1, 0.36, 1); }
-    .page-anim-fade { animation: page-anim-fade 0.24s ease; }
-    .page-anim-curl { animation: page-anim-curl 0.32s cubic-bezier(0.22, 1, 0.36, 1); backface-visibility: hidden; }
-    @media (prefers-reduced-motion: reduce) {
-      .page-anim-slide, .page-anim-fade, .page-anim-curl { animation: none; }
-    }
+        .filter-btn sup {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
 
-    @keyframes book-open {
-      from { opacity: 0; transform: scale(0.94) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .book-open-anim { animation: book-open 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); }
-    @media (prefers-reduced-motion: reduce) {
-      .book-open-anim { animation: none; }
-    }
+        .viewport {
+            position: absolute;
+            inset: 0;
+            top: 35%; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2200px;
+        }
 
-    .glow {
-      background: radial-gradient(circle, rgba(168,147,201,0.4) 0%, rgba(168,147,201,0) 70%);
-    }
+        .scene {
+            transform-style: preserve-3d;
+            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 20px; width: 20px;
-      border-radius: 50%;
-      background: var(--amber-soft);
-      box-shadow: 0 0 10px rgba(168,147,201,0.6);
-      margin-top: -8px;
-    }
-    input[type=range]::-webkit-slider-runnable-track {
-      -webkit-appearance: none;
-      height: 4px;
-      background: rgba(244,234,217,0.15);
-      border-radius: 4px;
-    }
-    input[type=range]::-moz-range-thumb {
-      height: 20px; width: 20px;
-      border: none;
-      border-radius: 50%;
-      background: var(--amber-soft);
-      box-shadow: 0 0 10px rgba(168,147,201,0.6);
-    }
-    input[type=range]::-moz-range-track {
-      height: 4px;
-      background: rgba(244,234,217,0.15);
-      border-radius: 4px;
-    }
+        .timeline {
+            transform-style: preserve-3d;
+            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+        }
 
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.12); }
-    }
-    .pivot-glow { animation: pulse-glow 1.6s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .pivot-glow { animation: none; }
-    }
-  </style>
+        .ground-line {
+            position: absolute;
+            width: 1px;
+            background: var(--border-color);
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        .label {
+            position: absolute;
+            left: 0;
+            transform-style: preserve-3d;
+            transform-origin: bottom center;
+            color: var(--text-accent);
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Silkscreen', cursive;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: top 0.65s, transform 0.65s;
+        }
+
+        .card-container {
+            position: absolute;
+            left: 0;
+            transform-style: preserve-3d;
+            transform-origin: bottom center;
+            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.65s;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+        }
+
+        .card-frame {
+            width: 92%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            background: var(--card-paper);
+            border-radius: 12px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            box-shadow: 
+                0 8px 12px -2px var(--shadow-color), 
+                inset 0 -2px 6px rgba(0,0,0,0.4);
+            transform-origin: bottom center;
+            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, background-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: visible;
+            container-type: inline-size;
+        }
+
+        .gba-lip {
+            width: 108.7%;
+            align-self: center;
+            height: 22%;
+            background: var(--card-paper);
+            border-bottom: 2px solid rgba(0,0,0,0.15);
+            border-radius: 8px;
+            box-shadow: 
+                inset 0 2px 4px var(--highlight),
+                0 4px 6px -2px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            transition: box-shadow 0.4s ease;
+        }
+
+        .gba-logo-area {
+            width: 70%;
+            height: 60%;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 3px rgba(0,0,0,0.2), 0 1px 1px var(--highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-indent);
+            overflow: hidden;
+        }
+
+        .gba-logo-text {
+            font-family: 'Space Mono', monospace;
+            font-size: min(12px, 3.8cqw);
+            font-weight: 700;
+            color: var(--text-main);
+            opacity: 0.4;
+            text-shadow: 0 1px 1px var(--highlight);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.4s ease;
+        }
+
+        .gba-label-recess {
+            width: 88%;
+            flex: 1;
+            margin-bottom: 20%;
+            background: var(--card-indent);
+            border-radius: 12px;
+            padding: 1.5%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 1px 1px var(--highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: white;
+            overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+            transition: filter 0.6s ease, opacity 0.6s ease;
+        }
+
+        .card-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .esrb-logo {
+            position: absolute;
+            bottom: 4%;
+            left: 4%;
+            width: 11%;
+            background: white;
+            border: min(2px, 0.4cqw) solid black;
+            display: flex;
+            flex-direction: column;
+            border-radius: 2px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .esrb-top {
+            background: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: min(4px, 1cqw);
+            font-weight: 900;
+            text-align: center;
+            padding: 1px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .esrb-e {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-family: 'Arial', sans-serif;
+            font-size: min(18px, 5cqw);
+            font-weight: 900;
+            line-height: 1;
+            padding: 2px 0;
+        }
+
+        .esrb-bottom {
+            font-family: 'Arial', sans-serif;
+            font-size: min(3.5px, 0.8cqw);
+            font-weight: 700;
+            color: black;
+            text-align: center;
+            line-height: 1;
+            padding-bottom: 2px;
+        }
+
+        .gba-bottom-grip {
+            position: absolute;
+            bottom: 6%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gba-bottom-grip span {
+            width: 100%;
+            height: 2px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 1px 1px var(--highlight);
+            border-radius: 2px;
+        }
+
+        .gba-triangle {
+            position: absolute;
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: min(8px, 2cqw) solid transparent;
+            border-right: min(8px, 2cqw) solid transparent;
+            border-top: min(8px, 2cqw) solid rgba(0,0,0,0.2);
+            filter: drop-shadow(0 1px 0px var(--highlight));
+        }
+
+        .card-container.active .card-frame {
+            box-shadow: 
+                0 25px 35px -10px var(--shadow-color), 
+                0 10px 10px -5px var(--shadow-color),
+                inset 0 -2px 6px rgba(0,0,0,0.4);
+            transform: scale(1.15);
+        }
+
+        .card-container.active .gba-lip {
+            box-shadow: 
+                0 15px 25px -5px rgba(0,0,0,0.3),
+                inset 0 2px 4px var(--highlight);
+        }
+
+        .card-container.active .gba-logo-text {
+            opacity: 1;
+            text-shadow: 0 1px 1px var(--bg-color), 0 0 12px var(--highlight);
+            transform: scale(1.05);
+        }
+
+        .card-container.insert-cartridge .card-frame {
+            animation: cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes cartridge-bounce {
+            0% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+            50% { transform: scale(0.95) translateY(80px); box-shadow: 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.6); }
+            100% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+        }
+
+        .screen-glare {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(-25deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .card-container.insert-cartridge .screen-glare {
+            animation: glare-flash 0.3s ease-out forwards;
+        }
+
+        @keyframes glare-flash {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
+        .controls-panel {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .controls-card {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+            width: 240px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .controls-card.open { display: flex; }
+
+        .control-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-label-group {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            letter-spacing: 0.8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            background: var(--slider-bg);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            transition: background-color 0.4s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--text-main);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.4s ease;
+        }
+
+        .modern-theme-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .modern-theme-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .adjust-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .adjust-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .adjust-btn:hover {
+            transform: translateY(-3px) rotate(10deg);
+            box-shadow: 0 6px 15px var(--shadow-color);
+        }
+
+        .mobile-only-btn { display: none; }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto !important;
+                height: auto !important;
+                min-height: 100vh;
+            }
+            .hide-mobile { display: none !important; }
+            .mobile-only-btn { display: flex; align-items: center; justify-content: center; }
+            
+            .header-left {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                padding: 30px 20px 10px 20px !important;
+            }
+            .header-left .name {
+                font-size: 32px !important;
+            }
+            .mech-keys-container {
+                margin-top: 15px !important;
+            }
+            .filter-panel {
+                position: relative !important;
+                top: 0 !important;
+                right: auto !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                padding: 10px 20px 30px 20px !important;
+                justify-content: flex-start !important;
+            }
+            .viewport {
+                position: relative !important;
+                top: 0 !important;
+                height: auto !important;
+                padding: 0 20px 60px 20px !important;
+                display: block !important;
+                perspective: none !important;
+            }
+            .scene, .timeline {
+                transform: none !important;
+                position: static !important;
+            }
+            .ground-line, .label, .controls-panel {
+                display: none !important;
+            }
+            #cards-container {
+                transform: none !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 40px !important;
+                padding-bottom: 40px !important;
+                padding-top: 20px !important;
+            }
+            .card-container {
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: 216px !important; 
+                margin: 0 auto !important;
+                max-width: 342px !important;
+                
+                --mobile-scale: 1;
+                --mobile-z: 1;
+                transform: scale(var(--mobile-scale)) !important;
+                z-index: var(--mobile-z) !important;
+                transition: none !important; 
+                will-change: transform;
+            }
+            .card-frame {
+                --m-shadow-y: 10px;
+                --m-shadow-b: 15px;
+                box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px var(--shadow-color), 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4) !important;
+                transform: none !important;
+                transition: background-color 0.4s ease !important;
+            }
+            .gba-lip {
+                box-shadow: 0 calc(var(--m-shadow-y) * 0.5) calc(var(--m-shadow-b) * 0.5) -2px rgba(0,0,0,0.2), inset 0 2px 4px var(--highlight) !important;
+            }
+            .card-content {
+                filter: none !important;
+                opacity: 1 !important;
+            }
+            .card-container.insert-cartridge .card-frame {
+                animation: mobile-cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+            }
+            @keyframes mobile-cartridge-bounce {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(40px) scale(0.95); }
+                100% { transform: translateY(0); }
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
 
-  <script>
-const {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useLayoutEffect
-} = React;
-const IconProps = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: "1.75",
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-};
-const Play = ({size = 24, className = "", fill = "none"}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", fill: fill, className: className, ...IconProps}, /*#__PURE__*/React.createElement("polygon", {points: "6 3 20 12 6 21 6 3"}));
-const Pause = ({size = 24, className = "", fill = "none"}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", fill: fill, className: className, ...IconProps}, /*#__PURE__*/React.createElement("rect", {x: "6", y: "4", width: "4", height: "16"}), /*#__PURE__*/React.createElement("rect", {x: "14", y: "4", width: "4", height: "16"}));
-const Plus = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("line", {x1: "12", y1: "5", x2: "12", y2: "19"}), /*#__PURE__*/React.createElement("line", {x1: "5", y1: "12", x2: "19", y2: "12"}));
-const ChevronLeft = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polyline", {points: "15 18 9 12 15 6"}));
-const ChevronUp = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polyline", {points: "18 15 12 9 6 15"}));
-const ChevronRight = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polyline", {points: "9 18 15 12 9 6"}));
-const BookOpen = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("path", {d: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"}), /*#__PURE__*/React.createElement("path", {d: "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"}));
-const Trash2 = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polyline", {points: "3 6 5 6 21 6"}), /*#__PURE__*/React.createElement("path", {d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}), /*#__PURE__*/React.createElement("line", {x1: "10", y1: "11", x2: "10", y2: "17"}), /*#__PURE__*/React.createElement("line", {x1: "14", y1: "11", x2: "14", y2: "17"}));
-const Check = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polyline", {points: "20 6 9 17 4 12"}));
-const Sliders = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("line", {x1: "4", y1: "21", x2: "4", y2: "14"}), /*#__PURE__*/React.createElement("line", {x1: "4", y1: "10", x2: "4", y2: "3"}), /*#__PURE__*/React.createElement("line", {x1: "12", y1: "21", x2: "12", y2: "12"}), /*#__PURE__*/React.createElement("line", {x1: "12", y1: "8", x2: "12", y2: "3"}), /*#__PURE__*/React.createElement("line", {x1: "20", y1: "21", x2: "20", y2: "16"}), /*#__PURE__*/React.createElement("line", {x1: "20", y1: "12", x2: "20", y2: "3"}), /*#__PURE__*/React.createElement("line", {x1: "1", y1: "14", x2: "7", y2: "14"}), /*#__PURE__*/React.createElement("line", {x1: "9", y1: "8", x2: "15", y2: "8"}), /*#__PURE__*/React.createElement("line", {x1: "17", y1: "16", x2: "23", y2: "16"}));
-const X = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("line", {x1: "18", y1: "6", x2: "6", y2: "18"}), /*#__PURE__*/React.createElement("line", {x1: "6", y1: "6", x2: "18", y2: "18"}));
-const SkipBack = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polygon", {points: "19 20 9 12 19 4 19 20"}), /*#__PURE__*/React.createElement("line", {x1: "5", y1: "19", x2: "5", y2: "5"}));
-const SkipForward = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polygon", {points: "5 4 15 12 5 20 5 4"}), /*#__PURE__*/React.createElement("line", {x1: "19", y1: "5", x2: "19", y2: "19"}));
-const Eye = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("path", {d: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"}), /*#__PURE__*/React.createElement("circle", {cx: "12", cy: "12", r: "3"}));
-const EyeOff = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("path", {d: "M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.87 20.87 0 0 1 5.06-5.94"}), /*#__PURE__*/React.createElement("path", {d: "M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a20.87 20.87 0 0 1-2.16 3.19"}), /*#__PURE__*/React.createElement("path", {d: "M14.12 14.12a3 3 0 1 1-4.24-4.24"}), /*#__PURE__*/React.createElement("line", {x1: "1", y1: "1", x2: "23", y2: "23"}));
-const Zap = ({size = 24, className = ""}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", className: className, ...IconProps}, /*#__PURE__*/React.createElement("polygon", {points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2"}));
-const Bookmark = ({size = 24, className = "", fill = "none"}) => /*#__PURE__*/React.createElement("svg", {width: size, height: size, viewBox: "0 0 24 24", fill: fill, className: className, ...IconProps}, /*#__PURE__*/React.createElement("path", {d: "M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"}));
+    <div class="header-left">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            <div class="name">Cristobal<br>D'Alessio</div>
+            <button id="mobile-theme-toggle" class="mobile-only-btn adjust-btn" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+        <div class="stats">FILTERED : <span id="project-count">0</span></div>
+        
+        <div class="mech-keys-container hide-mobile">
+            <button class="mech-key" id="key-left">←</button>
+            <button class="mech-key" id="key-right">→</button>
+            <button class="mech-key wide" id="key-enter">Enter</button>
+        </div>
+    </div>
 
-// --- Reading font themes ---
-const THEMES = [{id: 'serif', label: 'Serif', display: "'Fraunces', serif", glyph: 'Aa'}, {id: 'mono', label: 'Mono', display: "'IBM Plex Mono', monospace", glyph: '01'}, {id: 'sans', label: 'Sans', display: "'Inter', sans-serif", glyph: 'Aa'}];
+    <div class="filter-panel">
+        <button class="filter-btn active" data-cat="all">all <sup id="count-all">0</sup></button>
+        <button class="filter-btn" data-cat="art">art <sup id="count-art">0</sup></button>
+        <button class="filter-btn" data-cat="interactive">interactive <sup id="count-interactive">0</sup></button>
+        <button class="filter-btn" data-cat="productivity">productivity <sup id="count-productivity">0</sup></button>
+        <button class="filter-btn" data-cat="game">game <sup id="count-game">0</sup></button>
+    </div>
 
-const PARA_BREAK = '\u00b6';
-const hashString = (str = '') => {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) h = h * 31 + str.charCodeAt(i) >>> 0;
-  return h;
-};
+    <div class="viewport">
+        <div class="scene" id="scene">
+            <div class="timeline" id="timeline">
+                <div class="ground-line" id="ground-line"></div>
+                <div class="label" id="label-latest">start</div>
+                <div class="label" id="label-oldest">finish</div>
+                <div id="cards-container" style="transform-style: preserve-3d;"></div>
+            </div>
+        </div>
+    </div>
 
-const LOOKS = [{bg: '#A059FC', ink: '#123d24', lamp: '#123d24', beam: '#f5eeff', variant: 'pendant'}, {bg: '#F9CD39', ink: '#1a1a6b', lamp: '#1a1a6b', beam: '#fff8e0', variant: 'mushroom'}, {bg: '#F4A4E0', ink: '#0d3d2e', lamp: '#0d3d2e', beam: '#fff0fa', variant: 'arc'}, {bg: '#F25545', ink: '#0d3d3d', lamp: '#0d3d3d', beam: '#fdece8', variant: 'floor'}, {bg: '#28A83F', ink: '#4a0d3d', lamp: '#4a0d3d', beam: '#eafaf0', variant: 'globe'}, {bg: '#F6A0FD', ink: '#1d3d0d', lamp: '#1d3d0d', beam: '#fff0fe', variant: 'desk'}, {bg: '#3A7BD9', ink: '#f5f8ff', lamp: '#f5f8ff', beam: '#eaf2ff', variant: 'pendant'}, {bg: '#1FB6A8', ink: '#0a2b28', lamp: '#0a2b28', beam: '#eafffb', variant: 'mushroom'}, {bg: '#E88A2E', ink: '#2b1608', lamp: '#2b1608', beam: '#fff2e2', variant: 'arc'}, {bg: '#4A3A9E', ink: '#f0ecfa', lamp: '#f0ecfa', beam: '#ece5fc', variant: 'globe'}];
+    <div class="controls-panel hide-mobile">
+        <div class="controls-card" id="controls-card">
+            <button id="theme-toggle" class="modern-theme-btn">
+                <span>Toggle Theme</span>
+            </button>
+            <div class="control-row" style="margin-top: 10px;">
+                <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">72°</span></div>
+                <input type="range" id="input-pitch" min="30" max="85" value="72">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">42°</span></div>
+                <input type="range" id="input-angle" min="0" max="90" value="42">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Active Tilt</span><span id="val-tilt">-90°</span></div>
+                <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">0°</span></div>
+                <input type="range" id="input-rotate" min="-45" max="45" value="0">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Cartridge Size</span><span id="val-size">280px</span></div>
+                <input type="range" id="input-size" min="180" max="400" value="280">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">165px</span></div>
+                <input type="range" id="input-offsetY" min="-300" max="300" value="165">
+            </div>
+        </div>
+        <button class="adjust-btn" id="toggle-controls" title="Adjust View">
+            <svg viewBox="0 0 24 24">
+                <rect x="2" y="6" width="20" height="12" rx="4" ry="4"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                <line x1="18" y1="11" x2="18.01" y2="11"></line>
+            </svg>
+        </button>
+    </div>
 
-// --- Book spine templates (ported from a CSS type-specimen showcase) ---
-// Each template describes a distinct spine look: background, ink color, width, and a
-// layout name that renderTemplateSpine() knows how to draw. Books are assigned a template
-// deterministically by hashing their id/title, so the same book always looks the same.
-const BOOK_TEMPLATES = [
-  {id: 'flou', width: 34, layout: 'badge-mono', bg: 'linear-gradient(180deg, #fbcfe8 0%, #f43f5e 35%, #be123c 100%)', ink: '#ffffff', badgeBg: '#ffffff', badgeColor: '#be123c', badgeFont: "Georgia, serif", badgeItalic: true},
-  {id: 'apercu-condensed', width: 36, layout: 'title-subtitle', bg: '#ccb7e3', ink: '#1e1b4b', subtitle: 'EXTENDED', subtitleColor: '#fdf2f8', letterSpacing: '0.5px'},
-  {id: 'chromatic', width: 35, layout: 'badge-title-icon', bg: '#1e40af', ink: '#ffffff', badgeBg: '#84e1d7'},
-  {id: 'kibitz', width: 38, layout: 'badge-title-diamonds', bg: '#eae9e6', ink: '#15803d', badgeBg: '#f97316', badgeColor: '#b91c1c', bottomColor: '#b91c1c', badgeGlyph: '\u265E'},
-  {id: 'cotford', width: 32, layout: 'centered', bg: '#ea580c', ink: '#ffffff', font: '"Times New Roman", Times, serif', fontWeight: 'bold', fontSize: 16},
-  {id: 'apercu-wide', width: 68, layout: 'wide-list', bg: '#f8fafc', ink: '#16a34a', listColor: '#475569', list: ['1 Mono', '2 Condensed', '3 Arabic', '4 Thai']},
-  {id: 'manner', width: 38, layout: 'centered', bg: '#4a3f35', ink: '#d1c7bd', fontWeight: 'bold', fontSize: 15, letterSpacing: '8px'},
-  {id: 'champion', width: 46, layout: 'split-halves', topBg: '#1e293b', topColor: '#ffffff', bottomBg: '#f97316', bottomColor: '#0f172a', font: 'Impact, sans-serif'},
-  {id: 'basis-grotesque', width: 35, layout: 'title-subtitle', bg: '#1e3a8a', ink: '#ffffff', subtitle: 'Grotesque', subtitleColor: '#93c5fd'},
-  {id: 'basis-mono', width: 37, layout: 'badge-title-mono', bg: '#ffffff', ink: '#1e3a8a', badgeBg: '#1e3a8a', badgeColor: '#ffffff', font: 'monospace'},
-  {id: 'midnight', width: 50, layout: 'centered', bg: '#eef213', ink: '#0f172a', font: '"Arial Black", sans-serif', fontWeight: 900, fontSize: 26, letterSpacing: '-1px'},
-  {id: 'helvetica', width: 34, layout: 'title-subtitle', bg: '#27272a', ink: '#ffffff', subtitle: 'Now Variable', subtitleColor: '#a1a1aa', font: '"Helvetica Neue", Helvetica, Arial, sans-serif'},
-  {id: 'touvlo', width: 34, layout: 'title-subtitle', bg: '#f3f1e8', ink: '#3f3f46', subtitle: 'Backslant + Italic', subtitleColor: '#71717a', font: 'Georgia, serif', subtitleItalic: true},
-  {id: 'system85', width: 40, layout: 'title-subtitle', bg: '#115e59', ink: '#f0fdfa', subtitle: 'USER MANUAL', subtitleColor: '#ccfbf1', subtitleFont: 'monospace'},
-  {id: 'reader', width: 40, layout: 'icon-title-specimen', bg: '#fcfbf7', ink: '#18181b'},
-  {id: 'lardent', width: 40, layout: 'title-circles', bg: '#f472b6', ink: '#ffffff', circleColor: '#9d174d', font: '"Times New Roman", Times, serif'},
-  {id: 'robin', width: 34, layout: 'sticker-emojis', bg: '#6b7280', ink: '#111827', stickerBg: '#4ade80', stickerColor: '#111827'},
-  {id: 'value-serif', width: 34, layout: 'title-subtitle', bg: '#451a03', ink: '#f8fafc', subtitle: 'Italics', subtitleColor: '#9a3412', font: 'serif', subtitleItalic: true},
-  {id: 'mabry', width: 37, layout: 'sun-title', bg: '#ca8a04', ink: '#ffffff', sunColor: '#fef08a'},
-  {id: 'dopple', width: 32, layout: 'title-stripes', bg: '#18181b', ink: '#ffffff', stripes: ['#f43f5e', '#ec4899', '#22c55e', '#3b82f6', '#1d4ed8']}
-];
-const pickTemplate = (title, id) => BOOK_TEMPLATES[hashString(String(id || title)) % BOOK_TEMPLATES.length];
-const spineHeightPct = title => 62 + hashString(`${title}h`) % 22;
-const spineTilt = () => 0;
-const isLightColor = hex => {
-  const c = hex.replace('#', '');
-  const r = parseInt(c.substr(0, 2), 16), g = parseInt(c.substr(2, 2), 16), b = parseInt(c.substr(4, 2), 16);
-  return 0.299 * r + 0.587 * g + 0.114 * b > 150;
-};
-const lightenColor = (hex, amt) => {
-  const c = hex.replace('#', '');
-  const r = parseInt(c.substr(0, 2), 16), g = parseInt(c.substr(2, 2), 16), b = parseInt(c.substr(4, 2), 16);
-  const nr = Math.round(r + (255 - r) * amt);
-  const ng = Math.round(g + (255 - g) * amt);
-  const nb = Math.round(b + (255 - b) * amt);
-  return `rgb(${nr}, ${ng}, ${nb})`;
-};
-const darkenColor = (hex, amt) => {
-  const c = hex.replace('#', '');
-  const r = parseInt(c.substr(0, 2), 16), g = parseInt(c.substr(2, 2), 16), b = parseInt(c.substr(4, 2), 16);
-  const nr = Math.round(r * (1 - amt));
-  const ng = Math.round(g * (1 - amt));
-  const nb = Math.round(b * (1 - amt));
-  return `rgb(${nr}, ${ng}, ${nb})`;
-};
-const verticalTextStyle = flat => ({writingMode: 'vertical-rl', textOrientation: 'mixed', transform: flat ? 'rotate(0deg)' : 'rotate(180deg)', whiteSpace: 'nowrap', display: 'block', maxHeight: '100%', overflow: 'hidden'});
-const renderTemplateSpine = (tpl, title, flat) => {
-  switch (tpl.layout) {
-    case 'badge-mono':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0 flex items-center justify-center", style: {height: '22%', background: tpl.badgeBg}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.badgeColor, fontFamily: tpl.badgeFont, fontWeight: 'bold', fontStyle: tpl.badgeItalic ? 'italic' : 'normal', fontSize: 13}}, title)), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-2 inset-x-0 flex items-center justify-center"}, /*#__PURE__*/React.createElement("span", {style: {color: tpl.ink, fontFamily: 'monospace', fontWeight: 'bold', fontSize: 8}}, "MMXXVI")));
-    case 'title-subtitle':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col items-center justify-between py-4"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontFamily: tpl.font, fontWeight: 'bold', fontSize: 13, letterSpacing: tpl.letterSpacing}}, title), tpl.subtitle ? /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.subtitleColor, fontFamily: tpl.subtitleFont || tpl.font, fontSize: 9, fontStyle: tpl.subtitleItalic ? 'italic' : 'normal'}}, tpl.subtitle) : null);
-    case 'badge-title-icon':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0", style: {height: '18%', background: tpl.badgeBg}}), /*#__PURE__*/React.createElement("div", {className: "absolute inset-x-0 flex items-center justify-center overflow-hidden", style: {top: '20%', bottom: '14%'}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontSize: 12}}, title)), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-2 left-1/2 -translate-x-1/2 rounded-sm", style: {width: 8, height: 8, background: tpl.badgeBg}}));
-    case 'badge-title-diamonds':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0 flex items-center justify-center", style: {height: '18%', background: tpl.badgeBg, color: tpl.badgeColor, fontSize: 15}}, tpl.badgeGlyph), /*#__PURE__*/React.createElement("div", {className: "absolute inset-x-0 flex items-center justify-center overflow-hidden", style: {top: '20%', bottom: '16%'}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 900, fontSize: 15, letterSpacing: '0.5px'}}, title)), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-2 inset-x-0 flex items-center justify-center", style: {color: tpl.bottomColor, fontSize: 9}}, "\u2666 \u2666 \u2666"));
-    case 'centered':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex items-center justify-center overflow-hidden"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontFamily: tpl.font, fontWeight: tpl.fontWeight, fontSize: tpl.fontSize, letterSpacing: tpl.letterSpacing}}, title));
-    case 'wide-list':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col justify-between p-2"}, /*#__PURE__*/React.createElement("div", {style: {fontFamily: 'monospace', fontSize: 8, color: tpl.listColor, lineHeight: 1.4}}, tpl.list.map((l, i) => /*#__PURE__*/React.createElement("div", {key: i}, l))), /*#__PURE__*/React.createElement("div", {className: "self-center overflow-hidden", style: {maxHeight: '55%'}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 900, fontSize: 22, letterSpacing: '0.5px'}}, title)));
-    case 'split-halves':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0 flex items-center justify-center overflow-hidden", style: {height: '50%', background: tpl.topBg}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.topColor, fontFamily: tpl.font, fontSize: 15}}, title)), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-0 left-0 right-0 flex items-center justify-center", style: {height: '50%', background: tpl.bottomBg}}));
-    case 'badge-title-mono':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0 flex items-center justify-center", style: {height: '20%', background: tpl.badgeBg, color: tpl.badgeColor, fontFamily: tpl.font, fontWeight: 'bold', fontSize: 10}}, "BASIS"), /*#__PURE__*/React.createElement("div", {className: "absolute inset-x-0 flex items-center justify-center overflow-hidden", style: {top: '22%', bottom: '10%'}}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontFamily: tpl.font, fontSize: 13}}, title)));
-    case 'icon-title-specimen':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col items-center justify-between py-3"}, /*#__PURE__*/React.createElement("div", {className: "rounded-sm shrink-0", style: {width: 10, height: 10, border: `1px solid ${tpl.ink}`}}), /*#__PURE__*/React.createElement("div", {className: "flex-1 flex items-center justify-center overflow-hidden"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 'bold', fontSize: 13}}, title)), /*#__PURE__*/React.createElement("div", {className: "w-full shrink-0", style: {height: 1, background: `${tpl.ink}30`, marginBottom: 6}}), /*#__PURE__*/React.createElement("span", {style: {color: `${tpl.ink}90`, fontFamily: 'monospace', fontSize: 8}}, "AaBbCc"));
-    case 'title-circles':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col items-center justify-between py-4"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontFamily: tpl.font, fontWeight: 'bold', fontSize: 14}}, title), /*#__PURE__*/React.createElement("div", {className: "flex flex-col gap-1.5 shrink-0"}, [0, 1].map(i => /*#__PURE__*/React.createElement("div", {key: i, className: "rounded-full", style: {width: 11, height: 11, background: tpl.circleColor}}))));
-    case 'sticker-emojis':
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "absolute inset-x-0 flex items-center justify-center overflow-hidden", style: {top: '14%', height: '38%', background: tpl.stickerBg, color: tpl.stickerColor, fontWeight: 'bold', fontSize: 12}}, /*#__PURE__*/React.createElement("span", {style: verticalTextStyle(flat)}, title)), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-3 inset-x-0 flex flex-col items-center gap-1 text-[10px]"}, /*#__PURE__*/React.createElement("span", null, "\uD83D\uDCAC"), /*#__PURE__*/React.createElement("span", null, "\uD83D\uDC64")));
-    case 'sun-title':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col items-center justify-between py-4"}, /*#__PURE__*/React.createElement("span", {style: {color: tpl.sunColor, fontSize: 13}}, "\u2600"), /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 'bold', fontSize: 14}}, title));
-    case 'title-stripes':
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex flex-col items-center justify-between py-4"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 'bold', fontSize: 13}}, title), /*#__PURE__*/React.createElement("div", {className: "flex flex-col gap-1 shrink-0"}, tpl.stripes.map((s, i) => /*#__PURE__*/React.createElement("div", {key: i, style: {width: 18, height: 3, background: s}}))));
-    default:
-      return /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex items-center justify-center overflow-hidden"}, /*#__PURE__*/React.createElement("span", {style: {...verticalTextStyle(flat), color: tpl.ink, fontWeight: 'bold', fontSize: 13}}, title));
-  }
-};
-const LampArt = ({variant, lamp, beam}) => {
-
-  switch (variant) {
-    case 'pendant':
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("line", {x1: "50", y1: "8", x2: "50", y2: "44", stroke: lamp, strokeWidth: "1.5"}), /*#__PURE__*/React.createElement("path", {d: "M33,44 L67,44 L74,60 L26,60 Z", fill: lamp}), /*#__PURE__*/React.createElement("path", {d: "M22,60 L78,60 L92,132 L8,132 Z", fill: beam, opacity: "0.5"}));
-    case 'mushroom':
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("ellipse", {cx: "50", cy: "46", rx: "27", ry: "15", fill: lamp}), /*#__PURE__*/React.createElement("rect", {x: "43", y: "46", width: "14", height: "52", rx: "5", fill: beam}), /*#__PURE__*/React.createElement("ellipse", {cx: "50", cy: "101", rx: "19", ry: "6", fill: beam}), /*#__PURE__*/React.createElement("line", {x1: "72", y1: "42", x2: "80", y2: "52", stroke: lamp, strokeWidth: "1.5"}), /*#__PURE__*/React.createElement("circle", {cx: "81", cy: "55", r: "2.5", fill: lamp}));
-    case 'arc':
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("ellipse", {cx: "32", cy: "136", rx: "14", ry: "4", fill: lamp}), /*#__PURE__*/React.createElement("line", {x1: "32", y1: "134", x2: "32", y2: "40", stroke: lamp, strokeWidth: "2"}), /*#__PURE__*/React.createElement("path", {d: "M32,40 L68,24", stroke: lamp, strokeWidth: "2", fill: "none"}), /*#__PURE__*/React.createElement("circle", {cx: "32", cy: "40", r: "2.5", fill: lamp}), /*#__PURE__*/React.createElement("circle", {cx: "68", cy: "24", r: "2.5", fill: lamp}), /*#__PURE__*/React.createElement("path", {d: "M58,24 L80,30 L68,42 Z", fill: lamp}), /*#__PURE__*/React.createElement("path", {d: "M56,32 L82,32 L100,110 L38,110 Z", fill: beam, opacity: "0.45"}));
-    case 'desk':
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("rect", {x: "26", y: "118", width: "34", height: "10", rx: "4", fill: beam}), /*#__PURE__*/React.createElement("line", {x1: "43", y1: "118", x2: "43", y2: "70", stroke: lamp, strokeWidth: "2"}), /*#__PURE__*/React.createElement("path", {d: "M43,70 L76,46", stroke: lamp, strokeWidth: "2", fill: "none"}), /*#__PURE__*/React.createElement("circle", {cx: "76", cy: "46", r: "2.5", fill: lamp}), /*#__PURE__*/React.createElement("path", {d: "M60,46 A18,18 0 0 1 92,46 Z", fill: lamp}));
-    case 'floor':
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("ellipse", {cx: "50", cy: "140", rx: "16", ry: "4.5", fill: lamp}), /*#__PURE__*/React.createElement("line", {x1: "50", y1: "137", x2: "50", y2: "58", stroke: lamp, strokeWidth: "2"}), /*#__PURE__*/React.createElement("path", {d: "M32,58 L50,44 L68,58 L50,66 Z", fill: lamp}), /*#__PURE__*/React.createElement("path", {d: "M34,60 L66,60 L84,128 L16,128 Z", fill: beam, opacity: "0.4"}));
-    case 'globe':
-    default:
-      return /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 100 150", className: "w-full h-full"}, /*#__PURE__*/React.createElement("rect", {x: "38", y: "108", width: "24", height: "8", rx: "3", fill: lamp}), /*#__PURE__*/React.createElement("line", {x1: "50", y1: "108", x2: "50", y2: "94", stroke: lamp, strokeWidth: "2"}), /*#__PURE__*/React.createElement("circle", {cx: "50", cy: "66", r: "26", fill: lamp}), /*#__PURE__*/React.createElement("circle", {cx: "41", cy: "57", r: "9", fill: beam, opacity: "0.85"}));
-  }
-};
-
-const PixelCloud = ({className, style}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 40", className: className, style: style}, /*#__PURE__*/React.createElement("g", {fill: "#93a6f0", opacity: "0.85"}, /*#__PURE__*/React.createElement("rect", {x: "10", y: "14", width: "44", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "16", y: "8", width: "8", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "24", y: "4", width: "10", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "34", y: "6", width: "12", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "46", y: "10", width: "8", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "6", y: "18", width: "52", height: "6"})), /*#__PURE__*/React.createElement("g", {fill: "#ffffff"}, /*#__PURE__*/React.createElement("rect", {x: "8", y: "10", width: "44", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "14", y: "4", width: "8", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "22", y: "0", width: "10", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "32", y: "2", width: "12", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "44", y: "6", width: "8", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "4", y: "14", width: "52", height: "6"})));
-const PixelCloudB = ({className, style}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 40", className: className, style: style}, /*#__PURE__*/React.createElement("g", {fill: "#93a6f0", opacity: "0.85"}, /*#__PURE__*/React.createElement("rect", {x: "4", y: "18", width: "56", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "10", y: "12", width: "10", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "22", y: "8", width: "14", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "38", y: "10", width: "16", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "0", y: "22", width: "60", height: "6"})), /*#__PURE__*/React.createElement("g", {fill: "#ffffff"}, /*#__PURE__*/React.createElement("rect", {x: "2", y: "14", width: "56", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "8", y: "8", width: "10", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "20", y: "4", width: "14", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "36", y: "6", width: "16", height: "8"}), /*#__PURE__*/React.createElement("rect", {x: "0", y: "18", width: "60", height: "6"})));
-const PixelCloudC = ({className, style}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 48 32", className: className, style: style}, /*#__PURE__*/React.createElement("g", {fill: "#93a6f0", opacity: "0.85"}, /*#__PURE__*/React.createElement("rect", {x: "8", y: "12", width: "32", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "14", y: "6", width: "8", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "24", y: "4", width: "10", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "4", y: "16", width: "40", height: "4"})), /*#__PURE__*/React.createElement("g", {fill: "#ffffff"}, /*#__PURE__*/React.createElement("rect", {x: "6", y: "8", width: "32", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "12", y: "2", width: "8", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "22", y: "0", width: "10", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "2", y: "12", width: "40", height: "4"})));
-const PixelMoon = ({className, style}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 40 40", className: className, style: style}, /*#__PURE__*/React.createElement("mask", {id: "moon-crescent-mask"}, /*#__PURE__*/React.createElement("rect", {x: "0", y: "0", width: "40", height: "40", fill: "white"}), /*#__PURE__*/React.createElement("g", {fill: "black"}, /*#__PURE__*/React.createElement("rect", {x: "20", y: "2", width: "10", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "16", y: "6", width: "20", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "14", y: "12", width: "24", height: "14"}), /*#__PURE__*/React.createElement("rect", {x: "16", y: "26", width: "20", height: "6"}), /*#__PURE__*/React.createElement("rect", {x: "20", y: "32", width: "10", height: "4"}))), /*#__PURE__*/React.createElement("g", {fill: "#fff3c4", mask: "url(#moon-crescent-mask)"}, /*#__PURE__*/React.createElement("rect", {x: "14", y: "2", width: "12", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "8", y: "6", width: "24", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "4", y: "10", width: "32", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "2", y: "14", width: "36", height: "12"}), /*#__PURE__*/React.createElement("rect", {x: "4", y: "26", width: "32", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "8", y: "30", width: "24", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "14", y: "34", width: "12", height: "4"})), /*#__PURE__*/React.createElement("g", {fill: "#fff3c4", opacity: "0.85"}, /*#__PURE__*/React.createElement("rect", {x: "32", y: "4", width: "3", height: "3"}), /*#__PURE__*/React.createElement("rect", {x: "30", y: "30", width: "2", height: "2"})));
-const PixelStar = ({className, style, color = '#fff3c4'}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 16 16", className: className, style: style}, /*#__PURE__*/React.createElement("g", {fill: color}, /*#__PURE__*/React.createElement("rect", {x: "7", y: "0", width: "2", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "7", y: "12", width: "2", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "0", y: "7", width: "4", height: "2"}), /*#__PURE__*/React.createElement("rect", {x: "12", y: "7", width: "4", height: "2"}), /*#__PURE__*/React.createElement("rect", {x: "6", y: "6", width: "4", height: "4"})));
-const PixelShootingStar = ({className, style, color = '#fff3c4'}) => /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 36 10", className: className, style: style}, /*#__PURE__*/React.createElement("g", {fill: color}, /*#__PURE__*/React.createElement("rect", {x: "30", y: "3", width: "4", height: "4"}), /*#__PURE__*/React.createElement("rect", {x: "23", y: "3.3", width: "4", height: "3.4", opacity: "0.7"}), /*#__PURE__*/React.createElement("rect", {x: "16", y: "3.6", width: "4", height: "2.8", opacity: "0.5"}), /*#__PURE__*/React.createElement("rect", {x: "9", y: "4", width: "3", height: "2", opacity: "0.32"}), /*#__PURE__*/React.createElement("rect", {x: "3", y: "4.3", width: "2", height: "1.4", opacity: "0.16"})));
-
-// Config for the shelf's shooting stars: each travels in a straight line at its own `angle`
-// (0deg = rightward, positive = clockwise), so direction spans the full circle rather than
-// a narrow band. `duration`/`delay` are staggered so they don't all fire in sync.
-const SHOOTING_STARS = [
-  {top: '20%', left: '10%', angle: -18, duration: 9, delay: -2, size: 30, opacity: 0.7},
-  {top: '30%', right: '18%', angle: 152, duration: 13, delay: -7, size: 26, opacity: 0.5},
-  {top: '8%', left: '46%', angle: -138, duration: 11, delay: -4, size: 27, opacity: 0.45},
-  {top: '62%', left: '8%', angle: 34, duration: 15.5, delay: -10.5, size: 24, opacity: 0.4},
-  {top: '70%', right: '14%', angle: -95, duration: 12.5, delay: -8.5, size: 25, opacity: 0.45},
-  {top: '46%', left: '68%', angle: 105, duration: 15, delay: -12.5, size: 22, opacity: 0.35}
-];
-const CuteSlider = ({label, value, min, max, step, onChange, displayValue, accentColor = '#ffd77a', inkColor = '#f2ecdd'}) => {
-  const pct = Math.min(100, Math.max(0, (value - min) / (max - min) * 100));
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {className: "flex justify-between items-baseline mb-1.5"}, /*#__PURE__*/React.createElement("span", {className: "text-xs font-semibold truncate", style: {color: inkColor}}, label), /*#__PURE__*/React.createElement("span", {className: "text-xs font-bold shrink-0 ml-2", style: {color: accentColor}}, displayValue)), /*#__PURE__*/React.createElement("div", {className: "relative rounded-full overflow-hidden", style: {height: 10, background: `${inkColor}22`}}, /*#__PURE__*/React.createElement("div", {className: "absolute inset-y-0 left-0 rounded-full transition-[width] duration-100", style: {width: `${pct}%`, background: accentColor}}), /*#__PURE__*/React.createElement("input", {type: "range", min: min, max: max, step: step, value: value, onChange: e => onChange(Number(e.target.value)), className: "absolute w-full opacity-0 cursor-pointer", style: {height: 32, top: -11}})));
-};
-
-const READING_PRESETS = [{id: 'night', label: 'Night', bg: '#2a2136', ink: '#eee6f5', accent: '#b98fd9', sky: 'stars'}, {id: 'paper', label: 'Paper', bg: '#f3ede0', ink: '#3a3128', accent: '#c9793a', sky: 'clouds'}, {id: 'day', label: 'Day', bg: '#4a55e0', ink: '#f2ecdd', accent: '#ffd77a', sky: 'clouds'}, {id: 'dusk', label: 'Dusk', bg: '#2e1f2c', ink: '#f0dde8', accent: '#c97a9e', sky: 'stars'}];
-const READING_EXTRAS = [{id: 'ink', bg: '#17161c', ink: '#e7e3ef', accent: '#8f7cc7'}, {id: 'bluehour', bg: '#28344a', ink: '#e8ecf5', accent: '#7ba0d6'}, {id: 'clay', bg: '#e7d4c1', ink: '#4a2f1e', accent: '#c9793a'}, {id: 'moss', bg: '#1f2e22', ink: '#dfe8de', accent: '#7fa66c'}, {id: 'rosewood', bg: '#3a1620', ink: '#f0dfe2', accent: '#d97a93'}, {id: 'khaki', bg: '#c9c48a', ink: '#2b2438', accent: '#7a7a28'}, {id: 'sage', bg: '#e3e8dc', ink: '#33402f', accent: '#6b8a5a'}, {id: 'seafoam', bg: '#cfe4dc', ink: '#1f3a30', accent: '#3f8a72'}, {id: 'blush', bg: '#f0dbe0', ink: '#4a2634', accent: '#c65f7a'}];
-const READING_ALL = [...READING_PRESETS, ...READING_EXTRAS];
-const SORT_MODES = [{id: 'recent', label: 'Recent'}, {id: 'author', label: 'Author'}, {id: 'title', label: 'Title'}];
-const readingThemeTokens = t => ({bg: t.bg, ink: t.ink, pivot: t.accent, glow: t.accent, surface: `${t.ink}12`, line: `${t.ink}20`, track: `${t.ink}18`, muted: `${t.ink}90`, chip: `${t.accent}22`, chipText: t.accent, playBg: t.accent, playIcon: t.bg, panel: t.bg});
-
-// --- Local settings persistence (theme, shelf sizing, reading prefs) so the same
-// look applies everywhere in the app, reload after reload — not just in this tab's memory ---
-const SETTINGS_KEY = 'lamplight_settings_v1';
-const loadSettings = () => {
-  try {
-    const raw = localStorage.getItem(SETTINGS_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    return {};
-  }
-};
-const saveSettings = patch => {
-  try {
-    const current = loadSettings();
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({...current, ...patch}));
-  } catch (e) {
-    /* localStorage unavailable (sandboxed) — settings just won't persist */
-  }
-};
-
-const supabaseClient = window.supabase.createClient('https://kumlmoecgnpkhgpxuopk.supabase.co', 'sb_publishable_qQZRlaTbMm3kEs5n2Fikfg_K5OaciqO');
-
-const rowToBook = row => ({id: row.id, title: row.title, author: row.author, chapters: row.chapters || [], words: row.words ? row.words.split(' ') : [], progress: row.progress || 0, cover: row.cover || null, createdAt: row.created_at ? new Date(row.created_at).getTime() : 0});
-
-const makeDemoWords = n => 'the quiet room held its breath as morning light moved slowly across the worn wooden floor '.repeat(Math.ceil(n / 15)).trim().split(' ').slice(0, n);
-const PLACEHOLDER_BOOKS = [{title: 'The Great Wide Open', author: 'A. Rivera', wordCount: 400, progressPct: 0}, {title: 'Salt', author: 'M. Ferro', wordCount: 350, progressPct: 45}, {title: 'The Longest Way Home Through Winter', author: 'J. Okafor', wordCount: 500, progressPct: 100}, {title: 'Glass Houses', author: 'R. Bianchi', wordCount: 300, progressPct: 20}, {title: 'Nocturne', author: 'S. Vale', wordCount: 380, progressPct: 0}, {title: 'The Unfinished Garden', author: 'K. Novak', wordCount: 420, progressPct: 70}, {title: 'Static', author: 'D. Chen', wordCount: 330, progressPct: 100}, {title: 'Everything We Left Behind', author: 'L. Marsh', wordCount: 450, progressPct: 15}, {title: 'Amber', author: 'T. Osei', wordCount: 300, progressPct: 0}, {title: 'The Last Good Winter', author: 'P. Anand', wordCount: 400, progressPct: 55}, {title: 'Concrete Notions', author: 'H. Ostrom', wordCount: 360, progressPct: 30}, {title: 'Neue Grid', author: 'F. Lindqvist', wordCount: 340, progressPct: 0}].map((b, i, arr) => {
-  const words = makeDemoWords(b.wordCount);
-  return {id: `demo-${i}`, title: b.title, author: b.author, chapters: [{title: 'Chapter One', index: 0}, {title: 'Chapter Two', index: Math.floor(words.length / 2)}], words, progress: Math.floor(b.progressPct / 100 * (words.length - 1)), cover: null, createdAt: Date.now() - (arr.length - i) * 3600000};
-});
-const fetchBooks = async () => {
-  const {data, error} = await supabaseClient.from('books').select('*').order('created_at', {ascending: false});
-  if (error) throw error;
-  return data.map(rowToBook);
-};
-const insertBook = async (userId, bookData) => {
-  const {data, error} = await supabaseClient.from('books').insert({user_id: userId, title: bookData.title, author: bookData.author, chapters: bookData.chapters, words: bookData.words.join(' '), progress: 0, cover: bookData.cover || null}).select().single();
-  if (error) throw error;
-  return rowToBook(data);
-};
-// Kept for older rows that were saved before the cover column existed / before a cover
-// finished extracting — lets us backfill a cover onto an existing book without a full re-upload.
-const updateBookCoverRemote = async (id, coverDataUrl) => {
-  try {
-    const {error} = await supabaseClient.from('books').update({cover: coverDataUrl}).eq('id', id);
-    if (error) console.warn('Could not save cover remotely:', error.message);
-  } catch (e) {
-    console.warn('Could not save cover remotely:', e);
-  }
-};
-const updateBookProgress = async (id, progress) => {
-  const {error} = await supabaseClient.from('books').update({progress}).eq('id', id);
-  if (error) throw error;
-};
-const deleteBookRemote = async id => {
-  const {error} = await supabaseClient.from('books').delete().eq('id', id);
-  if (error) throw error;
-};
-
-const RSVPWord = ({word, isPlaying, ink, pivotColor, glowColor, sizeScale = 1}) => {
-  if (!word) return null;
-  const getORP = w => {
-    const len = w.length;
-    if (len <= 1) return 0;
-    if (len <= 3) return 1;
-    if (len <= 5) return 2;
-    if (len <= 7) return 3;
-    if (len <= 9) return 4;
-    if (len <= 13) return 5;
-    return 6;
-  };
-  const orp = getORP(word);
-  const left = word.substring(0, orp);
-  const mid = word.substring(orp, orp + 1);
-  const right = word.substring(orp + 1);
-  return /*#__PURE__*/React.createElement("div", {className: "relative flex font-display font-medium tracking-tight items-center justify-center select-none w-full px-6", style: {fontSize: `clamp(${(2.75 * sizeScale).toFixed(2)}rem, ${(7 * sizeScale).toFixed(1)}vw, ${(4 * sizeScale).toFixed(2)}rem)`}}, /*#__PURE__*/React.createElement("div", {className: "flex-1 text-right whitespace-pre", style: {color: ink}}, left), /*#__PURE__*/React.createElement("div", {className: "relative flex justify-center w-[1.2ch]"}, /*#__PURE__*/React.createElement("div", {className: `absolute -inset-4 rounded-full ${isPlaying ? 'pivot-glow' : ''}`, style: {background: `radial-gradient(circle, ${glowColor}59 0%, ${glowColor}00 70%)`}}), /*#__PURE__*/React.createElement("span", {className: "relative", style: {color: pivotColor}}, mid)), /*#__PURE__*/React.createElement("div", {className: "flex-1 text-left whitespace-pre", style: {color: ink}}, right));
-};
-const renderRichSegment = (wordsSlice, startIndex, chapters) => {
-  const nodes = [];
-  let currentPara = [];
-  let paraStart = startIndex;
-  let key = 0;
-  const flush = () => {
-    if (currentPara.length > 0) {
-      nodes.push(/*#__PURE__*/React.createElement("p", {key: `p-${key++}`, "data-start": paraStart, className: "mb-[1.35em]"}, currentPara.join(' ')));
-      currentPara = [];
-    }
-  };
-  wordsSlice.forEach((w, i) => {
-    const absoluteIndex = startIndex + i;
-    const chapterHere = chapters?.find(c => c.index === absoluteIndex);
-    if (chapterHere) {
-      flush();
-      nodes.push(/*#__PURE__*/React.createElement("h3", {key: `h-${key++}`, "data-start": absoluteIndex, className: "font-display italic text-[1.5em] mt-[0.3em] mb-[0.9em] text-center"}, chapterHere.title));
-      paraStart = absoluteIndex;
-    }
-    if (w === PARA_BREAK) {
-      flush();
-      paraStart = absoluteIndex + 1;
-    } else {
-      if (currentPara.length === 0) paraStart = absoluteIndex;
-      currentPara.push(w);
-    }
-  });
-  flush();
-  return nodes;
-};
-function App() {
-  const initialSettings = useMemo(() => loadSettings(), []);
-  const [books, setBooks] = useState([]);
-  const [activeBook, setActiveBook] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [wpm, setWpm] = useState(initialSettings.wpm ?? 500);
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isParsing, setIsParsing] = useState(false);
-  const [showChapters, setShowChapters] = useState(false);
-  const [showBookmarksPanel, setShowBookmarksPanel] = useState(false);
-  const [selectionQuote, setSelectionQuote] = useState(null);
-  const [highlightQuoteId, setHighlightQuoteId] = useState(null);
-  const pagePRef = useRef(null);
-  const scrollPRef = useRef(null);
-  const [themeIdx, setThemeIdx] = useState(initialSettings.themeIdx ?? (typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 0));
-  const [shelfScale, setShelfScale] = useState(initialSettings.shelfScale ?? 0.8);
-  const [bookWidthScale, setBookWidthScale] = useState(initialSettings.bookWidthScale ?? 1.6);
-  const BAR_WIDTH_PCT = 100;
-  const BAR_HEIGHT = 14;
-  const MOBILE_THICKNESS_SCALE = 1.3;
-  const [activeSpineId, setActiveSpineId] = useState(null);
-  const supportsHover = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const [mobileStackView, setMobileStackView] = useState(initialSettings.mobileStackView ?? true);
-  const [skyAnimated, setSkyAnimated] = useState(initialSettings.skyAnimated ?? false);
-  const [useCoverSpines, setUseCoverSpines] = useState(initialSettings.useCoverSpines ?? true);
-  const [sortMode, setSortMode] = useState(initialSettings.sortMode ?? 'recent'); // 'recent' | 'author' | 'title'
-  const [lastOpenedMap, setLastOpenedMap] = useState(initialSettings.lastOpenedMap ?? {});
-  const [bookmarks, setBookmarks] = useState(initialSettings.bookmarks ?? {});
-  const [showShelfControls, setShowShelfControls] = useState(false);
-  const theme = THEMES[themeIdx];
-  const cycleTheme = () => setThemeIdx(i => (i + 1) % THEMES.length);
-  const [readingThemeId, setReadingThemeId] = useState(() => initialSettings.readingThemeId ?? READING_ALL[Math.floor(Math.random() * READING_ALL.length)].id);
-  const isNight = (() => {
-    const t = READING_ALL.find(t => t.id === readingThemeId) || READING_PRESETS[0];
-    return t.sky ? t.sky === 'stars' : !isLightColor(t.bg);
-  })();
-  const chromeTheme = readingThemeTokens(READING_ALL.find(t => t.id === readingThemeId) || READING_PRESETS[0]);
-  const [showThemePicker, setShowThemePicker] = useState(false);
-  const FONT_SIZES = [0.95, 1.05, 1.2, 1.35, 1.5];
-  const [fontSizeIdx, setFontSizeIdx] = useState(initialSettings.fontSizeIdx ?? (typeof window !== 'undefined' && window.innerWidth < 768 ? 3 : 1));
-  const [showSpeed, setShowSpeed] = useState(false);
-  const [readMode, setReadMode] = useState('normal');
-  const [showControls, setShowControls] = useState(false);
-  const [session, setSession] = useState(undefined);
-  const [devMode, setDevMode] = useState(false);
-  const [authMode, setAuthMode] = useState('signIn');
-  const [authEmail, setAuthEmail] = useState('');
-  const [authPassword, setAuthPassword] = useState('');
-  const [authError, setAuthError] = useState('');
-  const [authNotice, setAuthNotice] = useState('');
-  const [authLoading, setAuthLoading] = useState(false);
-  const fileInputRef = useRef(null);
-
-  const [textAlign, setTextAlign] = useState(initialSettings.textAlign ?? (typeof window !== 'undefined' && window.innerWidth < 768 ? 'justify' : 'left'));
-  const [pageMode, setPageMode] = useState(initialSettings.pageMode ?? 'paginated');
-  const [pageAnimStyle, setPageAnimStyle] = useState(initialSettings.pageAnimStyle ?? 'slide');
-  const scrollContainerRef = useRef(null);
-
-  useEffect(() => {
-    saveSettings({wpm, themeIdx, shelfScale, bookWidthScale, mobileStackView, skyAnimated, useCoverSpines, fontSizeIdx, textAlign, pageMode, pageAnimStyle, sortMode, lastOpenedMap, bookmarks});
-  }, [wpm, themeIdx, shelfScale, bookWidthScale, mobileStackView, skyAnimated, useCoverSpines, fontSizeIdx, textAlign, pageMode, pageAnimStyle, sortMode, lastOpenedMap, bookmarks]);
-  const pickReadingTheme = id => {
-    setReadingThemeId(id);
-    saveSettings({readingThemeId: id});
-  };
-  useEffect(() => {
-    supabaseClient.auth.getSession().then(({data}) => setSession(data.session));
-    const {data: listener} = supabaseClient.auth.onAuthStateChange((_event, newSession) => {
-      setSession(newSession);
-    });
-    return () => listener.subscription.unsubscribe();
-  }, []);
-  useEffect(() => {
-    if (devMode) {
-      setBooks(PLACEHOLDER_BOOKS);
-      return;
-    }
-    if (session) {
-      fetchBooks().then(setBooks).catch(console.error);
-    } else {
-      setBooks([]);
-    }
-  }, [session, devMode]);
-  const handleAuthSubmit = async e => {
-    e.preventDefault();
-    setAuthError('');
-    setAuthNotice('');
-    setAuthLoading(true);
-    try {
-      if (authMode === 'forgot') {
-        const {error} = await supabaseClient.auth.resetPasswordForEmail(authEmail);
-        if (error) throw error;
-        setAuthNotice('Check your email for a link to reset your password.');
-      } else if (authMode === 'signUp') {
-        const {data, error} = await supabaseClient.auth.signUp({email: authEmail, password: authPassword});
-        if (error) throw error;
-        if (!data.session) setAuthNotice('Check your email to confirm your account, then sign in.');
-      } else {
-        const {error} = await supabaseClient.auth.signInWithPassword({email: authEmail, password: authPassword});
-        if (error) throw error;
-      }
-    } catch (err) {
-      setAuthError(err.message || 'Something went wrong.');
-    } finally {
-      setAuthLoading(false);
-    }
-  };
-  const handleSignOut = async () => {
-    setDevMode(false);
-    await supabaseClient.auth.signOut();
-  };
-
-  const [viewportWidth, setViewportWidth] = useState(() => typeof window !== 'undefined' ? window.innerWidth : 400);
-  useEffect(() => {
-    const onResize = () => setViewportWidth(window.innerWidth);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-  const wordsPerPage = viewportWidth < 640 ? 160 : viewportWidth < 1100 ? 260 : 420;
-  const pageBoxRef = useRef(null);
-  const pageContentRef = useRef(null);
-  const [pageFitCount, setPageFitCount] = useState(wordsPerPage);
-  const pageHistoryRef = useRef([]);
-  const [pageDirection, setPageDirection] = useState(1);
-  const touchStartXRef = useRef(null);
-
-  useEffect(() => {
-    setPageFitCount(wordsPerPage);
-  }, [wordIndex, wordsPerPage, activeBook, fontSizeIdx]);
-  useLayoutEffect(() => {
-    if (readMode !== 'normal') return;
-    const box = pageBoxRef.current;
-    const content = pageContentRef.current;
-    if (!box || !content) return;
-    if (content.scrollHeight > box.clientHeight && pageFitCount > 20) {
-      setPageFitCount(c => Math.max(20, c - 15));
-    }
-  }, [pageFitCount, readMode, wordIndex, viewportWidth, fontSizeIdx, showControls]);
-  useEffect(() => {
-    if (readMode === 'normal') pageHistoryRef.current = [];
-  }, [readMode, activeBook]);
-  const pageStart = wordIndex;
-  const rawPageWords = activeBook ? activeBook.words.slice(pageStart, Math.min(pageStart + pageFitCount, activeBook.words.length)) : [];
-  const midPageChapterBreak = activeBook ? activeBook.chapters?.find(c => c.index > pageStart && c.index < pageStart + rawPageWords.length) : null;
-  const pageWords = midPageChapterBreak ? rawPageWords.slice(0, midPageChapterBreak.index - pageStart) : rawPageWords;
-  const pageEnd = pageStart + pageWords.length;
-  const isLastPage = activeBook ? pageEnd >= activeBook.words.length : true;
-  const isFirstPage = pageStart <= 0;
-  const goForwardPage = () => {
-    if (!activeBook || isLastPage) return;
-    pageHistoryRef.current.push(pageStart);
-    setPageDirection(1);
-    setWordIndex(pageEnd);
-    if (isMobileView && showControls) setShowControls(false);
-  };
-  const goBackPage = () => {
-    if (isFirstPage) return;
-    const prev = pageHistoryRef.current.pop();
-    setPageDirection(-1);
-    setWordIndex(prev !== undefined ? prev : Math.max(0, pageStart - wordsPerPage));
-    if (isMobileView && showControls) setShowControls(false);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = e => {
-      if (!activeBook) return;
-      if (document.activeElement.tagName === 'INPUT') return;
-      if (readMode === 'rsvp') {
-        switch (e.code) {
-          case 'Space':
-            e.preventDefault();
-            setIsPlaying(p => !p);
-            break;
-          case 'ArrowRight':
-            e.preventDefault();
-            setIsPlaying(false);
-            setWordIndex(i => Math.min(i + 1, activeBook.words.length - 1));
-            break;
-          case 'ArrowLeft':
-            e.preventDefault();
-            setIsPlaying(false);
-            setWordIndex(i => Math.max(i - 1, 0));
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            setWpm(w => Math.min(w + 50, 1000));
-            break;
-          case 'ArrowDown':
-            e.preventDefault();
-            setWpm(w => Math.max(w - 50, 100));
-            break;
-          case 'BracketLeft':
-          case 'BracketRight':
-            e.preventDefault();
-            setShowChapters(s => !s);
-            break;
-          default:
-            break;
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Force default dark
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
         }
-      } else {
-        switch (e.code) {
-          case 'ArrowRight':
-          case 'Space':
-            e.preventDefault();
-            goForwardPage();
-            break;
-          case 'ArrowLeft':
-            e.preventDefault();
-            goBackPage();
-            break;
-          default:
-            break;
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeBook, readMode, pageStart, pageEnd, isFirstPage, isLastPage]);
 
-  useEffect(() => {
-    let interval;
-    if (isPlaying && readMode === 'rsvp' && activeBook && wordIndex < activeBook.words.length - 1) {
-      const msPerWord = 60000 / wpm;
-      interval = setInterval(() => {
-        setWordIndex(prev => {
-          if (prev >= activeBook.words.length - 2) {
-            setIsPlaying(false);
-            return activeBook.words.length - 1;
-          }
-          return prev + 1;
-        });
-      }, msPerWord);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, wpm, activeBook, wordIndex, readMode]);
-  const extractCoverDataUrl = async book => {
-    try {
-      const coverPath = await book.loaded.cover;
-      if (!coverPath) return null;
-      const coverUrl = await book.archive.createUrl(coverPath, {base64: false});
-      const resp = await fetch(coverUrl);
-      const blob = await resp.blob();
-      const dataUrl = await new Promise((resolve, reject) => {
-        const r = new FileReader();
-        r.onload = () => resolve(r.result);
-        r.onerror = reject;
-        r.readAsDataURL(blob);
-      });
-      return dataUrl;
-    } catch (e) {
-      console.warn('Could not extract cover image:', e);
-      return null;
-    }
-  };
-  const handleFileUpload = async e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setIsParsing(true);
-    const reader = new FileReader();
-    reader.onload = async event => {
-      try {
-        const bookData = event.target.result;
-        const book = window.ePub(bookData);
-        await book.ready;
-        const metadata = await book.loaded.metadata;
-        const title = metadata.title || file.name.replace('.epub', '');
-        const author = metadata.creator || "Unknown author";
-        const coverDataUrl = await extractCoverDataUrl(book);
-        let extractedWords = [];
-        let extractedChapters = [];
-        let globalWordCount = 0;
-        const spine = book.spine;
-        const nav = await book.loaded.navigation;
-        const tocList = nav ? nav.toc : [];
-        for (let i = 0; i < spine.length; i++) {
-          const item = spine.get(i);
-          try {
-            const doc = await item.load(book.load.bind(book));
-            if (doc) {
-              let bodyEl = null;
-              if (typeof doc === 'string') {
-                const parser = new DOMParser();
-                const parsed = parser.parseFromString(doc, "text/html");
-                bodyEl = parsed.body;
-              } else {
-                bodyEl = doc.body || doc;
-              }
-              const blocks = bodyEl ? Array.from(bodyEl.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, blockquote')) : [];
-              let cleanWords = [];
-              blocks.forEach(block => {
-                const t = (block.textContent || '').trim();
-                if (!t) return;
-                const w = t.split(/\s+/).filter(Boolean);
-                if (cleanWords.length > 0) cleanWords.push(PARA_BREAK);
-                cleanWords = cleanWords.concat(w);
-              });
-              if (cleanWords.length === 0) {
-                const fallbackText = (bodyEl ? bodyEl.textContent : '') || '';
-                cleanWords = fallbackText.trim().split(/\s+/).filter(Boolean);
-              }
-              if (cleanWords.length > 0) {
-                let chapterTitle = `Section ${i + 1}`;
-                const matchedToc = tocList.find(t => t.href.includes(item.idref) || item.href.includes(t.href.split('#')[0]));
-                if (matchedToc) chapterTitle = matchedToc.label.trim();
-                extractedChapters.push({title: chapterTitle, index: globalWordCount});
-                globalWordCount += cleanWords.length;
-                extractedWords = extractedWords.concat(cleanWords);
-              }
+        const PROJECTS = [
+            { id: 1, title: "Lamplight", description: "Your cozy RSVP Library", category: "productivity", url: "https://dalecri.github.io/Lamplight/" },
+            { id: 2, title: "Todo Garden", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
+            { id: 3, title: "Typing Terrarium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
+            { id: 4, title: "Todo Desert", description: "Desert Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/mesa-garden-todo/" },
+            { id: 5, title: "Maple Signal", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
+            { id: 6, title: "Petfluencer Caption Writer", description: "Generate content ideas for TwoStoryTails", category: "utility", url: "https://dalecri.github.io/petfluencer/" },
+            { id: 7, title: "Notesy Castle", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
+            { id: 8, title: "Nimbus Code", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
+            { id: 9, title: "Cartography Canvas", description: "Randomly generated ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
+            { id: 10, title: "IsoPaper Cubewall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
+            { id: 11, title: "Pastel Menagerie", description: "Craft soft-hued digital spirits", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
+            { id: 12, title: "Polygrade", description: "Minimalist canvas for low-fidelity art", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
+            { id: 13, title: "Lofi Sanctuary", description: "Ambient voxel room for deep work", category: "interactive", url: "https://dalecri.github.io/Voxel-lofi-room/" },
+            { id: 14, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
+            { id: 15, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
+            { id: 16, title: "Script Clock", description: "Real-time script-based timekeeping", category: "productivity", url: "https://dalecri.github.io/Script-Clock/" },
+            { id: 17, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
+            { id: 18, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
+            { id: 19, title: "Riverhouse Todo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
+            { id: 20, title: "Cipher Geode", description: "Extract crystalline security from raw data", category: "productivity", url: "https://dalecri.github.io/password-geode/" },
+            { id: 21, title: "Weather Loom", description: "Atmospheric Weather Loom App", category: "interactive", url: "https://dalecri.github.io/typographic-weather-loom/" },
+            { id: 22, title: "Apartment Todo", description: "Apartment inspired todo", category: "productivity", url: "https://dalecri.github.io/floating-apartment-todo/" },
+            { id: 23, title: "Carte Blache", description: "Practice your french", category: "productivity", url: "https://dalecri.github.io/FudgeMyFrench/" },
+            { id: 25, title: "Archived Files", description: "Cute Archived Files", category: "interactive", url: "https://dalecri.github.io/archived-files/" },
+            { id: 25, title: "Mobile Viewer", description: "Test websites for mobile", category: "productivity", url: "https://dalecri.github.io/mobile-render/" },
+            { id: 26, title: "Aesthetic Atelier", description: "A curated gallery of 3D visual renders", category: "interactive", url: "https://dalecri.github.io/3d-aesthetic-renders/" },
+        ];
+
+        let focusIdx = 0;
+        let currentFilter = "all";
+        let config = { 
+            pitch: 72,      
+            angle: 42,      
+            tilt: -90,      
+            rotate: 0,      
+            size: 280,
+            offsetY: 165
+        };
+
+        const PACK_STEP = 30;
+        const SPREAD_GAP = 600;
+        const POP_Z = 180;
+
+        const cardsLayer = document.getElementById('cards-container');
+        const timeline = document.getElementById('timeline');
+        const scene = document.getElementById('scene');
+        const groundLine = document.getElementById('ground-line');
+        const labelLatest = document.getElementById('label-latest');
+        const labelOldest = document.getElementById('label-oldest');
+        const projectCountDisp = document.getElementById('project-count');
+
+        function getFilteredItems() {
+            return currentFilter === "all" ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
+        }
+
+        // Handles the animation delay and same-tab routing
+        function playAndNavigate(index, url) {
+            const el = document.getElementById(`card-${index}`);
+            if (!el) return;
+            
+            el.classList.add('insert-cartridge');
+            
+            // Wait for the bounce animation to finish, then navigate current tab
+            setTimeout(() => {
+                window.location.assign(url);
+                
+                // Clean up in case the user uses the browser 'Back' button
+                setTimeout(() => {
+                    el.classList.remove('insert-cartridge');
+                }, 100);
+            }, 300);
+        }
+
+        function createCards() {
+            cardsLayer.innerHTML = '';
+            const items = getFilteredItems();
+            
+            items.forEach((p, i) => {
+                const container = document.createElement('a');
+                container.className = 'card-container';
+                container.id = `card-${i}`;
+                container.href = p.url;
+                
+                const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
+
+                container.innerHTML = `
+                    <div class="card-frame" style="container-type: inline-size;">
+                        <div class="gba-lip">
+                            <div class="gba-logo-area">
+                                <span class="gba-logo-text">${p.title}</span>
+                            </div>
+                        </div>
+                        <div class="gba-label-recess">
+                            <div class="card-content">
+                                <img class="card-preview-img" 
+                                     src="${previewUrl}" 
+                                     alt="${p.title}" 
+                                     loading="lazy"
+                                     onload="this.style.opacity=1"
+                                     style="opacity:0">
+                                <div class="screen-glare"></div>
+                                <div class="esrb-logo">
+                                    <div class="esrb-top">EVERYONE</div>
+                                    <div class="esrb-e">E</div>
+                                    <div class="esrb-bottom">CONTENT RATED BY<br>ESRB</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gba-bottom-grip">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="gba-triangle"></div>
+                    </div>
+                `;
+
+                container.onclick = (e) => {
+                    // Only intercept normal left clicks
+                    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                        e.preventDefault(); 
+                        if (window.innerWidth <= 768) {
+                            playAndNavigate(i, p.url);
+                        } else {
+                            if (focusIdx === i) {
+                                playAndNavigate(i, p.url);
+                            } else {
+                                focusIdx = i;
+                                updateScene();
+                            }
+                        }
+                    }
+                };
+                cardsLayer.appendChild(container);
+            });
+            
+            projectCountDisp.textContent = items.length;
+            updateCounts();
+
+            if (window.innerWidth <= 768) {
+                setTimeout(handleMobileScroll, 50);
             }
-          } catch (itemErr) {
-            console.warn(`Skipping unreadable spine item ${i}:`, itemErr);
-          }
         }
-        const parsedBook = {title, author, words: extractedWords, chapters: extractedChapters, cover: coverDataUrl};
-        if (devMode) {
-          const localBook = {id: `local-${Date.now()}`, progress: 0, cover: coverDataUrl, createdAt: Date.now(), ...parsedBook};
-          setBooks(prev => [localBook, ...prev]);
-        } else {
-          const savedBook = await insertBook(session.user.id, parsedBook);
-          setBooks(prev => [savedBook, ...prev]);
+
+        function updateCounts() {
+            document.getElementById('count-all').textContent = PROJECTS.length;
+            document.getElementById('count-art').textContent = PROJECTS.filter(p => p.category === "art").length;
+            document.getElementById('count-interactive').textContent = PROJECTS.filter(p => p.category === "interactive").length;
+            document.getElementById('count-productivity').textContent = PROJECTS.filter(p => p.category === "productivity").length;
+            document.getElementById('count-game').textContent = PROJECTS.filter(p => p.category === "game").length;
         }
-      } catch (error) {
-        console.error("Error parsing epub:", error);
-        alert("Couldn't read that EPUB. Try a different file.");
-      } finally {
-        setIsParsing(false);
-        if (fileInputRef.current) fileInputRef.current.value = '';
-      }
-    };
-    reader.readAsArrayBuffer(file);
-  };
-  const activeBookmarks = activeBook ? (bookmarks[activeBook.id] || []) : [];
-  const saveQuote = (text, atWordIndex) => {
-    if (!activeBook || !text) return;
-    const entry = {id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, text: text.slice(0, 400), wordIndex: atWordIndex, createdAt: Date.now()};
-    setBookmarks(prev => ({...prev, [activeBook.id]: [...(prev[activeBook.id] || []), entry]}));
-  };
-  const deleteQuote = id => {
-    if (!activeBook) return;
-    setBookmarks(prev => ({...prev, [activeBook.id]: (prev[activeBook.id] || []).filter(q => q.id !== id)}));
-  };
-  const jumpToQuote = q => {
-    setWordIndex(q.wordIndex);
-    setIsPlaying(false);
-    setShowBookmarksPanel(false);
-    setHighlightQuoteId(q.id);
-    if (pageMode === 'scroll' && scrollContainerRef.current) {
-      requestAnimationFrame(() => {
-        const el = scrollContainerRef.current;
-        if (!el || !activeBook) return;
-        const ratio = q.wordIndex / Math.max(1, activeBook.words.length - 1);
-        el.scrollTop = ratio * Math.max(0, el.scrollHeight - el.clientHeight);
-      });
-    }
-  };
-  const handleTextSelection = () => {
-    const sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !sel.toString().trim()) { setSelectionQuote(null); return; }
-    setHighlightQuoteId(null);
-    try {
-      const text = sel.toString().trim();
-      const range = sel.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
-      const container = range.startContainer;
-      const el = container.nodeType === 1 ? container : container.parentElement;
-      const ancestor = el ? el.closest('[data-start]') : null;
-      const paraStart = ancestor ? (parseInt(ancestor.dataset.start, 10) || 0) : 0;
-      const fullText = container.textContent || '';
-      const before = fullText.slice(0, range.startOffset);
-      const wordOffset = before.trim().length ? before.trim().split(/\s+/).filter(Boolean).length : 0;
-      setSelectionQuote({text, wordIndex: paraStart + wordOffset, top: rect.top, left: rect.left + rect.width / 2});
-    } catch (e) {
-      setSelectionQuote(null);
-    }
-  };
-  useEffect(() => {
-    const onSelectionChange = () => {
-      const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !sel.toString().trim()) {
-        setSelectionQuote(null);
-        setHighlightQuoteId(null);
-      }
-    };
-    document.addEventListener('selectionchange', onSelectionChange);
-    return () => document.removeEventListener('selectionchange', onSelectionChange);
-  }, []);
-  useEffect(() => {
-    if (!highlightQuoteId || !activeBook) return;
-    const q = activeBookmarks.find(x => x.id === highlightQuoteId);
-    if (!q) { setHighlightQuoteId(null); return; }
-    const raf = requestAnimationFrame(() => {
-      try {
-        const container = pageMode === 'scroll' ? scrollPRef.current : pagePRef.current;
-        if (!container) return;
-        const blocks = Array.from(container.querySelectorAll('[data-start]'));
-        let target = null;
-        for (const b of blocks) {
-          const s = parseInt(b.dataset.start, 10);
-          if (s <= q.wordIndex) target = b; else break;
+
+        function updateScene() {
+            if (window.innerWidth <= 768) {
+                handleMobileScroll();
+                return;
+            }
+
+            const items = getFilteredItems();
+            const totalLength = items.length * PACK_STEP;
+            scene.style.transform = `translateY(${config.offsetY}px) rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
+
+            const getCardY = (i) => {
+                const base = (totalLength / 2) - (i * PACK_STEP);
+                if (focusIdx < 0) return base;
+                if (i < focusIdx) return base + SPREAD_GAP / 2;
+                if (i === focusIdx) return base;
+                return base - SPREAD_GAP / 2;
+            };
+
+            const focusY = getCardY(focusIdx);
+            timeline.style.transform = `translateY(${-focusY}px)`;
+
+            const lineH = totalLength + (focusIdx >= 0 ? SPREAD_GAP : 0);
+            groundLine.style.height = `${lineH}px`;
+            groundLine.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0)}px`;
+
+            const labelTransform = `translate3d(-50%, 0, 0) rotateZ(${config.rotate - config.angle}deg) rotateX(${config.tilt}deg)`;
+            labelLatest.style.top = `${totalLength / 2 + (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) + 40}px`;
+            labelLatest.style.transform = labelTransform;
+            labelOldest.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) - 20}px`;
+            labelOldest.style.transform = labelTransform;
+
+            items.forEach((_, i) => {
+                const el = document.getElementById(`card-${i}`);
+                if (!el) return;
+                const isFocused = i === focusIdx;
+                const isNotFocused = !isFocused;
+                const y = getCardY(i);
+                const z = isFocused ? POP_Z : 0;
+                const zIndex = isFocused ? 1000 : items.length - i;
+                const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
+                const currentTilt = isFocused ? config.tilt : -90;
+
+                const cardHeight = config.size * 0.9; 
+                el.style.width = `${config.size}px`;
+                el.style.height = `${cardHeight}px`; 
+                el.style.top = `-${cardHeight}px`;
+                el.style.zIndex = zIndex;
+                el.style.transform = `translate3d(${-config.size/2}px, ${y}px, ${z}px) rotateZ(${cardZRot}deg) rotateX(${currentTilt}deg)`;
+                
+                el.classList.toggle('active', isFocused);
+                const content = el.querySelector('.card-content');
+                
+                content.style.filter = isNotFocused ? 'blur(2px) grayscale(0.5)' : 'none';
+                content.style.opacity = isNotFocused ? '0.5' : '1';
+            });
         }
-        if (!target) return;
-        const paraStart = parseInt(target.dataset.start, 10);
-        const localWordOffset = q.wordIndex - paraStart;
-        const text = target.textContent || '';
-        const wordsInPara = text.split(' ');
-        const charOffset = wordsInPara.slice(0, Math.max(0, localWordOffset)).join(' ').length + (localWordOffset > 0 ? 1 : 0);
-        const node = target.firstChild;
-        if (!node || node.nodeType !== 3) return;
-        const textLen = node.textContent.length;
-        const start = Math.min(Math.max(0, charOffset), textLen);
-        const end = Math.min(start + q.text.length, textLen);
-        if (end <= start) return;
-        const range = document.createRange();
-        range.setStart(node, start);
-        range.setEnd(node, end);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } catch (e) {
-        /* selection restore failed silently */
-      }
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [highlightQuoteId, activeBook, pageMode, pageStart]);
-  const openBook = book => {
-    setActiveBook(book);
-    setWordIndex(book.progress || 0);
-    setIsPlaying(false);
-    setShowChapters(false);
-    setShowControls(false);
-    setShowSpeed(false);
-    setReadMode('normal');
-    setActiveSpineId(null);
-    setLastOpenedMap(prev => ({...prev, [book.id]: Date.now()}));
-  };
-  useLayoutEffect(() => {
-    if (!activeBook || readMode !== 'normal' || pageMode !== 'scroll') return;
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    const ratio = activeBook.words.length > 1 ? (book => book.progress || 0)(activeBook) / (activeBook.words.length - 1) : 0;
-    el.scrollTop = ratio * Math.max(0, el.scrollHeight - el.clientHeight);
-  }, [activeBook, pageMode, readMode]);
-  const closeBook = async () => {
-    if (activeBook) {
-      const finalIndex = wordIndex;
-      setBooks(prev => prev.map(b => b.id === activeBook.id ? {...b, progress: finalIndex} : b));
-      if (!devMode) updateBookProgress(activeBook.id, finalIndex).catch(console.error);
-    }
-    setActiveBook(null);
-    setIsPlaying(false);
-  };
-  const handleDelete = async (e, id) => {
-    e.stopPropagation();
-    setBooks(prev => prev.filter(b => b.id !== id));
-    if (!devMode) deleteBookRemote(id).catch(console.error);
-  };
-  const stepWord = direction => {
-    setIsPlaying(false);
-    if (!activeBook) return;
-    if (direction === 'forward') setWordIndex(i => Math.min(i + 1, activeBook.words.length - 1));else setWordIndex(i => Math.max(i - 1, 0));
-  };
-  const togglePlay = () => {
-    setIsPlaying(p => {
-      const next = !p;
-      if (next && isMobileView && showControls) setShowControls(false);
-      return next;
-    });
-  };
-  const handleSeek = e => {
-    setWordIndex(parseInt(e.target.value, 10));
-    setIsPlaying(false);
-  };
-  const currentChapterIdx = activeBook ? activeBook.chapters?.findLastIndex(c => c.index <= wordIndex) ?? -1 : -1;
-  const sortedBooks = useMemo(() => {
-    const arr = [...books];
-    if (sortMode === 'title') {
-      arr.sort((a, b) => a.title.trim().toLowerCase().localeCompare(b.title.trim().toLowerCase()));
-    } else if (sortMode === 'author') {
-      arr.sort((a, b) => (a.author || '').trim().toLowerCase().localeCompare((b.author || '').trim().toLowerCase()));
-    } else {
-      arr.sort((a, b) => (lastOpenedMap[b.id] || 0) - (lastOpenedMap[a.id] || 0));
-    }
-    return arr;
-  }, [books, sortMode, lastOpenedMap]);
-  const spineNodesRef = useRef({});
-  const spinePrevRectsRef = useRef(null);
-  const sortedOrderKey = sortedBooks.map(b => b.id).join(',');
-  useLayoutEffect(() => {
-    const nodes = spineNodesRef.current;
-    const prevRects = spinePrevRectsRef.current;
-    const nextRects = {};
-    Object.keys(nodes).forEach(id => {
-      if (nodes[id]) nextRects[id] = nodes[id].getBoundingClientRect();
-    });
-    if (prevRects) {
-      Object.keys(nextRects).forEach(id => {
-        const el = nodes[id];
-        const prev = prevRects[id];
-        const next = nextRects[id];
-        if (!el || !prev || !next) return;
-        const dx = prev.left - next.left;
-        const dy = prev.top - next.top;
-        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
-        el.style.transition = 'none';
-        el.style.transform = `translate(${dx}px, ${dy}px)`;
-        requestAnimationFrame(() => {
-          el.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
-          el.style.transform = '';
+
+        function handleMobileScroll() {
+            if (window.innerWidth > 768) return;
+            const centerY = window.innerHeight / 2;
+            
+            document.querySelectorAll('.card-container').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.height === 0) return; 
+                
+                const cardCenter = rect.top + rect.height / 2;
+                const dist = Math.abs(centerY - cardCenter);
+                
+                const maxDist = window.innerHeight * 0.5; 
+                let scale = 1;
+                let zIndex = 1;
+                let shadowY = 10;
+                let shadowBlur = 15;
+                
+                if (dist < maxDist) {
+                    const intensity = 1 - (dist / maxDist);
+                    const eased = Math.pow(intensity, 1.8); 
+                    
+                    scale = 1 + (0.12 * eased);
+                    zIndex = Math.round(10 + (eased * 100));
+                    
+                    shadowY = 10 + (12 * eased);
+                    shadowBlur = 15 + (15 * eased);
+                }
+                
+                card.style.setProperty('--mobile-scale', scale.toFixed(3));
+                card.style.setProperty('--mobile-z', zIndex);
+                
+                const frame = card.querySelector('.card-frame');
+                if (frame) {
+                    frame.style.setProperty('--m-shadow-y', `${shadowY.toFixed(1)}px`);
+                    frame.style.setProperty('--m-shadow-b', `${shadowBlur.toFixed(1)}px`);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                requestAnimationFrame(handleMobileScroll);
+            }
+        }, { passive: true });
+
+        const toggleBtn = document.getElementById('toggle-controls');
+        const controlsCard = document.getElementById('controls-card');
+
+        toggleBtn.onclick = () => controlsCard.classList.toggle('open');
+
+        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size', 'offsetY'];
+        inputs.forEach(id => {
+            const input = document.getElementById(`input-${id}`);
+            const display = document.getElementById(`val-${id}`);
+            if(input) {
+                input.oninput = (e) => {
+                    const val = Number(e.target.value);
+                    config[id] = val;
+                    display.textContent = val + (id === 'size' || id === 'offsetY' ? 'px' : '°');
+                    updateScene();
+                };
+            }
         });
-      });
-    }
-    spinePrevRectsRef.current = nextRects;
-  }, [sortedOrderKey]);
-  const activeReadingTheme = READING_ALL.find(t => t.id === readingThemeId) || READING_PRESETS[0];
-  const readerTheme = readingThemeTokens(activeReadingTheme);
-  const isMobileView = viewportWidth < 768;
-  const readerHeaderEl = activeBook ? /*#__PURE__*/React.createElement("header", {className: "flex items-center gap-3 px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-3 shrink-0", style: {borderBottom: `1px solid ${readerTheme.line}`}}, /*#__PURE__*/React.createElement("button", {onClick: e => { e.stopPropagation(); closeBook(); }, className: "flex items-center gap-1 shrink-0 transition-transform duration-100 active:scale-90 text-sm font-medium py-1", style: {color: readerTheme.ink}}, /*#__PURE__*/React.createElement(ChevronLeft, {size: 20}), !isMobileView && "Shelf"), /*#__PURE__*/React.createElement("div", {className: "flex-1 min-w-0 text-center px-2"}, /*#__PURE__*/React.createElement("span", {className: "font-display text-sm font-semibold truncate block", style: {color: readerTheme.ink}}, activeBook.title)), /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-4 shrink-0", onClick: e => e.stopPropagation()}, /*#__PURE__*/React.createElement("button", {onClick: () => setShowThemePicker(true), className: "flex items-center justify-center transition-transform duration-100 active:scale-75", style: {color: readerTheme.ink}, "aria-label": "Customize"}, /*#__PURE__*/React.createElement(Sliders, {size: 19})), /*#__PURE__*/React.createElement("button", {onClick: () => setShowBookmarksPanel(true), className: "flex items-center justify-center transition-transform duration-100 active:scale-75", style: {color: activeBookmarks.length > 0 ? readerTheme.pivot : readerTheme.ink}, "aria-label": "Saved quotes"}, /*#__PURE__*/React.createElement(Bookmark, {size: 19, fill: activeBookmarks.length > 0 ? "currentColor" : "none"})), /*#__PURE__*/React.createElement("button", {onClick: () => {
-    setIsPlaying(false);
-    setReadMode(m => m === 'rsvp' ? 'normal' : 'rsvp');
-  }, className: "flex items-center justify-center transition-transform duration-100 active:scale-75", style: {color: readerTheme.ink}, "aria-label": readMode === 'rsvp' ? 'Switch to normal reading' : 'Switch to flow reading'}, readMode === 'rsvp' ? /*#__PURE__*/React.createElement(BookOpen, {size: 20}) : /*#__PURE__*/React.createElement(Zap, {size: 20})))) : null;
-  if (session === undefined) {
-    return /*#__PURE__*/React.createElement("div", {className: "flex items-center justify-center", style: {height: '100dvh', background: chromeTheme.bg}}, /*#__PURE__*/React.createElement("div", {className: "w-2 h-2 rounded-full glow", style: {background: chromeTheme.pivot}}));
-  }
-  if (!session && !devMode) {
-    return /*#__PURE__*/React.createElement("div", {className: "relative overflow-hidden", style: {height: '100dvh', background: chromeTheme.bg, '--font-display': theme.display}}, /*#__PURE__*/React.createElement("div", {className: "absolute left-1/2 -translate-x-1/2 top-0 pointer-events-none", style: {zIndex: 1}}, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 300 600", style: {height: '76vh', width: 'auto', overflow: 'visible'}}, /*#__PURE__*/React.createElement("line", {x1: "150", y1: "0", x2: "150", y2: "90", stroke: isNight ? '#ffd93d' : '#e0392f', strokeWidth: "5"}), /*#__PURE__*/React.createElement("rect", {x: "144", y: "90", width: "12", height: "22", fill: isNight ? '#ffd93d' : '#e0392f'}), /*#__PURE__*/React.createElement("rect", {x: "126", y: "110", width: "48", height: "14", rx: "7", fill: isNight ? '#aab9d8' : '#14122e'}), /*#__PURE__*/React.createElement("rect", {x: "108", y: "122", width: "84", height: "14", rx: "7", fill: isNight ? '#aab9d8' : '#14122e'}), /*#__PURE__*/React.createElement("rect", {x: "86", y: "134", width: "128", height: "16", rx: "8", fill: isNight ? '#aab9d8' : '#14122e'}), /*#__PURE__*/React.createElement("path", {d: "M92,148 Q88,148 88,152 L28,560 L272,560 L212,152 Q212,148 208,148 Z", fill: isNight ? '#b98fd9' : '#fff0bd', opacity: "0.85"}))), /*#__PURE__*/React.createElement("button", {onClick: () => setReadingThemeId(isNight ? 'day' : 'night'), className: "absolute z-20 active:scale-90 transition-transform", style: {top: 'max(1.1rem, env(safe-area-inset-top))', right: '1.1rem'}, "aria-label": isNight ? 'Switch to day' : 'Switch to night'}, isNight ? /*#__PURE__*/React.createElement(PixelMoon, {style: {width: 40, height: 40, opacity: 0.95}}) : /*#__PURE__*/React.createElement(PixelCloud, {style: {width: 56, height: 34, opacity: 0.9}})), /*#__PURE__*/React.createElement("div", {className: "relative z-10 flex flex-col items-center justify-end h-full px-8 pb-16"}, /*#__PURE__*/React.createElement("div", {className: "w-full max-w-xs"}, /*#__PURE__*/React.createElement("div", {className: "flex flex-col items-center gap-1.5 mb-7"}, /*#__PURE__*/React.createElement("span", {className: "font-display italic text-lg tracking-tight", style: {color: chromeTheme.ink, textShadow: '0 1px 6px rgba(0,0,0,0.35)'}}, "Lamplight"), /*#__PURE__*/React.createElement("span", {className: "font-display text-sm", style: {color: chromeTheme.ink, opacity: 0.85, textShadow: '0 1px 6px rgba(0,0,0,0.35)'}}, "Read in a new ", /*#__PURE__*/React.createElement("span", {className: "italic"}, "light."))), /*#__PURE__*/React.createElement("form", {onSubmit: handleAuthSubmit, className: "flex flex-col gap-3"}, /*#__PURE__*/React.createElement("input", {type: "email", required: true, placeholder: "Email", value: authEmail, onChange: e => setAuthEmail(e.target.value), className: "auth-input w-full px-4 py-3.5 rounded-2xl text-sm outline-none", style: {background: 'rgba(255,255,255,0.16)', border: '1px solid rgba(255,255,255,0.38)', color: chromeTheme.ink, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)'}}), authMode !== 'forgot' && /*#__PURE__*/React.createElement("input", {type: "password", required: true, placeholder: "Password", value: authPassword, onChange: e => setAuthPassword(e.target.value), minLength: 6, className: "auth-input w-full px-4 py-3.5 rounded-2xl text-sm outline-none", style: {background: 'rgba(255,255,255,0.16)', border: '1px solid rgba(255,255,255,0.38)', color: chromeTheme.ink, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)'}}), authMode === 'signIn' && /*#__PURE__*/React.createElement("button", {type: "button", onClick: () => {
-      setAuthMode('forgot');
-      setAuthError('');
-      setAuthNotice('');
-    }, className: "text-right text-xs font-mono -mt-1", style: {color: chromeTheme.ink, opacity: 0.65}}, "Forgot password?"), authError && /*#__PURE__*/React.createElement("p", {className: "text-xs", style: {color: '#ffd9df'}}, authError), authNotice && /*#__PURE__*/React.createElement("p", {className: "text-xs", style: {color: chromeTheme.pivot}}, authNotice), /*#__PURE__*/React.createElement("button", {type: "submit", disabled: authLoading, className: "w-full py-3 rounded-2xl font-semibold text-sm active:scale-[0.98] transition-transform disabled:opacity-50 mt-1", style: {background: chromeTheme.playBg, color: chromeTheme.playIcon}}, authLoading ? 'One moment…' : authMode === 'forgot' ? 'Send reset link' : authMode === 'signUp' ? 'Create account' : 'Sign in')), /*#__PURE__*/React.createElement("button", {onClick: () => {
-      setAuthMode(m => m === 'forgot' ? 'signIn' : m === 'signUp' ? 'signIn' : 'signUp');
-      setAuthError('');
-      setAuthNotice('');
-    }, className: "w-full text-center text-xs font-mono mt-4", style: {color: chromeTheme.ink, opacity: 0.75}}, authMode === 'forgot' ? 'Back to sign in' : authMode === 'signUp' ? 'Have an account? Sign in' : "New here? Create an account"), /*#__PURE__*/React.createElement("button", {onClick: () => setDevMode(true), className: "w-full text-center mt-6 transition-colors", style: {color: chromeTheme.ink, opacity: 0.6}}, /*#__PURE__*/React.createElement("span", {className: "block text-xs font-mono"}, "Continue without an account"), /*#__PURE__*/React.createElement("span", {className: "block text-[10px] font-mono opacity-80 mt-0.5"}, "Local only · no cloud sync · progress won't follow you across devices")))));
-  }
-  return /*#__PURE__*/React.createElement("div", {className: "w-full", style: {height: '100dvh', '--font-display': theme.display}}, activeBook ?
-  /*#__PURE__*/
-  React.createElement("div", {className: "fixed inset-0 flex flex-col overflow-hidden transition-colors duration-300 book-open-anim", style: {background: readerTheme.bg, '--selection-bg': `${readerTheme.pivot}40`}}, (!isMobileView || showControls) ? (isMobileView ? /*#__PURE__*/React.createElement("div", {onClick: () => setShowControls(false), className: "shrink-0"}, readerHeaderEl) : readerHeaderEl) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {onClick: () => setShowControls(true), className: "absolute top-0 inset-x-0 z-30", style: {height: '50%'}, "aria-label": "Show controls"}), /*#__PURE__*/React.createElement("div", {className: "shrink-0 flex justify-center pt-[max(0.85rem,env(safe-area-inset-top))] pb-3 px-14 pointer-events-none"}, /*#__PURE__*/React.createElement("span", {className: "font-display italic text-xs truncate", style: {color: readerTheme.muted, opacity: 0.75}}, activeBook.title))), selectionQuote && /*#__PURE__*/React.createElement("div", {className: "fixed z-50 flex items-center rounded-full overflow-hidden text-sm font-medium", style: {top: Math.max(8, selectionQuote.top - 46), left: selectionQuote.left, transform: 'translateX(-50%)', background: darkenColor(readerTheme.pivot, 0.72), border: `1.5px solid ${readerTheme.pivot}`, color: lightenColor(readerTheme.pivot, 0.35), boxShadow: '0 6px 16px rgba(0,0,0,0.35)'}}, /*#__PURE__*/React.createElement("button", {onClick: () => {
-      saveQuote(selectionQuote.text, selectionQuote.wordIndex);
-      window.getSelection()?.removeAllRanges();
-      setSelectionQuote(null);
-    }, className: "px-4 py-2 active:opacity-70 transition-opacity"}, "Highlight"), /*#__PURE__*/React.createElement("div", {style: {width: 1, alignSelf: 'stretch', background: `${readerTheme.pivot}66`}}), /*#__PURE__*/React.createElement("button", {onClick: async () => {
-      const text = selectionQuote.text;
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
         }
-      } catch (e) {
-        /* clipboard unavailable, ignore silently */
-      }
-      window.getSelection()?.removeAllRanges();
-      setSelectionQuote(null);
-    }, className: "px-4 py-2 active:opacity-70 transition-opacity"}, "Copy")), readMode === 'rsvp' ? /*#__PURE__*/React.createElement("main", {className: "flex-1 flex items-center justify-center relative cursor-pointer", onClick: () => togglePlay()}, isNight ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '12%', left: '14%', width: 9, height: 9, opacity: 0.35, color: readerTheme.ink}, color: readerTheme.ink}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '22%', right: '18%', width: 7, height: 7, opacity: 0.25}, color: readerTheme.ink}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {bottom: '18%', left: '22%', width: 6, height: 6, opacity: 0.2}, color: readerTheme.ink})) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PixelCloud, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '10%', right: '12%', width: 44, height: 28, opacity: 0.18, '--cloud-op': 0.18, animationDuration: '170.8s', animationDelay: '-4s'}}), /*#__PURE__*/React.createElement(PixelCloud, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {bottom: '14%', left: '10%', width: 34, height: 22, opacity: 0.14, '--cloud-op': 0.14, animationDuration: '223.6s', animationDelay: '-30s'}})), /*#__PURE__*/React.createElement(RSVPWord, {word: activeBook.words[wordIndex] || "The end.", isPlaying: isPlaying, ink: readerTheme.ink, pivotColor: readerTheme.pivot, glowColor: readerTheme.glow, sizeScale: FONT_SIZES[fontSizeIdx] / FONT_SIZES[1]})) : (pageMode === 'scroll' ? /*#__PURE__*/React.createElement("main", {className: "flex-1 overflow-y-auto overflow-x-hidden no-scrollbar", style: {touchAction: 'pan-y', overscrollBehaviorX: 'none'}, ref: scrollContainerRef, onScroll: e => {
-      if (!activeBook) return;
-      if (isMobileView && showControls) setShowControls(false);
-      const el = e.currentTarget;
-      const ratio = el.scrollTop / Math.max(1, el.scrollHeight - el.clientHeight);
-      setWordIndex(Math.round(ratio * (activeBook.words.length - 1)));
-    }}, /*#__PURE__*/React.createElement("div", {className: "reading-page mx-auto px-8 lg:px-16 pt-6 pb-24"}, /*#__PURE__*/React.createElement("div", {ref: scrollPRef, className: "font-display leading-[1.85] select-text", onMouseUp: () => handleTextSelection(), onTouchEnd: () => setTimeout(() => handleTextSelection(), 0), style: {color: readerTheme.ink, fontSize: `${FONT_SIZES[fontSizeIdx]}rem`, textAlign: textAlign}}, activeBook ? renderRichSegment(activeBook.words, 0, activeBook.chapters) : ''))) : /*#__PURE__*/React.createElement("main", {className: "flex-1 relative overflow-hidden", onClick: e => {
-      const sel = window.getSelection();
-      if (sel && sel.toString().trim()) return;
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      if (x < rect.width * 0.32) goBackPage();else if (x > rect.width * 0.68) goForwardPage();
-    }, onTouchStart: e => {
-      touchStartXRef.current = e.touches[0].clientX;
-      if (isMobileView && showControls) setShowControls(false);
-    }, onTouchEnd: e => {
-      if (touchStartXRef.current === null) return;
-      const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
-      touchStartXRef.current = null;
-      if (Math.abs(deltaX) > 48) {
-        if (deltaX < 0) goForwardPage();else goBackPage();
-      }
-    }}, /*#__PURE__*/React.createElement("div", {key: pageStart, className: `absolute inset-0 page-anim-${pageAnimStyle}`, style: {'--page-dir': pageDirection, transformOrigin: pageAnimStyle === 'curl' ? (pageDirection === 1 ? 'right center' : 'left center') : undefined}}, /*#__PURE__*/React.createElement("div", {className: "reading-page mx-auto h-full px-8 lg:px-16 pt-6 pb-14"}, /*#__PURE__*/React.createElement("div", {ref: pageBoxRef, className: "h-full overflow-hidden flex flex-col", style: {justifyContent: showControls ? 'flex-start' : 'center'}}, /*#__PURE__*/React.createElement("div", {ref: pageContentRef}, /*#__PURE__*/React.createElement("div", {ref: pagePRef, className: "font-display leading-[1.85] select-text", onMouseUp: () => handleTextSelection(), onTouchEnd: () => setTimeout(() => handleTextSelection(), 0), style: {color: readerTheme.ink, fontSize: `${FONT_SIZES[fontSizeIdx]}rem`, textAlign: textAlign}}, renderRichSegment(pageWords, pageStart, activeBook.chapters)))))), /*#__PURE__*/React.createElement("button", {onClick: e => {
-      e.stopPropagation();
-      goBackPage();
-    }, disabled: isFirstPage, className: "hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full transition-opacity disabled:opacity-0", style: {color: readerTheme.muted}, "aria-label": "Previous page"}, /*#__PURE__*/React.createElement(ChevronLeft, {size: 20})), /*#__PURE__*/React.createElement("button", {onClick: e => {
-      e.stopPropagation();
-      goForwardPage();
-    }, disabled: isLastPage, className: "hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full transition-opacity disabled:opacity-0", style: {color: readerTheme.muted}, "aria-label": "Next page"}, /*#__PURE__*/React.createElement(ChevronRight, {size: 20})), /*#__PURE__*/React.createElement("div", {className: "absolute bottom-3 left-0 right-0 h-4 flex items-center justify-center pointer-events-none"}, /*#__PURE__*/React.createElement("span", {className: "font-mono text-[10px] whitespace-nowrap", style: {color: readerTheme.muted}}, activeBook ? (pageStart / Math.max(activeBook.words.length - 1, 1) * 100).toFixed(0) : 0, "% through")))), (!isMobileView || showControls) && readMode === 'rsvp' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {onClick: e => {
-      e.stopPropagation();
-      setShowChapters(true);
-    }, className: "flex items-center justify-center gap-2 mx-auto mb-3 px-4 py-1.5 rounded-full text-xs font-mono transition-colors", style: {border: `1px solid ${readerTheme.line}`, color: readerTheme.muted}}, /*#__PURE__*/React.createElement(ChevronUp, {size: 12}), activeBook.chapters?.[currentChapterIdx !== -1 ? currentChapterIdx : 0]?.title || 'Start', /*#__PURE__*/React.createElement("span", {style: {opacity: 0.6}}, "·"), (currentChapterIdx !== -1 ? currentChapterIdx : 0) + 1, "/", activeBook.chapters?.length || 1), /*#__PURE__*/React.createElement("div", {className: "shrink-0 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] mx-auto max-w-md w-full flex flex-col items-center gap-2.5", onClick: e => e.stopPropagation()}, /*#__PURE__*/React.createElement("div", {className: "w-full px-2"}, /*#__PURE__*/React.createElement("div", {className: "relative flex items-center", style: {height: 44}}, /*#__PURE__*/React.createElement("input", {type: "range", min: "0", max: Math.max(activeBook.words.length - 1, 1), value: wordIndex, onChange: handleSeek, className: "w-full absolute inset-0 opacity-0 cursor-pointer z-10", style: {height: 44, margin: 0}}), /*#__PURE__*/React.createElement("div", {className: "w-full h-[3px] rounded-full overflow-hidden pointer-events-none", style: {background: readerTheme.track}}, /*#__PURE__*/React.createElement("div", {className: "h-full", style: {width: `${wordIndex / Math.max(activeBook.words.length - 1, 1) * 100}%`, background: readerTheme.pivot}})), /*#__PURE__*/React.createElement("div", {className: "absolute rounded-full pointer-events-none", style: {width: 20, height: 20, marginLeft: -10, left: `${wordIndex / Math.max(activeBook.words.length - 1, 1) * 100}%`, background: readerTheme.pivot, boxShadow: `0 0 0 4px ${readerTheme.pivot}30, 0 2px 6px rgba(0,0,0,0.35)`}})), /*#__PURE__*/React.createElement("div", {className: "h-4 flex items-center justify-center overflow-hidden"}, /*#__PURE__*/React.createElement("span", {className: "font-mono text-[10px] whitespace-nowrap", style: {color: readerTheme.muted}}, (wordIndex / Math.max(activeBook.words.length - 1, 1) * 100).toFixed(0), "% · ~", Math.ceil((activeBook.words.length - wordIndex) / wpm), "m left"))), /*#__PURE__*/React.createElement("div", {className: "flex items-center justify-center py-1"}, /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-2 rounded-full p-2 transition-colors", style: {background: `${readerTheme.ink}14`, backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', border: `1px solid ${readerTheme.ink}1a`}}, /*#__PURE__*/React.createElement("button", {onClick: () => stepWord('backward'), "aria-label": "Previous word", className: "w-12 h-12 flex items-center justify-center rounded-full transition-colors active:opacity-60", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(SkipBack, {size: 21})), /*#__PURE__*/React.createElement("button", {onClick: () => togglePlay(), className: "w-16 h-16 rounded-full flex items-center justify-center active:scale-90 transition-transform", style: {background: readerTheme.playBg, color: readerTheme.playIcon}}, isPlaying ? /*#__PURE__*/React.createElement(Pause, {size: 24, fill: "currentColor"}) : /*#__PURE__*/React.createElement(Play, {size: 24, fill: "currentColor", className: "ml-0.5"})), /*#__PURE__*/React.createElement("button", {onClick: () => stepWord('forward'), "aria-label": "Next word", className: "w-12 h-12 flex items-center justify-center rounded-full transition-colors active:opacity-60", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(SkipForward, {size: 21})))))), showChapters && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-50 flex flex-col justify-end"}, /*#__PURE__*/React.createElement("div", {className: "flex-1", onClick: () => setShowChapters(false)}), /*#__PURE__*/React.createElement("div", {className: "rounded-t-3xl max-h-[65vh] flex flex-col transition-colors", style: {background: readerTheme.panel, borderTop: `1px solid ${readerTheme.line}`}}, /*#__PURE__*/React.createElement("div", {className: "flex justify-center pt-3"}, /*#__PURE__*/React.createElement("div", {className: "w-9 h-1 rounded-full", style: {background: readerTheme.line}})), /*#__PURE__*/React.createElement("div", {className: "px-5 py-4 flex justify-between items-center"}, /*#__PURE__*/React.createElement("h3", {className: "font-display italic text-lg", style: {color: readerTheme.ink}}, "Contents"), /*#__PURE__*/React.createElement("button", {onClick: () => setShowChapters(false), className: "p-1", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(X, {size: 18}))), /*#__PURE__*/React.createElement("div", {className: "overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] flex flex-col gap-1"}, activeBook.chapters?.map((chap, idx) => {
-    const isCurrent = idx === (currentChapterIdx !== -1 ? currentChapterIdx : 0);
-    return /*#__PURE__*/React.createElement("button", {key: idx, onClick: () => {
-        setWordIndex(chap.index);
-        setShowChapters(false);
-        setIsPlaying(false);
-      }, className: "text-left px-4 py-3 rounded-xl text-sm transition-colors", style: isCurrent ? {background: readerTheme.chip, color: readerTheme.chipText, fontWeight: 500} : {color: readerTheme.muted}}, chap.title);
-  })))), showBookmarksPanel && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-50 flex flex-col justify-end"}, /*#__PURE__*/React.createElement("div", {className: "flex-1", onClick: () => setShowBookmarksPanel(false)}), /*#__PURE__*/React.createElement("div", {className: "rounded-t-3xl max-h-[65vh] flex flex-col transition-colors", style: {background: readerTheme.panel, borderTop: `1px solid ${readerTheme.line}`}}, /*#__PURE__*/React.createElement("div", {className: "flex justify-center pt-3"}, /*#__PURE__*/React.createElement("div", {className: "w-9 h-1 rounded-full", style: {background: readerTheme.line}})), /*#__PURE__*/React.createElement("div", {className: "px-5 py-4 flex justify-between items-center"}, /*#__PURE__*/React.createElement("h3", {className: "font-display italic text-lg", style: {color: readerTheme.ink}}, "Saved quotes"), /*#__PURE__*/React.createElement("button", {onClick: () => setShowBookmarksPanel(false), className: "p-1", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(X, {size: 18}))), activeBookmarks.length > 0 ? /*#__PURE__*/React.createElement("div", {className: "overflow-y-auto px-3 pb-[max(1rem,env(safe-area-inset-bottom))] flex flex-col gap-1.5"}, [...activeBookmarks].sort((a, b) => a.wordIndex - b.wordIndex).map(q => /*#__PURE__*/React.createElement("div", {key: q.id, className: "flex items-start gap-2 px-3 py-2.5 rounded-xl transition-colors", style: {background: `${readerTheme.ink}0a`}}, /*#__PURE__*/React.createElement("button", {onClick: () => jumpToQuote(q), className: "flex-1 text-left"}, /*#__PURE__*/React.createElement("p", {className: "font-display italic text-sm leading-snug line-clamp-3", style: {color: readerTheme.ink}}, "\u201c", q.text, "\u201d"), /*#__PURE__*/React.createElement("span", {className: "font-mono text-[9px] block mt-1", style: {color: readerTheme.muted}}, Math.round(q.wordIndex / Math.max(1, activeBook.words.length - 1) * 100), "% through")), /*#__PURE__*/React.createElement("button", {onClick: () => deleteQuote(q.id), className: "shrink-0 p-1.5 rounded-full transition-colors", style: {color: readerTheme.muted}, "aria-label": "Delete quote"}, /*#__PURE__*/React.createElement(X, {size: 14}))))) : /*#__PURE__*/React.createElement("div", {className: "px-5 pb-8 pt-1 text-center"}, /*#__PURE__*/React.createElement("p", {className: "text-sm", style: {color: readerTheme.muted}}, "No saved quotes yet."), /*#__PURE__*/React.createElement("p", {className: "font-mono text-[10px] mt-1", style: {color: readerTheme.muted, opacity: 0.7}}, "Select any text while reading to save it here.")))), showThemePicker && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-40", onClick: () => setShowThemePicker(false)}), /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-50 flex items-center justify-center px-5 transition-all duration-200 ease-out", style: {opacity: showThemePicker ? 1 : 0, transform: showThemePicker ? 'scale(1)' : 'scale(0.94)', pointerEvents: showThemePicker ? 'auto' : 'none'}}, /*#__PURE__*/React.createElement("div", {className: "w-full max-w-sm rounded-3xl overflow-y-auto", style: {background: `${readerTheme.panel}f2`, border: `1px solid ${readerTheme.line}`, boxShadow: '0 20px 50px -12px rgba(0,0,0,0.5)', maxHeight: '80vh'}, onClick: e => e.stopPropagation()}, /*#__PURE__*/React.createElement("div", {className: "px-5 pt-4 pb-3 flex justify-between items-center"}, /*#__PURE__*/React.createElement("h3", {className: "font-display italic text-lg", style: {color: readerTheme.ink}}, "Customize"), /*#__PURE__*/React.createElement("button", {onClick: () => setShowThemePicker(false), className: "p-1", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(X, {size: 18}))), readMode === 'rsvp' ? /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("div", {className: "flex justify-between items-baseline mb-2"}, /*#__PURE__*/React.createElement("span", {className: "text-xs font-semibold", style: {color: readerTheme.ink}}, "Reading speed"), /*#__PURE__*/React.createElement("span", {className: "text-xs font-bold", style: {color: readerTheme.chipText}}, `${wpm} wpm`)), /*#__PURE__*/React.createElement("div", {className: "flex items-center justify-between gap-1"}, [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000].map(v => /*#__PURE__*/React.createElement("button", {key: v, onClick: () => setWpm(v), "aria-label": `${v} words per minute`, className: "flex-1 flex items-center justify-center py-2 active:scale-90 transition-transform"}, /*#__PURE__*/React.createElement("span", {className: "rounded-full transition-all", style: v === wpm ? {width: 14, height: 14, background: readerTheme.chipText} : {width: 8, height: 8, background: readerTheme.line}}))))) : /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Page navigation"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-2 gap-1.5"}, [{id: 'paginated', label: 'Swipe'}, {id: 'scroll', label: 'Scroll'}].map(m => /*#__PURE__*/React.createElement("button", {key: m.id, onClick: () => setPageMode(m.id), className: "px-2 py-1.5 rounded-lg text-xs font-semibold text-center transition-colors", style: {background: pageMode === m.id ? "rgba(255,255,255,0.08)" : "transparent", border: `1px solid ${pageMode === m.id ? readerTheme.chipText : "rgba(255,255,255,0.15)"}`, color: readerTheme.ink}}, m.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Page turn animation"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-3 gap-1.5"}, [{id: 'fade', label: 'Fade'}, {id: 'curl', label: 'Curl'}, {id: 'slide', label: 'Slide'}].map(a => /*#__PURE__*/React.createElement("button", {key: a.id, onClick: () => setPageAnimStyle(a.id), className: "px-2 py-1.5 rounded-lg text-xs font-semibold text-center transition-colors", style: {background: pageAnimStyle === a.id ? "rgba(255,255,255,0.08)" : "transparent", border: `1px solid ${pageAnimStyle === a.id ? readerTheme.chipText : "rgba(255,255,255,0.15)"}`, color: readerTheme.ink}}, a.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Font"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-3 gap-1.5"}, THEMES.map((t, i) => /*#__PURE__*/React.createElement("button", {key: t.id, onClick: () => setThemeIdx(i), className: "flex flex-col items-center gap-0.5 py-1.5 rounded-lg text-sm transition-colors", style: {background: i === themeIdx ? `${readerTheme.ink}12` : 'transparent', border: `1px solid ${i === themeIdx ? readerTheme.chipText : readerTheme.line}`, color: readerTheme.ink}}, /*#__PURE__*/React.createElement("span", {style: {fontFamily: t.display}, className: "text-sm leading-none"}, t.glyph), /*#__PURE__*/React.createElement("span", {className: "font-mono text-[8px] uppercase tracking-wide", style: {color: readerTheme.muted}}, t.label))))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Text size · normal reading"), /*#__PURE__*/React.createElement("div", {className: "flex items-center justify-between gap-2"}, /*#__PURE__*/React.createElement("button", {onClick: () => setFontSizeIdx(i => Math.max(0, i - 1)), disabled: fontSizeIdx === 0, className: "w-8 h-8 flex items-center justify-center rounded-full transition-colors disabled:opacity-30", style: {border: `1px solid ${readerTheme.line}`, color: readerTheme.ink}, "aria-label": "Decrease text size"}, /*#__PURE__*/React.createElement("span", {className: "font-display text-xs"}, "A")), /*#__PURE__*/React.createElement("div", {className: "flex-1 flex items-center justify-center gap-1.5"}, FONT_SIZES.map((_, i) => /*#__PURE__*/React.createElement("span", {key: i, className: "rounded-full", style: {width: 5, height: 5, background: i === fontSizeIdx ? readerTheme.chipText : readerTheme.line}}))), /*#__PURE__*/React.createElement("button", {onClick: () => setFontSizeIdx(i => Math.min(FONT_SIZES.length - 1, i + 1)), disabled: fontSizeIdx === FONT_SIZES.length - 1, className: "w-8 h-8 flex items-center justify-center rounded-full transition-colors disabled:opacity-30", style: {border: `1px solid ${readerTheme.line}`, color: readerTheme.ink}, "aria-label": "Increase text size"}, /*#__PURE__*/React.createElement("span", {className: "font-display text-base"}, "A")))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Text align \u00b7 normal reading"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-3 gap-1.5"}, [{id: 'left', label: 'Left'}, {id: 'center', label: 'Center'}, {id: 'justify', label: 'Justify'}].map(a => /*#__PURE__*/React.createElement("button", {key: a.id, onClick: () => setTextAlign(a.id), className: "px-2 py-1.5 rounded-lg text-xs font-semibold text-center transition-colors", style: {background: textAlign === a.id ? "rgba(255,255,255,0.08)" : "transparent", border: `1px solid ${textAlign === a.id ? readerTheme.chipText : "rgba(255,255,255,0.15)"}`, color: readerTheme.ink}}, a.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "Reading theme"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-2 gap-1.5"}, READING_PRESETS.map(t => /*#__PURE__*/React.createElement("button", {key: t.id, onClick: () => pickReadingTheme(t.id), className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors", style: {background: t.id === readingThemeId ? "rgba(255,255,255,0.08)" : "transparent", border: `1px solid ${t.id === readingThemeId ? readerTheme.chipText : "rgba(255,255,255,0.15)"}`, color: readerTheme.ink}}, /*#__PURE__*/React.createElement("span", {className: "w-4 h-4 rounded-full shrink-0", style: {background: t.bg, border: `1px solid ${t.ink}40`}}), t.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-3"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-1.5", style: {color: readerTheme.muted}}, "More colors"), /*#__PURE__*/React.createElement("div", {className: "flex justify-between gap-1.5"}, READING_EXTRAS.map(t => /*#__PURE__*/React.createElement("button", {key: t.id, onClick: () => pickReadingTheme(t.id), "aria-label": t.id, className: "w-6 h-6 shrink-0 rounded-full transition-transform active:scale-90", style: {background: t.bg, border: t.id === readingThemeId ? `2px solid ${readerTheme.chipText}` : '1px solid rgba(255,255,255,0.15)'}})))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))]"})))) :
-  /*#__PURE__*/
-  React.createElement("div", {className: "h-full flex flex-col overflow-hidden relative", style: {background: readerTheme.bg}}, isNight ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '6%', left: '12%', width: 10, height: 10, opacity: 0.8}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '16%', left: '28%', width: 7, height: 7, opacity: 0.6}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '10%', right: '32%', width: 8, height: 8, opacity: 0.7}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '28%', left: '45%', width: 6, height: 6, opacity: 0.45}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '14%', left: '62%', width: 6, height: 6, opacity: 0.5}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '4%', left: '42%', width: 5, height: 5, opacity: 0.4}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '36%', left: '14%', width: 6, height: 6, opacity: 0.35}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '40%', right: '10%', width: 8, height: 8, opacity: 0.5}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '48%', left: '34%', width: 5, height: 5, opacity: 0.3}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '2%', right: '42%', width: 7, height: 7, opacity: 0.55}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '58%', left: '20%', width: 7, height: 7, opacity: 0.5}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '65%', right: '24%', width: 6, height: 6, opacity: 0.4}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '72%', left: '40%', width: 5, height: 5, opacity: 0.35}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '78%', right: '12%', width: 8, height: 8, opacity: 0.45}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '84%', left: '15%', width: 6, height: 6, opacity: 0.3}}), /*#__PURE__*/React.createElement(PixelStar, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-star-anim' : ''}`, style: {top: '90%', left: '55%', width: 5, height: 5, opacity: 0.35}}), skyAnimated && SHOOTING_STARS.map((s, i) => /*#__PURE__*/React.createElement("div", {key: `shoot-${i}`, className: "absolute pointer-events-none", style: {top: s.top, left: s.left, right: s.right, transform: `rotate(${s.angle}deg)`}}, /*#__PURE__*/React.createElement("div", {className: "sky-shoot-move", style: {animationDuration: `${s.duration}s`, animationDelay: `${s.delay}s`}}, /*#__PURE__*/React.createElement(PixelShootingStar, {style: {width: s.size, height: s.size * 10 / 36, opacity: s.opacity}}))))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PixelCloud, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '4%', left: '4%', width: 120, height: 75, opacity: 0.5, '--cloud-op': 0.5, animationDuration: '144.8s', animationDelay: '-12s'}}), /*#__PURE__*/React.createElement(PixelCloudB, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '16%', left: '32%', width: 80, height: 50, opacity: 0.35, '--cloud-op': 0.35, animationDuration: '246.8s', animationDelay: '-55s'}}), /*#__PURE__*/React.createElement(PixelCloudC, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '2%', left: '54%', width: 64, height: 43, opacity: 0.4, '--cloud-op': 0.4, animationDuration: '190.8s', animationDelay: '-20s'}}), /*#__PURE__*/React.createElement(PixelCloudB, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '30%', left: '6%', width: 100, height: 62, opacity: 0.3, '--cloud-op': 0.3, animationDuration: '207.2s', animationDelay: '-40s'}}), /*#__PURE__*/React.createElement(PixelCloud, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '38%', right: '6%', width: 140, height: 88, opacity: 0.28, '--cloud-op': 0.28, animationDuration: '158.0s', animationDelay: '-8s'}}), /*#__PURE__*/React.createElement(PixelCloudC, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '48%', left: '44%', width: 70, height: 47, opacity: 0.25, '--cloud-op': 0.25, animationDuration: '230.2s', animationDelay: '-60s'}}), /*#__PURE__*/React.createElement(PixelCloudB, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '56%', right: '28%', width: 66, height: 41, opacity: 0.3, '--cloud-op': 0.3, animationDuration: '181.0s', animationDelay: '-25s'}}), /*#__PURE__*/React.createElement(PixelCloudC, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '64%', left: '18%', width: 58, height: 38, opacity: 0.22, '--cloud-op': 0.22, animationDuration: '196.4s', animationDelay: '-45s'}}), /*#__PURE__*/React.createElement(PixelCloud, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '72%', right: '10%', width: 90, height: 56, opacity: 0.24, '--cloud-op': 0.24, animationDuration: '168.5s', animationDelay: '-18s'}}), /*#__PURE__*/React.createElement(PixelCloudB, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '80%', left: '40%', width: 50, height: 31, opacity: 0.2, '--cloud-op': 0.2, animationDuration: '214.6s', animationDelay: '-35s'}}), /*#__PURE__*/React.createElement(PixelCloudC, {className: `absolute pointer-events-none ${skyAnimated ? 'sky-cloud-anim' : ''}`, style: {top: '88%', right: '30%', width: 46, height: 30, opacity: 0.18, '--cloud-op': 0.18, animationDuration: '178.2s', animationDelay: '-50s'}})), /*#__PURE__*/React.createElement("nav", {className: "flex justify-between items-center px-5 pt-[max(1.25rem,env(safe-area-inset-top))] pb-1 shrink-0"}, /*#__PURE__*/React.createElement("div", {className: "flex flex-col gap-0.5"}, /*#__PURE__*/React.createElement("span", {className: "font-display italic tracking-tight", style: {fontSize: '1.35rem', color: readerTheme.ink}}, "Home"), /*#__PURE__*/React.createElement("span", {className: "font-mono text-[9px]", style: {color: readerTheme.muted}}, books.length, " book", books.length !== 1 ? 's' : '')), /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-4"}, /*#__PURE__*/React.createElement("input", {type: "file", accept: ".epub", ref: fileInputRef, onChange: handleFileUpload, className: "hidden"}), /*#__PURE__*/React.createElement("button", {onClick: () => fileInputRef.current?.click(), disabled: isParsing || !window.ePub, "aria-label": "Add book", className: "flex items-center justify-center w-10 h-10 rounded-full shrink-0 transition-transform duration-100 active:scale-75 disabled:opacity-40", style: {border: `2px solid ${readerTheme.ink}55`, color: readerTheme.ink}}, isParsing ? /*#__PURE__*/React.createElement("div", {className: "w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin"}) : /*#__PURE__*/React.createElement(Plus, {size: 19})), /*#__PURE__*/React.createElement("button", {onClick: () => setShowShelfControls(true), "aria-label": "Adjust shelf size", className: "flex items-center justify-center w-10 h-10 rounded-full shrink-0 transition-transform duration-100 active:scale-75", style: {border: `2px solid ${readerTheme.ink}55`, color: readerTheme.ink}}, /*#__PURE__*/React.createElement(Sliders, {size: 18})))), /*#__PURE__*/React.createElement("div", {className: "h-8 shrink-0"}), /*#__PURE__*/React.createElement("div", {className: "flex-1 min-h-0 flex flex-col pb-[max(4rem,env(safe-area-inset-bottom))]"}, books.length > 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {className: "flex-1 min-h-0 flex flex-col", style: {transform: `scale(${shelfScale})`, transformOrigin: 'bottom center'}}, /*#__PURE__*/React.createElement("div", {className: mobileStackView ? "flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar flex flex-col justify-end items-center gap-0.5 px-4 md:px-10" : "flex-1 min-h-0 overflow-x-auto no-scrollbar flex flex-row items-end gap-0.5 px-4 md:px-10", style: {WebkitOverflowScrolling: 'touch'}, onScroll: () => setActiveSpineId(null)}, sortedBooks.map((book, idx) => {
-    const tpl = pickTemplate(book.title, book.id);
-    const bg = tpl.bg;
-    const ink = tpl.ink;
-    const pct = book.progress > 0 && book.words?.length > 0 ? book.progress / book.words.length * 100 : 0;
-    const filledDots = pct <= 0 ? 0 : pct >= 97 ? 3 : Math.max(1, Math.round(pct / 33));
-    const mobileLengthPx = (Math.round(spineHeightPct(book.title) / 100 * 300) + 20) * bookWidthScale;
-    const effectiveWidthPx = tpl.width * bookWidthScale;
-    const showCoverArt = useCoverSpines && !!book.cover;
-    return /*#__PURE__*/React.createElement("div", {key: book.id, ref: el => { if (el) spineNodesRef.current[book.id] = el; else delete spineNodesRef.current[book.id]; }, className: `spine-mobile-wrap shrink-0 ${mobileStackView ? 'stack-mode' : ''}`, style: {'--sw': `${effectiveWidthPx}px`, '--sh': `${spineHeightPct(book.title)}%`, '--ml': `${mobileLengthPx}px`, '--swm': `${effectiveWidthPx * MOBILE_THICKNESS_SCALE}px`}}, /*#__PURE__*/React.createElement("button", {onClick: () => openBook(book), className: "spine-lift group relative shrink-0 rounded-t-[3px] rounded-b-[1px] overflow-hidden", style: {background: bg, width: effectiveWidthPx, height: '100%', '--tilt': `${spineTilt()}deg`, transformOrigin: 'bottom center', boxShadow: '0 3px 8px rgba(0,0,0,0.3)'}, "aria-label": book.title}, showCoverArt && book.cover && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0", style: {backgroundImage: `url(${book.cover})`, backgroundSize: 'cover', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat'}, "aria-hidden": "true"}), showCoverArt && !book.cover && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 flex items-center justify-center p-2", style: {background: '#3a3550'}}, /*#__PURE__*/React.createElement("span", {className: "font-mono text-[9px] text-center uppercase tracking-wide opacity-60", style: {color: '#f2ecdd', writingMode: 'vertical-rl'}}, "No cover")), !showCoverArt && /*#__PURE__*/React.createElement("div", {className: "absolute top-0 left-0 right-0 h-1 rounded-t-[3px]", style: {background: 'rgba(255,255,255,0.15)'}}), /*#__PURE__*/React.createElement("div", {className: "absolute top-2 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 whitespace-nowrap flex items-center justify-center", style: {background: 'rgba(20,18,30,0.85)', opacity: activeSpineId === book.id ? 1 : undefined}}, /*#__PURE__*/React.createElement("span", {className: "font-mono text-[9px] font-semibold text-center leading-none", style: {color: '#f2ecdd'}}, pct > 0 ? `${Math.round(pct)}%` : 'Unread')), showCoverArt ? null : renderTemplateSpine(tpl, book.title, mobileStackView), /*#__PURE__*/React.createElement("span", {onClick: e => {
-        e.stopPropagation();
-        handleDelete(e, book.id);
-      }, role: "button", tabIndex: 0, className: "absolute bottom-2 left-1/2 -translate-x-1/2 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer icon-upright", style: {background: showCoverArt ? 'rgba(0,0,0,0.45)' : `${ink}22`}, "aria-label": `Remove ${book.title}`}, /*#__PURE__*/React.createElement(Trash2, {size: 14, style: {color: showCoverArt ? '#f2ecdd' : ink}}))));
-  })), /*#__PURE__*/React.createElement("div", {className: "shrink-0 relative mx-auto", style: {width: `${BAR_WIDTH_PCT}%`}}, /*#__PURE__*/React.createElement("div", {style: {height: BAR_HEIGHT, background: isNight ? 'rgba(232,217,181,0.9)' : '#14122e', borderRadius: 3}}), /*#__PURE__*/React.createElement("div", {style: {height: Math.max(2, Math.round(BAR_HEIGHT / 2)), background: isNight ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0.4)', borderRadius: 2}}), /*#__PURE__*/React.createElement("div", {className: "absolute left-6 right-6", style: {top: BAR_HEIGHT + Math.max(2, Math.round(BAR_HEIGHT / 2)) + 1, height: 16, background: 'rgba(0,0,0,0.5)', filter: 'blur(9px)', borderRadius: '50%'}})))) : /*#__PURE__*/React.createElement("div", {className: "h-full w-full px-8 flex flex-col items-center justify-center text-center gap-4"}, /*#__PURE__*/React.createElement("div", {className: "p-5 rounded-2xl border border-dashed border-white/20"}, /*#__PURE__*/React.createElement(BookOpen, {size: 28, className: "text-white/50"})), /*#__PURE__*/React.createElement("p", {className: "text-sm text-[#f2ecdd]/70 max-w-[220px]"}, "No books on the shelf yet."))),
-  showShelfControls && /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-40", onClick: () => setShowShelfControls(false)}), /*#__PURE__*/React.createElement("div", {className: "absolute inset-0 z-50 flex items-center justify-center px-5 transition-all duration-200 ease-out", style: {opacity: showShelfControls ? 1 : 0, transform: showShelfControls ? 'scale(1)' : 'scale(0.94)', pointerEvents: showShelfControls ? 'auto' : 'none'}}, /*#__PURE__*/React.createElement("div", {className: "w-full max-w-sm rounded-3xl overflow-y-auto", style: {background: `${readerTheme.panel}f2`, border: `1px solid ${readerTheme.line}`, boxShadow: '0 20px 50px -12px rgba(0,0,0,0.5)', maxHeight: '80vh'}, onClick: e => e.stopPropagation()}, /*#__PURE__*/React.createElement("div", {className: "px-5 pt-4 pb-3 flex justify-between items-center"}, /*#__PURE__*/React.createElement("h3", {className: "font-display italic text-lg", style: {color: readerTheme.ink}}, "Shelf"), /*#__PURE__*/React.createElement("button", {onClick: () => setShowShelfControls(false), className: "p-1", style: {color: readerTheme.muted}}, /*#__PURE__*/React.createElement(X, {size: 18}))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-4"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-2.5", style: {color: readerTheme.muted}}, "Size"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-2 gap-2.5"}, /*#__PURE__*/React.createElement(CuteSlider, {label: "Shelf size", value: shelfScale, min: 0.5, max: 1.15, step: 0.01, onChange: setShelfScale, displayValue: `${Math.round(shelfScale * 100)}%`, accentColor: readerTheme.chipText, inkColor: readerTheme.ink}), /*#__PURE__*/React.createElement(CuteSlider, {label: "Book width", value: bookWidthScale, min: 0.8, max: 2.8, step: 0.05, onChange: setBookWidthScale, displayValue: `${Math.round(bookWidthScale * 100)}%`, accentColor: readerTheme.chipText, inkColor: readerTheme.ink}))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-2.5", style: {color: readerTheme.muted}}, "Behavior"), /*#__PURE__*/React.createElement("div", {className: "flex flex-col gap-3"}, /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-6"}, /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-2"}, /*#__PURE__*/React.createElement("button", {onClick: () => setMobileStackView(v => !v), className: "relative w-9 h-5 rounded-full transition-colors shrink-0", style: {background: mobileStackView ? readerTheme.chipText : 'rgba(255,255,255,0.15)'}, "aria-label": "Toggle mobile stacked view"}, /*#__PURE__*/React.createElement("span", {className: "absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform", style: {transform: mobileStackView ? 'translateX(16px)' : 'translateX(0)'}})), /*#__PURE__*/React.createElement("span", {className: "text-[13px] font-semibold", style: {color: readerTheme.ink}}, "Stack books")), /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-2"}, /*#__PURE__*/React.createElement("button", {onClick: () => setSkyAnimated(v => !v), className: "relative w-9 h-5 rounded-full transition-colors shrink-0", style: {background: skyAnimated ? readerTheme.chipText : 'rgba(255,255,255,0.15)'}, "aria-label": "Toggle animated sky"}, /*#__PURE__*/React.createElement("span", {className: "absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform", style: {transform: skyAnimated ? 'translateX(16px)' : 'translateX(0)'}})), /*#__PURE__*/React.createElement("span", {className: "text-[13px] font-semibold", style: {color: readerTheme.ink}}, "Animated sky"))), /*#__PURE__*/React.createElement("div", {className: "flex items-center gap-2"}, /*#__PURE__*/React.createElement("button", {onClick: () => setUseCoverSpines(v => !v), className: "relative w-9 h-5 rounded-full transition-colors shrink-0", style: {background: useCoverSpines ? readerTheme.chipText : 'rgba(255,255,255,0.15)'}, "aria-label": "Toggle real cover art on spines"}, /*#__PURE__*/React.createElement("span", {className: "absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform", style: {transform: useCoverSpines ? 'translateX(16px)' : 'translateX(0)'}})), /*#__PURE__*/React.createElement("div", {className: "flex flex-col"}, /*#__PURE__*/React.createElement("span", {className: "text-[13px] font-semibold", style: {color: readerTheme.ink}}, "Use real cover art"), /*#__PURE__*/React.createElement("span", {className: "text-[10px] font-mono opacity-70", style: {color: readerTheme.ink}}, "Crops a strip from each book's own cover instead of the templates — applies to the whole shelf at once"))))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-4"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-2", style: {color: readerTheme.muted}}, "Sort books by"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-3 gap-1.5"}, SORT_MODES.map(m => /*#__PURE__*/React.createElement("button", {key: m.id, onClick: () => setSortMode(m.id), className: "px-2 py-1.5 rounded-lg text-xs font-semibold text-center transition-colors", style: {background: sortMode === m.id ? 'rgba(255,255,255,0.08)' : 'transparent', border: `1px solid ${sortMode === m.id ? readerTheme.chipText : 'rgba(255,255,255,0.15)'}`, color: readerTheme.ink}}, m.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-2"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-2", style: {color: readerTheme.muted}}, "Reading theme"), /*#__PURE__*/React.createElement("div", {className: "grid grid-cols-2 gap-1.5"}, READING_PRESETS.map(t => /*#__PURE__*/React.createElement("button", {key: t.id, onClick: () => pickReadingTheme(t.id), className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors", style: {background: t.id === readingThemeId ? 'rgba(255,255,255,0.08)' : 'transparent', border: `1px solid ${t.id === readingThemeId ? readerTheme.chipText : 'rgba(255,255,255,0.15)'}`, color: readerTheme.ink}}, /*#__PURE__*/React.createElement("span", {className: "w-4 h-4 rounded-full shrink-0", style: {background: t.bg, border: `1px solid ${t.ink}40`}}), t.label)))), /*#__PURE__*/React.createElement("div", {className: "px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]"}, /*#__PURE__*/React.createElement("p", {className: "text-[10px] font-mono uppercase tracking-wide mb-2", style: {color: readerTheme.muted}}, "More colors"), /*#__PURE__*/React.createElement("div", {className: "flex justify-between gap-1.5"}, READING_EXTRAS.map(t => /*#__PURE__*/React.createElement("button", {key: t.id, onClick: () => pickReadingTheme(t.id), "aria-label": t.id, className: "w-6 h-6 shrink-0 rounded-full transition-transform active:scale-90", style: {background: t.bg, border: t.id === readingThemeId ? `2px solid ${readerTheme.chipText}` : '1px solid rgba(255,255,255,0.15)'}})))), /*#__PURE__*/React.createElement("div", {className: "px-5 pt-1 pb-[max(1.25rem,env(safe-area-inset-bottom))]"}, /*#__PURE__*/React.createElement("button", {onClick: () => { setShowShelfControls(false); handleSignOut(); }, className: "w-full py-2.5 rounded-xl text-sm font-semibold text-center transition-colors", style: {border: '1px solid rgba(239,68,68,0.35)', color: '#f87171', background: 'rgba(239,68,68,0.08)'}}, devMode ? 'Exit local mode' : 'Sign out'))))));
-}
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(/*#__PURE__*/React.createElement(App, null));
-</script>
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.closest('button').classList.add('active');
+                currentFilter = e.target.closest('button').dataset.cat;
+                focusIdx = 0;
+                createCards();
+                updateScene();
+            };
+        });
+
+        // --- Mechanical Keyboard & On-Screen Button Mapping ---
+        const keyLeft = document.getElementById('key-left');
+        const keyRight = document.getElementById('key-right');
+        const keyEnter = document.getElementById('key-enter');
+        
+        const keyMap = {
+            'ArrowLeft': keyLeft,
+            'ArrowRight': keyRight,
+            'Enter': keyEnter,
+            ' ': keyEnter
+        };
+
+        const handleLeft = () => { focusIdx = Math.max(0, focusIdx - 1); updateScene(); };
+        const handleRight = () => { focusIdx = Math.min(getFilteredItems().length - 1, focusIdx + 1); updateScene(); };
+        const handleAction = () => {
+            const items = getFilteredItems();
+            if(items[focusIdx]) playAndNavigate(focusIdx, items[focusIdx].url);
+        };
+
+        // Click Handlers for physical feeling buttons
+        if (keyLeft) keyLeft.onmousedown = handleLeft;
+        if (keyRight) keyRight.onmousedown = handleRight;
+        if (keyEnter) keyEnter.onmousedown = handleAction;
+
+        window.addEventListener('keydown', (e) => {
+            if (window.innerWidth <= 768) return; 
+            
+            // Add visual pressed effect
+            if (keyMap[e.key]) keyMap[e.key].classList.add('pressed');
+
+            if (e.key === 'Enter' || e.key === ' ') {
+                handleAction();
+            } else if (e.key === 'ArrowRight') {
+                handleRight();
+            } else if (e.key === 'ArrowLeft') {
+                handleLeft();
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keyMap[e.key]) keyMap[e.key].classList.remove('pressed');
+        });
+
+        let lastScroll = 0;
+        window.addEventListener('wheel', (e) => {
+            if (window.innerWidth <= 768) return; 
+            
+            const now = Date.now();
+            if (now - lastScroll < 60) return;
+            const items = getFilteredItems();
+            if (Math.abs(e.deltaY) > 10 || Math.abs(e.deltaX) > 10) {
+                if (e.deltaY > 0 || e.deltaX > 0) {
+                    focusIdx = Math.min(items.length - 1, focusIdx + 1);
+                } else {
+                    focusIdx = Math.max(0, focusIdx - 1);
+                }
+                lastScroll = now;
+                updateScene();
+            }
+        }, { passive: false });
+
+        window.addEventListener('resize', () => {
+            updateScene();
+        });
+
+        createCards();
+        updateScene();
+
+    </script>
 </body>
 </html>
