@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cristobal D'Alessio | Project Archive</title>
+    
+    <!-- Web Bookmark / Browser Tab Icon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- iPhone / iPad Home Screen Icon -->
+    <link rel="apple-touch-icon" href="logo.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -759,31 +765,32 @@
 
         const PROJECTS = [
             { id: 1, title: "Lamplight", description: "Your cozy RSVP Library", category: "productivity", url: "https://dalecri.github.io/Lamplight/" },
-            { id: 2, title: "Todo Garden", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
-            { id: 3, title: "Typing Terrarium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
-            { id: 4, title: "Todo Desert", description: "Desert Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/mesa-garden-todo/" },
-            { id: 5, title: "Maple Signal", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
-            { id: 6, title: "Petfluencer Caption Writer", description: "Generate content ideas for TwoStoryTails", category: "utility", url: "https://dalecri.github.io/petfluencer/" },
-            { id: 7, title: "Notesy Castle", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
-            { id: 8, title: "Nimbus Code", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
-            { id: 9, title: "Cartography Canvas", description: "Randomly generated ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
-            { id: 10, title: "IsoPaper Cubewall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 11, title: "Pastel Menagerie", description: "Craft soft-hued digital spirits", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
+            { id: 2, title: "SkyflatDo", description: "Apartment inspired todo", category: "productivity", url: "https://dalecri.github.io/floating-apartment-todo/" },
+            { id: 3, title: "GardenDo", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
+            { id: 4, title: "StardDo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
+            { id: 5, title: "Typerrium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
+            //{ id: 4, title: "Todo Desert", description: "Desert Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/mesa-garden-todo/" },
+            { id: 6, title: "Maple QR", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
+            //{ id: 6, title: "Petfluencer Caption Writer", description: "Generate content ideas for TwoStoryTails", category: "utility", url: "https://dalecri.github.io/petfluencer/" },
+            { id: 7, title: "Typerule", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
+            { id: 8, title: "Prettycode", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
+            //{ id: 9, title: "Cartography Canvas", description: "Randomly generated ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
+            { id: 10, title: "CubeWall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
+            //{ id: 11, title: "Pastel Menagerie", description: "Craft soft-hued digital spirits", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
             { id: 12, title: "Polygrade", description: "Minimalist canvas for low-fidelity art", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 13, title: "Lofi Sanctuary", description: "Ambient voxel room for deep work", category: "interactive", url: "https://dalecri.github.io/Voxel-lofi-room/" },
+            //{ id: 13, title: "Lofi Sanctuary", description: "Ambient voxel room for deep work", category: "interactive", url: "https://dalecri.github.io/Voxel-lofi-room/" },
             { id: 14, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
             { id: 15, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
-            { id: 16, title: "Script Clock", description: "Real-time script-based timekeeping", category: "productivity", url: "https://dalecri.github.io/Script-Clock/" },
+            //{ id: 16, title: "Script Clock", description: "Real-time script-based timekeeping", category: "productivity", url: "https://dalecri.github.io/Script-Clock/" },
             { id: 17, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
-            { id: 18, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
-            { id: 19, title: "Riverhouse Todo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
-            { id: 20, title: "Cipher Geode", description: "Extract crystalline security from raw data", category: "productivity", url: "https://dalecri.github.io/password-geode/" },
-            { id: 21, title: "Weather Loom", description: "Atmospheric Weather Loom App", category: "interactive", url: "https://dalecri.github.io/typographic-weather-loom/" },
-            { id: 22, title: "Apartment Todo", description: "Apartment inspired todo", category: "productivity", url: "https://dalecri.github.io/floating-apartment-todo/" },
+            //{ id: 18, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
+            
+            //{ id: 20, title: "Cipher Geode", description: "Extract crystalline security from raw data", category: "productivity", url: "https://dalecri.github.io/password-geode/" },
+            //{ id: 21, title: "Weather Loom", description: "Atmospheric Weather Loom App", category: "interactive", url: "https://dalecri.github.io/typographic-weather-loom/" },
             { id: 23, title: "Carte Blache", description: "Practice your french", category: "productivity", url: "https://dalecri.github.io/FudgeMyFrench/" },
-            { id: 25, title: "Archived Files", description: "Cute Archived Files", category: "interactive", url: "https://dalecri.github.io/archived-files/" },
-            { id: 25, title: "Mobile Viewer", description: "Test websites for mobile", category: "productivity", url: "https://dalecri.github.io/mobile-render/" },
-            { id: 26, title: "Aesthetic Atelier", description: "A curated gallery of 3D visual renders", category: "interactive", url: "https://dalecri.github.io/3d-aesthetic-renders/" },
+            //{ id: 25, title: "Archived Files", description: "Cute Archived Files", category: "interactive", url: "https://dalecri.github.io/archived-files/" },
+            //{ id: 25, title: "Mobile Viewer", description: "Test websites for mobile", category: "productivity", url: "https://dalecri.github.io/mobile-render/" },
+            //{ id: 26, title: "Aesthetic Atelier", description: "A curated gallery of 3D visual renders", category: "interactive", url: "https://dalecri.github.io/3d-aesthetic-renders/" },
         ];
 
         let focusIdx = 0;
