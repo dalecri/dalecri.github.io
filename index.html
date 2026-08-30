@@ -13,33 +13,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Light Theme */
-            --bg-color: #dcd6ce; 
-            --card-paper: #8a8d91; 
-            --card-indent: #75787c;
+            /* Light Theme (Beige Background) */
+            --bg-color: #E2E0D3; 
+            --card-paper: #0639C6; 
+            --card-indent: #042687;
+            --card-text: #E2E0D3;
             --card-content-bg: #111;
-            --text-main: #36322e;
-            --text-muted: #736d65;
-            --text-accent: #9c958b;
-            --border-color: rgba(54, 50, 46, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --slider-bg: #c9c2b8;
-            --highlight: rgba(255, 255, 255, 0.4);
+            --text-main: #0639C6;
+            --text-muted: #577AE0;
+            --text-accent: #0639C6;
+            --border-color: rgba(6, 57, 198, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --slider-bg: #B0ADC2;
+            --highlight: rgba(255, 255, 255, 0.2);
         }
 
         [data-theme="dark"] {
-            /* Dark Theme (Default) */
-            --bg-color: #292623; 
-            --card-paper: #4a4d51; 
-            --card-indent: #3a3d41;
+            /* Dark Theme (Blue Background - Matches Logo perfectly) */
+            --bg-color: #0639C6; 
+            --card-paper: #E2E0D3; 
+            --card-indent: #C2C0B3;
+            --card-text: #0639C6;
             --card-content-bg: #000;
-            --text-main: #e8e2d9;
-            --text-muted: #a39b91;
-            --text-accent: #756f67;
-            --border-color: rgba(232, 226, 217, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.6);
-            --slider-bg: #4a453f;
-            --highlight: rgba(255, 255, 255, 0.1);
+            --text-main: #E2E0D3;
+            --text-muted: #8AA7FF;
+            --text-accent: #E2E0D3;
+            --border-color: rgba(226, 224, 211, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --slider-bg: #042687;
+            --highlight: rgba(255, 255, 255, 0.5);
         }
 
         * {
@@ -67,19 +69,24 @@
         }
 
         .header-left .name {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
+            font-family: 'Silkscreen', cursive;
+            font-weight: 400;
             font-size: 42px;
-            line-height: 0.9;
+            line-height: 1.1;
             color: var(--text-main);
-            letter-spacing: -1px;
-            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+            text-shadow: 0 0 16px rgba(226, 224, 211, 0.4);
+        }
+
+        [data-theme="light"] .header-left .name, :root:not([data-theme="dark"]) .header-left .name {
+            text-shadow: 0 0 16px rgba(6, 57, 198, 0.3);
         }
 
         .header-left .stats {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Space Mono', monospace;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-muted);
             margin-top: 10px;
             letter-spacing: 1px;
@@ -94,19 +101,18 @@
         }
 
         .mech-key {
-            background: #fdfcee;
-            color: #111;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
+            background: var(--card-paper);
+            color: var(--card-text);
+            font-family: 'Silkscreen', cursive;
             font-size: 20px;
             height: 48px;
             min-width: 48px;
-            border: 2px solid #111;
-            border-radius: 8px;
+            border: 2px solid var(--card-text);
+            border-radius: 12px;
             box-shadow: 
-                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset 1px 1px 0 rgba(255,255,255,0.4),
                 inset -2px -4px 0 rgba(0,0,0,0.1),
-                0 6px 0 #111,
+                0 6px 0 var(--card-text),
                 0 10px 10px var(--shadow-color);
             display: flex;
             align-items: center;
@@ -119,11 +125,11 @@
 
         .mech-key:active, .mech-key.pressed {
             transform: translateY(4px);
-            background: #f4f3e6;
+            background: var(--card-indent);
             box-shadow: 
-                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset 1px 1px 0 rgba(255,255,255,0.4),
                 inset -2px -2px 0 rgba(0,0,0,0.1),
-                0 2px 0 #111,
+                0 2px 0 var(--card-text),
                 0 4px 5px var(--shadow-color);
         }
 
@@ -152,7 +158,7 @@
             font-weight: 600;
             color: var(--text-main);
             cursor: pointer;
-            opacity: 0.4;
+            opacity: 0.5;
             transition: all 0.2s ease;
             text-transform: lowercase;
             display: flex;
@@ -235,7 +241,7 @@
             margin: 0 auto;
             position: relative;
             background: var(--card-paper);
-            border-radius: 12px;
+            border-radius: 16px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             box-shadow: 
@@ -256,7 +262,7 @@
             height: 22%;
             background: var(--card-paper);
             border-bottom: 2px solid rgba(0,0,0,0.15);
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 
                 inset 0 2px 4px var(--highlight),
                 0 4px 6px -2px rgba(0,0,0,0.2);
@@ -265,7 +271,7 @@
             justify-content: center;
             position: relative;
             z-index: 2;
-            transition: box-shadow 0.4s ease;
+            transition: box-shadow 0.4s ease, background-color 0.4s ease;
         }
 
         .gba-logo-area {
@@ -279,14 +285,15 @@
             justify-content: center;
             background: var(--card-indent);
             overflow: hidden;
+            transition: background-color 0.4s ease;
         }
 
         .gba-logo-text {
             font-family: 'Space Mono', monospace;
             font-size: min(12px, 3.8cqw);
             font-weight: 700;
-            color: var(--text-main);
-            opacity: 0.4;
+            color: var(--card-text);
+            opacity: 0.6;
             text-shadow: 0 1px 1px var(--highlight);
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -306,6 +313,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            transition: background-color 0.4s ease;
         }
 
         .card-content {
@@ -426,7 +434,7 @@
 
         .card-container.active .gba-logo-text {
             opacity: 1;
-            text-shadow: 0 1px 1px var(--bg-color), 0 0 12px var(--highlight);
+            text-shadow: 0 1px 2px var(--shadow-color), 0 0 12px var(--highlight);
             transform: scale(1.05);
         }
 
@@ -475,7 +483,7 @@
         .controls-card {
             background: var(--bg-color);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 10px 30px var(--shadow-color);
             border: 1px solid var(--border-color);
             display: none;
@@ -528,7 +536,7 @@
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 11px;
             font-weight: 700;
@@ -681,7 +689,7 @@
 
     <div class="header-left">
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
-            <div class="name">Cristobal<br>D'Alessio</div>
+            <div class="name">cristobal<br>d'alessio</div>
             <button id="mobile-theme-toggle" class="mobile-only-btn adjust-btn" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
@@ -769,29 +777,17 @@
             { id: 3, title: "GardenDo", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
             { id: 4, title: "StardDo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
             { id: 5, title: "Typerrium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
-            //{ id: 4, title: "Todo Desert", description: "Desert Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/mesa-garden-todo/" },
             { id: 6, title: "Maple QR", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
-            //{ id: 6, title: "Petfluencer Caption Writer", description: "Generate content ideas for TwoStoryTails", category: "utility", url: "https://dalecri.github.io/petfluencer/" },
             { id: 7, title: "Typerule", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
             { id: 8, title: "Wordnest", description: "Practice your french", category: "productivity", url: "https://dalecri.github.io/Wordnest/" },
             { id: 9, title: "Prettycode", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
-            //{ id: 9, title: "Cartography Canvas", description: "Randomly generated ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
             { id: 10, title: "CubeWall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            //{ id: 11, title: "Pastel Menagerie", description: "Craft soft-hued digital spirits", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
             { id: 12, title: "Polygrade", description: "Minimalist canvas for low-fidelity art", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            //{ id: 13, title: "Lofi Sanctuary", description: "Ambient voxel room for deep work", category: "interactive", url: "https://dalecri.github.io/Voxel-lofi-room/" },
             { id: 14, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
             { id: 15, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
-            //{ id: 16, title: "Script Clock", description: "Real-time script-based timekeeping", category: "productivity", url: "https://dalecri.github.io/Script-Clock/" },
             { id: 17, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
             { id: 18, title: "TyQuest", description: "Life is but a game!", category: "productivity", url: "https://dalecri.github.io/tyquest/" },
-            { id: 19, title: "Loop Forge", description: "Grid to Strudel Code", category: "interactive", url: "https://dalecri.github.io/Loop-Forge/" },
-            //{ id: 18, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
-            //{ id: 20, title: "Cipher Geode", description: "Extract crystalline security from raw data", category: "productivity", url: "https://dalecri.github.io/password-geode/" },
-            //{ id: 21, title: "Weather Loom", description: "Atmospheric Weather Loom App", category: "interactive", url: "https://dalecri.github.io/typographic-weather-loom/" },
-            //{ id: 25, title: "Archived Files", description: "Cute Archived Files", category: "interactive", url: "https://dalecri.github.io/archived-files/" },
-            //{ id: 25, title: "Mobile Viewer", description: "Test websites for mobile", category: "productivity", url: "https://dalecri.github.io/mobile-render/" },
-            //{ id: 26, title: "Aesthetic Atelier", description: "A curated gallery of 3D visual renders", category: "interactive", url: "https://dalecri.github.io/3d-aesthetic-renders/" },
+            { id: 19, title: "Loop Forge", description: "Grid to Strudel Code", category: "interactive", url: "https://dalecri.github.io/Loop-Forge/" }
         ];
 
         let focusIdx = 0;
