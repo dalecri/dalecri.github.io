@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CD Archive</title>
   
   <!-- Tailwind CSS -->
@@ -23,6 +23,7 @@
       margin: 0;
       overflow: hidden;
       background-color: #0639C6;
+      touch-action: none; /* Prevents default browser swiping/pull-to-refresh */
     }
     .custom-scroll::-webkit-scrollbar { height: 8px; }
     .custom-scroll::-webkit-scrollbar-track { background: rgba(226, 224, 211, 0.1); border-radius: 4px; }
@@ -148,17 +149,16 @@
               if (char === 'X') fill = THEME.black;
               if (char === '1') fill = colors[0];
               if (char === '2') fill = colors[1];
-              if (char === '3') fill = THEME.beige; // Highlight wedge
-              if (char === '4') fill = THEME.black; // Inner outline
-              if (char === '5') fill = colors[0];   // Inner ring 
-              if (char === 'O') fill = 'transparent'; // Center hole
+              if (char === '3') fill = THEME.beige; 
+              if (char === '4') fill = THEME.black; 
+              if (char === '5') fill = colors[0];   
+              if (char === 'O') fill = 'transparent'; 
 
               return (
                 <div 
                   key={`${x}-${y}`}
                   style={{
                     position: 'absolute', left: `${x * pixelSize}%`, top: `${y * pixelSize}%`,
-                    /* Added +1px to hide subpixel rendering gaps and create solid immersion */
                     width: `calc(${pixelSize}% + 1px)`, height: `calc(${pixelSize}% + 1px)`, 
                     backgroundColor: fill,
                   }}
@@ -174,18 +174,30 @@
     function App() {
       const [viewMode, setViewMode] = useState('browse');
       const [activeIndex, setActiveIndex] = useState(0); 
-      const [computerState, setComputerState] = useState('idle'); // idle, inserting, reading, playing
+      const [computerState, setComputerState] = useState('idle'); 
       const [activeProject, setActiveProject] = useState(null);
       const [flyingCD, setFlyingCD] = useState(null);
+      const [radius, setRadius] = useState(450);
       
       const slotRef = useRef(null);
       const containerRef = useRef(null);
+      const touchStartX = useRef(null);
+      const isSwiping = useRef(false);
       
       const N = PROJECTS.length;
       const theta = 360 / N;
-      const radius = 450; 
 
-      // Keyboard & Scroll Navigation for Carousel
+      // Handle Resize for Responsive Carousel Radius
+      useEffect(() => {
+        const updateRadius = () => {
+          setRadius(window.innerWidth < 768 ? 160 : 450);
+        };
+        updateRadius();
+        window.addEventListener('resize', updateRadius);
+        return () => window.removeEventListener('resize', updateRadius);
+      }, []);
+
+      // Keyboard & Scroll Navigation
       useEffect(() => {
         if (viewMode !== 'browse') return;
 
@@ -217,7 +229,40 @@
         };
       }, [viewMode, activeIndex, N]);
 
+      // Mobile Touch Handlers
+      const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+        isSwiping.current = false;
+      };
+
+      const handleTouchMove = (e) => {
+        if (touchStartX.current === null) return;
+        const touchCurrentX = e.touches[0].clientX;
+        if (Math.abs(touchCurrentX - touchStartX.current) > 10) {
+          isSwiping.current = true;
+        }
+      };
+
+      const handleTouchEnd = (e) => {
+        if (touchStartX.current === null) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const delta = touchEndX - touchStartX.current;
+
+        if (Math.abs(delta) > 40) { 
+          if (delta > 0) setActiveIndex(prev => prev - 1); 
+          else setActiveIndex(prev => prev + 1); 
+          
+          // Clear swipe flag slightly after so clicks don't fire
+          setTimeout(() => { isSwiping.current = false; }, 100);
+        } else {
+          isSwiping.current = false;
+        }
+        touchStartX.current = null;
+      };
+
       const handleCDSelect = (clickedProjectIndex, e) => {
+        if (isSwiping.current) return; // Prevent tap action if user was swiping
+
         const currentProjectIndex = ((activeIndex % N) + N) % N;
 
         // Rotate the carousel to background CD if clicked
@@ -236,7 +281,7 @@
         
         let startX = window.innerWidth / 2 - 100;
         let startY = window.innerHeight / 2 - 100;
-        let cdWidth = 200;
+        let cdWidth = window.innerWidth < 768 ? 140 : 200;
 
         if (e && e.currentTarget) {
           const cdRect = e.currentTarget.getBoundingClientRect();
@@ -250,7 +295,6 @@
         setComputerState('inserting');
         setActiveProject(null);
 
-        // Timings adjusted to allow for longer spin
         setTimeout(() => {
           const slotRect = slotRef.current.getBoundingClientRect();
           const containerRect = containerRef.current.getBoundingClientRect();
@@ -264,13 +308,11 @@
             setFlyingCD(prev => ({ ...prev, isMoving: true }));
           }, 50);
 
-          // Give it 1200ms to spin wildly into the slot
           setTimeout(() => {
             setFlyingCD(null);
             setComputerState('reading');
           }, 1250);
 
-          // Read for a bit, then launch
           setTimeout(() => {
             setActiveProject(project);
             setComputerState('playing');
@@ -290,14 +332,14 @@
           className="min-h-screen w-full relative overflow-hidden flex flex-col font-['Space_Grotesk'] text-[#E2E0D3]"
         >
           {/* Header */}
-          <header className="absolute top-6 left-6 z-10 md:top-10 md:left-10 pointer-events-none">
+          <header className="absolute top-4 left-4 md:top-10 md:left-10 z-10 pointer-events-none">
             <h1 
-              className="font-['Silkscreen'] text-3xl md:text-5xl lowercase tracking-wider leading-none"
+              className="font-['Silkscreen'] text-2xl md:text-5xl lowercase tracking-wider leading-none"
               style={{ textShadow: `4px 4px 0 ${THEME.darkBlue}` }}
             >
               cd / archive
             </h1>
-            <p className="mt-2 font-bold tracking-widest opacity-80 text-xs md:text-sm">
+            <p className="mt-1 md:mt-2 font-bold tracking-widest opacity-80 text-[10px] md:text-sm">
               CRISTOBAL D'ALESSIO
             </p>
           </header>
@@ -313,33 +355,36 @@
             style={{ perspective: '1500px' }}
           >
             {viewMode === 'browse' && (
-              <div className="text-center absolute top-24 w-full opacity-60 text-sm tracking-widest animate-pulse font-bold">
-                SCROLL OR USE ARROW KEYS • CLICK CENTER TO LOAD
+              <div className="text-center absolute top-24 md:top-32 w-full opacity-60 text-[10px] md:text-sm tracking-widest animate-pulse font-bold px-4">
+                SWIPE, SCROLL, OR USE ARROW KEYS • TAP CENTER TO LOAD
               </div>
             )}
             
-            {/* Carousel Wrapper - Flattened to avoid CSS 3D intersection bugs */}
-            <div className="relative w-full max-w-5xl h-[400px] flex items-center justify-center">
+            {/* Carousel Wrapper with Touch Handlers */}
+            <div 
+              className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center touch-none"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               {PROJECTS.map((project, index) => {
                 const currentProjectIndex = ((activeIndex % N) + N) % N;
                 
                 const absOffset = Math.min(Math.abs(currentProjectIndex - index), N - Math.abs(currentProjectIndex - index));
                 const isFront = absOffset === 0;
 
-                // Continuous mathematical offset for perfect infinite rotation
                 const continuousOffset = index - activeIndex;
                 const angleDeg = continuousOffset * theta;
                 const rad = angleDeg * (Math.PI / 180);
                 
-                // Base coordinates for a cylinder
                 const x = Math.sin(rad) * radius;
                 const baseZ = Math.cos(rad) * radius - radius; 
                 
-                // Add a forward "pop" to the CDs as they reach the front to completely avoid overlap
-                const bump = Math.pow(Math.max(0, Math.cos(rad)), 10) * 120;
+                // Adjust pop out bump for mobile to prevent weird clipping
+                const bumpScale = window.innerWidth < 768 ? 80 : 120;
+                const bump = Math.pow(Math.max(0, Math.cos(rad)), 10) * bumpScale;
                 const z = baseZ + bump;
                 
-                // Strict depth sorting ensuring the front-most CD is always highest
                 const zLayer = Math.round((Math.cos(rad) + 1) * 100);
 
                 return (
@@ -358,20 +403,20 @@
                     <div className="flex items-center justify-center relative">
                       <PixelCD 
                         category={project.category} 
-                        className={`w-[200px] h-[200px] md:w-[260px] md:h-[260px] transition-all duration-700 ease-out drop-shadow-2xl
+                        className={`w-[140px] h-[140px] md:w-[260px] md:h-[260px] transition-all duration-700 ease-out drop-shadow-2xl
                           ${isFront ? 'scale-110' : 'scale-100 opacity-60'}
                         `} 
                       />
                     </div>
                     
                     <div 
-                      className={`absolute top-full mt-10 w-64 text-center transition-all duration-300
+                      className={`absolute top-full mt-6 md:mt-10 w-48 md:w-64 text-center transition-all duration-300
                         ${isFront ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
                       `}
                     >
-                      <h2 className="font-['Silkscreen'] text-2xl mb-1 text-white">{project.title}</h2>
-                      <p className="text-sm opacity-80 uppercase tracking-widest" style={{ color: THEME.beige }}>{project.category}</p>
-                      <p className="text-xs opacity-60 mt-2 max-w-[280px] leading-relaxed mx-auto">{project.description}</p>
+                      <h2 className="font-['Silkscreen'] text-lg md:text-2xl mb-1 text-white truncate px-2">{project.title}</h2>
+                      <p className="text-[10px] md:text-sm opacity-80 uppercase tracking-widest" style={{ color: THEME.beige }}>{project.category}</p>
+                      <p className="text-[9px] md:text-xs opacity-60 mt-1 md:mt-2 px-2 leading-relaxed mx-auto">{project.description}</p>
                     </div>
                   </div>
                 );
@@ -384,52 +429,44 @@
             ========================================
           */}
           <div 
-            className={`absolute inset-0 flex items-center justify-center pb-20 transition-all duration-700 ease-in-out
+            className={`absolute inset-0 flex items-center justify-center pb-10 md:pb-20 px-4 transition-all duration-700 ease-in-out
               ${viewMode === 'playing' ? 'opacity-100 translate-y-0 pointer-events-auto scale-100' : 'opacity-0 translate-y-full pointer-events-none scale-90'}
             `}
           >
-            {/* Floating Action Buttons */}
+            {/* Floating Action Buttons - Relocated for mobile to avoid header overlap */}
             <div 
-              className={`absolute top-6 right-6 z-50 flex gap-4 transition-all duration-500 ease-in-out delay-500
-                ${viewMode === 'playing' && computerState === 'playing' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
+              className={`absolute z-50 flex gap-2 md:gap-4 transition-all duration-500 ease-in-out delay-500
+                bottom-8 w-full justify-center md:bottom-auto md:top-6 md:w-auto md:right-6
+                ${viewMode === 'playing' && computerState === 'playing' ? 'opacity-100 translate-y-0' : 'opacity-0 md:-translate-y-4 pointer-events-none'}
               `}
             >
               <button 
                 onClick={handleEject}
-                className="px-4 py-2 bg-white text-black font-['Silkscreen'] text-sm hover:bg-red-400 transition-colors shadow-[4px_4px_0_0_#042687]"
+                className="px-4 py-2 bg-white text-black font-['Silkscreen'] text-xs md:text-sm hover:bg-red-400 transition-colors shadow-[4px_4px_0_0_#042687]"
               >
                 &lt; BACK
               </button>
               {activeProject && (
                 <button 
                   onClick={() => window.open(activeProject.url, '_blank')}
-                  className="px-4 py-2 bg-[#a3e635] text-black font-['Silkscreen'] text-sm hover:bg-emerald-400 transition-colors shadow-[4px_4px_0_0_#042687]"
+                  className="px-4 py-2 bg-[#a3e635] text-black font-['Silkscreen'] text-xs md:text-sm hover:bg-emerald-400 transition-colors shadow-[4px_4px_0_0_#042687]"
                 >
                   RUN PROJECT
                 </button>
               )}
             </div>
 
-            <div className="w-full max-w-xl relative" style={{ perspective: '1000px' }}>
+            <div className="w-full max-w-xl relative mx-auto" style={{ perspective: '1000px' }}>
               
               {/* Pixel Computer SVG Shell */}
               <svg viewBox="0 0 100 100" className="w-full h-auto drop-shadow-2xl" style={{ shapeRendering: 'crispEdges' }}>
-                {/* Monitor Case */}
                 <rect x="10" y="5" width="80" height="70" fill={THEME.beige} stroke={THEME.black} strokeWidth="1" />
                 <rect x="85" y="10" width="5" height="60" fill="rgba(0,0,0,0.1)" />
                 <rect x="10" y="70" width="80" height="5" fill="rgba(0,0,0,0.2)" />
-                
-                {/* Screen Bezel */}
                 <rect x="15" y="10" width="70" height="55" fill="#C2C0B3" stroke={THEME.black} strokeWidth="1" />
-                
-                {/* Base / Drive Area */}
                 <rect x="5" y="75" width="90" height="20" fill={THEME.beige} stroke={THEME.black} strokeWidth="1" />
                 <rect x="5" y="90" width="90" height="5" fill="rgba(0,0,0,0.2)" />
-                
-                {/* Floppy/CD Slot (Target for animation) */}
                 <rect x="55" y="82" width="30" height="3" fill={THEME.black} />
-                
-                {/* Buttons & Indicators (Flashes Yellow, Plays Green) */}
                 <rect x="88" y="82" width="3" height="3" fill={THEME.black} />
                 <rect 
                   x="15" y="82" width="6" height="4" 
@@ -437,11 +474,9 @@
                   className={computerState === 'inserting' || computerState === 'reading' ? 'animate-blink' : ''}
                 />
                 
-                {/* Screen Content via ForeignObject (Expanded fully edge to edge inside bezel) */}
                 <foreignObject x="18" y="13" width="64" height="49">
                   <div className="w-full h-full relative overflow-hidden bg-black flex flex-col items-center justify-center font-['Silkscreen'] text-xs">
                     
-                    {/* Idle State */}
                     {computerState === 'idle' && (
                       <div className="text-emerald-400 text-center flex flex-col items-center">
                         <p className="mb-2 text-[8px] sm:text-[10px]">SYSTEM READY</p>
@@ -449,7 +484,6 @@
                       </div>
                     )}
 
-                    {/* Reading / Noise State */}
                     {(computerState === 'inserting' || computerState === 'reading') && (
                       <div className="absolute inset-0 bg-black flex flex-col justify-start items-start p-1 overflow-hidden">
                         <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; SYS_INIT... OK</div>
@@ -459,7 +493,6 @@
                       </div>
                     )}
 
-                    {/* Playing State */}
                     {computerState === 'playing' && activeProject && (
                       <div className="absolute inset-0 bg-white relative">
                         <img 
@@ -468,19 +501,16 @@
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />
-                        {/* Scanline overlay */}
                         <div className="absolute inset-0 pointer-events-none opacity-20" 
                              style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px' }} />
                       </div>
                     )}
 
-                    {/* Screen Glare */}
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/10 to-transparent" />
                   </div>
                 </foreignObject>
               </svg>
 
-              {/* Invisible target div for the animation end point */}
               <div ref={slotRef} className="absolute" style={{ left: '55%', top: '82%', width: '30%', height: '3%' }} />
             </div>
           </div>
@@ -500,7 +530,7 @@
                 transform: flyingCD.isMoving 
                   ? `translate(${flyingCD.endX - flyingCD.startX}px, ${flyingCD.endY - flyingCD.startY}px) scaleY(0.05) scaleX(0.7) rotate(720deg)` 
                   : 'translate(0, 0) scaleY(1) scaleX(1) rotate(0deg)',
-                opacity: 1, // Stay visible while spinning to allow scale down to take effect seamlessly
+                opacity: 1, 
                 transitionDuration: '1200ms',
                 transitionTimingFunction: 'cubic-bezier(0.3, 0, 0.2, 1)',
                 transformOrigin: 'center'
@@ -514,7 +544,6 @@
       );
     }
 
-    // Render the App
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
