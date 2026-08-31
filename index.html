@@ -433,10 +433,10 @@
               ${viewMode === 'playing' ? 'opacity-100 translate-y-0 pointer-events-auto scale-100' : 'opacity-0 translate-y-full pointer-events-none scale-90'}
             `}
           >
-            {/* Floating Action Buttons - Relocated for mobile to avoid header overlap */}
+            {/* Floating Action Buttons - Relocated to top right and stacked on mobile to ensure visibility */}
             <div 
               className={`absolute z-50 flex gap-2 md:gap-4 transition-all duration-500 ease-in-out delay-500
-                bottom-8 w-full justify-center md:bottom-auto md:top-6 md:w-auto md:right-6
+                top-4 right-4 md:top-10 md:right-10 flex-col md:flex-row items-end
                 ${viewMode === 'playing' && computerState === 'playing' ? 'opacity-100 translate-y-0' : 'opacity-0 md:-translate-y-4 pointer-events-none'}
               `}
             >
@@ -473,43 +473,44 @@
                   fill={computerState === 'idle' ? THEME.black : (computerState === 'playing' ? '#10b981' : '#eab308')} 
                   className={computerState === 'inserting' || computerState === 'reading' ? 'animate-blink' : ''}
                 />
-                
-                <foreignObject x="18" y="13" width="64" height="49">
-                  <div className="w-full h-full relative overflow-hidden bg-black flex flex-col items-center justify-center font-['Silkscreen'] text-xs">
-                    
-                    {computerState === 'idle' && (
-                      <div className="text-emerald-400 text-center flex flex-col items-center">
-                        <p className="mb-2 text-[8px] sm:text-[10px]">SYSTEM READY</p>
-                        <p className="animate-blink text-[8px] sm:text-[10px]">INSERT DISK...</p>
-                      </div>
-                    )}
-
-                    {(computerState === 'inserting' || computerState === 'reading') && (
-                      <div className="absolute inset-0 bg-black flex flex-col justify-start items-start p-1 overflow-hidden">
-                        <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; SYS_INIT... OK</div>
-                        <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; MOUNT //CD-ROM</div>
-                        <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; DECRYPTING...</div>
-                        <div className="matrix-text animate-pulse" style={{ fontSize: '4px', lineHeight: '7px', marginTop: '2px' }}>&gt; READING SECTORS...</div>
-                      </div>
-                    )}
-
-                    {computerState === 'playing' && activeProject && (
-                      <div className="absolute inset-0 bg-white relative">
-                        <img 
-                          src={`https://api.microlink.io?url=${encodeURIComponent(activeProject.url)}&screenshot=true&embed=screenshot.url`}
-                          alt={activeProject.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 pointer-events-none opacity-20" 
-                             style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px' }} />
-                      </div>
-                    )}
-
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/10 to-transparent" />
-                  </div>
-                </foreignObject>
               </svg>
+                
+              {/* HTML Overlay for Screen (Replaces SVG foreignObject to fix mobile scaling bugs) */}
+              <div className="absolute" style={{ left: '18%', top: '13%', width: '64%', height: '49%' }}>
+                <div className="w-full h-full relative overflow-hidden bg-black flex flex-col items-center justify-center font-['Silkscreen'] text-xs">
+                  
+                  {computerState === 'idle' && (
+                    <div className="text-emerald-400 text-center flex flex-col items-center">
+                      <p className="mb-2 text-[8px] sm:text-[10px]">SYSTEM READY</p>
+                      <p className="animate-blink text-[8px] sm:text-[10px]">INSERT DISK...</p>
+                    </div>
+                  )}
+
+                  {(computerState === 'inserting' || computerState === 'reading') && (
+                    <div className="absolute inset-0 bg-black flex flex-col justify-start items-start p-1 overflow-hidden">
+                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; SYS_INIT... OK</div>
+                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; MOUNT //CD-ROM</div>
+                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; DECRYPTING...</div>
+                      <div className="matrix-text animate-pulse" style={{ fontSize: '4px', lineHeight: '7px', marginTop: '2px' }}>&gt; READING SECTORS...</div>
+                    </div>
+                  )}
+
+                  {computerState === 'playing' && activeProject && (
+                    <div className="absolute inset-0 bg-white relative">
+                      <img 
+                        src={`https://api.microlink.io?url=${encodeURIComponent(activeProject.url)}&screenshot=true&embed=screenshot.url`}
+                        alt={activeProject.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 pointer-events-none opacity-20" 
+                           style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px' }} />
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/10 to-transparent" />
+                </div>
+              </div>
 
               <div ref={slotRef} className="absolute" style={{ left: '55%', top: '82%', width: '30%', height: '3%' }} />
             </div>
