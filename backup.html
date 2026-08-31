@@ -4,38 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cristobal D'Alessio | Project Archive</title>
+    
+    <!-- Web Bookmark / Browser Tab Icon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- iPhone / iPad Home Screen Icon -->
+    <link rel="apple-touch-icon" href="logo.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- Light Theme (Pale Morel) --- */
-            --bg-color: #dcd6ce; 
-            --card-paper: #ece7e0;
-            --card-content-bg: #c9c3ba;
-            --text-main: #36322e;
-            --text-muted: #736d65;
-            --text-accent: #9c958b;
-            --border-color: rgba(54, 50, 46, 0.1);
-            --shadow-color: rgba(54, 50, 46, 0.1);
-            --slider-bg: #c9c2b8;
-            --highlight: rgba(255, 255, 255, 0.6);
-            
-            --pack-step: 20px;
-            --spread-gap: 600px;
-            --pop-z: 180px;
+            /* Light Theme (Beige Background) */
+            --bg-color: #E2E0D3; 
+            --card-paper: #0639C6; 
+            --card-indent: #042687;
+            --card-text: #E2E0D3;
+            --card-content-bg: #111;
+            --text-main: #0639C6;
+            --text-muted: #577AE0;
+            --text-accent: #0639C6;
+            --border-color: rgba(6, 57, 198, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --slider-bg: #B0ADC2;
+            --highlight: rgba(255, 255, 255, 0.2);
         }
 
         [data-theme="dark"] {
-            /* --- Dark Theme (Deep Morel) --- */
-            --bg-color: #292623; 
-            --card-paper: #36322e;
-            --card-content-bg: #1c1a18;
-            --text-main: #e8e2d9;
-            --text-muted: #a39b91;
-            --text-accent: #756f67;
-            --border-color: rgba(232, 226, 217, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --slider-bg: #4a453f;
-            --highlight: rgba(255, 255, 255, 0.03);
+            /* Dark Theme (Blue Background - Matches Logo perfectly) */
+            --bg-color: #0639C6; 
+            --card-paper: #E2E0D3; 
+            --card-indent: #C2C0B3;
+            --card-text: #0639C6;
+            --card-content-bg: #000;
+            --text-main: #E2E0D3;
+            --text-muted: #8AA7FF;
+            --text-accent: #E2E0D3;
+            --border-color: rgba(226, 224, 211, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --slider-bg: #042687;
+            --highlight: rgba(255, 255, 255, 0.5);
         }
 
         * {
@@ -55,7 +61,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- UI OVERLAYS --- */
         .header-left {
             position: absolute;
             top: 50px;
@@ -64,62 +69,79 @@
         }
 
         .header-left .name {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
+            font-family: 'Silkscreen', cursive;
+            font-weight: 400;
             font-size: 42px;
-            line-height: 0.9;
+            line-height: 1.1;
             color: var(--text-main);
-            letter-spacing: -1px;
-            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+            text-shadow: 0 0 16px rgba(226, 224, 211, 0.4);
+        }
+
+        [data-theme="light"] .header-left .name, :root:not([data-theme="dark"]) .header-left .name {
+            text-shadow: 0 0 16px rgba(6, 57, 198, 0.3);
         }
 
         .header-left .stats {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Space Mono', monospace;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-muted);
             margin-top: 10px;
             letter-spacing: 1px;
         }
 
-        .header-right {
-            position: absolute;
-            top: 50px;
-            right: 60px;
-            z-index: 100;
-            font-family: 'Space Mono', monospace;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: 3px;
-            text-transform: lowercase;
+        /* --- Mechanical Keyboard Keys --- */
+        .mech-keys-container {
             display: flex;
+            gap: 14px;
+            margin-top: 24px;
             align-items: center;
         }
 
-        .theme-btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 18px;
-            cursor: pointer;
-            margin-right: 16px;
-            opacity: 0.6;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+        .mech-key {
+            background: var(--card-paper);
+            color: var(--card-text);
+            font-family: 'Silkscreen', cursive;
+            font-size: 20px;
+            height: 48px;
+            min-width: 48px;
+            border: 2px solid var(--card-text);
+            border-radius: 12px;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.4),
+                inset -2px -4px 0 rgba(0,0,0,0.1),
+                0 6px 0 var(--card-text),
+                0 10px 10px var(--shadow-color);
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+            text-transform: uppercase;
+            padding: 0 12px;
         }
 
-        .theme-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
+        .mech-key:active, .mech-key.pressed {
+            transform: translateY(4px);
+            background: var(--card-indent);
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.4),
+                inset -2px -2px 0 rgba(0,0,0,0.1),
+                0 2px 0 var(--card-text),
+                0 4px 5px var(--shadow-color);
         }
 
-        /* --- FILTERING UI --- */
+        .mech-key.wide {
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 0 16px;
+        }
+
         .filter-panel {
             position: absolute;
-            bottom: 50px;
+            top: 50px;
             right: 60px;
             z-index: 100;
             display: flex;
@@ -136,7 +158,7 @@
             font-weight: 600;
             color: var(--text-main);
             cursor: pointer;
-            opacity: 0.4;
+            opacity: 0.5;
             transition: all 0.2s ease;
             text-transform: lowercase;
             display: flex;
@@ -156,7 +178,6 @@
             color: var(--text-muted);
         }
 
-        /* --- ISOMETRIC SCENE --- */
         .viewport {
             position: absolute;
             inset: 0;
@@ -201,7 +222,6 @@
             transition: top 0.65s, transform 0.65s;
         }
 
-        /* --- CARD STYLING --- */
         .card-container {
             position: absolute;
             left: 0;
@@ -209,38 +229,102 @@
             transform-origin: bottom center;
             transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.65s;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            outline: none;
         }
 
         .card-frame {
-            width: 100%;
+            width: 92%;
             height: 100%;
+            margin: 0 auto;
             position: relative;
             background: var(--card-paper);
-            padding: 16px;
-            border-radius: 11px;
+            border-radius: 16px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             box-shadow: 
-                0 4px 6px -1px var(--shadow-color), 
-                0 2px 4px -1px var(--shadow-color),
-                inset 0 1px 0 var(--highlight);
+                0 8px 12px -2px var(--shadow-color), 
+                inset 0 -2px 6px rgba(0,0,0,0.4);
             transform-origin: bottom center;
             transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, background-color 0.4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow: visible;
+            container-type: inline-size;
+        }
+
+        .gba-lip {
+            width: 108.7%;
+            align-self: center;
+            height: 22%;
+            background: var(--card-paper);
+            border-bottom: 2px solid rgba(0,0,0,0.15);
+            border-radius: 12px;
+            box-shadow: 
+                inset 0 2px 4px var(--highlight),
+                0 4px 6px -2px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            transition: box-shadow 0.4s ease, background-color 0.4s ease;
+        }
+
+        .gba-logo-area {
+            width: 70%;
+            height: 60%;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 3px rgba(0,0,0,0.2), 0 1px 1px var(--highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-indent);
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+        }
+
+        .gba-logo-text {
+            font-family: 'Space Mono', monospace;
+            font-size: min(12px, 3.8cqw);
+            font-weight: 700;
+            color: var(--card-text);
+            opacity: 0.6;
+            text-shadow: 0 1px 1px var(--highlight);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.4s ease;
+        }
+
+        .gba-label-recess {
+            width: 88%;
+            flex: 1;
+            margin-bottom: 20%;
+            background: var(--card-indent);
+            border-radius: 12px;
+            padding: 1.5%;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 1px 1px var(--highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background-color 0.4s ease;
         }
 
         .card-content {
             position: relative;
             width: 100%;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 100%;
+            border-radius: 8px;
+            background: white;
             overflow: hidden;
-            border-radius: 4px;
-            background: var(--card-content-bg); 
-            transition: filter 0.6s ease, opacity 0.6s ease, background-color 0.4s ease;
-            box-shadow: inset 0 2px 4px var(--shadow-color);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+            transition: filter 0.6s ease, opacity 0.6s ease;
         }
 
         .card-preview-img {
@@ -252,111 +336,160 @@
             transition: opacity 0.5s ease;
         }
 
-        .card-info {
-            width: 100%;
-            padding-top: 14px;
+        .esrb-logo {
+            position: absolute;
+            bottom: 4%;
+            left: 4%;
+            width: 11%;
+            background: white;
+            border: min(2px, 0.4cqw) solid black;
+            display: flex;
+            flex-direction: column;
+            border-radius: 2px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .esrb-top {
+            background: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: min(4px, 1cqw);
+            font-weight: 900;
             text-align: center;
+            padding: 1px 0;
+            letter-spacing: 0.5px;
         }
 
-        .card-title {
-            font-size: 13px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 2px;
-            transition: color 0.4s ease;
-        }
-
-        .card-desc {
-            font-size: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-style: italic;
-            color: var(--text-muted);
-            transition: color 0.4s ease;
-        }
-
-        /* --- ACTIVE STATE --- */
-        .card-container.active .card-frame {
-            box-shadow: 
-                0 20px 25px -5px var(--shadow-color), 
-                0 10px 10px -5px var(--shadow-color);
-            transform: scale(1.2);
-        }
-
-        .anchor-elements {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            transform-style: preserve-3d;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .card-container.active .anchor-elements {
-            opacity: 1;
-        }
-
-        .plus-icon {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            border: 1px solid var(--border-color);
-            background: var(--card-paper);
+        .esrb-e {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: var(--text-muted);
-            box-shadow: 0 4px 6px var(--shadow-color);
-            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+            color: black;
+            font-family: 'Arial', sans-serif;
+            font-size: min(18px, 5cqw);
+            font-weight: 900;
+            line-height: 1;
+            padding: 2px 0;
         }
 
-        .anchor-line {
-            position: absolute;
-            left: 50%;
-            width: 1px;
-            border-left: 1px dashed var(--text-accent);
-            transform: translateX(-50%);
-            opacity: 0.5;
-        }
-
-        .focused-label {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) translateY(16px);
-            color: var(--text-muted);
-            font-size: 9px;
+        .esrb-bottom {
+            font-family: 'Arial', sans-serif;
+            font-size: min(3.5px, 0.8cqw);
+            font-weight: 700;
+            color: black;
             text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            white-space: nowrap;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            line-height: 1;
+            padding-bottom: 2px;
         }
 
-        /* --- ADJUST VIEW PANEL --- */
+        .gba-bottom-grip {
+            position: absolute;
+            bottom: 6%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gba-bottom-grip span {
+            width: 100%;
+            height: 2px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 1px 1px var(--highlight);
+            border-radius: 2px;
+        }
+
+        .gba-triangle {
+            position: absolute;
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: min(8px, 2cqw) solid transparent;
+            border-right: min(8px, 2cqw) solid transparent;
+            border-top: min(8px, 2cqw) solid rgba(0,0,0,0.2);
+            filter: drop-shadow(0 1px 0px var(--highlight));
+        }
+
+        .card-container.active .card-frame {
+            box-shadow: 
+                0 25px 35px -10px var(--shadow-color), 
+                0 10px 10px -5px var(--shadow-color),
+                inset 0 -2px 6px rgba(0,0,0,0.4);
+            transform: scale(1.15);
+        }
+
+        .card-container.active .gba-lip {
+            box-shadow: 
+                0 15px 25px -5px rgba(0,0,0,0.3),
+                inset 0 2px 4px var(--highlight);
+        }
+
+        .card-container.active .gba-logo-text {
+            opacity: 1;
+            text-shadow: 0 1px 2px var(--shadow-color), 0 0 12px var(--highlight);
+            transform: scale(1.05);
+        }
+
+        .card-container.insert-cartridge .card-frame {
+            animation: cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes cartridge-bounce {
+            0% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+            50% { transform: scale(0.95) translateY(80px); box-shadow: 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.6); }
+            100% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
+        }
+
+        .screen-glare {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(-25deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .card-container.insert-cartridge .screen-glare {
+            animation: glare-flash 0.3s ease-out forwards;
+        }
+
+        @keyframes glare-flash {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
         .controls-panel {
             position: absolute;
             bottom: 40px;
-            left: 60px;
+            right: 60px;
             z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
         }
 
         .controls-card {
-            background: var(--card-paper);
+            background: var(--bg-color);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 10px 30px var(--shadow-color);
             border: 1px solid var(--border-color);
             display: none;
             flex-direction: column;
             gap: 14px;
             width: 240px;
-            margin-bottom: 12px;
             transition: background-color 0.4s ease, border-color 0.4s ease;
         }
 
@@ -399,32 +532,73 @@
             transition: background-color 0.4s ease;
         }
 
-        .adjust-btn {
-            background: var(--card-paper);
+        .modern-theme-btn {
+            background: var(--bg-color);
             border: 1px solid var(--border-color);
-            padding: 10px 16px;
+            padding: 8px 12px;
             border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px var(--shadow-color);
-            font-family: 'Syne', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
             font-weight: 700;
-            font-size: 12px;
             color: var(--text-main);
+            cursor: pointer;
+            text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.2s ease;
-        }
-        
-        .adjust-btn:hover {
-            transform: translateY(-2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 5px;
         }
 
-        /* --- MOBILE VIEW ADAPTATIONS --- */
+        .modern-theme-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .adjust-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .adjust-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .adjust-btn:hover {
+            transform: translateY(-3px) rotate(10deg);
+            box-shadow: 0 6px 15px var(--shadow-color);
+        }
+
+        .mobile-only-btn { display: none; }
+
         @media (max-width: 768px) {
             body {
                 overflow-y: auto !important;
                 height: auto !important;
                 min-height: 100vh;
             }
+            .hide-mobile { display: none !important; }
+            .mobile-only-btn { display: flex; align-items: center; justify-content: center; }
+            
             .header-left {
                 position: relative !important;
                 top: 0 !important;
@@ -434,21 +608,12 @@
             .header-left .name {
                 font-size: 32px !important;
             }
-            .header-right {
-                display: block !important;
-                top: 30px !important;
-                right: 20px !important;
-            }
-            .header-title {
-                display: none;
-            }
-            .theme-btn {
-                margin-right: 0;
-                font-size: 24px;
+            .mech-keys-container {
+                margin-top: 15px !important;
             }
             .filter-panel {
                 position: relative !important;
-                bottom: auto !important;
+                top: 0 !important;
                 right: auto !important;
                 flex-direction: row !important;
                 flex-wrap: wrap !important;
@@ -467,7 +632,7 @@
                 transform: none !important;
                 position: static !important;
             }
-            .ground-line, .label, .anchor-elements, .controls-panel {
+            .ground-line, .label, .controls-panel {
                 display: none !important;
             }
             #cards-container {
@@ -484,32 +649,38 @@
                 left: 0 !important;
                 top: 0 !important;
                 width: 100% !important;
-                height: 360px !important;
+                height: 216px !important; 
                 margin: 0 auto !important;
-                max-width: 400px !important;
+                max-width: 342px !important;
                 
-                /* Mac Dock Scale Logic Injection via JS */
                 --mobile-scale: 1;
                 --mobile-z: 1;
                 transform: scale(var(--mobile-scale)) !important;
                 z-index: var(--mobile-z) !important;
-                transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+                transition: none !important; 
                 will-change: transform;
             }
             .card-frame {
-                /* Mac Dock Shadow Logic Injection via JS */
                 --m-shadow-y: 10px;
                 --m-shadow-b: 15px;
-                box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px var(--shadow-color), 0 5px 10px -5px var(--shadow-color) !important;
+                box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px var(--shadow-color), 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4) !important;
                 transform: none !important;
-                transition: box-shadow 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease !important;
+                transition: background-color 0.4s ease !important;
+            }
+            .gba-lip {
+                box-shadow: 0 calc(var(--m-shadow-y) * 0.5) calc(var(--m-shadow-b) * 0.5) -2px rgba(0,0,0,0.2), inset 0 2px 4px var(--highlight) !important;
             }
             .card-content {
                 filter: none !important;
                 opacity: 1 !important;
             }
-            .card-info {
-                opacity: 1 !important;
+            .card-container.insert-cartridge .card-frame {
+                animation: mobile-cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+            }
+            @keyframes mobile-cartridge-bounce {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(40px) scale(0.95); }
+                100% { transform: translateY(0); }
             }
         }
     </style>
@@ -517,18 +688,25 @@
 <body>
 
     <div class="header-left">
-        <div class="name">Cristobal<br>D'Alessio</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            <div class="name">cristobal<br>d'alessio</div>
+            <button id="mobile-theme-toggle" class="mobile-only-btn adjust-btn" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
         <div class="stats">FILTERED : <span id="project-count">0</span></div>
-    </div>
-
-    <div class="header-right">
-        <button id="theme-toggle" class="theme-btn" title="Toggle Theme">🌙</button>
-        <span class="header-title">project : archive</span>
+        
+        <div class="mech-keys-container hide-mobile">
+            <button class="mech-key" id="key-left">←</button>
+            <button class="mech-key" id="key-right">→</button>
+            <button class="mech-key wide" id="key-enter">Enter</button>
+        </div>
     </div>
 
     <div class="filter-panel">
         <button class="filter-btn active" data-cat="all">all <sup id="count-all">0</sup></button>
         <button class="filter-btn" data-cat="art">art <sup id="count-art">0</sup></button>
+        <button class="filter-btn" data-cat="interactive">interactive <sup id="count-interactive">0</sup></button>
         <button class="filter-btn" data-cat="productivity">productivity <sup id="count-productivity">0</sup></button>
         <button class="filter-btn" data-cat="game">game <sup id="count-game">0</sup></button>
     </div>
@@ -544,99 +722,74 @@
         </div>
     </div>
 
-    <div class="controls-panel">
+    <div class="controls-panel hide-mobile">
         <div class="controls-card" id="controls-card">
-            <div class="control-row">
+            <button id="theme-toggle" class="modern-theme-btn">
+                <span>Toggle Theme</span>
+            </button>
+            <div class="control-row" style="margin-top: 10px;">
                 <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">72°</span></div>
                 <input type="range" id="input-pitch" min="30" max="85" value="72">
             </div>
-
             <div class="control-row">
                 <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">42°</span></div>
                 <input type="range" id="input-angle" min="0" max="90" value="42">
             </div>
-
             <div class="control-row">
                 <div class="control-label-group"><span>Active Tilt</span><span id="val-tilt">-90°</span></div>
                 <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
             </div>
-
             <div class="control-row">
                 <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">0°</span></div>
                 <input type="range" id="input-rotate" min="-45" max="45" value="0">
             </div>
-
             <div class="control-row">
-                <div class="control-label-group"><span>Card Size</span><span id="val-size">260px</span></div>
-                <input type="range" id="input-size" min="150" max="400" value="260">
+                <div class="control-label-group"><span>Cartridge Size</span><span id="val-size">280px</span></div>
+                <input type="range" id="input-size" min="180" max="400" value="280">
+            </div>
+            <div class="control-row">
+                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">165px</span></div>
+                <input type="range" id="input-offsetY" min="-300" max="300" value="165">
             </div>
         </div>
-        <button class="adjust-btn" id="toggle-controls">⚙️ ADJUST VIEW</button>
+        <button class="adjust-btn" id="toggle-controls" title="Adjust View">
+            <svg viewBox="0 0 24 24">
+                <rect x="2" y="6" width="20" height="12" rx="4" ry="4"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                <line x1="18" y1="11" x2="18.01" y2="11"></line>
+            </svg>
+        </button>
     </div>
 
     <script>
-        // --- THEME LOGIC ---
-        const themeBtn = document.getElementById('theme-toggle');
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Force default dark
         if (savedTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            themeBtn.textContent = '☀️';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
         }
 
-        themeBtn.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                themeBtn.textContent = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeBtn.textContent = '☀️';
-            }
-        });
-
-        //REMOVE FOR NOW
-        // { id: 23, title: "Mac Finder", description: "Navigating a digital life via MacOS heritage", category: "productivity", url: "https://dalecri.github.io/apple-finder-aboutme/" },
-        //{ id: 16, title: "Legacy Link", description: "A gamified profile in 8-bit nostalgia", category: "game", url: "https://dalecri.github.io/Gameboy-about-me/" },
-
-        // --- DATA ---
-     const PROJECTS = [
-            { id: 1, title: "Voxel Garden", description: "Track tasks in a Zen space", category: "productivity", url: "https://dalecri.github.io/voxel-todo-garden/" },
-            { id: 2, title: "Maple Signal", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
-            { id: 3, title: "Typing Terrarium", description: "Grow digital flora through speed and precision", category: "productiviy", url: "https://dalecri.github.io/typing-speed-terrarium/" },
-            { id: 4, title: "Cipher Geode", description: "Extract crystalline security from raw data", category: "productivity", url: "https://dalecri.github.io/password-geode/" },
-            { id: 5, title: "Atmospheric Loom", description: "Weaving seven-day forecasts into silk", category: "productivity", url: "https://dalecri.github.io/typographic-weather-loom/" },
-            { id: 6, title: "Aesthetic Atelier", description: "A curated gallery of 3D visual renders", category: "productivity", url: "https://dalecri.github.io/3d-aesthetic-renders/" },
-            { id: 7, title: "Writing Castle", description: "Watch your castle grow with your writing", category: "productivity", url: "https://dalecri.github.io/cathedral-markdown/" },
-            { id: 8, title: "Nimbus Code", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
-            { id: 9, title: "Cartography Canvas", description: "Randomly generated ASCII landscape architect", category: "art", url: "https://dalecri.github.io/ASCII-Map-generator/" },
-            { id: 10, title: "IsoPaper Cubewall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 11, title: "Pastel Menagerie", description: "Craft soft-hued digital spirits", category: "art", url: "https://dalecri.github.io/pixel-monster-creator/" },
+        const PROJECTS = [
+            { id: 1, title: "Lamplight", description: "Your cozy RSVP Library", category: "productivity", url: "https://dalecri.github.io/Lamplight/" },
+            { id: 2, title: "SkyflatDo", description: "Apartment inspired todo", category: "productivity", url: "https://dalecri.github.io/floating-apartment-todo/" },
+            { id: 3, title: "GardenDo", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
+            { id: 4, title: "StardDo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
+            { id: 5, title: "Typerrium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
+            { id: 6, title: "Maple QR", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
+            { id: 7, title: "Typerule", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
+            { id: 8, title: "Wordnest", description: "Practice your french", category: "productivity", url: "https://dalecri.github.io/Wordnest/" },
+            { id: 9, title: "Prettycode", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
+            { id: 10, title: "CubeWall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
             { id: 12, title: "Polygrade", description: "Minimalist canvas for low-fidelity art", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 13, title: "Lofi Sanctuary", description: "Ambient voxel room for deep work", category: "art", url: "https://dalecri.github.io/Voxel-lofi-room/" },
             { id: 14, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
             { id: 15, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
-            { id: 16, title: "Script Clock", description: "Real-time script-based timekeeping", category: "productivity", url: "https://dalecri.github.io/Script-Clock/" },
             { id: 17, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
-            { id: 18, title: "Pixel Artist", description: "Simple Pixel Art", category: "art", url: "https://dalecri.github.io/pixel-art-generator/" },
-            { id: 19, title: "IsoCity Tasker", description: "Construct your day in three dimensions", category: "productivity", url: "https://dalecri.github.io/isocity-todo-app/" },
-            { id: 20, title: "Bloom Pomodoro", description: "High-focus intervals with a soft touch", category: "productivity", url: "https://dalecri.github.io/pomodoro-app/" },
-            { id: 21, title: "Cupid Message", description: "Celestial calculations in a cosmic interface", category: "art", url: "https://dalecri.github.io/cute-love-message/" },
-            { id: 22, title: "Nebula Math", description: "Fancy Cosmic Calculator", category: "productivity", url: "https://dalecri.github.io/cosmic-calculator/" },
-            { id: 23, title: "Static Solace", description: "Sculpting focus through white noise", category: "productivity", url: "https://dalecri.github.io/noise-machine/" },
-            { id: 24, title: "Chroma Flux", description: "Dynamic color-grid perception challenge", category: "game", url: "https://dalecri.github.io/chroma-flux/" },
-            { id: 25, title: "Mobile Viewer", description: "Test websites for mobile", category: "productivity", url: "https://dalecri.github.io/mobile-render/" },
-            { id: 26, title: "Timezone Visualizer", description: "Canadian Time Zone Visual", category: "productivity", url: "https://dalecri.github.io/timezone-visualizer/" },
-            { id: 27, title: "Flickr", description: "your eyes stay still, the words come to you", category: "productivity", url: "https://dalecri.github.io/flickr/" },
-            { id: 28, title: "Voxel Mesa Garden", description: "Track tasks in a Mesa Environment", category: "productivity", url: "https://dalecri.github.io/mesa-garden-tasker/" },
-            
-         
-         
+            { id: 18, title: "TyQuest", description: "Life is but a game!", category: "productivity", url: "https://dalecri.github.io/tyquest/" },
+            { id: 19, title: "Loop Forge", description: "Grid to Strudel Code", category: "interactive", url: "https://dalecri.github.io/Loop-Forge/" }
         ];
 
-        // --- STATE & SETTINGS ---
         let focusIdx = 0;
         let currentFilter = "all";
         let config = { 
@@ -644,10 +797,11 @@
             angle: 42,      
             tilt: -90,      
             rotate: 0,      
-            size: 260       
+            size: 280,
+            offsetY: 165
         };
 
-        const PACK_STEP = 20;
+        const PACK_STEP = 30;
         const SPREAD_GAP = 600;
         const POP_Z = 180;
 
@@ -663,52 +817,79 @@
             return currentFilter === "all" ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
         }
 
-        // --- RENDER ---
+        // Handles the animation delay and same-tab routing
+        function playAndNavigate(index, url) {
+            const el = document.getElementById(`card-${index}`);
+            if (!el) return;
+            
+            el.classList.add('insert-cartridge');
+            
+            // Wait for the bounce animation to finish, then navigate current tab
+            setTimeout(() => {
+                window.location.assign(url);
+                
+                // Clean up in case the user uses the browser 'Back' button
+                setTimeout(() => {
+                    el.classList.remove('insert-cartridge');
+                }, 100);
+            }, 300);
+        }
+
         function createCards() {
             cardsLayer.innerHTML = '';
             const items = getFilteredItems();
             
             items.forEach((p, i) => {
-                const container = document.createElement('div');
+                const container = document.createElement('a');
                 container.className = 'card-container';
                 container.id = `card-${i}`;
+                container.href = p.url;
                 
                 const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
 
                 container.innerHTML = `
-                    <div class="card-frame">
-                        <div class="card-content">
-                            <img class="card-preview-img" 
-                                 src="${previewUrl}" 
-                                 alt="${p.title}" 
-                                 loading="lazy"
-                                 onload="this.style.opacity=1"
-                                 style="opacity:0">
+                    <div class="card-frame" style="container-type: inline-size;">
+                        <div class="gba-lip">
+                            <div class="gba-logo-area">
+                                <span class="gba-logo-text">${p.title}</span>
+                            </div>
                         </div>
-                        <div class="card-info">
-                            <div class="card-title">${p.title}</div>
-                            <div class="card-desc">${p.description}</div>
+                        <div class="gba-label-recess">
+                            <div class="card-content">
+                                <img class="card-preview-img" 
+                                     src="${previewUrl}" 
+                                     alt="${p.title}" 
+                                     loading="lazy"
+                                     onload="this.style.opacity=1"
+                                     style="opacity:0">
+                                <div class="screen-glare"></div>
+                                <div class="esrb-logo">
+                                    <div class="esrb-top">EVERYONE</div>
+                                    <div class="esrb-e">E</div>
+                                    <div class="esrb-bottom">CONTENT RATED BY<br>ESRB</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="anchor-elements">
-                        <div class="plus-icon" style="top: -${config.size + 40}px">+</div>
-                        <div class="anchor-line" style="bottom: -${POP_Z}px; height: ${POP_Z}px;"></div>
-                        <div class="focused-label" style="bottom: -${POP_Z}px;">
-                            focused project<br/>
-                            <span style="font-weight:700; font-size:11px; color:var(--text-main)">${String(i + 1).padStart(2, '0')} — ${items.length}</span>
+                        <div class="gba-bottom-grip">
+                            <span></span><span></span><span></span>
                         </div>
+                        <div class="gba-triangle"></div>
                     </div>
                 `;
 
-                container.onclick = () => {
-                    if (window.innerWidth <= 768) {
-                        window.open(p.url, '_blank');
-                    } else {
-                        if (focusIdx === i) {
-                            window.open(p.url, '_blank');
+                container.onclick = (e) => {
+                    // Only intercept normal left clicks
+                    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                        e.preventDefault(); 
+                        if (window.innerWidth <= 768) {
+                            playAndNavigate(i, p.url);
                         } else {
-                            focusIdx = i;
-                            updateScene();
+                            if (focusIdx === i) {
+                                playAndNavigate(i, p.url);
+                            } else {
+                                focusIdx = i;
+                                updateScene();
+                            }
                         }
                     }
                 };
@@ -726,6 +907,7 @@
         function updateCounts() {
             document.getElementById('count-all').textContent = PROJECTS.length;
             document.getElementById('count-art').textContent = PROJECTS.filter(p => p.category === "art").length;
+            document.getElementById('count-interactive').textContent = PROJECTS.filter(p => p.category === "interactive").length;
             document.getElementById('count-productivity').textContent = PROJECTS.filter(p => p.category === "productivity").length;
             document.getElementById('count-game').textContent = PROJECTS.filter(p => p.category === "game").length;
         }
@@ -738,7 +920,7 @@
 
             const items = getFilteredItems();
             const totalLength = items.length * PACK_STEP;
-            scene.style.transform = `rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
+            scene.style.transform = `translateY(${config.offsetY}px) rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
 
             const getCardY = (i) => {
                 const base = (totalLength / 2) - (i * PACK_STEP);
@@ -772,7 +954,7 @@
                 const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
                 const currentTilt = isFocused ? config.tilt : -90;
 
-                const cardHeight = config.size * 1.15;
+                const cardHeight = config.size * 0.9; 
                 el.style.width = `${config.size}px`;
                 el.style.height = `${cardHeight}px`; 
                 el.style.top = `-${cardHeight}px`;
@@ -781,24 +963,19 @@
                 
                 el.classList.toggle('active', isFocused);
                 const content = el.querySelector('.card-content');
-                const info = el.querySelector('.card-info');
-                const plus = el.querySelector('.plus-icon');
                 
                 content.style.filter = isNotFocused ? 'blur(2px) grayscale(0.5)' : 'none';
                 content.style.opacity = isNotFocused ? '0.5' : '1';
-                info.style.opacity = isNotFocused ? '0.3' : '1';
-                if(plus) plus.style.top = `-${cardHeight + 40}px`;
             });
         }
 
-        // --- FLUID MOBILE "MAC DOCK" SCROLL LOGIC ---
         function handleMobileScroll() {
             if (window.innerWidth > 768) return;
             const centerY = window.innerHeight / 2;
             
             document.querySelectorAll('.card-container').forEach(card => {
                 const rect = card.getBoundingClientRect();
-                if (rect.height === 0) return; // Skip unmounted
+                if (rect.height === 0) return; 
                 
                 const cardCenter = rect.top + rect.height / 2;
                 const dist = Math.abs(centerY - cardCenter);
@@ -837,25 +1014,42 @@
             }
         }, { passive: true });
 
-        // --- INTERACTION LOGIC ---
         const toggleBtn = document.getElementById('toggle-controls');
         const controlsCard = document.getElementById('controls-card');
 
         toggleBtn.onclick = () => controlsCard.classList.toggle('open');
 
-        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size'];
+        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size', 'offsetY'];
         inputs.forEach(id => {
             const input = document.getElementById(`input-${id}`);
             const display = document.getElementById(`val-${id}`);
-            input.oninput = (e) => {
-                const val = Number(e.target.value);
-                config[id] = val;
-                display.textContent = val + (id === 'size' ? 'px' : '°');
-                updateScene();
-            };
+            if(input) {
+                input.oninput = (e) => {
+                    const val = Number(e.target.value);
+                    config[id] = val;
+                    display.textContent = val + (id === 'size' || id === 'offsetY' ? 'px' : '°');
+                    updateScene();
+                };
+            }
         });
 
-        // Filtering logic
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = (e) => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -867,17 +1061,47 @@
             };
         });
 
-        // Navigation
+        // --- Mechanical Keyboard & On-Screen Button Mapping ---
+        const keyLeft = document.getElementById('key-left');
+        const keyRight = document.getElementById('key-right');
+        const keyEnter = document.getElementById('key-enter');
+        
+        const keyMap = {
+            'ArrowLeft': keyLeft,
+            'ArrowRight': keyRight,
+            'Enter': keyEnter,
+            ' ': keyEnter
+        };
+
+        const handleLeft = () => { focusIdx = Math.max(0, focusIdx - 1); updateScene(); };
+        const handleRight = () => { focusIdx = Math.min(getFilteredItems().length - 1, focusIdx + 1); updateScene(); };
+        const handleAction = () => {
+            const items = getFilteredItems();
+            if(items[focusIdx]) playAndNavigate(focusIdx, items[focusIdx].url);
+        };
+
+        // Click Handlers for physical feeling buttons
+        if (keyLeft) keyLeft.onmousedown = handleLeft;
+        if (keyRight) keyRight.onmousedown = handleRight;
+        if (keyEnter) keyEnter.onmousedown = handleAction;
+
         window.addEventListener('keydown', (e) => {
             if (window.innerWidth <= 768) return; 
-            const items = getFilteredItems();
-            if (e.key === 'ArrowRight') {
-                focusIdx = Math.min(items.length - 1, focusIdx + 1);
-                updateScene();
+            
+            // Add visual pressed effect
+            if (keyMap[e.key]) keyMap[e.key].classList.add('pressed');
+
+            if (e.key === 'Enter' || e.key === ' ') {
+                handleAction();
+            } else if (e.key === 'ArrowRight') {
+                handleRight();
             } else if (e.key === 'ArrowLeft') {
-                focusIdx = Math.max(0, focusIdx - 1);
-                updateScene();
+                handleLeft();
             }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keyMap[e.key]) keyMap[e.key].classList.remove('pressed');
         });
 
         let lastScroll = 0;
@@ -902,7 +1126,6 @@
             updateScene();
         });
 
-        // --- INIT ---
         createCards();
         updateScene();
 
