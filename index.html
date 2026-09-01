@@ -23,7 +23,7 @@
       margin: 0;
       overflow: hidden;
       background-color: #0639C6;
-      touch-action: none; /* Prevents default browser swiping/pull-to-refresh */
+      touch-action: none;
       -webkit-tap-highlight-color: transparent;
     }
     .custom-scroll::-webkit-scrollbar { height: 8px; }
@@ -73,6 +73,9 @@
       transform-origin: 50% 50%;
       will-change: transform;
     }
+    .cd-auto-spin {
+      animation: cd-spin 1.1s linear infinite;
+    }
     .cd-shine {
       background: linear-gradient(115deg, transparent 22%, rgba(255,255,255,0.95) 46%, rgba(255,255,255,0.95) 54%, transparent 78%);
       mix-blend-mode: overlay;
@@ -80,7 +83,6 @@
       transition: opacity 0.35s ease;
       will-change: opacity;
     }
-    /* Slow, subtle spin + mirror shine while hovered (desktop) or pressed (mobile) */
     .group:hover .cd-spin-target,
     .group:active .cd-spin-target {
       animation: cd-spin 3.2s linear infinite;
@@ -142,8 +144,6 @@
     const hueForProject = (id) => (id * 53) % 360;
 
     // --- Pixel Art data, both sampled directly from reference photos ---
-    // CD: 36x36, circular, edge-cleaned. Monitor: 42x39, sampled via flood-fill background removal.
-    // null = transparent, otherwise a hex fill color
     const CD_GRID = [[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"#0d0d0d",null,null,"#0d0d0d",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,"#0d0d0d","#0d0d0d","#212621","#010401","#020301","#030100","#010204","#010101","#010101","#010101","#6e6e6e","#0d0d0d",null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,"#0d0d0d","#010101","#030203","#050403","#0bdc0c","#0afa07","#91cd07","#bfbe09","#91925a","#a8a8a8","#c0c0c0","#c0c0c0","#6f6f6f","#010101","#010101","#424242",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,"#0d0d0d","#010102","#131212","#80817f","#c1bfc0","#bfc0c1","#1bf618","#03fe02","#91ce03","#bfbf01","#92925b","#a8a8a8","#c0c0c0","#c0c0c0","#dadada","#e7e7e7","#c0c0c0","#919191","#010101","#212121",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,"#0d0d0d","#1f4444","#13a29f","#636482","#1314df","#bfc0c8","#c1c0c0","#18f718","#02fe03","#8fcf02","#bfbf00","#92925b","#a8a8a8","#c0c0c0","#c0c0c0","#c4c4c4","#d9d9d9","#e7e7e7","#c7c7c7","#dedede","#c6c6c6","#222222",null,null,null,null,null,null,null],[null,null,null,null,null,null,"#0d0d0d","#224a4b","#06abac","#08bebb","#14a0bf","#0304ef","#8a8691","#c0c0c0","#18f718","#02fe03","#8fcf02","#bfbf00","#92925b","#a8a8a8","#c0c0c0","#c0c0c0","#d6d6d6","#e4e4e4","#d5d5d5","#f7f7f7","#ffffff","#f8f8f8","#d9d9d9","#262626",null,null,null,null,null,null],[null,null,null,null,null,"#0d0d0d","#2e5f5e","#069e9e","#00c0bf","#00c0bf","#0fb5bc","#5f5fa6","#2422d0","#bfc0c6","#92d097","#19f71a","#6aac4a","#b5b31a","#92925c","#a8a8a8","#c0c0c0","#c0c0c0","#c7c7c7","#dbdbdb","#f3f3f3","#ffffff","#ffffff","#ffffff","#fdfdfd","#bebebe","#414141",null,null,null,null,null],[null,null,null,null,"#0d0d0d","#666465","#899fa3","#65bfbd","#00c0bf","#00c0bf","#0abdb9","#26acb1","#0306eb","#8f919b","#beb8b9","#1ef41e","#82c287","#bbbb2a","#93915d","#a8a8a8","#c0c0c0","#c0c0c0","#d2d2d2","#e2e2e2","#dddddd","#ffffff","#ffffff","#ffffff","#fefefe","#d1d1d1","#8b8b8b","#525252",null,null,null,null],[null,null,null,"#0d0d0d","#6e6d6e","#9a979a","#c0c0bf","#abc0c4","#5ac1be","#03bec1","#03c0c0","#06bec2","#4e53ac","#3133c5","#aeaec3","#1cf61c","#90d092","#bfc033","#93915d","#a8a8a8","#c0c0c0","#d3d3d3","#e0e0e0","#dcdcdc","#ededed","#ffffff","#ffffff","#f9f9f9","#d7d7d7","#c0c0c0","#979797","#7e7e7e","#656565",null,null,null],[null,null,null,"#706d6e","#2f7474","#84d3d7","#bfc1c0","#bfc1bf","#acc0c1","#5dc1bf","#04bebf","#05c0bc","#39a2ac","#0106ef","#8988a5","#18f018","#41ea3e","#a3c816","#94915c","#a8a8a8","#c0c0c0","#cdcdcd","#dedede","#ededed","#ffffff","#ffffff","#f9f9f9","#d6d6d6","#c0c0c0","#9c9c9c","#a5a5a5","#9c9c9c","#181818",null,null,null],[null,null,"#0d0d0d","#407f80","#0bbebd","#2cf0ee","#62dee0","#80d4d9","#bfc1c1","#b3c0c3","#54c1bf","#03bfc0","#07bec0","#3d43be","#4142b7","#0de320","#01ff02","#90cf03","#92925b","#a8a8a8","#c0c0c0","#d0d0d0","#ececec","#ffffff","#ffffff","#f6f6f6","#dadada","#bdbdbd","#a0a0a0","#a0a0a0","#a0a0a0","#a0a0a0","#4f4f4f","#707070",null,null],[null,null,"#626160","#45915b","#72fb91","#41fcc0","#05fdfd","#25f2f1","#70dadb","#7cd6d8","#b3c0c1","#4ec2c2","#0bbeba","#469c9e","#0d15ed","#32ac52","#10f110","#8fcf01","#92925b","#a8a8a8","#cfcfcf","#dedede","#eeeeee","#ffffff","#f7f7f7","#dadada","#bcbcbc","#a3a3a3","#9c9c9c","#a4a4a4","#9b9b9b","#a3a3a3","#9c9c9c","#282828",null,null],[null,"#0d0d0d","#447841","#5eb90e","#cbfc0a","#bafa50","#62fc9f","#63fba0","#4bfbb6","#17f7f7","#84d4d4","#c0c2c1","#48c0c0","#06bebf","#2c43ca","#4d4cb2","#16d32e","#90cf02","#93925c","#a8a8a8","#d6d6d6","#dedede","#e7e7e7","#f6f6f6","#dbdbdb","#bababa","#a5a5a5","#9a9a9a","#a8a8a8","#999999","#a8a8a8","#9a9a9a","#a6a6a6","#616161","#878787",null],[null,"#4a4a4a","#06a008","#05fc03","#5cfb05","#b4fb09","#b5fc05","#cafb07","#d0fc31","#4dfbb5","#5ff5b2","#d0d290","#8cd3ce","#3abfc1","#599798","#0f17e8","#21a459","#8bb824","#8c8c66","#9d9d9d","#adadad","#d6d6d6","#f6f6f6","#dbdbdb","#bababa","#a7a7a7","#969696","#aaaaaa","#929292","#aeaeae","#929292","#aaaaaa","#969696","#a7a7a7","#343434",null],[null,"#4a4a4b","#249609","#2fef05","#31ef02","#32ee02","#20f504","#3afb0b","#bffc07","#befb07","#c5fc09","#f8fd0e","#4bf9bc","#ccd194","#36b4ab","#2536d6","#4f517f","#5f6161","#60605f","#606060","#727272","#afafaf","#d1d1d1","#bababa","#a7a7a7","#989898","#ababab","#949494","#b0b0b0","#909090","#b0b0b0","#949494","#acacac","#989898","#2a2a2a",null],[null,"#4a494c","#80681c","#cca227","#cba325","#cba325","#89b928","#24e11f","#1bf601","#1bf601","#3af305","#f3f209","#f3f408","#f2f207","#928c71","#6f7171","#2b2b2b","#212121","#252525","#1a1a1a","#484848","#777777","#979797","#a6a6a6","#969696","#ababab","#909090","#b1b1b1","#898989","#b7b7b7","#898989","#b1b1b1","#909090","#acacac","#353535",null],["#0d0d0d","#4a4a49","#9a059b","#f703f9","#f902fa","#f902f7","#f902f8","#e931b7","#c7a61f","#c0a71a","#c7a621","#bea81a","#c8a722","#bfa71a","#858771","#161416","#6c6d6d","#e2e2e2","#fefefe","#b9b9b9","#403f40","#40423f","#808080","#969596","#a7a8a8","#8e8e8f","#afb0b0","#878788","#b8b8b8","#7f8081","#b8b8b8","#868788","#b1b0b0","#8e8d8e","#252625","#a09fa0"],[null,"#4b4a4a","#730e73","#d611d6","#d114d0","#cf13ce","#da12d8","#c711c7","#e012df","#c012c0","#e613e5","#ba11ba","#ea13e9","#b911b8","#877285","#131313","#bfbfbf","#ffffff","#ffffff","#fefefe","#6d6e6e","#434043","#837a83","#8a708b","#8e6f8c","#897089","#8f6f8e","#897188","#8f6f90","#887087","#8f6f90","#897087","#8e6f8f","#897188","#2a212b","#a0a0a0"],[null,"#4b4949","#535153","#7f8081","#827f82","#827f7f","#80807f","#808080","#817f7f","#81817c","#827e7f","#80817c","#817f81","#808080","#817f81","#131313","#bfbfbf","#ffffff","#ffffff","#fefefe","#6d6d6f","#434045","#984c94","#d406cc","#e707e1","#cb06c3","#f006e9","#c305bf","#f608f0","#c301c6","#fb04f8","#ca02ca","#f503f1","#cf03d1","#3b0536","#a1a0a1"],["#0d0d0d","#494949","#505050","#a5a5a5","#a0a0a0","#9c9c9c","#a8a8a8","#929292","#b0b0b0","#898989","#b8b8b8","#808080","#c0c0c0","#808080","#808080","#141414","#616161","#dfdfdf","#ffffff","#afafaf","#383838","#444042","#9a9b50","#c3bc0a","#c4bb0b","#c1bd0c","#bebd10","#bebe0a","#c0ba16","#f00ce8","#f805f4","#f606f1","#f905f4","#f805f2","#4b0649","#a0a09f"],[null,"#494949","#797979","#9b9b9b","#a0a0a0","#a4a4a4","#989898","#adadad","#909090","#b7b7b7","#888888","#c0c0c0","#808080","#c0c0c0","#888888","#808080","#222222","#020202","#010102","#030303","#4b4a4b","#82807e","#b4b74a","#fefe03","#fefe03","#bffb09","#08fb04","#09fc02","#0af906","#15f30b","#bebd0c","#c3ba0c","#c6b90b","#c3bb0e","#39390b",null],[null,"#4a4a4a","#565656","#a3a3a3","#9f9f9f","#9d9d9d","#a6a6a6","#969696","#acacac","#8f8f8f","#b2b2b2","#888888","#b8b8b8","#c0c0c0","#e8e8e8","#909090","#747473","#707073","#70706d","#736f71","#393db4","#1665cd","#60bfb1","#8bdbba","#62faa3","#f4fc05","#dafb06","#defa07","#d8fb0b","#0afb03","#19f603","#1cf602","#1af604","#19f702","#0f4807",null],[null,"#494949","#737373","#9d9d9d","#a0a0a0","#a3a3a3","#9a9a9a","#a9a9a9","#949494","#b0b0b0","#8f8f8f","#b7b7b7","#c0c0c0","#f5f5f5","#fcfcfc","#c1c1c1","#b8b7b6","#8d8e8e","#a6a636","#50d815","#0e6692","#3746bf","#4b9fa3","#4fc4c2","#b1c8c3","#a0d5b3","#28fcd6","#43fabe","#fcfc05","#dbfa04","#d9fb03","#d6fc09","#23fc05","#03fd02","#094908",null],[null,"#0d0d0d","#676767","#7a7a7a","#9f9f9f","#9e9e9e","#a4a4a4","#999999","#a8a8a8","#949494","#b2b2b2","#c0c0c0","#eeeeee","#fefefe","#d5d5d5","#eaeaea","#ccccca","#909091","#adae24","#4be505","#3aa35e","#4341bb","#1766cb","#15c0bf","#5ac1c0","#b6c4c2","#79d8d8","#0efcf3","#43fcbe","#43fbbf","#44fbbf","#e6fb20","#c7fa0b","#34710d","#899a8c",null],[null,null,"#606060","#545454","#a0a0a0","#a1a1a1","#9d9d9d","#a6a6a6","#999999","#b0b0b0","#c5c5c5","#ececec","#ffffff","#fefefe","#ededed","#d5d5d5","#c4c5c3","#909091","#aeac25","#48e604","#16e91a","#166f8e","#2840cf","#3ba4a1","#12c0bf","#59c0c4","#b9c2c3","#8cd1d0","#83d5d4","#09fbfa","#06fcfc","#44fbc2","#4cfbb6","#1a4132",null,null],[null,null,"#0d0d0d","#606060","#646464","#9f9f9f","#a2a2a2","#9d9d9d","#aeaeae","#c6c6c6","#e9e9e9","#ffffff","#ffffff","#fefefe","#dcdcdc","#c3c3c3","#c0c0bf","#909091","#aead26","#49e604","#02fe05","#2aa856","#4243bb","#2266c8","#03bfbe","#16c0bf","#59c2bf","#bfc1c0","#bdc1be","#7bd6d6","#7bd6da","#16f7f6","#0d7779","#7b8f90",null,null],[null,null,null,"#6d6d6d","#545454","#a0a0a0","#9f9f9f","#acacac","#c9c9c9","#e7e7e7","#ffffff","#ffffff","#fefefe","#dbdbdb","#e2e2e2","#c5c5c5","#c0c0bf","#909091","#adae25","#8bd045","#2fef36","#56d055","#5f5fc6","#1d3cd4","#37a6a7","#05bfbd","#10bfc1","#61c1c1","#c2bfc1","#c2bfbf","#bec1bf","#78d8d8","#182125",null,null,null],[null,null,null,"#0d0d0d","#717171","#7c7c7c","#acacac","#c9c9c9","#e6e6e6","#ffffff","#ffffff","#fefefe","#dfdfdf","#dedede","#dfdfdf","#c5c5c5","#c0c0bf","#909091","#aead24","#c3be7a","#53e352","#5fdf64","#8a8abc","#4042b8","#2f66bd","#03c0bc","#03c0be","#11bfbf","#63c0bd","#c0c0c1","#c2bfbf","#6e6d6e","#7b7c7b",null,null,null],[null,null,null,null,"#0d0d0d","#6f6f6f","#979797","#e4e4e4","#ffffff","#ffffff","#ffffff","#fdfdfd","#dadada","#e3e3e3","#c5c5c5","#c0c0c0","#c0c0bf","#909091","#adac24","#b1af69","#47d845","#60e060","#b2aeb3","#6163bd","#1331df","#2caaac","#03bfbf","#04c0be","#06bebe","#6ec1be","#726f6e","#6f6f6f",null,null,null,null],[null,null,null,null,null,"#0d0d0d","#787878","#bababa","#ffffff","#ffffff","#ffffff","#fefefe","#e6e6e6","#d7d7d7","#c3c3c3","#c0c0c0","#c0c0bf","#909091","#aead24","#a7a534","#42d323","#3fea3e","#99cc96","#898cc4","#3a3ac2","#3e6eb0","#03c0bf","#05bfbb","#07bebf","#0a7777","#626265",null,null,null,null,null],[null,null,null,null,null,null,"#0d0d0d","#696969","#c7c7c7","#ffffff","#fcfcfc","#ececec","#d2d2d2","#ececec","#c6c6c6","#c0c0c0","#c0c0bf","#909091","#adae25","#c1be05","#54e105","#04fc06","#54e359","#b1aeaf","#6869af","#0f2de3","#1fb1b1","#03b9bb","#098989","#4b4c4c",null,null,null,null,null,null],[null,null,null,null,null,null,null,"#0d0d0d","#616161","#bfbfbf","#bebebe","#c0c0c0","#eeeeee","#d0d0d0","#c2c2c2","#c0c0c0","#c0c0bf","#909091","#adae24","#c1be02","#52e302","#02fe02","#53e353","#c0c0c0","#9294c7","#2c33ba","#566767","#128687","#434243",null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,"#0d0d0d","#252525","#373737","#a4a4a4","#a5a5a5","#dadada","#c3c3c3","#c0c0c0","#c0c0bf","#909091","#aead24","#c0bf01","#52e302","#02fe02","#48d849","#a5a5a2","#949697","#5f5c5d","#262625","#424140",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,"#0d0d0d","#202020","#212121","#222222","#989898","#a8a8a8","#a8a8a8","#7e7f7e","#979825","#a9a706","#49c906","#08de06","#188d18","#212024","#222121","#585959",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,"#0d0d0d","#0d0d0d","#212121","#000000","#010102","#010106","#000102","#050301","#050301","#030306","#6e6e6d","#0d0d0d",null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"#0d0d0d",null,null,"#0d0d0d",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]];
     const MONITOR_GRID = [[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,"#808080","#979797","#979697","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979696","#979796","#7f7d72","#46463a","#0f1111",null,null,null,null,null,null,null],["#171717","#ababab","#dfdccf","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c6","#dbd6c7","#dbd6c6","#dbd6c7","#bebaa0","#888668","#76735b","#3c3b33",null,null,null,null,null,null],["#171717","#ababab","#dad4c4","#d3cdb6","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#8b896b","#2f2f2b",null,null,null,null,null],["#171717","#acabac","#d9d4c3","#aeaa8a","#a4a180","#a5a080","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a4a180","#a5a181","#b5b090","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1f1f1a",null,null,null,null,null],["#171717","#acabac","#d9d3c2","#aaa685","#10100e","#0a1221","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1121","#0a1221","#0a1121","#0a1121","#0a1121","#0a1221","#0a1221","#0a1221","#0a1221","#0a1221","#0a1221","#0a101e","#25251d","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1f1f1a",null,null,null,null,null],["#171717","#acabac","#d9d3c2","#aaa684","#111318","#2863be","#266cc9","#266bca","#266cc9","#266bca","#266cc9","#266bca","#266cc9","#266bca","#266cc9","#266bca","#266cc9","#266ac8","#2664c5","#2668c7","#2666c6","#2766c6","#2767c7","#2664c5","#2761c3","#2761c3","#2661c3","#2658ae","#24231f","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1d1d18","#3d3d3a",null,null,null,null],["#171717","#acabac","#d9d3c2","#aaa685","#101317","#2867c2","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#268be1","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2586dd","#2673cf","#2679d4","#2576d2","#2677d2","#2679d3","#2574d0","#2665c6","#266dcb","#2563c5","#2558af","#24231e","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1f1e18","#bbb7a1","#48453f","#47443f","#565550",null],["#171717","#acabac","#d9d3c2","#aaa685","#101317","#2867c2","#2f87de","#5071cf","#417bd6","#268ce2","#509dc0","#77aea2","#3f96ce","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2585dc","#2676d2","#2677d3","#2678d2","#2577d2","#2579d4","#2674d0","#267bd5","#2564c5","#2558af","#24231e","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d17","#9d9b78","#c0bc9f","#c1bb9f","#918d79","#1e1e1e"],["#171717","#acabac","#d9d3c2","#aaa685","#101317","#2867c2","#3c7ed9","#9643b0","#6d5dc1","#268ce1","#93b98c","#f8e140","#68a6ae","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2686de","#2578d3","#2677d3","#2577d2","#2677d3","#2576d2","#2578d2","#2676d2","#2463c4","#2558af","#24231e","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7b","#a39f7b","#7b785e","#1e1e1f"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2867c2","#3186dd","#596bcc","#4777d3","#258ce1","#56a1bb","#85b298","#4398ca","#258ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2587de","#2578d3","#2676d2","#2677d2","#2677d3","#2676d2","#2578d4","#2675d2","#2463c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2867c2","#3f99e1","#a5cae6","#77b5e4","#268ce1","#4a73d1","#6b5ec2","#3b7ed8","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2585dd","#2675d2","#2677d3","#2577d2","#2576d2","#2578d4","#2574d1","#257ad5","#2464c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2867c2","#4d9fe2","#ededee","#a6cbe8","#278ce1","#5f65c8","#9443b1","#4875d2","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#2689df","#2679d5","#2675d2","#2676d2","#2579d4","#2673d0","#257bd6","#2570cf","#2562c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2866c2","#2d91e1","#4fa0e2","#4099e0","#268ce2","#3184db","#3b7dd7","#2c87de","#268ce1","#268ce1","#268ce1","#278be1","#278be1","#2583db","#2574d1","#2578d4","#2577d3","#2575d0","#257cd5","#2671ce","#277fd9","#2564c6","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2867c2","#397fd9","#864cb7","#6462c5","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#268ce1","#268be1","#2684dc","#2671ce","#267bd6","#2575d2","#2576d2","#257ad4","#2572ce","#257fd8","#256dcc","#2563c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2867c2","#387fd8","#8449b4","#6361c4","#2689df","#2689df","#268ae0","#2688df","#268be0","#2687de","#268ce1","#2683db","#246ecb","#267dd7","#2573cf","#2678d4","#2677d3","#2673d0","#277cd6","#246fcd","#2881da","#2565c6","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101318","#2765c2","#2f82d0","#5688aa","#458cc1","#2676d2","#2676d2","#2579d5","#2573d0","#257dd7","#246fcc","#2680da","#246ecc","#267ed7","#2472ce","#267ad5","#2574d2","#2576d3","#2579d4","#2672d0","#267dd6","#266ecc","#2563c4","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#111318","#2763c1","#4e86b1","#f9e240","#aebf76","#2578d4","#2677d3","#2676d1","#257ad5","#2672d0","#257dd6","#2470ce","#267dd7","#2672cf","#267bd5","#2575d0","#2678d3","#2677d2","#2675d1","#2679d5","#2672d0","#257dd7","#2464c6","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101318","#2765c2","#3d89c4","#a6bc79","#779b92","#2676d2","#2677d3","#2578d3","#2675d2","#2679d4","#2774d0","#267bd5","#2573d0","#267ad4","#2575d0","#2679d3","#2577d2","#2578d2","#2678d4","#2575d2","#2679d4","#2573d1","#2563c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101318","#2863c1","#2577d2","#2478d2","#2677d2","#2677d2","#2577d2","#2577d2","#2577d3","#2576d2","#2578d3","#2576d1","#2578d2","#2676d2","#2577d2","#2577d3","#2577d2","#2677d2","#2577d2","#2577d3","#2676d2","#2677d4","#2564c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101317","#2764c1","#2576d2","#2678d4","#2675d3","#2677d3","#2676d3","#2576d2","#2678d2","#2676d1","#2579d3","#2675d1","#2678d3","#2575d2","#2578d2","#2676d2","#2677d3","#2677d2","#2576d2","#2678d3","#2675d1","#2778d3","#2563c5","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101317","#2861c0","#2664c7","#2574d1","#2579d3","#2576d2","#2577d3","#2578d3","#2674d1","#257bd4","#2673cf","#267cd6","#2672cf","#257bd5","#2774d0","#2678d4","#2676d3","#2677d2","#2678d3","#2575d1","#247bd4","#2673cf","#2464c4","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7b","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101318","#2861c0","#2667c9","#267bd5","#2674d0","#2678d4","#2677d3","#2675d1","#257bd5","#2572cf","#267ed7","#2570cd","#267ed7","#2671ce","#257bd5","#2674d0","#2678d3","#2677d3","#2675d1","#2666c6","#266cca","#2664c5","#2562c4","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#ababac","#d8d4c2","#a9a685","#101317","#2861c0","#2663c5","#2668c8","#2665c6","#2667c7","#2667c7","#2665c6","#2568c8","#2564c5","#256ac9","#2662c4","#2669c9","#2564c5","#2668c8","#2565c6","#2667c7","#2666c7","#2566c6","#2662c4","#2662c4","#2662c4","#2562c4","#2558af","#24231f","#b0ab89","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#acabac","#d9d4c2","#aaa685","#111418","#3267bc","#2f68c1","#2f68c1","#3068c0","#2f68c0","#3068c0","#3068c0","#3068c0","#3068c0","#3068c1","#3068c1","#3068c1","#3068c1","#3068c1","#3068c1","#3068c1","#3068c1","#3068c1","#2f69c1","#3068c0","#3068c0","#3068c0","#2e5eac","#24231f","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#acabac","#d9d4c2","#aaa685","#1a1917","#d2ccbc","#cbbcba","#ccccb7","#c4cbb2","#cec4ba","#cdc3ba","#c4cbb2","#cbcdb6","#cbbdb9","#d1cabb","#d2cdb9","#d2ceb9","#d2cdb9","#d2ceb9","#d2cdb9","#d2ceb9","#d2cdb9","#d2ceb9","#d2ceba","#bfbaaa","#cfcab8","#bbb7a7","#bebaa8","#25241e","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#acabac","#d9d4c2","#aaa685","#181713","#a49893","#7f4c8a","#889f81","#5f9668","#927590","#90708f","#63976b","#849e7e","#81508d","#a29491","#a9a393","#a9a493","#a9a393","#a9a493","#a9a393","#a9a493","#a9a393","#a9a493","#a9a494","#302e2b","#949184","#1a1916","#989589","#25241e","#b0ab8a","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d18","#9c9a78","#a39f7a","#a39f7a","#7b775d","#1e1e1e"],["#171717","#acabac","#d9d4c2","#aaa684","#414034","#39382f","#39382f","#39382d","#39382e","#3a382e","#39382e","#39382d","#39382e","#3a382e","#39382e","#39382d","#39382d","#39382d","#39382d","#39382d","#39382d","#39382d","#39382d","#39382d","#39382e","#39382e","#39382e","#39382d","#504e3f","#b0ac8a","#d3cdb7","#d3cdb7","#bab598","#a39f7a","#a39f7a","#a39f7b","#1e1d19","#9d9978","#a39f7a","#a39f7a","#7a785e","#1e1e1e"],["#171717","#acabac","#d9d4c2","#bab697","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b191","#b6b192","#b6b191","#b7b191","#b6b291","#beb99c","#d3cdb7","#d3cdb7","#bab598","#a39f7b","#a39f7a","#a39f7b","#1e1d18","#9d9978","#67644f","#676450","#605e4e",null],["#171717","#acabac","#d9d4c2","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d2ceb7","#8ec290","#92c392","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#bab598","#a39f7c","#a39f7a","#a39f7b","#1e1d18","#595849","#1e1e1e",null,null,null],["#171717","#acabab","#d9d4c1","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d3ccb7","#d3cdb7","#d2ceb6","#96c295","#9ac396","#d2cdb6","#d3ccb7","#d3ccb7","#d3cdb7","#bab597","#a39f7b","#a39f79","#a39f7a","#1e1e19",null,null,null,null,null],[null,"#5e5e5e","#4e4d48","#4c4a44","#4d4a44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4d4b44","#4e4a45","#4d4a44","#4d4a44","#4d4b44","#4d4b44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#4d4a44","#434139","#3b392f","#3b3a2f","#3c3b31",null,null,null,null,null,null],[null,null,null,"#141414","#aeaeae","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b5b5","#b5b4b3","#9f9c8f","#a4a094","#b4b4b4","#aeaca7","#a09c8c","#a09c8d","#9f9c8d","#9f9c8d","#a09c8d","#a09c8d","#9f9c8b","#7b7960","#7b795f","#7b795f","#7b795f","#7b795f","#7b795f","#34352b","#363636",null,null,null,null,null,null,null],[null,null,null,null,"#414141","#343434","#343434","#343434","#343434","#343434","#343434","#333333","#333333","#333333","#333334","#333332","#2d2c29","#2f2e2b","#343333","#31302f","#2e2c28","#2e2c28","#2e2c28","#2e2c28","#2e2c28","#2e2c28","#2d2c28","#23221d","#24231e","#24231e","#24231e","#24231d","#23231d","#4f4f4a",null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,"#212121","#848075","#b6b2a2","#b6b2a2","#b7b2a1","#b6b2a1","#b6b2a1","#b7b2a1","#b7b29f","#a5a08a","#8e8a6e","#8d8a6e","#8e8a6d","#8d8a6d","#8d8a6d","#8a896f","#141211",null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,"#2d2d2d","#2d2d2e","#2d2d2e","#2d2c2d","#2d2d2c","#2d2d2d","#2d2d2d","#2d2d2d","#2c2c2c","#282724","#282723","#282723","#282723","#272623","#272623","#272623","#21201b","#1f1e18","#1f1e18","#1e1d19","#1f1e1a","#1f1e1a","#1f1e1a","#383836",null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,"#737271","#e7e5e1","#e6e5e0","#e6e5df","#e6e5e0","#e6e5df","#e6e5e0","#e6e5df","#e6e5e0","#e4e3db","#d3ccb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#d3cdb7","#aea989","#a39f7a","#a39f7a","#a39f7a","#a39f7a","#a39f7a","#a39f7a","#737059","#474743",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,"#282828","#a3a29f","#969284","#969284","#969284","#969284","#969284","#969284","#969284","#969284","#969284","#969283","#969284","#969284","#969284","#969284","#969284","#969283","#7c7963","#747159","#747159","#747159","#747159","#747159","#747159","#747158","#3c3b30",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,"#1f1f1f","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d","#1d1d1d",null,null,null,null,null,null,null,null,null]];
 
@@ -171,9 +171,9 @@
       );
     };
 
-    const PixelCD = ({ className = "", hueShift = 0 }) => (
+    const PixelCD = ({ className = "", hueShift = 0, spinning = false }) => (
       <div className={`relative aspect-square overflow-hidden ${className}`} style={{ borderRadius: '50%', filter: `hue-rotate(${hueShift}deg)` }}>
-        <div className="cd-spin-target absolute inset-0">
+        <div className={`cd-spin-target absolute inset-0 ${spinning ? 'cd-auto-spin' : ''}`}>
           <PixelArt grid={CD_GRID} className="w-full h-full" />
         </div>
         <div className="cd-shine absolute inset-0 pointer-events-none" style={{ borderRadius: '50%' }} />
@@ -184,24 +184,67 @@
       <PixelArt grid={MONITOR_GRID} className={className} />
     );
 
+    // Full-screen matrix-code rain, used once the disc has "seated" and the drive is reading
+    const MatrixRain = ({ active }) => {
+      const canvasRef = useRef(null);
+      useEffect(() => {
+        if (!active) return;
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const fontSize = 7;
+        const chars = 'ｱｶｻﾀﾅﾊﾏﾔﾗﾜ0123456789ABCDEF';
+        let width, height, columns, drops, rafId;
+
+        const setup = () => {
+          width = canvas.clientWidth;
+          height = canvas.clientHeight;
+          canvas.width = width;
+          canvas.height = height;
+          columns = Math.max(1, Math.floor(width / fontSize));
+          drops = new Array(columns).fill(0).map(() => Math.random() * (height / fontSize));
+        };
+        setup();
+
+        const draw = () => {
+          ctx.fillStyle = 'rgba(0,0,0,0.18)';
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = '#34d399';
+          ctx.font = `${fontSize}px monospace`;
+          for (let i = 0; i < columns; i++) {
+            const ch = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            drops[i]++;
+          }
+          rafId = requestAnimationFrame(draw);
+        };
+        draw();
+
+        return () => cancelAnimationFrame(rafId);
+      }, [active]);
+
+      return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+    };
+
     // --- Main Application Component ---
     function App() {
       const [viewMode, setViewMode] = useState('browse');
       const [activeIndex, setActiveIndex] = useState(0); 
       const [computerState, setComputerState] = useState('idle'); 
       const [activeProject, setActiveProject] = useState(null);
-      const [flyingCD, setFlyingCD] = useState(null);
+      const [insertingDisk, setInsertingDisk] = useState(null); // { project, hue }
+      const [diskPhase, setDiskPhase] = useState(null); // 'half' | 'gone'
       const [radius, setRadius] = useState(450);
       
-      const slotRef = useRef(null);
-      const containerRef = useRef(null);
       const touchStartX = useRef(null);
       const isSwiping = useRef(false);
       
       const N = PROJECTS.length;
       const theta = 360 / N;
 
-      // Handle Resize for Responsive Carousel Radius
       useEffect(() => {
         const updateRadius = () => {
           setRadius(window.innerWidth < 768 ? 160 : 450);
@@ -211,7 +254,6 @@
         return () => window.removeEventListener('resize', updateRadius);
       }, []);
 
-      // Keyboard & Scroll Navigation
       useEffect(() => {
         if (viewMode !== 'browse') return;
 
@@ -243,7 +285,6 @@
         };
       }, [viewMode, activeIndex, N]);
 
-      // Mobile Touch Handlers
       const handleTouchStart = (e) => {
         touchStartX.current = e.touches[0].clientX;
         isSwiping.current = false;
@@ -265,7 +306,6 @@
         if (Math.abs(delta) > 40) { 
           if (delta > 0) setActiveIndex(prev => prev - 1); 
           else setActiveIndex(prev => prev + 1); 
-          
           setTimeout(() => { isSwiping.current = false; }, 100);
         } else {
           isSwiping.current = false;
@@ -273,7 +313,7 @@
         touchStartX.current = null;
       };
 
-      const handleCDSelect = (clickedProjectIndex, e) => {
+      const handleCDSelect = (clickedProjectIndex) => {
         if (isSwiping.current) return;
 
         const currentProjectIndex = ((activeIndex % N) + N) % N;
@@ -282,7 +322,6 @@
           let diff = clickedProjectIndex - currentProjectIndex;
           if (diff > N / 2) diff -= N;
           if (diff < -N / 2) diff += N;
-          
           setActiveIndex(prev => prev + diff);
           return;
         }
@@ -291,57 +330,43 @@
 
         const project = PROJECTS[clickedProjectIndex];
         const hue = hueForProject(project.id);
-        
-        let startX = window.innerWidth / 2 - 100;
-        let startY = window.innerHeight / 2 - 100;
-        let cdWidth = window.innerWidth < 768 ? 140 : 200;
 
-        if (e && e.currentTarget) {
-          const cdRect = e.currentTarget.getBoundingClientRect();
-          const containerRect = containerRef.current.getBoundingClientRect();
-          startX = cdRect.left - containerRect.left;
-          startY = cdRect.top - containerRect.top;
-          cdWidth = cdRect.width;
-        }
-
+        // 1) The computer appears, disc already spinning, seated half-in / half-out of the top slot
         setViewMode('playing');
         setComputerState('inserting');
         setActiveProject(null);
+        setInsertingDisk({ project, hue });
+        setDiskPhase('half');
 
+        // 2) After a beat, the disc finishes sliding in and disappears into the slot
         setTimeout(() => {
-          const slotRect = slotRef.current.getBoundingClientRect();
-          const containerRect = containerRef.current.getBoundingClientRect();
-          
-          const endX = slotRect.left - containerRect.left + (slotRect.width / 2) - (cdWidth / 2) * 0.3;
-          const endY = slotRect.top - containerRect.top + (slotRect.height / 2) - (cdWidth / 2) * 0.3;
+          setDiskPhase('gone');
+        }, 950);
 
-          setFlyingCD({ project, hue, startX, startY, endX, endY, width: cdWidth, isMoving: false });
+        // 3) The instant it's fully seated, the matrix code takes over the screen
+        setTimeout(() => {
+          setComputerState('reading');
+        }, 1400);
 
-          setTimeout(() => {
-            setFlyingCD(prev => ({ ...prev, isMoving: true }));
-          }, 50);
-
-          setTimeout(() => {
-            setFlyingCD(null);
-            setComputerState('reading');
-          }, 1250);
-
-          setTimeout(() => {
-            setActiveProject(project);
-            setComputerState('playing');
-          }, 2750); 
-        }, 300);
+        // 4) The screen resolves to the loaded project
+        setTimeout(() => {
+          setActiveProject(project);
+          setComputerState('playing');
+          setInsertingDisk(null);
+          setDiskPhase(null);
+        }, 3400);
       };
 
       const handleEject = () => {
         setComputerState('idle');
         setActiveProject(null);
         setViewMode('browse');
+        setInsertingDisk(null);
+        setDiskPhase(null);
       };
 
       return (
         <div 
-          ref={containerRef}
           className="min-h-screen w-full relative overflow-hidden flex flex-col font-['Space_Grotesk'] text-[#E2E0D3]"
         >
           {/* Header */}
@@ -403,7 +428,7 @@
                 return (
                   <div 
                     key={project.id}
-                    onClick={(e) => handleCDSelect(index, e)}
+                    onClick={() => handleCDSelect(index)}
                     className="absolute cursor-pointer flex flex-col items-center justify-center group"
                     style={{
                       transform: `translateX(${x}px) translateZ(${z}px) rotateY(${angleDeg}deg)`,
@@ -471,10 +496,28 @@
             </div>
 
             <div className="w-full max-w-md relative mx-auto" style={{ aspectRatio: '42 / 39' }}>
-              
+
+              {/* The disc: appears already spinning, seated half above / half behind the monitor's top edge,
+                  then slides fully in ("gone") right before the matrix code takes over. */}
+              {insertingDisk && computerState !== 'playing' && (
+                <div
+                  className="absolute pointer-events-none"
+                  style={{
+                    left: '50%',
+                    top: '2.564%',
+                    width: '32%',
+                    transform: `translate(-50%, ${diskPhase === 'gone' ? '25%' : '-50%'}) scale(${diskPhase === 'gone' ? 0.8 : 1})`,
+                    opacity: diskPhase === 'gone' ? 0 : 1,
+                    transition: 'transform 480ms cubic-bezier(0.4, 0, 0.2, 1), opacity 480ms ease',
+                  }}
+                >
+                  <PixelCD hueShift={insertingDisk.hue} spinning className="w-full aspect-square" />
+                </div>
+              )}
+
               <PixelMonitor className="absolute inset-0 w-full h-full drop-shadow-2xl" />
 
-              {/* Power light (overlays the baked-in light on the case) */}
+              {/* Power light */}
               <div 
                 className={`absolute ${computerState === 'inserting' || computerState === 'reading' ? 'animate-blink' : ''}`}
                 style={{ 
@@ -494,12 +537,17 @@
                     </div>
                   )}
 
-                  {(computerState === 'inserting' || computerState === 'reading') && (
-                    <div className="absolute inset-0 bg-black flex flex-col justify-start items-start p-1 overflow-hidden">
-                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; SYS_INIT... OK</div>
-                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; MOUNT //CD-ROM</div>
-                      <div className="matrix-text" style={{ fontSize: '4px', lineHeight: '7px' }}>&gt; DECRYPTING...</div>
-                      <div className="matrix-text animate-pulse" style={{ fontSize: '4px', lineHeight: '7px', marginTop: '2px' }}>&gt; READING SECTORS...</div>
+                  {computerState === 'inserting' && (
+                    <div className="absolute inset-0 bg-black screen-static opacity-40" />
+                  )}
+
+                  {computerState === 'reading' && (
+                    <div className="absolute inset-0 bg-black">
+                      <MatrixRain active={true} />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <div className="matrix-text bg-black/50 px-1" style={{ fontSize: '5px', lineHeight: '8px' }}>MOUNT //CD-ROM</div>
+                        <div className="matrix-text bg-black/50 px-1 animate-pulse mt-0.5" style={{ fontSize: '5px', lineHeight: '8px' }}>READING SECTORS...</div>
+                      </div>
                     </div>
                   )}
 
@@ -519,36 +567,7 @@
                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/10 to-transparent" />
                 </div>
               </div>
-
-              <div ref={slotRef} className="absolute" style={{ left: '88.095%', top: '38.46%', width: '9.524%', height: '20.51%' }} />
             </div>
-          </div>
-
-          {/* ========================================
-            FLOATING ANIMATED CD (true 3D flip toward the monitor)
-            ========================================
-          */}
-          <div className="absolute inset-0 pointer-events-none z-50" style={{ perspective: '1200px' }}>
-            {flyingCD && (
-              <div
-                style={{
-                  position: 'absolute',
-                  width: flyingCD.width,
-                  height: flyingCD.width,
-                  left: flyingCD.startX,
-                  top: flyingCD.startY,
-                  transformStyle: 'preserve-3d',
-                  transform: flyingCD.isMoving 
-                    ? `translate3d(${flyingCD.endX - flyingCD.startX}px, ${flyingCD.endY - flyingCD.startY}px, -160px) rotateY(1080deg) rotateX(12deg) scale(0.35)` 
-                    : 'translate3d(0,0,0) rotateY(0deg) rotateX(0deg) scale(1)',
-                  transitionProperty: 'transform',
-                  transitionDuration: '1150ms',
-                  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-              >
-                <PixelCD hueShift={flyingCD.hue} className="w-full h-full drop-shadow-2xl" />
-              </div>
-            )}
           </div>
 
         </div>
