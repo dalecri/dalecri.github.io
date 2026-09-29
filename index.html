@@ -868,7 +868,7 @@ function openP(id){
   document.getElementById("pd-title").textContent=p.name;
   document.getElementById("pd-dl").innerHTML=p.play?`<div><dt>${T("How it plays","Le jeu","Cómo se juega")}</dt><dd>${p.play[lang]}</dd></div><div><dt>${T("Controls","Commandes","Controles")}</dt><dd>${p.controls[lang]}</dd></div>`:`<div><dt>${T("Challenge","Défi","Reto")}</dt><dd>${p.problem[lang]}</dd></div><div><dt>${T("What I did","Mon rôle","Qué hice")}</dt><dd>${p.did[lang]}</dd></div>`;
   document.getElementById("pd-tags").innerHTML=p.tags.map(t=>`<li>${t}</li>`).join("");
-  document.getElementById("pd-links").innerHTML=(p.demo?`<a class="btn" href="${p.demo}" target="_blank" rel="noopener">${T("Try it live","Essayer","Pruébalo en vivo")} ↗</a>`:"")+(p.repo?`<a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">${T("View code","Voir le code","Ver código")} ↗</a>`:"");
+  document.getElementById("pd-links").innerHTML=(p.demo?`<a class="btn" href="${p.demo}" target="_blank" rel="noopener">${T("Try it live","Essayer","Pruébalo en vivo")} ↗</a>`:"");
   document.getElementById("pd-close").textContent=T("Back to projects","Retour aux projets","Volver a proyectos");
   pd.showModal();
 }
