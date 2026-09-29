@@ -645,9 +645,9 @@ html{scroll-behavior:smooth}
         <li><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i><span data-i="hb3">Laurentian trails</span></li>
       </ul>
       <div class="now-grid">
-        <div class="now-card"><i class="fa-solid fa-tv" aria-hidden="true"></i><div><span class="px" data-i="nw1">Watching</span><b>The Sopranos</b></div></div>
-        <div class="now-card"><i class="fa-solid fa-book" aria-hidden="true"></i><div><span class="px" data-i="nw2">Reading</span><b>Bad Blood</b></div></div>
-        <div class="now-card"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><div><span class="px" data-i="nw3">Playing</span><b>Cyberpunk 2077</b></div></div>
+        <div class="now-card"><i class="fa-solid fa-tv" aria-hidden="true"></i><div><span class="px" data-i="nw1">Currently watching</span><b>The Sopranos</b></div></div>
+        <div class="now-card"><i class="fa-solid fa-book" aria-hidden="true"></i><div><span class="px" data-i="nw2">Currently reading</span><b>Bad Blood</b></div></div>
+        <div class="now-card"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><div><span class="px" data-i="nw3">Currently playing</span><b>Cyberpunk 2077</b></div></div>
       </div>
     </div>
     <h3 class="sub-h" data-i="expH">Experience and education</h3>
@@ -847,6 +847,7 @@ Object.assign(ES,{w2p:"¿Por qué los precios de la telefonía celular subieron 
  w3p:"Un procedimiento paso a paso para una publicación económica bajo embargo, desde las invitaciones del día anterior hasta el resumen posterior.",w3m:"4 min de lectura",read3:"Leer muestra (EN) →",
  w4k:"Informe de campaña",w4h:"Economistas en vivo en Reddit",w4p:"Cómo los AMA en vivo sobre inflación y el censo convirtieron el escepticismo hacia los datos oficiales en conversación real.",w4m:"3 min de lectura",read4:"Leer muestra (EN) →"});
 Object.assign(FR,{themeLbl:"Thème"});ES.themeLbl="Tema";
+Object.assign(FR,{nw1:"En visionnement",nw2:"En cours de lecture",nw3:"En cours de partie"});Object.assign(ES,{nw1:"Viendo ahora",nw2:"Leyendo ahora",nw3:"Jugando ahora"});
 const T=(en,fr,es)=>lang==="fr"?fr:lang==="es"?es:en;
 const nodes=[...document.querySelectorAll("[data-i]")];
 const EN={}; nodes.forEach(n=>{EN[n.dataset.i]??=n.innerHTML});
