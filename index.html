@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-palette="nordic">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <title>Cristobal's Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600&family=Archivo:wght@500;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Righteous&family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap">
 <style>
 /* Layout: one calm column, lamp-lit plum night; pixel labels as the signature detail */
 /* Layout: a framed card on a dotted night sky, centered mono hero; lavender as the one accent */
@@ -26,32 +26,6 @@
 :root[data-theme="light"]{
   --sky:#E4DFEB; --bg:#F8F6FB; --surface:#FFFFFF; --ink:#231D2C; --muted:#665C75; --line:#DDD5E7;
   --lamp:#6A53A3; --lamp-soft:#ECE6F6; --plum:#5A4590; --fill:#8C80A0; --dots:#D3CCDD; color-scheme:light}
-
-/* ===== Theme: STUDIO (bold, colour-blocked, hard edges) ===== */
-html:root[data-palette="studio"]{--sky:#16171B;--bg:#EEF0F3;--surface:#FFFFFF;--ink:#111216;--muted:#474C57;--line:#111216;--lamp:#2F4BFF;--lamp-soft:#DDE3FF;--plum:#2F4BFF;--fill:#6B7180;--dots:#2A2C33;
- --f-display:"Archivo","Arial Black",system-ui,sans-serif;--f-pixel:"Archivo",system-ui,sans-serif;color-scheme:light}
-[data-palette="studio"] .frame{border:0}
-[data-palette="studio"] .hero h1{font-weight:900;letter-spacing:-.05em}
-[data-palette="studio"] .hero h1 .d{background:#FF5A36;border-radius:0}
-[data-palette="studio"] .avatar{border:3px solid var(--ink);box-shadow:8px 8px 0 #2F4BFF}
-[data-palette="studio"] .btn{border-radius:0;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-weight:800}
-[data-palette="studio"] .btn.ghost{background:#C6F24E}
-[data-palette="studio"] .thesis{background:var(--ink);color:#fff;padding:28px 32px;max-width:none;text-align:left}
-[data-palette="studio"] .pillars{gap:16px;background:none;border:0;border-radius:0;overflow:visible}
-[data-palette="studio"] .pillar{border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
-[data-palette="studio"] .pillar:nth-child(1){background:#2F4BFF;--ink:#fff;--muted:#E1E6FF;--lamp:#C6F24E;color:#fff}
-[data-palette="studio"] .pillar:nth-child(2){background:#FF5A36;--ink:#111216;--muted:#2B1A14;--lamp:#111216}
-[data-palette="studio"] .pillar:nth-child(3){background:#C6F24E;--ink:#111216;--muted:#2E3514;--lamp:#2F4BFF}
-[data-palette="studio"] :is(.case,.pcard,.wcard,.now-card,.small){border-radius:0;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
-[data-palette="studio"] .pcard:hover,[data-palette="studio"] .wcard:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #2F4BFF}
-[data-palette="studio"] :is(.tags li,.hobbies li,.rpill,.filters button,.lang,.case-toggle){border-radius:0}
-[data-palette="studio"] .rpill{background:#C6F24E;color:var(--ink);border:2px solid var(--ink)}
-[data-palette="studio"] .thumb{background:#DDE3FF}
-[data-palette="studio"] .contact{background:#2F4BFF;border:2px solid var(--ink);border-radius:0;box-shadow:10px 10px 0 var(--ink);--ink:#fff;--muted:#E1E6FF;--lamp:#C6F24E;color:#fff}
-[data-palette="studio"] .contact .btn{background:#C6F24E;color:#111216}
-[data-palette="studio"] .contact .btn.ghost{background:#fff;color:#111216}
-[data-palette="studio"] dialog{border-radius:0;border:2px solid var(--ink)}
-[data-palette="studio"] .now-card i,[data-palette="studio"] .now-card svg{border-radius:0}
 
 /* ===== Theme: NORDIC (calm, muted, Scandinavian colour blocks) ===== */
 html:root[data-palette="nordic"]{--sky:#C9D3D8;--bg:#EEF1F2;--surface:#FFFFFF;--ink:#1E2A30;--muted:#5B6970;--line:#D5DDE0;--lamp:#3E6B63;--lamp-soft:#DCE8E3;--plum:#3E6B63;--fill:#8C9AA1;--dots:#B9C5CB;
@@ -84,39 +58,6 @@ html:root[data-palette="nordic"]{--sky:#C9D3D8;--bg:#EEF1F2;--surface:#FFFFFF;--
 [data-palette="nordic"] .contact .btn.ghost{background:transparent;color:#EEF1F2;border-color:#4A5C64}
 [data-palette="nordic"] dialog{border-radius:18px}
 
-/* ===== Theme: SUNSET (warm retro, stacked colour bands, soft round shapes) ===== */
-html:root[data-palette="sunset"]{--sky:#3A1E14;--bg:#FFF1E6;--surface:#FFFFFF;--ink:#3A1E14;--muted:#7A5244;--line:#F1D3C0;--lamp:#E4572E;--lamp-soft:#FDE0D2;--plum:#1F7A6D;--fill:#C08B75;--dots:#4C2A1D;
- --f-display:"Righteous","Trebuchet MS",system-ui,sans-serif;color-scheme:light}
-[data-palette="sunset"] .frame{border:0;border-radius:32px;overflow:hidden}
-[data-palette="sunset"] .hero h1{letter-spacing:-.01em;color:#3A1E14}
-[data-palette="sunset"] .hero h1 .d{background:#F2A93B}
-[data-palette="sunset"] .avatar{border:0;box-shadow:0 0 0 7px #F2A93B,0 0 0 14px #E4572E,0 0 0 21px #1F7A6D;margin-block:14px 18px}
-[data-palette="sunset"] .btn{border-radius:999px;border:0;background:#E4572E;color:#FFF1E6}
-[data-palette="sunset"] .btn.ghost{background:#1F7A6D;color:#FFF1E6}
-[data-palette="sunset"] .thesis{background:linear-gradient(#FFF1E6,#FFF1E6) padding-box;color:#E4572E}
-[data-palette="sunset"] .pillars{gap:14px;background:none;border:0;overflow:visible}
-[data-palette="sunset"] .pillar{border-radius:28px;padding:28px}
-[data-palette="sunset"] .pillar:nth-child(1){background:#E4572E;--ink:#FFF1E6;--muted:#FFE2D6;--lamp:#FFD28A;color:#FFF1E6}
-[data-palette="sunset"] .pillar:nth-child(2){background:#F2A93B;--ink:#3A1E14;--muted:#5A3320;--lamp:#3A1E14}
-[data-palette="sunset"] .pillar:nth-child(3){background:#1F7A6D;--ink:#FFF1E6;--muted:#D6EFEA;--lamp:#FFD28A;color:#FFF1E6}
-[data-palette="sunset"] :is(.case,.pcard,.wcard,.now-card,.small){border-radius:28px;border:0;box-shadow:0 10px 30px -14px #E4572E55}
-[data-palette="sunset"] .case:nth-of-type(3n+1){border-top:10px solid #E4572E}
-[data-palette="sunset"] .case:nth-of-type(3n+2){border-top:10px solid #F2A93B}
-[data-palette="sunset"] .case:nth-of-type(3n){border-top:10px solid #1F7A6D}
-[data-palette="sunset"] .thumb{background:#FDE0D2}
-[data-palette="sunset"] .rpill{background:#1F7A6D;color:#FFF1E6;border-color:#1F7A6D}
-[data-palette="sunset"] .contact{background:#1F7A6D;border:0;border-radius:32px;--ink:#FFF1E6;--muted:#D6EFEA;--lamp:#FFD28A;color:#FFF1E6}
-[data-palette="sunset"] .contact .btn{background:#F2A93B;color:#3A1E14}
-[data-palette="sunset"] .contact .btn.ghost{background:transparent;color:#FFF1E6;border:2px solid #FFF1E6}
-[data-palette="sunset"] .now-card:nth-child(1) i,[data-palette="sunset"] .now-card:nth-child(1) svg{background:#E4572E;color:#FFF1E6}
-[data-palette="sunset"] .now-card:nth-child(2) i,[data-palette="sunset"] .now-card:nth-child(2) svg{background:#F2A93B;color:#3A1E14}
-[data-palette="sunset"] .now-card:nth-child(3) i,[data-palette="sunset"] .now-card:nth-child(3) svg{background:#1F7A6D;color:#FFF1E6}
-[data-palette="sunset"] dialog{border-radius:28px}
-[data-palette="sunset"] .hobbies li{border:0;background:#FDE0D2}
-
-.palettes{display:flex;gap:6px;align-items:center}
-.palettes button{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
-.palettes button[aria-pressed="true"]{border-color:var(--ink)}
 
 *{box-sizing:border-box}
 body{background:var(--sky) radial-gradient(var(--dots) 1px,transparent 1.2px) 0 0/18px 18px;color:var(--ink);font:16px/1.6 var(--f-body);padding-inline:clamp(12px,4vw,56px);padding-block:32px}
@@ -133,7 +74,6 @@ nav .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .mark span{color:var(--lamp);position:absolute;top:-12px;right:-6px;font-size:22px}
 nav .links{display:flex;gap:28px;flex:1;align-items:center;flex-wrap:wrap;margin-left:24px}
 nav .links .lang{margin-left:auto}
-.foot-theme{display:flex;align-items:center;gap:10px}
 nav .links a{text-decoration:none;color:var(--ink);font:400 16px var(--f-display)}
 nav .links a:hover{color:var(--ink)}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -344,7 +284,7 @@ body{margin:0}
 img{max-width:100%}
 html{scroll-behavior:smooth}
 </style>
-<script>(function(){var v=null;try{v=localStorage.getItem("pal")}catch(e){}v=v||"nordic";if(v!=="lavender")document.documentElement.setAttribute("data-palette",v)})();</script>
+<script>document.documentElement.setAttribute("data-palette","nordic");</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/brands.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/solid.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/fontawesome.min.js"></script>
@@ -744,7 +684,6 @@ html{scroll-behavior:smooth}
 
   <footer>
     <span>© 2026 Cristobal D'Alessio · Québec, Canada</span>
-    <div class="foot-theme"><span data-i="themeLbl">Theme</span><div class="palettes" role="group" aria-label="Colour theme"><button type="button" data-pal="lavender" title="Lavender" aria-label="Lavender theme" aria-pressed="false" style="background:#B9A7DD"></button><button type="button" data-pal="studio" title="Studio" aria-label="Studio theme" aria-pressed="false" style="background:conic-gradient(#2F4BFF 0 33%,#FF5A36 0 66%,#C6F24E 0)"></button><button type="button" data-pal="nordic" title="Nordic" aria-label="Nordic theme" aria-pressed="true" style="background:conic-gradient(#CFDDD6 0 33%,#CDD9E3 0 66%,#E7D3C6 0);box-shadow:inset 0 0 0 5px #1E2A30"></button><button type="button" data-pal="sunset" title="Sunset" aria-label="Sunset theme" aria-pressed="false" style="background:conic-gradient(#E4572E 0 33%,#F2A93B 0 66%,#1F7A6D 0)"></button></div></div>
     <a href="#top" data-i="top">Back to top ↑</a>
   </footer>
 </main>
@@ -1032,15 +971,6 @@ document.getElementById("l-fr").onclick=()=>setLang("fr");
 document.getElementById("l-es").onclick=()=>setLang("es");
 try{const s=localStorage.getItem("lang"); if(s==="fr"||s==="es") setLang(s)}catch(e){}
 
-function setPal(v){
-  if(!["lavender","studio","nordic","sunset"].includes(v)) v="lavender";
-  if(v==="lavender") document.documentElement.removeAttribute("data-palette"); else document.documentElement.setAttribute("data-palette",v);
-  document.querySelectorAll(".palettes button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pal===v));
-  try{localStorage.setItem("pal",v)}catch(e){}
-}
-document.querySelectorAll(".palettes button").forEach(b=>b.onclick=()=>setPal(b.dataset.pal));
-let _pal=null;try{_pal=localStorage.getItem("pal")}catch(e){}
-setPal(_pal||"nordic");
 
 const copyBtn=document.getElementById("copy"), email=document.getElementById("email");
 copyBtn.onclick=()=>{
