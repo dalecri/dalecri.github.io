@@ -1,1138 +1,759 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristobal D'Alessio | Project Archive</title>
-    
-    <!-- Web Bookmark / Browser Tab Icon -->
-    <link rel="icon" type="image/png" href="logo.png">
-    <!-- iPhone / iPad Home Screen Icon -->
-    <link rel="apple-touch-icon" href="logo.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cristobal D'Alessio: social media strategy, communications operations and technical writing. Based in Québec, Canada.">
+<meta name="theme-color" content="#221D2B">
+<title>Cristobal's Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one calm column, lamp-lit plum night; pixel labels as the signature detail */
+/* Layout: a framed card on a dotted night sky, centered mono hero; lavender as the one accent */
+:root{
+  --sky:#18141F; --bg:#221D2B; --surface:#2A2434; --ink:#EDE7F3; --muted:#A99DBB; --line:#3A3247;
+  --lamp:#B9A7DD; --lamp-soft:#342C44; --plum:#CDBDEA; --fill:#8C80A0; --dots:#2C2636;
+  --f-display:"Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-pixel:"Space Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --sky:#E4DFEB; --bg:#F8F6FB; --surface:#FFFFFF; --ink:#231D2C; --muted:#665C75; --line:#DDD5E7;
+  --lamp:#6A53A3; --lamp-soft:#ECE6F6; --plum:#5A4590; --fill:#8C80A0; --dots:#D3CCDD; color-scheme:light}}
+:root[data-theme="light"]{
+  --sky:#E4DFEB; --bg:#F8F6FB; --surface:#FFFFFF; --ink:#231D2C; --muted:#665C75; --line:#DDD5E7;
+  --lamp:#6A53A3; --lamp-soft:#ECE6F6; --plum:#5A4590; --fill:#8C80A0; --dots:#D3CCDD; color-scheme:light}
 
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Light Theme (Beige Background) */
-            --bg-color: #E2E0D3; 
-            --card-paper: #0639C6; 
-            --card-indent: #042687;
-            --card-text: #E2E0D3;
-            --card-content-bg: #111;
-            --text-main: #0639C6;
-            --text-muted: #577AE0;
-            --text-accent: #0639C6;
-            --border-color: rgba(6, 57, 198, 0.15);
-            --shadow-color: rgba(0, 0, 0, 0.2);
-            --slider-bg: #B0ADC2;
-            --highlight: rgba(255, 255, 255, 0.2);
-        }
+*{box-sizing:border-box}
+body{background:var(--sky) radial-gradient(var(--dots) 1px,transparent 1.2px) 0 0/18px 18px;color:var(--ink);font:16px/1.6 var(--f-body);padding-inline:clamp(12px,4vw,56px);padding-block:32px}
+.frame{max-width:1360px;margin:0 auto;background:var(--bg);border:1px solid var(--line);padding-inline:clamp(16px,5vw,72px)}
+.wrap{max-width:980px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:3px;border-radius:4px}
+.px{font-family:var(--f-pixel);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--lamp)}
 
-        [data-theme="dark"] {
-            /* Dark Theme (Blue Background - Matches Logo perfectly) */
-            --bg-color: #0639C6; 
-            --card-paper: #E2E0D3; 
-            --card-indent: #C2C0B3;
-            --card-text: #0639C6;
-            --card-content-bg: #000;
-            --text-main: #E2E0D3;
-            --text-muted: #8AA7FF;
-            --text-accent: #E2E0D3;
-            --border-color: rgba(226, 224, 211, 0.2);
-            --shadow-color: rgba(0, 0, 0, 0.4);
-            --slider-bg: #042687;
-            --highlight: rgba(255, 255, 255, 0.5);
-        }
+/* nav */
+nav{padding-block:32px 8px}
+nav .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.mark{font:700 26px var(--f-display);text-decoration:none;position:relative;padding-right:14px}
+.mark span{color:var(--lamp);position:absolute;top:-12px;right:-6px;font-size:22px}
+nav .links{display:flex;gap:28px;flex:1;align-items:center;flex-wrap:wrap;margin-left:24px}
+nav .links .lang{margin-left:auto}
+nav .links a{text-decoration:none;color:var(--ink);font:400 16px var(--f-display)}
+nav .links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:700 12px var(--f-display);background:none;border:0;color:var(--muted);padding:5px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
+/* hero */
+.hero{position:relative;padding-block:80px 40px;display:grid;justify-items:center;text-align:center;gap:18px}
+.hero .hi{font:400 clamp(18px,2.2vw,24px) var(--f-display);color:var(--lamp);margin:8px 0 -6px}
+.hero h1{font:700 clamp(56px,12vw,168px)/1 var(--f-display);letter-spacing:-.04em;margin:0}
+.hero h1 .d{display:inline-block;width:.24em;height:.24em;border-radius:50%;background:var(--lamp);margin-left:.08em}
+.hero .lede{font:400 clamp(16px,1.8vw,21px)/1.9 var(--f-display);margin:8px 0 0;max-width:34ch}
+.star{position:absolute;color:var(--lamp);font:300 64px/1 var(--f-body);pointer-events:none}
+.star.a{left:8%;top:34%}.star.b{right:14%;top:40%;font-size:28px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
+.btn{font:400 16px var(--f-display);padding:14px 28px;border-radius:999px;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--muted)}
+.status{display:flex;gap:10px;align-items:center;justify-content:center;color:var(--muted);font:400 14px var(--f-display);flex-wrap:wrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--lamp);box-shadow:0 0 0 4px var(--lamp-soft)}
+.hero-foot{width:100%;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;font:400 14px var(--f-display);color:var(--muted)}
+.hero-foot a{text-decoration:none}.hero-foot a:hover{color:var(--ink)}
+/* pillars */
+.thesis{font:700 clamp(22px,3.2vw,34px)/1.3 var(--f-display);letter-spacing:-.02em;text-align:center;max-width:26ch;margin:24px auto 40px;text-wrap:balance}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pillar{background:var(--surface);padding:22px;display:grid;gap:8px;align-content:start}
+.pillar h3{font:700 19px/1.2 var(--f-display);margin:0}
+.pillar p{margin:0;color:var(--muted);font-size:15px}
 
-        body {
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
+section{padding-block:72px 0}
+.sec-head{display:grid;gap:6px;margin-bottom:28px}
+.sec-head h2{font:700 clamp(28px,4vw,38px)/1.1 var(--f-display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sec-head p{margin:0;color:var(--muted);max-width:60ch}
 
-        .header-left {
-            position: absolute;
-            top: 50px;
-            left: 60px;
-            z-index: 100;
-        }
+/* case studies */
+.cases{display:grid;gap:18px}
+.case{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.case h3{font:700 26px/1.15 var(--f-display);margin:4px 0 10px}
+.case .body{min-width:0;display:grid;gap:14px;align-content:start}
+.case dl{margin:0;display:grid;gap:10px}
+.case dt{font-weight:600;font-size:13px;color:var(--plum);text-transform:uppercase;letter-spacing:.06em}
+.case dd{margin:0;color:var(--ink);font-size:15.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+.tags li{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.fill{border:1.5px dashed var(--fill);border-radius:6px;padding:0 6px;color:var(--fill);font-size:.92em;white-space:nowrap}
+.stats{display:flex;gap:24px;flex-wrap:wrap}
+.stat b{display:block;font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
 
-        .header-left .name {
-            font-family: 'Silkscreen', cursive;
-            font-weight: 400;
-            font-size: 42px;
-            line-height: 1.1;
-            color: var(--text-main);
-            letter-spacing: 2px;
-            text-transform: lowercase;
-            text-shadow: 0 0 16px rgba(226, 224, 211, 0.4);
-        }
+/* mini visuals */
+.visual{min-width:0;border-radius:12px;background:var(--bg);border:1px solid var(--line);padding:18px;display:grid;gap:10px;align-content:center;min-height:220px}
+.ticket{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.ticket .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--lamp-soft);color:var(--lamp)}
+.chip.done{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.grid9 i{aspect-ratio:1;border-radius:6px;display:block}
+.page{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;font-size:15px;line-height:1.8}
+.page .hl{background:var(--lamp-soft);border-radius:3px;padding:0 2px}
 
-        [data-theme="light"] .header-left .name, :root:not([data-theme="dark"]) .header-left .name {
-            text-shadow: 0 0 16px rgba(6, 57, 198, 0.3);
-        }
+.more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.small{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:8px;align-content:start}
+.small h3{font:700 20px var(--f-display);margin:0}
+.small p{margin:0;color:var(--muted);font-size:15px}
 
-        .header-left .stats {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
+/* projects */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filters button{font:400 13px var(--f-display);padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--lamp);border-color:var(--lamp);color:var(--bg)}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pcard{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;cursor:pointer;display:grid;grid-template-rows:auto 1fr}
+.pcard:hover{border-color:var(--lamp)}
+.thumb{background:var(--lamp-soft);padding:16px;aspect-ratio:16/10;max-width:100%;display:grid;align-content:center;gap:6px;font:400 13px/1.4 var(--f-display);color:var(--ink);overflow:hidden}
+.thumb .win{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:4px}
+.thumb .win i{font-style:normal;color:var(--lamp)}
+.thumb .win s{text-decoration:none;color:var(--muted);font-size:12px}
+.pinfo{padding:16px 18px 18px;display:grid;gap:6px;align-content:start;min-width:0}
+.pinfo .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pinfo h3{font:700 18px var(--f-display);margin:0}
+.pinfo p{margin:0;color:var(--muted);font-size:14.5px}
+.st{font:400 11px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.st.live{color:var(--lamp)}
+.more-row{display:flex;justify-content:center;margin-top:20px}
+dialog{border:1px solid var(--line);border-radius:16px;padding:0;background:var(--surface);color:var(--ink);width:min(620px,calc(100% - 32px));max-height:calc(100% - 48px)}
+dialog::backdrop{background:rgba(10,8,14,.6)}
+.pd-thumb .thumb{aspect-ratio:auto;min-height:170px}
+.pd-body{padding:22px 24px 24px;display:grid;gap:14px}
+.pd-body h3{font:700 26px var(--f-display);margin:0}
+.pd-body dl{margin:0;display:grid;gap:10px}
+.pd-body dt{font-weight:600;font-size:13px;color:var(--plum);text-transform:uppercase;letter-spacing:.06em}
+.pd-body dd{margin:0}
+.pd-body .btn{justify-self:start}
+.pd-links{justify-content:flex-start}
+.pd-links .btn{padding:10px 20px;font-size:14px}
+.archive{font:400 14px var(--f-display);color:var(--lamp);text-decoration:none}
+.archive:hover{text-decoration:underline}
 
-        /* --- Mechanical Keyboard Keys --- */
-        .mech-keys-container {
-            display: flex;
-            gap: 14px;
-            margin-top: 24px;
-            align-items: center;
-        }
+.case.collapsed{grid-template-columns:minmax(0,1fr)}
+.case.collapsed dl,.case.collapsed .tags,.case.collapsed .visual{display:none}
+.case-toggle{justify-self:start;font:400 14px var(--f-display);color:var(--lamp);background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+.case-toggle:hover{border-color:var(--lamp)}
+.channels{list-style:none;margin:0;padding:0;display:flex;gap:14px;flex-wrap:wrap;font-size:20px;color:var(--muted)}
+.channels li{display:flex}.channels a{color:inherit;text-decoration:none;display:flex}.channels a:hover{color:var(--lamp)}.channels li:hover{color:var(--lamp)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* writing */
+.wgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.wcard{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:8px;align-content:start;grid-template-rows:auto auto 1fr auto}
+button.wcard{cursor:pointer}button.wcard:hover{border-color:var(--lamp)}
+.wcard.soon{background:transparent;border-style:dashed}
+.wcard h3{font:700 18px/1.3 var(--f-display);margin:0}
+.wcard p{margin:0;color:var(--muted);font-size:14.5px}
+.wmeta{display:flex;justify-content:space-between;gap:10px;font:400 13px var(--f-display);color:var(--muted);margin-top:6px}
+.wmeta .go{color:var(--lamp)}
+dialog.doc{width:min(760px,calc(100% - 24px));max-height:calc(100% - 32px)}
+.doc-bar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.doc-bar .btn{padding:8px 16px;font-size:14px}
+.doc-body{padding:28px clamp(18px,5vw,48px) 40px;max-width:66ch;margin:0 auto;font-size:16px}
+.doc-body h1{font:700 clamp(24px,4vw,32px)/1.2 var(--f-display);margin:0 0 10px}
+.doc-body h2{font:700 20px var(--f-display);margin:32px 0 8px}
+.doc-lede{color:var(--muted);font-size:17px}
+.doc-body ol,.doc-body ul{padding-left:22px;display:grid;gap:6px}
+.doc-body code{font:14px var(--f-display);background:var(--lamp-soft);padding:1px 5px;border-radius:4px}
+.doc-body dt{font-weight:600;margin-top:14px}.doc-body dd{margin:4px 0 0;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font:400 13px var(--f-display);margin:18px 0}
+.toc a{color:var(--lamp);text-decoration:none}
+.note{border-left:3px solid var(--lamp);background:var(--lamp-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:15px}
+.note.warn{border-left-color:var(--plum)}
 
-        .mech-key {
-            background: var(--card-paper);
-            color: var(--card-text);
-            font-family: 'Silkscreen', cursive;
-            font-size: 20px;
-            height: 48px;
-            min-width: 48px;
-            border: 2px solid var(--card-text);
-            border-radius: 12px;
-            box-shadow: 
-                inset 1px 1px 0 rgba(255,255,255,0.4),
-                inset -2px -4px 0 rgba(0,0,0,0.1),
-                0 6px 0 var(--card-text),
-                0 10px 10px var(--shadow-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
-            text-transform: uppercase;
-            padding: 0 12px;
-        }
+/* timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--line);display:grid;gap:22px}
+.tl li{position:relative;display:grid;gap:2px}
+.tl li::before{content:"";position:absolute;left:-27px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1.5px solid var(--lamp)}
+.tl li.now::before{background:var(--lamp);box-shadow:0 0 0 4px var(--lamp-soft)}
+.tl li.edu::before{border-radius:2px}
+.tl .yr{font:400 12px var(--f-display);letter-spacing:.08em;color:var(--lamp);font-variant-numeric:tabular-nums}
+.tl b{font:700 16px/1.3 var(--f-display)}
+.tl li>span:last-child{color:var(--muted);font-size:14.5px}
 
-        .mech-key:active, .mech-key.pressed {
-            transform: translateY(4px);
-            background: var(--card-indent);
-            box-shadow: 
-                inset 1px 1px 0 rgba(255,255,255,0.4),
-                inset -2px -2px 0 rgba(0,0,0,0.1),
-                0 2px 0 var(--card-text),
-                0 4px 5px var(--shadow-color);
-        }
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;max-width:720px}
+.about p{margin:0 0 14px;max-width:62ch}
+.skills{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+.skills h4{font:600 13px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--plum);margin:0 0 8px}
+.skills .grp{margin-bottom:18px}
 
-        .mech-key.wide {
-            font-size: 13px;
-            letter-spacing: 1px;
-            padding: 0 16px;
-        }
+/* contact */
+.contact{margin-block:80px 40px;border-radius:18px;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:40px clamp(22px,5vw,48px);display:grid;gap:18px}
+.contact h2{font:800 clamp(28px,4.5vw,44px)/1.05 var(--f-display);margin:0;text-wrap:balance}
+.contact p{margin:0;opacity:.8;max-width:52ch}
+.contact .btn{background:var(--lamp);border-color:var(--lamp);color:var(--bg)}
+.contact .btn.ghost{background:transparent;border-color:var(--muted);color:var(--ink)}
+.contact .ctas{justify-content:flex-start}
+.copied{font-size:14px;opacity:.85}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:14px;padding-block:0 40px}
 
-        .filter-panel {
-            position: absolute;
-            top: 50px;
-            right: 60px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .filter-btn {
-            background: none;
-            border: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-main);
-            cursor: pointer;
-            opacity: 0.5;
-            transition: all 0.2s ease;
-            text-transform: lowercase;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-btn.active {
-            opacity: 1;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .filter-btn sup {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-muted);
-        }
-
-        .viewport {
-            position: absolute;
-            inset: 0;
-            top: 35%; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            perspective: 2200px;
-        }
-
-        .scene {
-            transform-style: preserve-3d;
-            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .timeline {
-            transform-style: preserve-3d;
-            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-        }
-
-        .ground-line {
-            position: absolute;
-            width: 1px;
-            background: var(--border-color);
-            left: 0;
-            transform: translateX(-50%);
-        }
-
-        .label {
-            position: absolute;
-            left: 0;
-            transform-style: preserve-3d;
-            transform-origin: bottom center;
-            color: var(--text-accent);
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            font-family: 'Silkscreen', cursive;
-            text-transform: uppercase;
-            white-space: nowrap;
-            transition: top 0.65s, transform 0.65s;
-        }
-
-        .card-container {
-            position: absolute;
-            left: 0;
-            transform-style: preserve-3d;
-            transform-origin: bottom center;
-            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.65s;
-            cursor: pointer;
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            outline: none;
-        }
-
-        .card-frame {
-            width: 92%;
-            height: 100%;
-            margin: 0 auto;
-            position: relative;
-            background: var(--card-paper);
-            border-radius: 16px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            box-shadow: 
-                0 8px 12px -2px var(--shadow-color), 
-                inset 0 -2px 6px rgba(0,0,0,0.4);
-            transform-origin: bottom center;
-            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, background-color 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: visible;
-            container-type: inline-size;
-        }
-
-        .gba-lip {
-            width: 108.7%;
-            align-self: center;
-            height: 22%;
-            background: var(--card-paper);
-            border-bottom: 2px solid rgba(0,0,0,0.15);
-            border-radius: 12px;
-            box-shadow: 
-                inset 0 2px 4px var(--highlight),
-                0 4px 6px -2px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            transition: box-shadow 0.4s ease, background-color 0.4s ease;
-        }
-
-        .gba-logo-area {
-            width: 70%;
-            height: 60%;
-            border-radius: 20px;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: inset 0 2px 3px rgba(0,0,0,0.2), 0 1px 1px var(--highlight);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--card-indent);
-            overflow: hidden;
-            transition: background-color 0.4s ease;
-        }
-
-        .gba-logo-text {
-            font-family: 'Space Mono', monospace;
-            font-size: min(12px, 3.8cqw);
-            font-weight: 700;
-            color: var(--card-text);
-            opacity: 0.6;
-            text-shadow: 0 1px 1px var(--highlight);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            transition: all 0.4s ease;
-        }
-
-        .gba-label-recess {
-            width: 88%;
-            flex: 1;
-            margin-bottom: 20%;
-            background: var(--card-indent);
-            border-radius: 12px;
-            padding: 1.5%;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 1px 1px var(--highlight);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: background-color 0.4s ease;
-        }
-
-        .card-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            background: white;
-            overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
-            transition: filter 0.6s ease, opacity 0.6s ease;
-        }
-
-        .card-preview-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .esrb-logo {
-            position: absolute;
-            bottom: 4%;
-            left: 4%;
-            width: 11%;
-            background: white;
-            border: min(2px, 0.4cqw) solid black;
-            display: flex;
-            flex-direction: column;
-            border-radius: 2px;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .esrb-top {
-            background: black;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            font-size: min(4px, 1cqw);
-            font-weight: 900;
-            text-align: center;
-            padding: 1px 0;
-            letter-spacing: 0.5px;
-        }
-
-        .esrb-e {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: black;
-            font-family: 'Arial', sans-serif;
-            font-size: min(18px, 5cqw);
-            font-weight: 900;
-            line-height: 1;
-            padding: 2px 0;
-        }
-
-        .esrb-bottom {
-            font-family: 'Arial', sans-serif;
-            font-size: min(3.5px, 0.8cqw);
-            font-weight: 700;
-            color: black;
-            text-align: center;
-            line-height: 1;
-            padding-bottom: 2px;
-        }
-
-        .gba-bottom-grip {
-            position: absolute;
-            bottom: 6%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 10%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .gba-bottom-grip span {
-            width: 100%;
-            height: 2px;
-            background: rgba(0,0,0,0.15);
-            box-shadow: 0 1px 1px var(--highlight);
-            border-radius: 2px;
-        }
-
-        .gba-triangle {
-            position: absolute;
-            bottom: 2%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: min(8px, 2cqw) solid transparent;
-            border-right: min(8px, 2cqw) solid transparent;
-            border-top: min(8px, 2cqw) solid rgba(0,0,0,0.2);
-            filter: drop-shadow(0 1px 0px var(--highlight));
-        }
-
-        .card-container.active .card-frame {
-            box-shadow: 
-                0 25px 35px -10px var(--shadow-color), 
-                0 10px 10px -5px var(--shadow-color),
-                inset 0 -2px 6px rgba(0,0,0,0.4);
-            transform: scale(1.15);
-        }
-
-        .card-container.active .gba-lip {
-            box-shadow: 
-                0 15px 25px -5px rgba(0,0,0,0.3),
-                inset 0 2px 4px var(--highlight);
-        }
-
-        .card-container.active .gba-logo-text {
-            opacity: 1;
-            text-shadow: 0 1px 2px var(--shadow-color), 0 0 12px var(--highlight);
-            transform: scale(1.05);
-        }
-
-        .card-container.insert-cartridge .card-frame {
-            animation: cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        @keyframes cartridge-bounce {
-            0% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
-            50% { transform: scale(0.95) translateY(80px); box-shadow: 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.6); }
-            100% { transform: scale(1.15) translateY(0); box-shadow: 0 25px 35px -10px var(--shadow-color), 0 10px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4); }
-        }
-
-        .screen-glare {
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 150%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-            transform: skewX(-25deg);
-            z-index: 20;
-            pointer-events: none;
-        }
-
-        .card-container.insert-cartridge .screen-glare {
-            animation: glare-flash 0.3s ease-out forwards;
-        }
-
-        @keyframes glare-flash {
-            0% { left: -150%; }
-            100% { left: 150%; }
-        }
-
-        .controls-panel {
-            position: absolute;
-            bottom: 40px;
-            right: 60px;
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 15px;
-        }
-
-        .controls-card {
-            background: var(--bg-color);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            border: 1px solid var(--border-color);
-            display: none;
-            flex-direction: column;
-            gap: 14px;
-            width: 240px;
-            transition: background-color 0.4s ease, border-color 0.4s ease;
-        }
-
-        .controls-card.open { display: flex; }
-
-        .control-row {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .control-label-group {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-main);
-            letter-spacing: 0.8px;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 4px;
-            background: var(--slider-bg);
-            border-radius: 2px;
-            outline: none;
-            -webkit-appearance: none;
-            transition: background-color 0.4s ease;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: var(--text-main);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.4s ease;
-        }
-
-        .modern-theme-btn {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-main);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        .modern-theme-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
-        }
-
-        .adjust-btn {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 10px var(--shadow-color);
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        
-        .adjust-btn svg {
-            width: 22px;
-            height: 22px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .adjust-btn:hover {
-            transform: translateY(-3px) rotate(10deg);
-            box-shadow: 0 6px 15px var(--shadow-color);
-        }
-
-        .mobile-only-btn { display: none; }
-
-        @media (max-width: 768px) {
-            body {
-                overflow-y: auto !important;
-                height: auto !important;
-                min-height: 100vh;
-            }
-            .hide-mobile { display: none !important; }
-            .mobile-only-btn { display: flex; align-items: center; justify-content: center; }
-            
-            .header-left {
-                position: relative !important;
-                top: 0 !important;
-                left: 0 !important;
-                padding: 30px 20px 10px 20px !important;
-            }
-            .header-left .name {
-                font-size: 32px !important;
-            }
-            .mech-keys-container {
-                margin-top: 15px !important;
-            }
-            .filter-panel {
-                position: relative !important;
-                top: 0 !important;
-                right: auto !important;
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-                padding: 10px 20px 30px 20px !important;
-                justify-content: flex-start !important;
-            }
-            .viewport {
-                position: relative !important;
-                top: 0 !important;
-                height: auto !important;
-                padding: 0 20px 60px 20px !important;
-                display: block !important;
-                perspective: none !important;
-            }
-            .scene, .timeline {
-                transform: none !important;
-                position: static !important;
-            }
-            .ground-line, .label, .controls-panel {
-                display: none !important;
-            }
-            #cards-container {
-                transform: none !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 40px !important;
-                padding-bottom: 40px !important;
-                padding-top: 20px !important;
-            }
-            .card-container {
-                position: relative !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                height: 216px !important; 
-                margin: 0 auto !important;
-                max-width: 342px !important;
-                
-                --mobile-scale: 1;
-                --mobile-z: 1;
-                transform: scale(var(--mobile-scale)) !important;
-                z-index: var(--mobile-z) !important;
-                transition: none !important; 
-                will-change: transform;
-            }
-            .card-frame {
-                --m-shadow-y: 10px;
-                --m-shadow-b: 15px;
-                box-shadow: 0 var(--m-shadow-y) var(--m-shadow-b) -5px var(--shadow-color), 0 5px 10px -5px var(--shadow-color), inset 0 -2px 6px rgba(0,0,0,0.4) !important;
-                transform: none !important;
-                transition: background-color 0.4s ease !important;
-            }
-            .gba-lip {
-                box-shadow: 0 calc(var(--m-shadow-y) * 0.5) calc(var(--m-shadow-b) * 0.5) -2px rgba(0,0,0,0.2), inset 0 2px 4px var(--highlight) !important;
-            }
-            .card-content {
-                filter: none !important;
-                opacity: 1 !important;
-            }
-            .card-container.insert-cartridge .card-frame {
-                animation: mobile-cartridge-bounce 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-            }
-            @keyframes mobile-cartridge-bounce {
-                0% { transform: translateY(0); }
-                50% { transform: translateY(40px) scale(0.95); }
-                100% { transform: translateY(0); }
-            }
-        }
-    </style>
+@media (max-width:1000px) and (min-width:761px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .star{display:none}
+  .hero-foot{justify-content:center;text-align:center}
+  .pillars,.case,.about,.pgrid,.wgrid{grid-template-columns:minmax(0,1fr)}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{padding-block:48px 24px}
+  nav .links a.hide-sm{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+}
+body{margin:0}
+[hidden]{display:none!important}
+img{max-width:100%}
+html{scroll-behavior:smooth}
+</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/brands.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/fontawesome.min.js"></script>
 </head>
 <body>
 
-    <div class="header-left">
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
-            <div class="name">cristobal<br>d'alessio</div>
-            <button id="mobile-theme-toggle" class="mobile-only-btn adjust-btn" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
-        </div>
-        <div class="stats">FILTERED : <span id="project-count">0</span></div>
-        
-        <div class="mech-keys-container hide-mobile">
-            <button class="mech-key" id="key-left">←</button>
-            <button class="mech-key" id="key-right">→</button>
-            <button class="mech-key wide" id="key-enter">Enter</button>
-        </div>
+<div class="frame">
+<nav>
+  <div class="wrap">
+    <a class="mark" href="#top">c<span>✳</span></a>
+    <div class="links">
+      <a href="#work" class="hide-sm" data-i="navWork">Work</a>
+      <a href="#writing" class="hide-sm" data-i="navWrite">Writing</a>
+      <a href="#projects" class="hide-sm" data-i="navProj">Projects</a>
+      <a href="#about" class="hide-sm" data-i="navAbout">About</a>
+      <a href="#contact" class="hide-sm" data-i="navContact">Contact</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="l-en" aria-pressed="true">EN</button>
+        <button type="button" id="l-fr" aria-pressed="false">FR</button>
+        <button type="button" id="l-es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <span class="star a" aria-hidden="true">✳</span><span class="star b" aria-hidden="true">+</span>
+    <div class="px" data-i="eyebrow">Social media · Operations · Technical writing</div>
+    <p class="hi" data-i="hi">Hi! I'm</p>
+    <h1>Cristobal<span class="d" aria-hidden="true"></span></h1>
+    <p class="lede" data-i="lede">Welcome to my little corner of the internet.</p>
+    <div class="ctas">
+      <a class="btn ghost" href="#work" data-i="ctaWork">Explore my work ↓</a>
+      <a class="btn" href="#contact" data-i="ctaCv">Get my CV</a>
+    </div>
+    <div class="status"><span class="dot"></span><span data-i="status">Communications professional and operations specialist · open to remote roles</span></div>
+    <div class="hero-foot">
+      <span data-i="based">Based in Québec, Canada</span>
+      <span><a href="#contact">crisdalessio@gmail.com</a> · <a href="https://www.linkedin.com/">LinkedIn</a></span>
+    </div>
+  </header>
+
+  <p class="thesis" data-i="thesis">I make technical things clear, for the public, for users, and for the teams building them.</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <span class="px">600K+</span>
+      <h3 data-i="p1h">Social media strategy</h3>
+      <p data-i="p1">Channel management, campaign planning and data-informed content, from a national agency to my own brand.</p>
+    </div>
+    <div class="pillar">
+      <span class="px" data-i="pa2">Media Hotline</span>
+      <h3 data-i="p2h">Communications operations</h3>
+      <p data-i="p2">Request management and triaging, expert routing, SOPs, dashboards and KPI reporting.</p>
+    </div>
+    <div class="pillar">
+      <span class="px" data-i="pa3">Expert to media</span>
+      <h3 data-i="p3h">Technical & digital writing</h3>
+      <p data-i="p3">Turning technical answers from experts into clear, professional responses that fit the audience.</p>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="sec-head">
+      <span class="px" data-i="workEye">Case studies</span>
+      <h2 data-i="workH">Work, in and out of the office</h2>
     </div>
 
-    <div class="filter-panel">
-        <button class="filter-btn active" data-cat="all">all <sup id="count-all">0</sup></button>
-        <button class="filter-btn" data-cat="art">art <sup id="count-art">0</sup></button>
-        <button class="filter-btn" data-cat="interactive">interactive <sup id="count-interactive">0</sup></button>
-        <button class="filter-btn" data-cat="productivity">productivity <sup id="count-productivity">0</sup></button>
-        <button class="filter-btn" data-cat="game">game <sup id="count-game">0</sup></button>
-    </div>
-
-    <div class="viewport">
-        <div class="scene" id="scene">
-            <div class="timeline" id="timeline">
-                <div class="ground-line" id="ground-line"></div>
-                <div class="label" id="label-latest">start</div>
-                <div class="label" id="label-oldest">finish</div>
-                <div id="cards-container" style="transform-style: preserve-3d;"></div>
-            </div>
+    <div class="cases">
+      <!-- Media Hotline -->
+      <article class="case">
+        <div class="body">
+          <span class="px" data-i="c1eye">Operations + writing · Statistics Canada · Dec 2023 to now</span>
+          <h3 data-i="c1h">Managing the Media Hotline</h3>
+          <dl>
+            <div><dt data-i="lblProblem">Challenge</dt><dd data-i="c1a">On major economic release days, requests from media outlets across Canada arrive quickly. To meet our service standards, queries must be directed promptly, answered in the journalist's language of choice and vetted for media use.</dd></div>
+            <div><dt data-i="lblDid">What I do</dt><dd data-i="c1b">As journalists' primary point of contact, I route their queries to certified experts and track each one to close, shaping the expert's answer into a well-suited reply that keeps the agency's professional tone without unnecessary technical jargon. I also lead embargoed lockups with national news agencies for releases like the Consumer Price Index (CPI), the Labour Force Survey (LFS) and gross domestic product (GDP).</dd></div>
+            <div><dt data-i="lblSys">Behind the scenes</dt><dd data-i="c1c">I build internal dashboards, report on our key KPIs to management, certify experts for media interviews, and write the SOPs the team works from.</dd></div>
+          </dl>
+          <div class="stats">
+            <div class="stat"><b>CPI · LFS · GDP</b><span data-i="s1">release lockups led</span></div>
+            <div class="stat"><b><span class="fill">###</span></b><span data-i="s2">media requests / year</span></div>
+          </div>
+          <ul class="tags"><li>Media relations</li><li>Dynamics 365</li><li>Agility PR</li><li data-i="tOps">KPI reporting</li></ul>
         </div>
-    </div>
-
-    <div class="controls-panel hide-mobile">
-        <div class="controls-card" id="controls-card">
-            <button id="theme-toggle" class="modern-theme-btn">
-                <span>Toggle Theme</span>
-            </button>
-            <div class="control-row" style="margin-top: 10px;">
-                <div class="control-label-group"><span>Pitch (X)</span><span id="val-pitch">72°</span></div>
-                <input type="range" id="input-pitch" min="30" max="85" value="72">
-            </div>
-            <div class="control-row">
-                <div class="control-label-group"><span>Angle (Z)</span><span id="val-angle">42°</span></div>
-                <input type="range" id="input-angle" min="0" max="90" value="42">
-            </div>
-            <div class="control-row">
-                <div class="control-label-group"><span>Active Tilt</span><span id="val-tilt">-90°</span></div>
-                <input type="range" id="input-tilt" min="-110" max="-30" value="-90">
-            </div>
-            <div class="control-row">
-                <div class="control-label-group"><span>Active Rotate</span><span id="val-rotate">0°</span></div>
-                <input type="range" id="input-rotate" min="-45" max="45" value="0">
-            </div>
-            <div class="control-row">
-                <div class="control-label-group"><span>Cartridge Size</span><span id="val-size">280px</span></div>
-                <input type="range" id="input-size" min="180" max="400" value="280">
-            </div>
-            <div class="control-row">
-                <div class="control-label-group"><span>Offset (Y)</span><span id="val-offsetY">165px</span></div>
-                <input type="range" id="input-offsetY" min="-300" max="300" value="165">
-            </div>
+        <div class="visual" aria-hidden="true">
+          <div class="ticket"><span class="px">08:30</span><span class="t" data-i="tk1">Labour Force Survey: lockup opens</span><span class="chip" data-i="chipOpen">Embargo</span></div>
+          <div class="ticket"><span class="px">08:31</span><span class="t" data-i="tk2">CPI: interview request (FR)</span><span class="chip" data-i="chipExpert">Expert</span></div>
+          <div class="ticket"><span class="px">08:45</span><span class="t" data-i="tk3">GDP: methodology question</span><span class="chip done" data-i="chipDone">Answered</span></div>
         </div>
-        <button class="adjust-btn" id="toggle-controls" title="Adjust View">
-            <svg viewBox="0 0 24 24">
-                <rect x="2" y="6" width="20" height="12" rx="4" ry="4"></rect>
-                <path d="M6 12h4"></path>
-                <path d="M8 10v4"></path>
-                <line x1="15" y1="13" x2="15.01" y2="13"></line>
-                <line x1="18" y1="11" x2="18.01" y2="11"></line>
-            </svg>
-        </button>
+      </article>
+
+      <article class="case">
+        <div class="body">
+          <span class="px" data-i="c4eye">Social strategy · Statistics Canada · 2020 to 2023</span>
+          <h3 data-i="c4h">Social Media for Canada's National Statistical Agency</h3>
+          <dl>
+            <div><dt data-i="lblProblem">Challenge</dt><dd data-i="c4a">Official statistics matter to all Canadians online, but no one enjoys parsing complex figures on social media.</dd></div>
+            <div><dt data-i="lblDid2">What I did</dt><dd data-i="c4b">Managed and grew the agency's channels, developed and ran campaigns for major data releases and survey collections, and coordinated live Reddit AMAs between subject matter experts and Canadians.</dd></div>
+            <div><dt data-i="lblSys">Behind the scenes</dt><dd data-i="c4c">Developed performance reports for senior management using Meltwater, Hootsuite and platform analytics. I also wrote platform SOPs and trained new team members on social media best practices.</dd></div>
+          </dl>
+          <div class="stats">
+            <div class="stat"><b>600K+</b><span data-i="s5">followers across platforms</span></div>
+            <div class="stat"><b>6</b><span data-i="s6">platforms managed</span></div>
+          </div>
+          <ul class="channels" aria-label="Channels"><li title="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i><span class="sr">X</span></li><li title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="sr">Instagram</span></li><li title="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i><span class="sr">Facebook</span></li><li title="Reddit"><i class="fa-brands fa-reddit-alien" aria-hidden="true"></i><span class="sr">Reddit</span></li><li title="LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i><span class="sr">LinkedIn</span></li><li title="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span class="sr">YouTube</span></li></ul>
+          <ul class="tags"><li data-i="tStrat">Content strategy</li><li>Social listening</li><li>Reddit AMAs</li></ul>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <div class="ticket"><span class="px">IG</span><span class="t" data-i="sm1">What does a typical Canadian commute look like?</span><span class="chip" data-i="chipPost">Post</span></div>
+          <div class="ticket"><span class="px">r/</span><span class="t" data-i="sm2">AMA: we're StatCan analysts, ask us about housing data</span><span class="chip" data-i="chipLive">Live</span></div>
+          <div class="ticket"><span class="px">X</span><span class="t" data-i="sm3">CPI rose in August: here's what drove it</span><span class="chip done" data-i="chipSched">Scheduled</span></div>
+        </div>
+      </article>
+
+      <!-- TwoStoryTails -->
+      <article class="case">
+        <div class="body">
+          <span class="px" data-i="c2eye">Social strategy · My own brand · 2022 to now</span>
+          <h3 data-i="c2h">TwoStoryTails | Multicat + Bengal content</h3>
+          <dl>
+            <div><dt data-i="lblProblem">Challenge</dt><dd data-i="c2a">Build a recognizable cat account in a crowded niche, with limited time to post.</dd></div>
+            <div><dt data-i="lblDid2">What I did</dt><dd data-i="c2b">Created the concept (four cats, two floors, two personalities), the visual identity and a posting rhythm. Then I built TwoStoryCaptions, a small tool that plans posts and drafts captions.</dd></div>
+            <div><dt data-i="lblChanged">What changed</dt><dd data-i="c2c">Faster content planning and a consistent brand voice across posts.</dd></div>
+          </dl>
+          <div class="stats">
+            <div class="stat"><b>400K+</b><span data-i="s3">views across platforms</span></div>
+            <div class="stat"><b>13.3K</b><span data-i="s4">TikTok likes</span></div>
+          </div>
+          <ul class="channels" aria-label="Channels"><li><a href="https://www.youtube.com/@twostorytails" target="_blank" rel="noopener" title="TwoStoryTails on YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span class="sr">TwoStoryTails on YouTube</span></a></li><li><a href="https://www.instagram.com/twostorytails/" target="_blank" rel="noopener" title="TwoStoryTails on Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="sr">TwoStoryTails on Instagram</span></a></li><li><a href="https://www.tiktok.com/@twostorytails" target="_blank" rel="noopener" title="TwoStoryTails on TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><span class="sr">TwoStoryTails on TikTok</span></a></li></ul>
+          <ul class="tags"><li data-i="tStrat">Content strategy</li><li data-i="tBrand">Branding</li><li data-i="tTool">Tool building</li></ul>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <div class="px" data-i="upDown">Upstairs / Downstairs</div>
+          <div class="grid9">
+            <i style="background:var(--lamp)"></i><i style="background:var(--plum)"></i><i style="background:var(--lamp-soft)"></i>
+            <i style="background:var(--plum)"></i><i style="background:var(--lamp-soft)"></i><i style="background:var(--lamp)"></i>
+            <i style="background:var(--lamp-soft)"></i><i style="background:var(--lamp)"></i><i style="background:var(--plum)"></i>
+          </div>
+        </div>
+      </article>
+
     </div>
+  </section>
 
-    <script>
-        const savedTheme = localStorage.getItem('theme') || 'dark'; // Force default dark
-        if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-        }
+  <section id="writing">
+    <div class="sec-head">
+      <span class="px" data-i="wrEye">Writing samples</span>
+      <h2 data-i="wrH">Technical & digital writing</h2>
+      <p data-i="wrP">How I adapt complex information for journalists, social audiences, users and internal teams.</p>
+    </div>
+    <div class="wgrid">
+      <button class="wcard" type="button" id="open-guide">
+        <span class="px" data-i="w1k">User guide</span>
+        <h3 data-i="w1h">Lamplight: getting started</h3>
+        <p data-i="w1p">A task-based guide for a reading app: importing books, focus mode, themes and troubleshooting.</p>
+        <span class="wmeta"><span data-i="w1m">5 min read</span><span class="go" data-i="read">Read sample →</span></span>
+      </button>
+      <div class="wcard soon">
+        <span class="px" data-i="w2k">Before & after</span>
+        <h3 data-i="w2h">From expert answer to media response</h3>
+        <p data-i="w2p">A technical answer from a subject-matter expert, edited into a clear reply a journalist can use, with notes on each change.</p>
+        <span class="wmeta"><span class="st" data-i="soon">Coming soon</span></span>
+      </div>
+      <div class="wcard soon">
+        <span class="px" data-i="w3k">Process doc</span>
+        <h3 data-i="w3h">Running a release-day media lockup</h3>
+        <p data-i="w3p">A step-by-step SOP for an embargoed release, from setup to the moment the embargo lifts.</p>
+        <span class="wmeta"><span class="st" data-i="soon2">Coming soon</span></span>
+      </div>
+    </div>
+  </section>
 
-        const PROJECTS = [
-            { id: 1, title: "Lamplight", description: "Your cozy RSVP Library", category: "productivity", url: "https://dalecri.github.io/Lamplight/" },
-            { id: 20, title: "Little Folders", description: "A digital space to collect your thoughts", category: "productivity", url: "https://dalecri.github.io/little-folders/" },
-            { id: 2, title: "Journo", description: "Journo", category: "productivity", url: "https://dalecri.github.io/journo/" },
-            { id: 3, title: "SkyflatDo", description: "Apartment inspired todo", category: "productivity", url: "https://dalecri.github.io/floating-apartment-todo/" },
-            { id: 4, title: "GardenDo", description: "Garden Voxel-inspired Todo App", category: "interactive", url: "https://dalecri.github.io/japanese-voxel-todo/" },
-            { id: 5, title: "StardDo", description: "Labelle-inspired Voxel Todo App", category: "interactive", url: "https://dalecri.github.io/voxel-city-river/" },
-            { id: 6, title: "Typerrium", description: "Grow digital flora through speed and precision", category: "interactive", url: "https://dalecri.github.io/typing-speed-terrarium/" },
-            { id: 7, title: "Maple QR", description: "Geometric floral QR generator", category: "productivity", url: "https://dalecri.github.io/QR-Code-generator/" },
-            { id: 8, title: "Typerule", description: "Watch your castle grow with your writing", category: "interactive", url: "https://dalecri.github.io/cathedral-markdown/" },
-            { id: 9, title: "Wordnest", description: "Practice your french", category: "productivity", url: "https://dalecri.github.io/Wordnest/" },
-            { id: 10, title: "Prettycode", description: "Export beautiful code snippets", category: "productivity", url: "https://dalecri.github.io/nimbus-code-beautifier/" },
-            { id: 11, title: "CubeWall", description: "Prismatic cube-grid wallpaper studio", category: "art", url: "https://dalecri.github.io/isometric-cube-wallpaper-generator/" },
-            { id: 12, title: "Polygrade", description: "Minimalist canvas for low-fidelity art", category: "art", url: "https://dalecri.github.io/polygon-wallpaper-generator/" },
-            { id: 13, title: "Cryptogotchi", description: "Nurture your digital security companion", category: "productivity", url: "https://dalecri.github.io/tamagotchi-password-gen/" },
-            { id: 14, title: "Cozy 2048", description: "Soft-palette numerical merging", category: "game", url: "https://dalecri.github.io/cozy-2048/" },
-            { id: 15, title: "Retro Rubic", description: "A tactile 3D geometric puzzle classic", category: "game", url: "https://dalecri.github.io/rubics-cube/" },
-            { id: 16, title: "TyQuest", description: "Life is but a game!", category: "productivity", url: "https://dalecri.github.io/tyquest/" },
-            { id: 17, title: "Loop Forge", description: "Grid to Strudel Code", category: "interactive", url: "https://dalecri.github.io/Loop-Forge/" },
-            { id: 18, title: "Style Guide", description: "My Style Guide", category: "interactive", url: "https://dalecri.github.io/my-portfolio/" },
-            { id: 19, title: "The Office Todo", description: "Todo App, but make it The Office", category: "interactive", url: "https://paperwork-scranton.hogaroro.chatgpt.site/" },
-        ];
+  <dialog id="guide" class="doc" aria-labelledby="g-title" lang="en">
+    <div class="doc-bar"><span class="px">User guide · Sample</span><button class="btn ghost" type="button" id="guide-close">Close</button></div>
+    <article class="doc-body">
+      <h1 id="g-title">Getting started with Lamplight</h1>
+      <p class="doc-lede">Lamplight is a calm reading app for EPUB books. This guide covers everything you need for your first session.</p>
+      <nav class="toc" aria-label="On this page"><a href="#g1">Add a book</a><a href="#g2">Read</a><a href="#g3">Focus mode</a><a href="#g4">Change the lighting</a><a href="#g5">Where your books are stored</a><a href="#g6">Troubleshooting</a></nav>
 
-        let focusIdx = 0;
-        let currentFilter = "all";
-        let config = { 
-            pitch: 72,      
-            angle: 42,      
-            tilt: -90,      
-            rotate: 0,      
-            size: 280,
-            offsetY: 165
-        };
+      <h2 id="g1">Add a book</h2>
+      <p>Lamplight opens EPUB files, the most common ebook format.</p>
+      <ol><li>On your shelf, select <b>Add book</b>.</li><li>Choose an <code>.epub</code> file from your device.</li><li>The book appears on your shelf with its cover. Select it to start reading.</li></ol>
+      <div class="note"><b>Tip:</b> Many free, public-domain books are available as EPUB files from online libraries.</div>
 
-        const PACK_STEP = 30;
-        const SPREAD_GAP = 600;
-        const POP_Z = 180;
+      <h2 id="g2">Read</h2>
+      <p>Tap or click the right side of the page to go forward and the left side to go back. Lamplight remembers where you stopped, so you can close the app and pick up on the same page later.</p>
 
-        const cardsLayer = document.getElementById('cards-container');
-        const timeline = document.getElementById('timeline');
-        const scene = document.getElementById('scene');
-        const groundLine = document.getElementById('ground-line');
-        const labelLatest = document.getElementById('label-latest');
-        const labelOldest = document.getElementById('label-oldest');
-        const projectCountDisp = document.getElementById('project-count');
+      <h2 id="g3">Focus mode</h2>
+      <p>Focus mode shows one word at a time in the centre of the screen. It helps when you want to read without your eyes wandering down the page.</p>
+      <ol><li>While reading, select <b>Focus</b>.</li><li>Set your speed in words per minute (wpm). If you're new to this, start around 250 wpm.</li><li>Select <b>Play</b>. Select <b>Pause</b> at any time to stop and return to the full page.</li></ol>
+      <p>The timer shows how long you've been reading in this session.</p>
 
-        function getFilteredItems() {
-            return currentFilter === "all" ? PROJECTS : PROJECTS.filter(p => p.category === currentFilter);
-        }
+      <h2 id="g4">Change the lighting</h2>
+      <p>Lamplight has three lighting themes. Tap the icon at the top of the screen to switch between them:</p>
+      <ul><li><b>Sun:</b> bright and high-contrast, for daytime.</li><li><b>Lamp:</b> warm tones for evening reading.</li><li><b>Moon:</b> dark and low-light, for reading in bed.</li></ul>
 
-        // Handles the animation delay and same-tab routing
-        function playAndNavigate(index, url) {
-            const el = document.getElementById(`card-${index}`);
-            if (!el) return;
-            
-            el.classList.add('insert-cartridge');
-            
-            // Wait for the bounce animation to finish, then navigate current tab
-            setTimeout(() => {
-                window.location.assign(url);
-                
-                // Clean up in case the user uses the browser 'Back' button
-                setTimeout(() => {
-                    el.classList.remove('insert-cartridge');
-                }, 100);
-            }, 300);
-        }
+      <h2 id="g5">Where your books are stored</h2>
+      <p>Your books and reading progress are saved on your device only. Nothing is uploaded, and no account is needed.</p>
+      <div class="note warn"><b>Important:</b> In the web version, clearing your browser's site data also deletes your books and progress. Keep a copy of your EPUB files somewhere else.</div>
 
-        function createCards() {
-            cardsLayer.innerHTML = '';
-            const items = getFilteredItems();
-            
-            items.forEach((p, i) => {
-                const container = document.createElement('a');
-                container.className = 'card-container';
-                container.id = `card-${i}`;
-                container.href = p.url;
-                
-                const previewUrl = `https://api.microlink.io?url=${encodeURIComponent(p.url)}&screenshot=true&embed=screenshot.url`;
+      <h2 id="g6">Troubleshooting</h2>
+      <dl>
+        <dt>My book won't open.</dt><dd>Make sure the file ends in <code>.epub</code>. Books bought from some stores are copy-protected (DRM) and can't be opened in other apps.</dd>
+        <dt>My books disappeared.</dt><dd>Your browser's data was probably cleared. Add the books again from your EPUB files. Reading progress can't be recovered.</dd>
+        <dt>Focus mode is too fast.</dt><dd>Lower the wpm setting. Most people read comfortably between 200 and 300 wpm.</dd>
+      </dl>
+    </article>
+  </dialog>
 
-                container.innerHTML = `
-                    <div class="card-frame" style="container-type: inline-size;">
-                        <div class="gba-lip">
-                            <div class="gba-logo-area">
-                                <span class="gba-logo-text">${p.title}</span>
-                            </div>
-                        </div>
-                        <div class="gba-label-recess">
-                            <div class="card-content">
-                                <img class="card-preview-img" 
-                                     src="${previewUrl}" 
-                                     alt="${p.title}" 
-                                     loading="lazy"
-                                     onload="this.style.opacity=1"
-                                     style="opacity:0">
-                                <div class="screen-glare"></div>
-                                <div class="esrb-logo">
-                                    <div class="esrb-top">EVERYONE</div>
-                                    <div class="esrb-e">E</div>
-                                    <div class="esrb-bottom">CONTENT RATED BY<br>ESRB</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gba-bottom-grip">
-                            <span></span><span></span><span></span>
-                        </div>
-                        <div class="gba-triangle"></div>
-                    </div>
-                `;
+  <section id="projects">
+    <div class="sec-head">
+      <span class="px" data-i="projEye">Projects</span>
+      <h2 data-i="projH">Things I've designed and built</h2>
+      <p data-i="projP">Apps, tools and browser games. Some solve my own problems, some are just for fun. Tap one for the details.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+    <div class="pgrid" id="pgrid"></div>
+    <div class="more-row" style="gap:20px;align-items:center;flex-wrap:wrap"><button class="btn ghost" type="button" id="showall" hidden></button><a class="archive" href="https://dalecri.github.io/my-collection/" target="_blank" rel="noopener" data-i="archive">Browse my full project archive ↗</a></div>
+  </section>
 
-                container.onclick = (e) => {
-                    // Only intercept normal left clicks
-                    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-                        e.preventDefault(); 
-                        if (window.innerWidth <= 768) {
-                            playAndNavigate(i, p.url);
-                        } else {
-                            if (focusIdx === i) {
-                                playAndNavigate(i, p.url);
-                            } else {
-                                focusIdx = i;
-                                updateScene();
-                            }
-                        }
-                    }
-                };
-                cardsLayer.appendChild(container);
-            });
-            
-            projectCountDisp.textContent = items.length;
-            updateCounts();
+  <dialog id="pd" aria-labelledby="pd-title">
+    <div class="pd-thumb" id="pd-thumb"></div>
+    <div class="pd-body">
+      <span class="px" id="pd-kind"></span>
+      <h3 id="pd-title"></h3>
+      <dl id="pd-dl"></dl>
+      <ul class="tags" id="pd-tags"></ul>
+      <div class="ctas pd-links" id="pd-links"></div>
+      <button class="btn ghost" type="button" id="pd-close"></button>
+    </div>
+  </dialog>
 
-            if (window.innerWidth <= 768) {
-                setTimeout(handleMobileScroll, 50);
-            }
-        }
+  <section id="about">
+    <div class="sec-head">
+      <span class="px" data-i="aboutEye">About</span>
+      <h2 data-i="aboutH">Experience and education</h2>
+    </div>
+    <div class="about">
+      <ol class="tl">
+        <li class="now"><span class="yr">Dec 2023 – <span data-i="now">now</span></span><b data-i="tl1">Communications Officer, Media Relations</b><span data-i="tl1s">Statistics Canada</span></li>
+        <li class="edu"><span class="yr">2023</span><b data-i="tl5">Honours Bachelor of Public Relations</b><span data-i="tl5s">University of Ottawa</span></li>
+        <li><span class="yr">Jan 2020 – Dec 2023</span><b data-i="tl6">Communications Officer, Social Media</b><span data-i="tl6s">Statistics Canada</span></li>
+        <li class="edu"><span class="yr">2020</span><b data-i="tl4">Diploma, Public Relations</b><span data-i="tl4s">Algonquin College</span></li>
+        <li><span class="yr">Nov 2018 – Jan 2020</span><b data-i="tl2">Desktop Support Technician</b><span data-i="tl2s">Statistics Canada</span></li>
+        <li class="edu"><span class="yr">2018</span><b data-i="tl3">Diploma, Mobile Application Design & Development</b><span data-i="tl3s">Algonquin College</span></li>
+        <li><span class="yr">Aug 2012 – Jan 2020</span><b data-i="tl7">Supervisor & Head Coach</b><span data-i="tl7s">Nepean Corona School of Gymnastics · Coach of the Year 2017</span></li>
+      </ol>
+    </div>
+    <div class="skills">
+      <div class="grp"><h4 data-i="sk2">Social media</h4><ul class="tags"><li data-i="tStrat">Content strategy</li><li data-i="skH">Campaign planning</li><li>Meltwater</li><li>Hootsuite</li><li>Sprout Social</li></ul></div>
+      <div class="grp"><h4 data-i="sk5">Operations</h4><ul class="tags"><li>Dynamics 365</li><li data-i="skI">Queue & triage</li><li data-i="skE">SOPs</li><li data-i="skF">Dashboards & KPIs</li></ul></div>
+      <div class="grp"><h4 data-i="sk1">Writing</h4><ul class="tags"><li data-i="skJ">Media responses</li><li data-i="skB">Plain language</li><li data-i="skK">User guides</li><li>Agility PR</li></ul></div>
+      <div class="grp"><h4 data-i="sk3">Build</h4><ul class="tags"><li>HTML / CSS / JS</li><li>Capacitor</li><li>Adobe CC</li><li data-i="skG">AI workflows</li></ul></div>
+      <div class="grp"><h4 data-i="sk4">Languages</h4><ul class="tags"><li data-i="lgEs">Spanish (native)</li><li data-i="lgEn">English (fluent)</li><li data-i="lgFr">French (functional, improving)</li></ul></div>
+    </div>
+  </section>
 
-        function updateCounts() {
-            document.getElementById('count-all').textContent = PROJECTS.length;
-            document.getElementById('count-art').textContent = PROJECTS.filter(p => p.category === "art").length;
-            document.getElementById('count-interactive').textContent = PROJECTS.filter(p => p.category === "interactive").length;
-            document.getElementById('count-productivity').textContent = PROJECTS.filter(p => p.category === "productivity").length;
-            document.getElementById('count-game').textContent = PROJECTS.filter(p => p.category === "game").length;
-        }
+  <div class="contact" id="contact">
+    <span class="px" data-i="cEye">Say hi</span>
+    <h2 data-i="cH">Hiring for communications, social media or operations? Let's talk.</h2>
+    <p data-i="cP">Send me a note and I'll reply within a day.</p>
+    <div class="ctas">
+      <button class="btn" type="button" id="copy" data-i="cCopy">Copy my email</button>
+      <a class="btn ghost" href="https://www.linkedin.com/" data-i="cLi">LinkedIn</a>
+      <span class="copied" id="email">crisdalessio@gmail.com</span>
+    </div>
+  </div>
 
-        function updateScene() {
-            if (window.innerWidth <= 768) {
-                handleMobileScroll();
-                return;
-            }
+  <footer>
+    <span>© 2026 Cristobal D'Alessio · Labelle, QC</span>
+    <a href="#top" data-i="top">Back to top ↑</a>
+  </footer>
+</main>
+</div>
 
-            const items = getFilteredItems();
-            const totalLength = items.length * PACK_STEP;
-            scene.style.transform = `translateY(${config.offsetY}px) rotateX(${config.pitch}deg) rotateZ(${config.angle}deg)`;
+<script>
+const FR = {
+  navWork:"Travail", navAbout:"À propos", navContact:"Contact", navProj:"Projets", projEye:"Projets", projH:"Ce que j'ai conçu et créé", projP:"De petites applications et des outils, surtout pour régler mes propres problèmes. Touchez-en un pour les détails.", now:"auj.", tl1:"Conseiller en médias", tl1s:"Statistique Canada · Ligne nationale des médias", tl2:"Technicien en déploiement informatique", tl2s:"Statistique Canada", tl3:"Conception et développement d'applications mobiles", tl3s:"Diplôme · Collège Algonquin", tl4:"Relations publiques", tl4s:"Baccalauréat et diplôme · Collège Algonquin",
+  eyebrow:"Communications · Médias sociaux · Design", hi:"Salut/Hi! Je suis", based:"Basé au Québec, Canada",
+    lede:"Bienvenue dans mon petit coin d'internet.",
+  ctaWork:"Voir mes projets ↓", ctaCv:"Obtenir mon CV",
+  status:"Ouvert aux postes à distance en opérations, marketing et médias sociaux",
+  p1h:"Communications", p1:"Relations avec les médias, préparation des porte-parole et messages clairs sur des données complexes.",
+  p2h:"Médias sociaux et contenu", p2:"Ton de marque, calendriers de contenu et croissance d'une communauté à partir de zéro.",
+  p3h:"Design et développement", p3:"Interfaces et petites applications web en HTML, CSS et JavaScript. Des outils qui font gagner du temps.",
+  workEye:"Études de cas", workH:"Mon travail, au bureau et ailleurs",
+  workP:"Chaque projet répond à trois questions : quel était le problème, ce que j'ai fait, et ce qui a changé.",
+  c1eye:"Statistique Canada · Emploi actuel", c1h:"Ligne nationale des médias",
+  lblProblem:"Problème", lblDid:"Mon rôle", lblChanged:"Résultat", lblStatus:"Statut",
+  c1a:"Les journalistes de partout au Canada ont besoin de réponses exactes sur les statistiques officielles, rapidement, dans les deux langues officielles.",
+  c1b:"Je trie les demandes, je mets les journalistes en contact avec des experts et je rédige des réponses bilingues claires.",
+  c1c:"Suivi et transfert des demandes simplifiés.", fillProcess:"ajouter un processus amélioré",
+  s1:"demandes des médias / an", s2:"délai moyen de réponse",
+  tBil:"Communications bilingues", tOps:"Processus",
+  tk1:"Enquête sur la population active : données régionales", tk2:"Publication de l'IPC : demande d'entrevue (FR)", tk3:"Question sur la méthodologie du recensement",
+  chipOpen:"Ouvert", chipExpert:"Expert", chipDone:"Répondu",
+  c2eye:"Médias sociaux · Marque personnelle",
+  c2a:"Créer un compte de chats reconnaissable dans un créneau très occupé, avec peu de temps pour publier.",
+  c2b:"J'ai créé le concept (quatre chats, deux étages, deux personnalités), l'identité visuelle et un rythme de publication. Ensuite, j'ai conçu TwoStoryCaptions, un petit outil qui planifie les publications et rédige les légendes.",
+  c2c:"Planification plus rapide et un ton de marque constant.",
+  s3:"abonnés", s4:"taux d'engagement moyen",
+  tStrat:"Stratégie de contenu", tBrand:"Image de marque", tTool:"Création d'outils",
+  upDown:"En haut / En bas",
+  c3eye:"Application web · Design + code",
+  c3a:"Les applications de lecture sont encombrées et poussent vers la prochaine distraction.",
+  c3b:"J'ai conçu et programmé un lecteur EPUB dans un seul fichier HTML, avec un style pixel art, un mode concentration qui affiche un mot à la fois et une vitesse de lecture réglable.",
+  c3c:"En cours. Prochaines étapes : mode hors ligne et version mobile.",
+  tIx:"Design d'interaction",
+  pg:"C'était une soirée tranquille, et la lampe dessinait un cercle doux sur la page. Elle lisait lentement, <span class=\"hl\">un mot</span> à la fois.",
+  live:"En ligne", wip:"En cours",
+  m1:"Un tableau blanc pour les idées, les listes et les petites trouvailles. Conçu pour remplacer une pile de notes autocollantes.",
+  m2:"Une application de cartes mémoire pour apprendre le français. Révision espacée, séances courtes.",
+  aboutEye:"À propos", aboutH:"Communicateur le jour, créateur le soir",
+  ab1:"Du déploiement informatique aux relations avec les médias, j'ai fait carrière dans les communications fédérales à Statistique Canada.",
+  ab2:"C'est ce mélange qui compte. Je peux rédiger l'annonce, planifier la campagne et créer l'outil qui accélère le travail.",
+  ab3:"Je parle espagnol et anglais, et j'améliore mon français chaque semaine. J'habite au Québec avec mon partenaire Tyler et nos quatre chats.",
+  sk1:"Communications", sk2:"Marketing et médias sociaux", sk3:"Design et développement", sk4:"Langues",
+  skA:"Gestion des enjeux", skB:"Langage clair", skC:"Ton de marque", skD:"Analytique",
+  lgEs:"Espagnol (langue maternelle)", lgEn:"Anglais (courant)", lgFr:"Français (intermédiaire)",
+  cEye:"Say hi · Dites bonjour",
+  cH:"Vous cherchez quelqu'un qui sait communiquer et construire?",
+  cP:"Je suis ouvert aux postes à distance en opérations, marketing ou médias sociaux. Écrivez-moi et je vous répondrai en moins d'une journée.",
+  cCopy:"Copier mon courriel", cLi:"LinkedIn", top:"Retour en haut ↑"
+};
+Object.assign(FR,{
+  eyebrow:"Communications · Opérations · Design",
+  status:"Professionnel des communications et spécialiste des opérations · ouvert aux postes à distance",
+  p1:"Relations avec les médias, huis clos pour les publications économiques et messages clairs sur des statistiques complexes.",
+  p2:"Quatre ans à gérer des comptes nationaux de plus de 600 000 abonnés, et ma propre marque bâtie à partir de zéro.",
+  p3h:"Opérations et outils", p3:"Tableaux de bord, rapports sur les indicateurs clés, procédures et petites applications web.",
+  c1eye:"Statistique Canada · Depuis déc. 2023", c1h:"Relations avec les médias",
+  c1a:"Les journalistes ont besoin de réponses exactes sur les statistiques officielles, rapidement et dans les deux langues officielles, surtout les jours de publication.",
+  c1b:"Je dirige des huis clos avec les agences de presse nationales pour des publications majeures comme l'IPC, l'Enquête sur la population active et le PIB. Je gère les demandes des journalistes dans Dynamics 365, je les mets en contact avec des experts certifiés et je rends les données claires.",
+  lblSys:"En coulisses",
+  c1c:"Je crée des tableaux de bord internes, je fais rapport sur nos indicateurs clés, je certifie les experts pour les entrevues et je rédige les procédures de l'équipe.",
+  s1:"huis clos dirigés", s2:"demandes des médias / an", tOps:"Rapports d'indicateurs",
+  tk1:"Enquête sur la population active : ouverture du huis clos", tk2:"IPC : demande d'entrevue (FR)", tk3:"PIB : question de méthodologie",
+  chipOpen:"Embargo",
+  c4eye:"Statistique Canada · 2020 à 2023", c4h:"Médias sociaux nationaux",
+  c4a:"Les statistiques officielles concernent tout le monde, mais un tableau de données n'arrête personne en train de défiler.",
+  c4b:"J'ai géré et fait croître les comptes de l'organisme, mené des campagnes pour des publications et des collectes d'enquêtes, et animé des AMA en direct sur Reddit avec des analystes.",
+  c4c:"Rapports de performance pour la haute direction avec Meltwater, Hootsuite et Sprout Social. J'ai aussi rédigé les procédures et formé les nouveaux membres de l'équipe.",
+  s5:"abonnés sur toutes les plateformes", s6:"plateformes gérées",
+  sm1:"À quoi ressemble un trajet typique au Canada?", sm2:"AMA : nous sommes analystes à StatCan, posez vos questions sur le logement", sm3:"L'IPC a augmenté en août : voici pourquoi",
+  chipPost:"Publication", chipLive:"En direct", chipSched:"Planifié",
+  c2eye:"Ma propre marque · Depuis 2022",
+  aboutH:"Rendre les choses complexes claires",
+  ab1:"Je suis professionnel des communications et spécialiste des opérations. Depuis le début de ma carrière, mon travail consiste à rendre clair quelque chose de complexe pour le bon public.",
+  ab2:"Tout a commencé comme entraîneur de gymnastique, à expliquer des techniques aux enfants et à gérer des conversations délicates avec les parents. À Statistique Canada, je suis passé du soutien informatique, où j'ai accompagné le personnel lors d'une migration de systèmes, à la gestion des médias sociaux nationaux, puis aux relations avec les médias.",
+  ab5:"Ce que j'aime le plus, c'est bâtir le système derrière le travail : le tableau de bord, la procédure, l'outil qui fait tout fonctionner.",
+  tl1:"Agent de communication, Relations avec les médias", tl5:"Baccalauréat spécialisé en relations publiques", tl5s:"Université d'Ottawa",
+  tl6:"Agent de communication, Médias sociaux", tl6s:"Statistique Canada", tl4:"Diplôme, Relations publiques", tl4s:"Collège Algonquin",
+  tl2:"Technicien de soutien informatique", tl3:"Diplôme, Conception et développement d'applications mobiles", tl3s:"Collège Algonquin",
+  tl7:"Superviseur et entraîneur-chef", tl7s:"École de gymnastique Nepean Corona · Entraîneur de l'année 2017",
+  skA:"Huis clos sous embargo", sk5:"Opérations", skE:"Procédures", skF:"Tableaux de bord et indicateurs", skG:"Flux de travail avec l'IA", sk3:"Développement",
+  lgFr:"Français (fonctionnel, en progrès)",
+  cH:"Vous recrutez en communications, médias sociaux ou opérations? Parlons-en.", cP:"Écrivez-moi et je vous répondrai en moins d'une journée."
+});
+Object.assign(FR,{
+  thesis:"Je rends les sujets techniques clairs, pour le public, pour les utilisateurs et pour les équipes qui les créent.",
+  pa1:"Pour le public", pa2:"Pour les utilisateurs", pa3:"Pour les équipes",
+  p1h:"Communications", p1:"Relations avec les médias, huis clos des jours de publication et contenu social qui rendent les statistiques accessibles.",
+  p2h:"Documentation et rédaction UX", p2:"Guides d'utilisation, intégration et textes d'interface, par quelqu'un qui crée des applications et parle le langage des développeurs.",
+  p3:"Procédures, formation, tableaux de bord et rapports d'indicateurs qui font tout fonctionner.",
+  navWrite:"Rédaction", wrEye:"Exemples de rédaction", wrH:"Documentation et rédaction UX", wrP:"Des exemples de la façon dont j'explique un logiciel à ses utilisateurs et aux équipes qui le gèrent.",
+  w1k:"Guide d'utilisation", w1h:"Lamplight : premiers pas", w1p:"Un guide axé sur les tâches pour une application de lecture : importer des livres, mode concentration, thèmes et dépannage.", w1m:"5 min de lecture", read:"Lire l'exemple (EN) →",
+  w2k:"Analyse de textes UX", w2h:"Réécrire un parcours d'inscription confus", w2p:"Textes d'interface avant et après pour les boutons, les erreurs et les écrans vides, avec le raisonnement derrière chaque changement.",
+  w3k:"Procédure", w3h:"Mener un huis clos le jour d'une publication", w3p:"Une procédure étape par étape pour une publication sous embargo, de la préparation jusqu'à la levée de l'embargo.",
+  soon:"Bientôt", soon2:"Bientôt"
+});
+Object.assign(FR,{
+  eyebrow:"Médias sociaux · Opérations · Rédaction technique",
+  p1h:"Stratégie des médias sociaux", p1:"Gestion des comptes, planification de campagnes et contenu appuyé par les données, d'un organisme national à ma propre marque.",
+  pa2:"Ligne des médias", p2h:"Opérations de communication", p2:"Faire rouler le système : file de demandes, triage, experts, procédures, tableaux de bord et indicateurs.",
+  p3h:"Rédaction technique et numérique", p3:"Transformer des publications de données en messages pour les médias, publications sociales et guides clairs, adaptés à chaque public.",
+  c1eye:"Opérations + rédaction · Statistique Canada · Depuis déc. 2023", c1h:"Gérer la Ligne des médias",
+  c1a:"Les jours de publication, les demandes des journalistes de partout au Canada arrivent toutes en même temps. Chaque réponse doit être exacte, bilingue et rapide.",
+  c1b:"Je gère la file de demandes dans Dynamics 365 : triage, transfert aux experts certifiés et suivi jusqu'à la fermeture. Je dirige les huis clos avec les agences de presse pour l'IPC, l'EPA et le PIB, et je transforme chaque publication en messages utiles pour les journalistes.",
+  c4eye:"Stratégie sociale · Statistique Canada · 2020 à 2023", c2eye:"Stratégie sociale · Ma propre marque · Depuis 2022",
+  wrH:"Rédaction technique et numérique", wrP:"Comment j'adapte de l'information complexe pour les journalistes, les publics sociaux, les utilisateurs et les équipes internes.",
+  w2k:"Adaptation d'une publication", w2h:"Une publication, trois publics", w2p:"Une publication économique publique transformée en messages pour les médias, en fil social et en résumé clair.",
+  ab1:"Je suis professionnel des communications et spécialiste des opérations. Depuis le début de ma carrière, mon travail consiste à prendre des idées complexes et à les rendre claires pour le bon public.",
+  sk2:"Médias sociaux", skH:"Planification de campagnes", sk5:"Opérations", skI:"File et triage", sk1:"Rédaction", skJ:"Messages pour les médias", skK:"Guides d'utilisation", sk3:"Développement"
+});
+Object.assign(FR,{
+  pa3:"Des experts aux médias",
+  p3:"Transformer les réponses techniques des experts en réponses claires et professionnelles, adaptées au public.",
+  c1b:"Je gère la file de demandes dans Dynamics 365 : triage, transfert aux experts certifiés et suivi jusqu'à la fermeture. Quand un expert répond, je mets sa réponse en forme pour le journaliste : exacte, professionnelle et aussi peu technique que les données le permettent. Je dirige aussi les huis clos avec les agences de presse pour l'IPC, l'EPA et le PIB.",
+  w2k:"Avant et après", w2h:"De la réponse d'expert à la réponse aux médias",
+  w2p:"Une réponse technique d'un expert, révisée en réponse claire pour un journaliste, avec des notes sur chaque changement.",
+  skJ:"Réponses aux médias"
+});
+Object.assign(FR,{archive:"Voir toutes mes archives de projets ↗"});
+Object.assign(FR,{projP:"Des applications, des outils et des jeux web. Certains règlent mes propres problèmes, d'autres sont juste pour le plaisir. Touchez-en un pour les détails."});
+Object.assign(FR,{p2:"Gestion et triage des demandes, transfert aux experts, procédures, tableaux de bord et rapports d'indicateurs."});
+Object.assign(FR,{lblProblem:"Défi", c1h:"Gérer la Ligne des médias", c1a:"Les jours de publications économiques majeures, les demandes des médias de partout au Canada arrivent rapidement. Pour respecter nos normes de service, chaque demande doit être traitée promptement, dans la langue choisie par le journaliste, et chaque question doit recevoir une réponse exacte et complète."});
+Object.assign(FR,{c1b:"Premier point de contact des journalistes, je transmets leurs questions aux experts certifiés et j'en assure le suivi jusqu'à la fermeture. Quand un expert répond, je mets sa réponse en forme pour en faire une réponse adaptée, en respectant le ton professionnel de l'organisme et en retirant le jargon technique superflu. Je dirige aussi les huis clos avec les agences de presse nationales pour des publications comme l'Indice des prix à la consommation (IPC), l'Enquête sur la population active (EPA) et le produit intérieur brut (PIB)."});
+Object.assign(FR,{
+ c4a:"Les statistiques officielles concernent tous les Canadiens en ligne, mais personne n'aime décortiquer des chiffres complexes sur les médias sociaux.",
+ c4b:"J'ai géré et fait croître les comptes de l'organisme, conçu et mené des campagnes pour les grandes publications de données, les journées thématiques et les collectes d'enquêtes, et coordonné des AMA en direct sur Reddit entre des experts et le public.",
+ c4c:"J'ai préparé des rapports de performance pour la haute direction avec Meltwater, Hootsuite et les outils d'analyse des plateformes. J'ai aussi rédigé les procédures des plateformes et formé les nouveaux membres de l'équipe aux bonnes pratiques des médias sociaux."
+});
+Object.assign(FR,{c1a:"Les jours de publications économiques majeures, les demandes des médias de partout au Canada arrivent rapidement. Pour respecter nos normes de service, les questions doivent être acheminées promptement, recevoir une réponse dans la langue choisie par le journaliste et être validées pour une utilisation médiatique."});
+Object.assign(FR,{c1b:"Premier point de contact des journalistes, je transmets leurs questions aux experts certifiés et j'en assure le suivi jusqu'à la fermeture, en transformant la réponse de l'expert en une réponse adaptée qui respecte le ton professionnel de l'organisme, sans jargon technique superflu. Je dirige aussi les huis clos avec les agences de presse nationales pour des publications comme l'Indice des prix à la consommation (IPC), l'Enquête sur la population active (EPA) et le produit intérieur brut (PIB)."});
+Object.assign(FR,{c4b:"J'ai géré et fait croître les comptes de l'organisme, conçu et mené des campagnes pour les grandes publications de données et les collectes d'enquêtes, et coordonné des AMA en direct sur Reddit entre des experts et la population canadienne."});
+Object.assign(FR,{ab1:"Je suis professionnel des communications et spécialiste des opérations. J'aime le défi de prendre des idées complexes et de les rendre claires pour le bon public. Ce fil conducteur traverse toute ma carrière : entraîner des gymnastes en décortiquant des techniques difficiles, accompagner des centaines d'employés de Statistique Canada lors d'une migration informatique à l'échelle de l'organisme, puis gérer aujourd'hui des médias sociaux nationaux et les relations avec les médias."});
+Object.assign(FR,{hi:"Bonjour ! Je suis", c4h:"Médias sociaux pour l'organisme statistique du Canada", cEye:"Dites bonjour", lblDid2:"Mon rôle"});
+const ES={"navWork": "Trabajo", "navWrite": "Redacción", "navProj": "Proyectos", "navAbout": "Sobre mí", "navContact": "Contacto", "eyebrow": "Redes sociales · Operaciones · Redacción técnica", "hi": "¡Hola! Soy", "lede": "Bienvenidos a mi pequeño rincón de internet.", "ctaWork": "Explora mi trabajo ↓", "ctaCv": "Ver mi CV", "status": "Profesional de comunicaciones y especialista en operaciones · disponible para puestos remotos", "based": "Con base en Quebec, Canadá", "thesis": "Hago que lo técnico sea claro: para el público, para los usuarios y para los equipos que lo construyen.", "p1h": "Estrategia de redes sociales", "p1": "Gestión de canales, planificación de campañas y contenido basado en datos, desde una agencia nacional hasta mi propia marca.", "pa2": "Línea de Medios", "p2h": "Operaciones de comunicación", "p2": "Gestión y clasificación de solicitudes, canalización a expertos, procedimientos (SOP), tableros e informes de KPI.", "pa3": "Del experto a los medios", "p3h": "Redacción técnica y digital", "p3": "Convierto respuestas técnicas de expertos en respuestas claras y profesionales, adaptadas a cada público.", "workEye": "Casos de estudio", "workH": "Trabajo, dentro y fuera de la oficina", "c1eye": "Operaciones + redacción · Statistics Canada · Dic. 2023 a la fecha", "c1h": "Gestión de la Línea de Medios", "lblProblem": "Reto", "lblDid": "Qué hago", "lblDid2": "Qué hice", "lblSys": "Tras bambalinas", "lblChanged": "Qué cambió", "c1a": "En los días de publicaciones económicas importantes, las solicitudes de medios de todo Canadá llegan rápidamente. Para cumplir con nuestros estándares de servicio, las consultas deben canalizarse con prontitud, responderse en el idioma que elija el periodista y validarse para su uso en medios.", "c1b": "Como principal punto de contacto de los periodistas, canalizo sus consultas a expertos certificados y doy seguimiento a cada una hasta su cierre, convirtiendo la respuesta del experto en una respuesta adecuada que mantiene el tono profesional de la agencia, sin jerga técnica innecesaria. También dirijo sesiones bajo embargo con agencias de noticias nacionales para publicaciones como el Índice de Precios al Consumidor (IPC), la Encuesta de Población Activa (LFS) y el producto interno bruto (PIB).", "c1c": "Creo tableros internos, informo a la dirección sobre nuestros KPI clave, certifico a expertos para entrevistas con medios y redacto los procedimientos con los que trabaja el equipo.", "s1": "sesiones bajo embargo dirigidas", "s2": "solicitudes de medios / año", "tOps": "Informes de KPI", "tk1": "Encuesta de Población Activa: abre la sesión", "chipOpen": "Embargo", "tk2": "IPC: solicitud de entrevista (FR)", "chipExpert": "Experto", "tk3": "PIB: pregunta metodológica", "chipDone": "Respondida", "c4eye": "Estrategia social · Statistics Canada · 2020 a 2023", "c4h": "Redes sociales para la agencia estadística de Canadá", "c4a": "Las estadísticas oficiales importan a todos los canadienses en línea, pero a nadie le gusta descifrar cifras complejas en redes sociales.", "c4b": "Gestioné e hice crecer los canales de la agencia, desarrollé y dirigí campañas para grandes publicaciones de datos y recolecciones de encuestas, y coordiné AMA en vivo en Reddit entre expertos y la población canadiense.", "c4c": "Elaboré informes de desempeño para la alta dirección con Meltwater, Hootsuite y las analíticas de cada plataforma. También redacté los procedimientos de las plataformas y capacité a nuevos integrantes del equipo en buenas prácticas de redes sociales.", "s5": "seguidores en todas las plataformas", "s6": "plataformas gestionadas", "tStrat": "Estrategia de contenido", "sm1": "¿Cómo es un trayecto típico al trabajo en Canadá?", "chipPost": "Publicación", "sm2": "AMA: somos analistas de StatCan, pregúntennos sobre datos de vivienda", "chipLive": "En vivo", "sm3": "El IPC subió en agosto: esto lo impulsó", "chipSched": "Programada", "c2eye": "Estrategia social · Mi propia marca · 2022 a la fecha", "c2a": "Crear una cuenta de gatos reconocible en un nicho saturado, con poco tiempo para publicar.", "c2b": "Creé el concepto (cuatro gatos, dos pisos, dos personalidades), la identidad visual y un ritmo de publicación. Luego construí TwoStoryCaptions, una pequeña herramienta que planifica publicaciones y redacta textos.", "c2c": "Planificación de contenido más rápida y una voz de marca coherente en todas las publicaciones.", "s3": "seguidores", "s4": "interacción promedio", "tBrand": "Imagen de marca", "tTool": "Creación de herramientas", "upDown": "Arriba / Abajo", "wrEye": "Muestras de redacción", "wrH": "Redacción técnica y digital", "wrP": "Cómo adapto información compleja para periodistas, audiencias en redes, usuarios y equipos internos.", "w1k": "Guía de usuario", "w1h": "Lamplight: primeros pasos", "w1p": "Una guía por tareas para una app de lectura: importar libros, modo concentración, temas y solución de problemas.", "w1m": "5 min de lectura", "read": "Leer muestra (EN) →", "w2k": "Antes y después", "w2h": "De la respuesta del experto a la respuesta a medios", "w2p": "Una respuesta técnica de un experto, editada para convertirla en una respuesta clara que un periodista pueda usar, con notas sobre cada cambio.", "soon": "Próximamente", "soon2": "Próximamente", "w3k": "Documento de proceso", "w3h": "Cómo dirigir una sesión bajo embargo el día de una publicación", "w3p": "Un procedimiento paso a paso para una publicación bajo embargo, desde la preparación hasta que se levanta el embargo.", "projEye": "Proyectos", "projH": "Lo que he diseñado y construido", "projP": "Apps, herramientas y juegos web. Algunos resuelven mis propios problemas y otros son solo por diversión. Toca uno para ver los detalles.", "archive": "Ver mi archivo completo de proyectos ↗", "aboutEye": "Sobre mí", "aboutH": "Hacer claro lo complicado", "ab1": "Soy profesional de comunicaciones y especialista en operaciones. Disfruto el reto de tomar ideas complicadas y hacerlas claras para el público adecuado. Ese hilo recorre toda mi carrera: desde entrenar gimnasia y desglosar habilidades técnicas difíciles, hasta acompañar a cientos de empleados de Statistics Canada en una migración informática en toda la agencia, y hoy gestionar canales sociales nacionales y relaciones con los medios.", "now": "hoy", "tl1": "Oficial de Comunicaciones, Relaciones con los Medios", "tl5": "Licenciatura con honores en Relaciones Públicas", "tl5s": "Universidad de Ottawa", "tl6": "Oficial de Comunicaciones, Redes Sociales", "tl4": "Diploma en Relaciones Públicas", "tl2": "Técnico de Soporte de Escritorio", "tl3": "Diploma en Diseño y Desarrollo de Aplicaciones Móviles", "tl7": "Supervisor y Entrenador en Jefe", "tl7s": "Nepean Corona School of Gymnastics · Entrenador del Año 2017", "sk2": "Redes sociales", "skH": "Planificación de campañas", "sk5": "Operaciones", "skI": "Cola y clasificación", "skE": "Procedimientos (SOP)", "skF": "Tableros y KPI", "sk1": "Redacción", "skJ": "Respuestas a medios", "skB": "Lenguaje claro", "skK": "Guías de usuario", "sk3": "Desarrollo", "skG": "Flujos de trabajo con IA", "sk4": "Idiomas", "lgEs": "Español (nativo)", "lgEn": "Inglés (fluido)", "lgFr": "Francés (funcional, en progreso)", "cEye": "Saluda", "cH": "¿Buscas talento en comunicaciones, redes sociales u operaciones? Hablemos.", "cP": "Escríbeme y te respondo en menos de un día.", "cCopy": "Copiar mi correo", "top": "Volver arriba ↑"};
+const ES_P={"lamplight": {"kind": "App de lectura", "line": "Un lugar tranquilo para leer, una página o una palabra a la vez.", "problem": "Las apps de lectura están saturadas y te empujan hacia la siguiente distracción.", "did": "Diseñé y construí un lector EPUB en un solo archivo HTML, con estilo pixel art, un modo de una palabra a la vez y velocidad ajustable."}, "pocketful": {"kind": "Pizarra", "line": "Un hogar para ideas, listas y los pequeños hallazgos del camino.", "problem": "Mis ideas estaban dispersas entre notas adhesivas, apps de notas y capturas de pantalla.", "did": "Construí un tablero libre para listas, notas y hallazgos guardados, pensado para sentirse ligero y lúdico."}, "journo": {"kind": "App de diario", "line": "Un cuaderno digital para palabras, recuerdos e ideas sueltas.", "problem": "Las apps de diario se sienten como software de productividad, no como un cuaderno.", "did": "Diseñé un diario táctil con aspecto de papel, con páginas diarias y espacio para fotos y recuerdos."}, "wordnest": {"kind": "App de aprendizaje", "line": "Tarjetas de francés con repaso espaciado y sesiones cortas.", "problem": "Quería practicar francés en cinco minutos libres.", "did": "Construí una app de tarjetas con repetición espaciada, mazos personalizados y una pantalla de repaso tranquila y enfocada."}, "captions": {"kind": "Planificador de contenido", "line": "Planifica publicaciones y redacta textos para las cuentas de TwoStoryTails.", "problem": "Planificar publicaciones para cuatro gatos en dos pisos tomaba más tiempo que filmarlos.", "did": "Construí un planificador que organiza ideas por gato y genera borradores de textos con la voz de la cuenta."}, "fall": {"kind": "Juego web", "line": "Una caída arriesgada: cuanto más tiempo caes, más ganas, pero solo lo conservas si aterrizas.", "play": "Una caída arriesgada: cuanto más tiempo caes, más ganas, pero solo lo conservas si aterrizas.", "controls": "Arrastra a la izquierda y a la derecha para dirigirte. Aterriza en una cornisa para asegurar tus puntos."}, "loop": {"kind": "Juego web", "line": "Un juego de esquivar donde cada ronda de 10 segundos se rebobina y tus intentos anteriores regresan como ecos que debes evitar.", "play": "Un juego de esquivar donde cada ronda de 10 segundos se rebobina y tus intentos anteriores regresan como ecos que debes evitar.", "controls": "Arrastra en cualquier parte para moverte, o usa las flechas. Recoge las marcas para completar la hoja."}, "keep": {"kind": "Juego web", "line": "Mantén viva a una criatura luminosa colocando un objeto a la vez: comida, un muro, un rebotador o un portal.", "play": "Mantén viva a una criatura luminosa colocando un objeto a la vez: comida, un muro, un rebotador o un portal.", "controls": "Toca para colocar un objeto. Al colocar uno nuevo, el anterior desaparece."}, "lasso": {"kind": "Juego web", "line": "Una arena .io del viejo oeste: arrastra una cuerda, rodea a jinetes rivales para lazarlos y corta sus cuerdas.", "play": "Una arena .io del viejo oeste: arrastra una cuerda, rodea a jinetes rivales para lazarlos y corta sus cuerdas.", "controls": "Dirige a tu jinete. Cruza tu propia cuerda para cerrar un lazo alrededor de jinetes y oro."}, "afterimage": {"kind": "Juego web", "line": "Un juego de memoria: una ruta destella un segundo y debes trazarla antes de que se desvanezca su imagen.", "play": "Un juego de memoria: una ruta destella un segundo y debes trazarla antes de que se desvanezca su imagen.", "controls": "Observa el destello y luego traza la ruta empezando por el anillo."}, "fence": {"kind": "Juego web", "line": "Un rompecabezas por turnos en pixel art: construye cercas para reclamar el pastizal antes de que el limo lo invada.", "play": "Un rompecabezas por turnos en pixel art: construye cercas para reclamar el pastizal antes de que el limo lo invada.", "controls": "Arrastra sobre las líneas de la cuadrícula para colocar cercas y luego toca Construir."}, "lastlight": {"kind": "Juego web", "line": "Un escalador de cuevas en pixel art donde eres la llama de una vela que se encoge.", "play": "Un escalador de cuevas en pixel art donde eres la llama de una vela que se encoge.", "controls": "Sube flotando, roza las velas para recargarte y esquiva gotas y viento."}, "mirror": {"kind": "Juego web", "line": "Un corredor de pantalla dividida con un solo pulgar: dirige al corredor del día y a su gemelo nocturno a la vez.", "play": "Un corredor de pantalla dividida con un solo pulgar: dirige al corredor del día y a su gemelo nocturno a la vez.", "controls": "Arrastra en cualquier parte. Encuentra el único punto por donde pasan ambos corredores."}};
+Object.assign(FR,{aboutH:"Expérience et formation"});ES.aboutH="Experiencia y formación";
+Object.assign(FR,{s3:"vues sur TikTok",s4:"mentions J'aime sur TikTok"});ES.s3="vistas en TikTok";ES.s4="me gusta en TikTok";
+Object.assign(FR,{s3:"vues sur Instagram et TikTok"});ES.s3="vistas en Instagram y TikTok";
+Object.assign(FR,{s3:"vues sur toutes les plateformes"});ES.s3="vistas en todas las plataformas";
+Object.assign(FR,{c4h:"Médias sociaux pour l'organisme statistique national du Canada",c2h:"TwoStoryTails | Contenu multichats + Bengal"});ES.c4h="Redes sociales para la agencia nacional de estadística de Canadá";ES.c2h="TwoStoryTails | Contenido multigatos + Bengalí";
+const T=(en,fr,es)=>lang==="fr"?fr:lang==="es"?es:en;
+const nodes=[...document.querySelectorAll("[data-i]")];
+const EN={}; nodes.forEach(n=>{EN[n.dataset.i]??=n.innerHTML});
+let lang="en";
+const PROJECTS=[
+ {id:"lamplight",demo:"https://dalecri.github.io/Lamplight/",repo:"https://github.com/dalecri/Lamplight",name:"Lamplight",cat:"apps",status:"wip",
+  kind:{en:"Reading app",fr:"Application de lecture"},
+  line:{en:"A quieter place to read, one page or one word at a time.",fr:"Un endroit calme pour lire, une page ou un mot à la fois."},
+  thumb:'<div class="win"><i>☾ unhurried.</i><span>She read slowly, one word at a time.</span><s>275 wpm · 04:32</s></div>',
+  problem:{en:"Reading apps are cluttered and pull you toward the next distraction.",fr:"Les applications de lecture sont encombrées et poussent vers la prochaine distraction."},
+  did:{en:"Designed and built an EPUB reader in a single HTML file, with a pixel-art look, a one-word-at-a-time focus mode and adjustable speed.",fr:"J'ai conçu un lecteur EPUB dans un seul fichier HTML, avec un style pixel art, un mode un mot à la fois et une vitesse réglable."},
+  tags:["Interaction design","HTML / CSS / JS","Pixel art"]},
+ {id:"pocketful",demo:"https://dalecri.github.io/little-folders/",repo:"https://github.com/dalecri/little-folders",name:"Pocketful",cat:"apps",status:"live",
+  kind:{en:"Whiteboard app",fr:"Tableau blanc"},
+  line:{en:"A home for ideas, lists and the good bits you find along the way.",fr:"Un endroit pour les idées, les listes et les petites trouvailles."},
+  thumb:'<div class="win"><i>Ideas for a rainy day</i><span>☑ Make something</span><span>☐ Follow a daydream</span></div>',
+  problem:{en:"Ideas ended up scattered across sticky notes, notes apps and screenshots.",fr:"Mes idées étaient éparpillées entre notes autocollantes, applications et captures d'écran."},
+  did:{en:"Built a free-form board for lists, notes and saved finds, designed to feel light and playful.",fr:"J'ai créé un tableau libre pour les listes, notes et trouvailles, léger et ludique."},
+  tags:["Creative tools","UI design"]},
+ {id:"journo",demo:"https://dalecri.github.io/digital-journal-app/",repo:"https://github.com/dalecri/digital-journal-app",name:"Journo",cat:"apps",status:"wip",
+  kind:{en:"Journal app",fr:"Journal"},
+  line:{en:"A digital notebook for words, memories and messy thoughts.",fr:"Un carnet numérique pour les mots, les souvenirs et les idées en vrac."},
+  thumb:'<div class="win"><i>A page for today ✧</i><span>More noticing. Less rushing.</span><s>One day at a time</s></div>',
+  problem:{en:"Journaling apps feel like productivity software instead of a notebook.",fr:"Les applications de journal ressemblent à des logiciels de productivité, pas à un carnet."},
+  did:{en:"Designed a tactile, paper-like journal with daily pages and room for photos and memories.",fr:"J'ai conçu un journal tactile qui ressemble au papier, avec des pages quotidiennes et de la place pour des photos."},
+  tags:["Digital experience","Skeuomorphic UI"]},
+ {id:"wordnest",demo:"https://dalecri.github.io/Wordnest/",repo:"https://github.com/dalecri/Wordnest",name:"Wordnest",cat:"apps",status:"wip",
+  kind:{en:"Learning app",fr:"Apprentissage"},
+  line:{en:"French flashcards with spaced review and short sessions.",fr:"Des cartes mémoire en français, avec révision espacée et séances courtes."},
+  thumb:'<div class="win"><i>la bougie</i><span>→ the candle</span><s>12 cards due today</s></div>',
+  problem:{en:"I wanted French practice that fits into five spare minutes.",fr:"Je voulais pratiquer mon français en cinq minutes libres."},
+  did:{en:"Built a flashcard app with spaced repetition, custom decks and a calm, focused review screen.",fr:"J'ai créé une application de cartes mémoire avec répétition espacée et paquets personnalisés."},
+  tags:["Education","HTML / CSS / JS"]},
+ {id:"captions",demo:"https://dalecri.github.io/Twostorycaptions/",repo:"https://github.com/dalecri/Twostorycaptions",name:"TwoStoryCaptions",cat:"tools",status:"live",
+  kind:{en:"Content planner",fr:"Planificateur de contenu"},
+  line:{en:"Plans posts and drafts captions for the TwoStoryTails accounts.",fr:"Planifie les publications et rédige les légendes pour TwoStoryTails."},
+  thumb:'<div class="win"><i>Mon · Upstairs</i><span>Ramses supervises the laundry</span><s>Caption draft ready</s></div>',
+  problem:{en:"Planning posts for four cats across two floors took more time than filming them.",fr:"Planifier les publications pour quatre chats prenait plus de temps que de les filmer."},
+  did:{en:"Built a planner that tracks post ideas per cat and generates caption drafts in the account's voice.",fr:"J'ai créé un planificateur qui suit les idées par chat et génère des légendes dans le ton du compte."},
+  tags:["Social media","Workflow","Tool building"]},
+ {"id": "fall", "name": "Fall", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/fall-game/fall-game.html", "repo": "https://github.com/dalecri/fall-game", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A push-your-luck faller: the longer you fall, the more you earn, but you only keep it if you land.", "fr": "Plus vous tombez longtemps, plus vous gagnez, mais seulement si vous atterrissez."}, "thumb": "<div class=\"win\"><i>Fall</i><span>Depth 310m · ×4</span><s>Land there safely… or keep falling?</s></div>", "play": {"en": "A push-your-luck faller: the longer you fall, the more you earn, but you only keep it if you land.", "fr": "Plus vous tombez longtemps, plus vous gagnez, mais seulement si vous atterrissez."}, "controls": {"en": "Drag left and right to steer. Land on a ledge to bank your points.", "fr": "Glissez à gauche et à droite. Atterrissez pour encaisser vos points."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "loop", "name": "Loop", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/loop-game/loop.html", "repo": "https://github.com/dalecri/loop-game", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A dodge game where every 10-second round rewinds and your past runs return as echoes to avoid.", "fr": "Chaque manche de 10 secondes recommence et vos essais passés reviennent comme des échos à éviter."}, "thumb": "<div class=\"win\"><i>Loop</i><span>Sheet 3 · 10s</span><s>Echoes: 3</s></div>", "play": {"en": "A dodge game where every 10-second round rewinds and your past runs return as echoes to avoid.", "fr": "Chaque manche de 10 secondes recommence et vos essais passés reviennent comme des échos à éviter."}, "controls": {"en": "Drag anywhere to move, or use the arrow keys. Grab the marks to clear the sheet.", "fr": "Glissez pour bouger ou utilisez les flèches. Attrapez les marques."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "keep", "name": "Keep It Alive", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/Keep-it-alive/keep-it-alive.html", "repo": "https://github.com/dalecri/Keep-it-alive", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "Keep a glowing creature alive by placing one object at a time: food, a wall, a bumper or a portal.", "fr": "Gardez une créature lumineuse en vie en plaçant un seul objet à la fois."}, "thumb": "<div class=\"win\"><i>Keep It Alive</i><span>Epoch 2 · Calm</span><s>Age 3:12</s></div>", "play": {"en": "Keep a glowing creature alive by placing one object at a time: food, a wall, a bumper or a portal.", "fr": "Gardez une créature lumineuse en vie en plaçant un seul objet à la fois."}, "controls": {"en": "Tap to place an object. Placing a new one removes the old one.", "fr": "Touchez pour placer un objet. Un nouvel objet remplace l'ancien."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "lasso", "name": "Lasso.io", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/lassoio/lasso-io.html", "repo": "https://github.com/dalecri/lassoio", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A western .io arena: drag a rope behind you, circle rival riders to lasso them, and cut their ropes.", "fr": "Une arène .io western : tracez des cercles avec votre corde pour attraper vos rivaux."}, "thumb": "<div class=\"win\"><i>Lasso.io</i><span>Lassoed 4 · Rope 12</span><s>Ride a full circle!</s></div>", "play": {"en": "A western .io arena: drag a rope behind you, circle rival riders to lasso them, and cut their ropes.", "fr": "Une arène .io western : tracez des cercles avec votre corde pour attraper vos rivaux."}, "controls": {"en": "Steer your rider. Cross your own rope to close a loop around riders and gold.", "fr": "Dirigez votre cavalier et croisez votre corde pour fermer la boucle."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "afterimage", "name": "Afterimage", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/afterimage/afterimage.html", "repo": "https://github.com/dalecri/afterimage", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A memory game: a route flashes for a second, then you trace it before the afterimage fades.", "fr": "Un jeu de mémoire : un tracé s'affiche une seconde, puis vous le refaites de mémoire."}, "thumb": "<div class=\"win\"><i>Afterimage</i><span>Turns 2 · Score 180</span><s>Trace it from memory.</s></div>", "play": {"en": "A memory game: a route flashes for a second, then you trace it before the afterimage fades.", "fr": "Un jeu de mémoire : un tracé s'affiche une seconde, puis vous le refaites de mémoire."}, "controls": {"en": "Watch the flash, then trace the route starting at the ring.", "fr": "Regardez le tracé, puis refaites-le à partir de l'anneau."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "fence", "name": "Fence", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/fence/fence.html", "repo": "https://github.com/dalecri/fence", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A pixel-art turn-based puzzle: build fences to claim pasture before the slime takes over.", "fr": "Un casse-tête pixel art au tour par tour : clôturez le pâturage avant que la gelée l'envahisse."}, "thumb": "<div class=\"win\"><i>Fence</i><span>Field 1 · Slime 18%</span><s>Build before it spreads.</s></div>", "play": {"en": "A pixel-art turn-based puzzle: build fences to claim pasture before the slime takes over.", "fr": "Un casse-tête pixel art au tour par tour : clôturez le pâturage avant que la gelée l'envahisse."}, "controls": {"en": "Drag along grid lines to place fence, then tap Build.", "fr": "Glissez le long de la grille pour placer la clôture, puis touchez Construire."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "lastlight", "name": "Last Light", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/lastlight/lastlight.html", "repo": "https://github.com/dalecri/lastlight", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A pixel-art cave climber where you play a shrinking candle flame.", "fr": "Une escalade en pixel art où vous êtes une flamme qui rétrécit."}, "thumb": "<div class=\"win\"><i>Last Light</i><span>Depth 64m · Candles 5</span><s>You shrink every second.</s></div>", "play": {"en": "A pixel-art cave climber where you play a shrinking candle flame.", "fr": "Une escalade en pixel art où vous êtes une flamme qui rétrécit."}, "controls": {"en": "Drift upward, brush past candles to refuel, and dodge drips and wind.", "fr": "Montez, touchez les chandelles pour vous ranimer et évitez les gouttes."}, "tags": ["Game design", "HTML / CSS / JS"]},
+ {"id": "mirror", "name": "Mirror Run", "cat": "games", "status": "game", "demo": "https://dalecri.github.io/mirror-run/mirrorrun.html", "repo": "https://github.com/dalecri/mirror-run", "kind": {"en": "Browser game", "fr": "Jeu web"}, "line": {"en": "A one-thumb split-screen runner: steer a day runner and its mirrored night twin at once.", "fr": "Un jeu de course à écran partagé : dirigez deux coureurs en miroir d'un seul pouce."}, "thumb": "<div class=\"win\"><i>Mirror Run</i><span>Day ☀ | ☾ Night</span><s>Metres 402</s></div>", "play": {"en": "A one-thumb split-screen runner: steer a day runner and its mirrored night twin at once.", "fr": "Un jeu de course à écran partagé : dirigez deux coureurs en miroir d'un seul pouce."}, "controls": {"en": "Drag anywhere. Find the one spot that gets both runners through.", "fr": "Glissez pour trouver le seul passage qui fonctionne des deux côtés."}, "tags": ["Game design", "HTML / CSS / JS"]}
+];
+const CATS={all:{en:"All",fr:"Tout"},apps:{en:"Apps",fr:"Applications"},tools:{en:"Tools",fr:"Outils"},games:{en:"Games",fr:"Jeux"}};
+const STATUS={live:{en:"Live",fr:"En ligne"},wip:{en:"In progress",fr:"En cours"},game:{en:"Game",fr:"Jeu"}};
+PROJECTS.forEach(p=>{const e=ES_P[p.id]; if(e) for(const k in e) if(p[k]) p[k].es=e[k];});
+CATS.all.es="Todo";CATS.apps.es="Apps";CATS.tools.es="Herramientas";CATS.games.es="Juegos";
+STATUS.live.es="En línea";STATUS.wip.es="En progreso";STATUS.game.es="Juego";
+const LIMIT=6; let cat="all", expanded=false;
+const esc=t=>t;
+function renderProjects(){
+  const f=document.getElementById("filters");
+  f.innerHTML=Object.keys(CATS).map(k=>`<button type="button" data-c="${k}" aria-pressed="${k===cat}">${CATS[k][lang]}</button>`).join("");
+  f.querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;expanded=false;renderProjects()});
+  const list=PROJECTS.filter(p=>cat==="all"||p.cat===cat);
+  const shown=expanded?list:list.slice(0,LIMIT);
+  document.getElementById("pgrid").innerHTML=shown.map(p=>`
+    <button class="pcard" type="button" data-id="${p.id}">
+      <div class="thumb" aria-hidden="true">${p.thumb}</div>
+      <div class="pinfo"><div class="top"><h3>${p.name}</h3><span class="st ${p.status}">${STATUS[p.status][lang]}</span></div>
+      <p>${p.line[lang]}</p>${p.demo?`<span class="st live">${T("Live demo","Démo en ligne","Demo en vivo")} ↗</span>`:""}</div>
+    </button>`).join("");
+  document.querySelectorAll(".pcard").forEach(c=>c.onclick=()=>openP(c.dataset.id));
+  const sa=document.getElementById("showall");
+  sa.hidden=list.length<=LIMIT;
+  sa.textContent=expanded?(T("Show fewer","Voir moins","Ver menos")):(T(`Show all ${list.length} projects`,`Voir les ${list.length} projets`,`Ver los ${list.length} proyectos`));
+  sa.onclick=()=>{expanded=!expanded;renderProjects()};
+}
+document.querySelectorAll(".case").forEach(c=>{
+  const b=document.createElement("button"); b.type="button"; b.className="case-toggle";
+  c.querySelector(".body").appendChild(b); c.classList.add("collapsed");
+  const label=()=>{const open=!c.classList.contains("collapsed"); b.setAttribute("aria-expanded",open);
+    b.textContent=open?(T("Show less −","Réduire −","Ver menos −")):(T("Read the case study +","Lire l'étude de cas +","Leer el caso de estudio +"))};
+  b.onclick=()=>{c.classList.toggle("collapsed");label()}; c._label=label; label();
+});
+function relabelCases(){document.querySelectorAll(".case").forEach(c=>c._label&&c._label())}
+const pd=document.getElementById("pd");
+function openP(id){
+  const p=PROJECTS.find(x=>x.id===id); const L=lang==="fr";
+  document.getElementById("pd-thumb").innerHTML=`<div class="thumb">${p.thumb}</div>`;
+  document.getElementById("pd-kind").textContent=`${p.kind[lang]} · ${STATUS[p.status][lang]}`;
+  document.getElementById("pd-title").textContent=p.name;
+  document.getElementById("pd-dl").innerHTML=p.play?`<div><dt>${T("How it plays","Le jeu","Cómo se juega")}</dt><dd>${p.play[lang]}</dd></div><div><dt>${T("Controls","Commandes","Controles")}</dt><dd>${p.controls[lang]}</dd></div>`:`<div><dt>${T("Challenge","Défi","Reto")}</dt><dd>${p.problem[lang]}</dd></div><div><dt>${T("What I did","Mon rôle","Qué hice")}</dt><dd>${p.did[lang]}</dd></div>`;
+  document.getElementById("pd-tags").innerHTML=p.tags.map(t=>`<li>${t}</li>`).join("");
+  document.getElementById("pd-links").innerHTML=(p.demo?`<a class="btn" href="${p.demo}" target="_blank" rel="noopener">${T("Try it live","Essayer","Pruébalo en vivo")} ↗</a>`:"")+(p.repo?`<a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">${T("View code","Voir le code","Ver código")} ↗</a>`:"");
+  document.getElementById("pd-close").textContent=T("Back to projects","Retour aux projets","Volver a proyectos");
+  pd.showModal();
+}
+const gd=document.getElementById("guide");
+document.getElementById("open-guide").onclick=()=>{gd.showModal();gd.scrollTop=0};
+document.getElementById("guide-close").onclick=()=>gd.close();
+gd.addEventListener("click",e=>{if(e.target===gd)gd.close()});
+gd.querySelectorAll(".toc a").forEach(a=>a.onclick=e=>{e.preventDefault();gd.querySelector(a.getAttribute("href")).scrollIntoView({behavior:"smooth"})});
+document.getElementById("pd-close").onclick=()=>pd.close();
+pd.addEventListener("click",e=>{if(e.target===pd)pd.close()});
+function setLang(l){
+  lang=l; const d=l==="fr"?FR:l==="es"?ES:EN;
+  nodes.forEach(n=>{const v=d[n.dataset.i]; if(v!=null) n.innerHTML=v});
+  document.documentElement.lang=l;
+  document.getElementById("l-en").setAttribute("aria-pressed",l==="en");
+  document.getElementById("l-fr").setAttribute("aria-pressed",l==="fr");
+  document.getElementById("l-es").setAttribute("aria-pressed",l==="es");
+  try{localStorage.setItem("lang",l)}catch(e){}
+  renderProjects();
+  relabelCases();
+}
+renderProjects();
+document.getElementById("l-en").onclick=()=>setLang("en");
+document.getElementById("l-fr").onclick=()=>setLang("fr");
+document.getElementById("l-es").onclick=()=>setLang("es");
+try{const s=localStorage.getItem("lang"); if(s==="fr"||s==="es") setLang(s)}catch(e){}
 
-            const getCardY = (i) => {
-                const base = (totalLength / 2) - (i * PACK_STEP);
-                if (focusIdx < 0) return base;
-                if (i < focusIdx) return base + SPREAD_GAP / 2;
-                if (i === focusIdx) return base;
-                return base - SPREAD_GAP / 2;
-            };
+const copyBtn=document.getElementById("copy"), email=document.getElementById("email");
+copyBtn.onclick=()=>{
+  const done=()=>{const t=copyBtn.textContent; copyBtn.textContent=T("Copied","Copié","Copiado"); setTimeout(()=>copyBtn.textContent=t,1500)};
+  const sel=()=>{const r=document.createRange(); r.selectNodeContents(email); const s=getSelection(); s.removeAllRanges(); s.addRange(r)};
+  try{navigator.clipboard.writeText(email.textContent).then(done,sel)}catch(e){sel()}
+};
+</script>
 
-            const focusY = getCardY(focusIdx);
-            timeline.style.transform = `translateY(${-focusY}px)`;
-
-            const lineH = totalLength + (focusIdx >= 0 ? SPREAD_GAP : 0);
-            groundLine.style.height = `${lineH}px`;
-            groundLine.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0)}px`;
-
-            const labelTransform = `translate3d(-50%, 0, 0) rotateZ(${config.rotate - config.angle}deg) rotateX(${config.tilt}deg)`;
-            labelLatest.style.top = `${totalLength / 2 + (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) + 40}px`;
-            labelLatest.style.transform = labelTransform;
-            labelOldest.style.top = `${-totalLength / 2 - (focusIdx >= 0 ? SPREAD_GAP / 2 : 0) - 20}px`;
-            labelOldest.style.transform = labelTransform;
-
-            items.forEach((_, i) => {
-                const el = document.getElementById(`card-${i}`);
-                if (!el) return;
-                const isFocused = i === focusIdx;
-                const isNotFocused = !isFocused;
-                const y = getCardY(i);
-                const z = isFocused ? POP_Z : 0;
-                const zIndex = isFocused ? 1000 : items.length - i;
-                const cardZRot = isFocused ? (config.rotate - config.angle) : 0;
-                const currentTilt = isFocused ? config.tilt : -90;
-
-                const cardHeight = config.size * 0.9; 
-                el.style.width = `${config.size}px`;
-                el.style.height = `${cardHeight}px`; 
-                el.style.top = `-${cardHeight}px`;
-                el.style.zIndex = zIndex;
-                el.style.transform = `translate3d(${-config.size/2}px, ${y}px, ${z}px) rotateZ(${cardZRot}deg) rotateX(${currentTilt}deg)`;
-                
-                el.classList.toggle('active', isFocused);
-                const content = el.querySelector('.card-content');
-                
-                content.style.filter = isNotFocused ? 'blur(2px) grayscale(0.5)' : 'none';
-                content.style.opacity = isNotFocused ? '0.5' : '1';
-            });
-        }
-
-        function handleMobileScroll() {
-            if (window.innerWidth > 768) return;
-            const centerY = window.innerHeight / 2;
-            
-            document.querySelectorAll('.card-container').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if (rect.height === 0) return; 
-                
-                const cardCenter = rect.top + rect.height / 2;
-                const dist = Math.abs(centerY - cardCenter);
-                
-                const maxDist = window.innerHeight * 0.5; 
-                let scale = 1;
-                let zIndex = 1;
-                let shadowY = 10;
-                let shadowBlur = 15;
-                
-                if (dist < maxDist) {
-                    const intensity = 1 - (dist / maxDist);
-                    const eased = Math.pow(intensity, 1.8); 
-                    
-                    scale = 1 + (0.12 * eased);
-                    zIndex = Math.round(10 + (eased * 100));
-                    
-                    shadowY = 10 + (12 * eased);
-                    shadowBlur = 15 + (15 * eased);
-                }
-                
-                card.style.setProperty('--mobile-scale', scale.toFixed(3));
-                card.style.setProperty('--mobile-z', zIndex);
-                
-                const frame = card.querySelector('.card-frame');
-                if (frame) {
-                    frame.style.setProperty('--m-shadow-y', `${shadowY.toFixed(1)}px`);
-                    frame.style.setProperty('--m-shadow-b', `${shadowBlur.toFixed(1)}px`);
-                }
-            });
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 768) {
-                requestAnimationFrame(handleMobileScroll);
-            }
-        }, { passive: true });
-
-        const toggleBtn = document.getElementById('toggle-controls');
-        const controlsCard = document.getElementById('controls-card');
-
-        toggleBtn.onclick = () => controlsCard.classList.toggle('open');
-
-        const inputs = ['pitch', 'angle', 'tilt', 'rotate', 'size', 'offsetY'];
-        inputs.forEach(id => {
-            const input = document.getElementById(`input-${id}`);
-            const display = document.getElementById(`val-${id}`);
-            if(input) {
-                input.oninput = (e) => {
-                    const val = Number(e.target.value);
-                    config[id] = val;
-                    display.textContent = val + (id === 'size' || id === 'offsetY' ? 'px' : '°');
-                    updateScene();
-                };
-            }
-        });
-
-        function toggleTheme() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-
-        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
-        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.onclick = (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                e.target.closest('button').classList.add('active');
-                currentFilter = e.target.closest('button').dataset.cat;
-                focusIdx = 0;
-                createCards();
-                updateScene();
-            };
-        });
-
-        // --- Mechanical Keyboard & On-Screen Button Mapping ---
-        const keyLeft = document.getElementById('key-left');
-        const keyRight = document.getElementById('key-right');
-        const keyEnter = document.getElementById('key-enter');
-        
-        const keyMap = {
-            'ArrowLeft': keyLeft,
-            'ArrowRight': keyRight,
-            'Enter': keyEnter,
-            ' ': keyEnter
-        };
-
-        const handleLeft = () => { focusIdx = Math.max(0, focusIdx - 1); updateScene(); };
-        const handleRight = () => { focusIdx = Math.min(getFilteredItems().length - 1, focusIdx + 1); updateScene(); };
-        const handleAction = () => {
-            const items = getFilteredItems();
-            if(items[focusIdx]) playAndNavigate(focusIdx, items[focusIdx].url);
-        };
-
-        // Click Handlers for physical feeling buttons
-        if (keyLeft) keyLeft.onmousedown = handleLeft;
-        if (keyRight) keyRight.onmousedown = handleRight;
-        if (keyEnter) keyEnter.onmousedown = handleAction;
-
-        window.addEventListener('keydown', (e) => {
-            if (window.innerWidth <= 768) return; 
-            
-            // Add visual pressed effect
-            if (keyMap[e.key]) keyMap[e.key].classList.add('pressed');
-
-            if (e.key === 'Enter' || e.key === ' ') {
-                handleAction();
-            } else if (e.key === 'ArrowRight') {
-                handleRight();
-            } else if (e.key === 'ArrowLeft') {
-                handleLeft();
-            }
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (keyMap[e.key]) keyMap[e.key].classList.remove('pressed');
-        });
-
-        let lastScroll = 0;
-        window.addEventListener('wheel', (e) => {
-            if (window.innerWidth <= 768) return; 
-            
-            const now = Date.now();
-            if (now - lastScroll < 60) return;
-            const items = getFilteredItems();
-            if (Math.abs(e.deltaY) > 10 || Math.abs(e.deltaX) > 10) {
-                if (e.deltaY > 0 || e.deltaX > 0) {
-                    focusIdx = Math.min(items.length - 1, focusIdx + 1);
-                } else {
-                    focusIdx = Math.max(0, focusIdx - 1);
-                }
-                lastScroll = now;
-                updateScene();
-            }
-        }, { passive: false });
-
-        window.addEventListener('resize', () => {
-            updateScene();
-        });
-
-        createCards();
-        updateScene();
-
-    </script>
 </body>
 </html>
