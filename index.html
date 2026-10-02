@@ -183,7 +183,7 @@ dialog::backdrop{background:rgba(10,8,14,.6)}
 .rpills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
 .rpill{font:700 14px/1 var(--f-display);letter-spacing:.06em;text-decoration:none;color:var(--lamp);background:var(--lamp-soft);border:1px solid var(--lamp);border-radius:999px;padding:6px 12px;cursor:help}
 /* writing */
-.wgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .wcard{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:8px;align-content:start;grid-template-rows:auto auto 1fr auto}
 button.wcard{cursor:pointer}button.wcard:hover{border-color:var(--lamp)}
 .wcard.soon{background:transparent;border-style:dashed}
@@ -239,6 +239,19 @@ blockquote.final{background:var(--surface);border:1px solid var(--lamp)}
 .timeline-dl dt{font:700 14px var(--f-display);color:var(--lamp);margin:0;font-variant-numeric:tabular-nums}
 .timeline-dl dd{margin:0;color:var(--ink)}
 .meta-line{font:400 13px var(--f-display);color:var(--muted)}
+.persona{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0;background:var(--surface)}
+.persona header{display:flex;gap:14px;align-items:flex-start;margin-bottom:10px}
+.persona header i,.persona header svg{flex:none;width:40px!important;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--lamp-soft);color:var(--lamp);padding:11px;box-sizing:border-box}
+.persona h3{margin:0 0 2px;font:700 17px var(--f-display)}
+.persona header p{margin:0;color:var(--muted);font-size:14.5px}
+.persona dl{margin:0;display:grid;gap:6px}
+.persona dt{font:700 11px var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--lamp);margin-top:6px}
+.persona dd{margin:0;color:var(--ink)}
+.dodont{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dodont h3{margin:6px 0}
+.variants dt{font:700 12px var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--lamp);margin-top:16px}
+.variants dd{margin:6px 0 0;padding:12px 16px;border-left:3px solid var(--lamp);background:var(--surface);border-radius:0 10px 10px 0}
+@media (max-width:640px){.dodont{grid-template-columns:minmax(0,1fr)}}
 /* timeline */
 .tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--line);display:grid;gap:22px}
 .tl li{position:relative;display:grid;gap:2px}
@@ -437,6 +450,12 @@ html{scroll-behavior:smooth}
         <p data-i="w4p">How live AMAs on inflation and the census turned skepticism about official data into real conversation.</p>
         <span class="wmeta"><span data-i="w4m">3 min read</span><span class="go" data-i="read4">Read sample →</span></span>
       </button>
+      <button class="wcard" type="button" data-doc="s-audience">
+        <span class="px" data-i="w5k">Audience &amp; voice brief</span>
+        <h3 data-i="w5h">Who TwoStoryTails is for</h3>
+        <p data-i="w5p">Four audience personas with goals and pain points, voice rules, and one cat moment written four ways.</p>
+        <span class="wmeta"><span data-i="w5m">5 min read</span><span class="go" data-i="read5">Read sample →</span></span>
+      </button>
     </div>
   </section>
 
@@ -500,6 +519,100 @@ html{scroll-behavior:smooth}
       <h2>Measuring success</h2>
       <p>After each AMA, I tracked impressions for the event and promotional posts, plus UTM-based click-through rates to our website and releases, and compared them against our baselines and previous AMAs. I also ran sentiment scans of the comment threads to see whether conversations showed more trust in the data or a better understanding of it.</p>
       <div class="note"><b>Result:</b> The AMAs consistently outperformed our other campaign formats and live events in both impressions and engagement, and sentiment was positive overall. When Canadians can talk directly with the experts behind the data, skepticism turns into meaningful engagement.</div>
+    </article>
+  </dialog>
+
+  <dialog id="s-audience" class="doc" aria-labelledby="sau-title" lang="en">
+    <div class="doc-bar"><span class="px">Audience &amp; voice brief · Sample</span><button class="btn ghost" type="button" data-close>Close</button></div>
+    <article class="doc-body">
+      <h1 id="sau-title">Who TwoStoryTails is for</h1>
+      <p class="doc-lede">TwoStoryTails follows four cats across two floors: two domestic shorthairs downstairs, a Bengal and a Savannah upstairs. This brief defines who the content is for, what each audience needs, and how the voice adapts to serve them.</p>
+      <div class="note"><b>About this sample:</b> These are proto-personas, built from the account's content strategy and performance rather than formal user research. The next step is to validate them against platform audience insights.</div>
+      <nav class="toc" aria-label="On this page"><a href="#au1">Snapshot</a><a href="#au2">Personas</a><a href="#au3">Voice rules</a><a href="#au4">One moment, four audiences</a><a href="#au5">How this guides decisions</a></nav>
+
+      <h2 id="au1">Snapshot</h2>
+      <ul>
+        <li><b>Concept:</b> 4 cats, 2 floors, domestic meets exotic.</li>
+        <li><b>Platforms:</b> Instagram, TikTok and YouTube.</li>
+        <li><b>Reach:</b> 400K+ views across platforms. On TikTok, videos average about 1.3K views, roughly ten times the follower count, so most viewers are reached through discovery rather than as followers.</li>
+        <li><b>What that means:</b> the first line of every post has to work for someone who has never seen the account before.</li>
+      </ul>
+
+      <h2 id="au2">Personas</h2>
+      <section class="persona">
+        <header><i class="fa-solid fa-house" aria-hidden="true"></i><div><h3>The Multi-Cat Juggler</h3><p>Shares a home with two or more cats, usually with very different personalities that don't all get along.</p></div></header>
+        <dl>
+          <dt>Goals</dt><dd>Feel seen, laugh at the shared chaos, and pick up ideas for keeping the peace.</dd>
+          <dt>Pain points</dt><dd>Feeling like a referee. Managing separate spaces. Most pet content shows one perfect cat, not a split household.</dd>
+          <dt>What they need from a post</dt><dd>Honest, relatable dynamics and proof that a household with "zones" is normal.</dd>
+          <dt>Best pillars &amp; formats</dt><dd>Multi-cat dynamics · Two-floor contrast posts · Split-screen reels</dd>
+          <dt>Voice</dt><dd>Warm and knowing. "We're in this together."</dd>
+        </dl>
+      </section>
+      <section class="persona">
+        <header><i class="fa-solid fa-paw" aria-hidden="true"></i><div><h3>The Exotic-Breed Curious</h3><p>Owns, or is thinking about getting, a high-energy breed like a Bengal or a Savannah.</p></div></header>
+        <dl>
+          <dt>Goals</dt><dd>Understand what living with these breeds is really like, day to day.</dd>
+          <dt>Pain points</dt><dd>Glossy breeder content skips the noise, energy and enrichment needs. Advice online is often conflicting.</dd>
+          <dt>What they need from a post</dt><dd>Real behaviour, practical tips and honest trade-offs.</dd>
+          <dt>Best pillars &amp; formats</dt><dd>Educational tidbits · Individual spotlights on Diego and Ramses · Carousels and short explainer reels</dd>
+          <dt>Voice</dt><dd>Still playful, but accurate. The joke carries the fact; it never replaces it.</dd>
+        </dl>
+      </section>
+      <section class="persona">
+        <header><i class="fa-solid fa-face-laugh" aria-hidden="true"></i><div><h3>The Scroll-Break Seeker</h3><p>Not necessarily a cat owner. Opens the app for a quick laugh between other things.</p></div></header>
+        <dl>
+          <dt>Goals</dt><dd>A 10-second laugh and something worth sending to a friend.</dd>
+          <dt>Pain points</dt><dd>Stressful feeds. Cringe or overly sugary pet content.</dd>
+          <dt>What they need from a post</dt><dd>A hook in the first line and a punchline that works without any backstory.</dd>
+          <dt>Best pillars &amp; formats</dt><dd>Witty and relatable humour · POV memes · Inner monologue · Trending audio</dd>
+          <dt>Voice</dt><dd>Dry and deadpan, one or two emojis at most, never baby talk.</dd>
+        </dl>
+      </section>
+      <section class="persona">
+        <header><i class="fa-solid fa-moon" aria-hidden="true"></i><div><h3>The Cozy-Content Unwinder</h3><p>Watches in the evening to wind down after a long day.</p></div></header>
+        <dl>
+          <dt>Goals</dt><dd>Calm, comfort and a soft end to the day.</dd>
+          <dt>Pain points</dt><dd>Overstimulating content, loud audio and constant chaos.</dd>
+          <dt>What they need from a post</dt><dd>Slow pacing, soft light, purring, and captions that ask nothing of them.</dd>
+          <dt>Best pillars &amp; formats</dt><dd>Calming and cozy · Seasonal moments · Lo-fi reels · Quiet nature-documentary narration</dd>
+          <dt>Voice</dt><dd>Gentle, observational and short.</dd>
+        </dl>
+      </section>
+
+      <h2 id="au3">Voice rules</h2>
+      <p>One voice across every audience: a dry, observant narrator documenting a very dramatic household. What changes per audience is the format and the pacing, not the personality.</p>
+      <div class="dodont">
+        <div><h3>Do</h3>
+          <blockquote class="final"><p>POV: you walk into the kitchen and both of them are already staring at you like you're late on rent 💀</p></blockquote>
+          <blockquote class="final"><p>The Bengal has located the treat bag. He announces his discovery to the entire floor. Negotiations begin.</p></blockquote>
+        </div>
+        <div><h3>Don't</h3>
+          <blockquote class="draft"><p>omg my babies are so cute!! 🐱🐱🐱</p></blockquote>
+          <blockquote class="draft"><p>Nature-documentary narration on every single post. It stops being funny when it's the default.</p></blockquote>
+        </div>
+      </div>
+
+      <h2 id="au4">One moment, four audiences</h2>
+      <p><b>The moment:</b> Ramses, who almost never sits on laps, finally chooses one.</p>
+      <dl class="variants">
+        <dt>Scroll-Break Seeker · Inner monologue</dt>
+        <dd>Don't breathe. Don't move. Don't even think too loudly. A rare event is in progress and any sudden movement could disrupt the prophecy.</dd>
+        <dt>Multi-Cat Juggler · Two-floor story</dt>
+        <dd>Upstairs: Ramses has chosen a lap for the first time this month. Downstairs: Neo has been on one for three business days and sees no reason to celebrate.</dd>
+        <dt>Exotic-Breed Curious · Educational tidbit</dt>
+        <dd>Ramses almost never sits on laps unless it's his idea. With high-energy breeds, affection often works best on the cat's terms: let them come to you, stay still, and skip the grab.</dd>
+        <dt>Cozy-Content Unwinder · Quiet narration</dt>
+        <dd>A rare stillness settles over the upper floor. The Savannah has chosen his resting place. The human will not move for forty minutes.</dd>
+      </dl>
+
+      <h2 id="au5">How this guides decisions</h2>
+      <ul>
+        <li><b>Weekly mix:</b> every week includes at least one post for each persona, so no audience goes quiet for long.</li>
+        <li><b>Hooks first:</b> since most views come from discovery, the first line is written for the Scroll-Break Seeker, even on posts meant for another persona.</li>
+        <li><b>Timing to test:</b> humour at lunchtime, cozy content in the evening, educational carousels mid-morning on weekdays.</li>
+        <li><b>Validation:</b> compare these personas with Instagram and TikTok audience data (age, location, active hours) and recurring themes in comments, then revise.</li>
+      </ul>
     </article>
   </dialog>
 
@@ -779,6 +892,8 @@ Object.assign(ES,{w2p:"¿Por qué los precios de la telefonía celular subieron 
  w4k:"Informe de campaña",w4h:"Economistas en vivo en Reddit",w4p:"Cómo los AMA en vivo sobre inflación y el censo convirtieron el escepticismo hacia los datos oficiales en conversación real.",w4m:"3 min de lectura",read4:"Leer muestra (EN) →"});
 Object.assign(FR,{themeLbl:"Thème"});ES.themeLbl="Tema";
 Object.assign(FR,{nw1:"En visionnement",nw2:"En cours de lecture",nw3:"En cours de partie"});Object.assign(ES,{nw1:"Viendo ahora",nw2:"Leyendo ahora",nw3:"Jugando ahora"});
+Object.assign(FR,{w5k:"Public et ton",w5h:"À qui s'adresse TwoStoryTails",w5p:"Quatre personas avec leurs objectifs et irritants, des règles de ton, et un même moment écrit de quatre façons.",w5m:"5 min de lecture",read5:"Lire l'exemple (EN) →"});
+Object.assign(ES,{w5k:"Audiencia y voz",w5h:"Para quién es TwoStoryTails",w5p:"Cuatro perfiles de audiencia con objetivos y puntos de dolor, reglas de voz y un mismo momento escrito de cuatro formas.",w5m:"5 min de lectura",read5:"Leer muestra (EN) →"});
 const T=(en,fr,es)=>lang==="fr"?fr:lang==="es"?es:en;
 const nodes=[...document.querySelectorAll("[data-i]")];
 const EN={}; nodes.forEach(n=>{EN[n.dataset.i]??=n.innerHTML});
