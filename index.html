@@ -899,6 +899,14 @@ const nodes=[...document.querySelectorAll("[data-i]")];
 const EN={}; nodes.forEach(n=>{EN[n.dataset.i]??=n.innerHTML});
 let lang="en";
 const PROJECTS=[
+ {id:"loopforge",demo:"https://dalecri.github.io/Loop-Forge/",repo:"https://github.com/dalecri/Loop-Forge",name:"Loop Forge",cat:"tools",status:"live",
+  kind:{en:"Music sequencer",fr:"Séquenceur musical",es:"Secuenciador musical"},
+  line:{en:"Turn pixel patterns into music, then take the Strudel code with you.",fr:"Transformez des motifs de pixels en musique, puis récupérez le code Strudel.",es:"Convierte patrones de píxeles en música y llévate el código Strudel."},
+  thumb:'<div class="win"><i>Loop Forge</i><span>DRUMS · BASS · LEAD · CHORDS</span><span aria-hidden="true" style="color:var(--lamp);letter-spacing:.15em">■ □ □ ■ □ ■ □ □<br>□ □ ■ □ □ □ ■ □<br>■ □ □ □ ■ □ □ ■</span><s>16 steps · 8 layers · Strudel</s></div>',
+  problem:{en:"Make building musical loops approachable without hiding how the patterns work.",fr:"Rendre la création de boucles musicales accessible sans masquer le fonctionnement des motifs.",es:"Hacer accesible la creación de bucles musicales sin ocultar cómo funcionan los patrones."},
+  did:{en:"Built a browser step sequencer with eight layers, a paintable grid, song arrangement and live Strudel code generation. Added beginner guides, saved loops, share links and offline support.",fr:"J'ai créé un séquenceur dans le navigateur avec huit pistes, une grille à dessiner, un arrangement de morceaux et la génération de code Strudel en direct. J'ai ajouté des guides pour débutants, la sauvegarde de boucles, des liens de partage et un mode hors ligne.",es:"Creé un secuenciador web con ocho capas, una cuadrícula para dibujar patrones, arreglos de canciones y generación de código Strudel en tiempo real. Añadí guías para principiantes, bucles guardados, enlaces para compartir y soporte sin conexión."},
+  tags:["Music","Creative coding","Strudel","PWA"]},
+
  {id:"lofi",demo:"https://dalecri.github.io/Voxel-lofi-room/",repo:"https://github.com/dalecri/Voxel-lofi-room",name:"Lofi Rooms",cat:"apps",status:"live",
   kind:{en:"Cozy room builder",fr:"Créateur de pièces douillettes"},
   line:{en:"Build tiny isometric voxel rooms, switch on the lamps, put a record on and let the cats wander.",fr:"Créez de petites pièces isométriques en voxels, allumez les lampes, lancez un disque et laissez les chats se promener."},
