@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.lofirooms.app",
+      "sha256_cert_fingerprints": [
+        "05:5A:1B:83:D2:D7:6C:FC:61:0D:9B:D0:22:C1:98:5B:0B:86:57:B8:FA:15:E5:77:D9:D1:E1:BE:7E:7C:8B:09"
+      ]
+    }
+  }
+]
