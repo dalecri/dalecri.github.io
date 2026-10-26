@@ -302,7 +302,7 @@ img{max-width:100%}
 html{scroll-behavior:smooth}
 
   /* Living background: ASCII koi pond in the hero */
-  .hero>.pond-bg{position:absolute;inset:0;z-index:0;border-radius:24px;overflow:hidden;opacity:.5;pointer-events:none}
+  .hero>.pond-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
   .hero>.pond-bg canvas{display:block}
   .hero .px,.hero .hi,.hero h1,.hero .ctas,.hero .hero-foot{position:relative;z-index:1}
   .hero .avatar{z-index:1}
@@ -1066,7 +1066,7 @@ copyBtn.onclick=()=>{
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const canvas = document.getElementById('pondCanvas');
-  const ctx = canvas.getContext('2d', { alpha: false });
+  const ctx = canvas.getContext('2d', { alpha: true });
 
   // Grid specifications
   const FONT_NAME = '"Courier New", Courier, monospace';
@@ -1545,8 +1545,7 @@ copyBtn.onclick=()=>{
   // --- Main Render Cycle ---
   function drawFrame() {
     // Clear screen with deep pond color
-    ctx.fillStyle = '#030810';
-    ctx.fillRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
 
     // Clear grid buffers
     const total = cols * rows;
