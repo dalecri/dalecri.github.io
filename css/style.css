@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.3);
+    border-radius: 9999px;
+}
+.glass-pill {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+@keyframes pulse-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}
+.animate-bounce-slow {
+    animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* ==== Merge overrides: portfolio content in the ASCII landing design ====
+   Loaded after the page's own stylesheet, so these win on equal specificity.
+   The landing design tokens: warm paper #FAF9F5, stone ink, Inter for display
+   type, JetBrains Mono for mono labels. The page's palette system (nordic)
+   and all section markup are unchanged. */
+
+:root{
+  --f-display:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-body:"Inter", "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Hero becomes the landing stage: full-viewport, ASCII canvas behind content */
+.hero{
+  min-height:min(94vh, 940px);
+  align-content:center;
+  overflow:hidden;
+  padding-block:56px 20px;
+}
+.hero canvas#ascii-canvas{position:absolute; inset:0; z-index:0;}
+.hero>*:not(canvas):not(.star){position:relative; z-index:2;}
+.hero .hero-bar{justify-self:stretch; width:100%;}
+.hero h1{font-family:"Inter", sans-serif; font-weight:600; letter-spacing:-.03em;}
+.hero .px{letter-spacing:.26em; text-transform:uppercase;}
+
+/* Section headings pick up the landing display face */
+section h2, .doc h2{font-family:"Inter", sans-serif; font-weight:600; letter-spacing:-.02em;}
