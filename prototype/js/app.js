@@ -598,10 +598,18 @@
     toggleBtns.forEach(btn => btn && btn.addEventListener('click', toggleDrawer));
     if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', toggleDrawer);
 
+    // Prototype: propagate the pond palette to the whole site theme.
+    // CSS in css/style.css keys off body[data-pond-theme="lotus|sakura|cyber"].
+    function applySiteTheme() {
+        document.body.dataset.pondTheme = currentSeason;
+    }
+    applySiteTheme();
+
     // Season Buttons
     document.querySelectorAll('.season-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             currentSeason = btn.dataset.season;
+            applySiteTheme();
             document.querySelectorAll('.season-btn').forEach(b => {
                 b.className = 'season-btn px-2 py-1.5 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 border border-transparent hover:border-stone-300 transition-all';
             });

@@ -32,3 +32,67 @@ body, html {
 .animate-bounce-slow {
     animation: pulse-subtle 3s infinite ease-in-out;
 }
+
+/* ---- Prototype site theming: the pond palette drives the whole page ----
+   js/app.js sets body[data-pond-theme] from the studio's season buttons.
+   Accent hexes are taken from the engine's own PALETTES in js/app.js. */
+
+/* Page background tint (matches each palette's canvas background) */
+body[data-pond-theme="sakura"] { background-color: #FDF8F8; }
+body[data-pond-theme="cyber"]  { background-color: #F2F7F6; }
+html.dark body[data-pond-theme="sakura"] { background-color: #130D14; }
+html.dark body[data-pond-theme="cyber"]  { background-color: #070F12; }
+
+/* Section eyebrows */
+body[data-pond-theme="lotus"]  .th-acc { color: #9E3B66; }
+body[data-pond-theme="sakura"] .th-acc { color: #9D4452; }
+body[data-pond-theme="cyber"]  .th-acc { color: #005F56; }
+html.dark body[data-pond-theme="lotus"]  .th-acc { color: #F4A9C7; }
+html.dark body[data-pond-theme="sakura"] .th-acc { color: #FCD5CE; }
+html.dark body[data-pond-theme="cyber"]  .th-acc { color: #72EFDD; }
+
+/* Project cards: thumbnail glyphs, hover border and title */
+body[data-pond-theme="lotus"]  .th-thumb { color: #9E3B66; }
+body[data-pond-theme="sakura"] .th-thumb { color: #9D4452; }
+body[data-pond-theme="cyber"]  .th-thumb { color: #005F56; }
+html.dark body[data-pond-theme="lotus"]  .th-thumb { color: #F4A9C7; }
+html.dark body[data-pond-theme="sakura"] .th-thumb { color: #FCD5CE; }
+html.dark body[data-pond-theme="cyber"]  .th-thumb { color: #72EFDD; }
+body[data-pond-theme="lotus"]  .th-card:hover { border-color: rgba(238, 133, 181, 0.65); }
+body[data-pond-theme="sakura"] .th-card:hover { border-color: rgba(248, 173, 157, 0.8); }
+body[data-pond-theme="cyber"]  .th-card:hover { border-color: rgba(72, 191, 227, 0.65); }
+body[data-pond-theme="lotus"]  .th-card:hover h3 { color: #9E3B66; }
+body[data-pond-theme="sakura"] .th-card:hover h3 { color: #9D4452; }
+body[data-pond-theme="cyber"]  .th-card:hover h3 { color: #005F56; }
+html.dark body[data-pond-theme="lotus"]  .th-card:hover h3 { color: #F4A9C7; }
+html.dark body[data-pond-theme="sakura"] .th-card:hover h3 { color: #FCD5CE; }
+html.dark body[data-pond-theme="cyber"]  .th-card:hover h3 { color: #72EFDD; }
+
+/* Writing rows: title on hover */
+body[data-pond-theme="lotus"]  .th-row:hover .th-title { color: #9E3B66; }
+body[data-pond-theme="sakura"] .th-row:hover .th-title { color: #9D4452; }
+body[data-pond-theme="cyber"]  .th-row:hover .th-title { color: #005F56; }
+html.dark body[data-pond-theme="lotus"]  .th-row:hover .th-title { color: #F4A9C7; }
+html.dark body[data-pond-theme="sakura"] .th-row:hover .th-title { color: #FCD5CE; }
+html.dark body[data-pond-theme="cyber"]  .th-row:hover .th-title { color: #72EFDD; }
+
+/* Top bar hovers */
+body[data-pond-theme="lotus"]  header a:hover, body[data-pond-theme="lotus"]  header button:hover { color: #9E3B66; }
+body[data-pond-theme="sakura"] header a:hover, body[data-pond-theme="sakura"] header button:hover { color: #9D4452; }
+body[data-pond-theme="cyber"]  header a:hover, body[data-pond-theme="cyber"]  header button:hover { color: #005F56; }
+html.dark body[data-pond-theme="lotus"]  header a:hover, html.dark body[data-pond-theme="lotus"]  header button:hover { color: #F4A9C7; }
+html.dark body[data-pond-theme="sakura"] header a:hover, html.dark body[data-pond-theme="sakura"] header button:hover { color: #FCD5CE; }
+html.dark body[data-pond-theme="cyber"]  header a:hover, html.dark body[data-pond-theme="cyber"]  header button:hover { color: #72EFDD; }
+
+/* Text selection follows the palette too */
+body[data-pond-theme="sakura"] ::selection { background-color: #FCD5CE; }
+body[data-pond-theme="cyber"]  ::selection { background-color: #72EFDD; }
+
+/* The studio's active season button, recolored for the cyber palette
+   (the engine paints it pink; sakura is close enough to pink to leave). */
+body[data-pond-theme="cyber"] .season-btn[class*="bg-pink-100"] {
+    background-color: #CFFAFE; color: #134E4A; border-color: #5EEAD4;
+}
+html.dark body[data-pond-theme="cyber"] .season-btn[class*="bg-pink-100"] {
+    background-color: rgba(8, 47, 73, 0.7); color: #A5F3FC; border-color: #155E75;
+}
