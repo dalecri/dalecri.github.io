@@ -144,12 +144,6 @@
         <footer class="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 pb-6 flex items-end justify-between pointer-events-none">
             <!-- Bottom Left Monogram Badge (Matches Reference) -->
             <div class="pointer-events-auto flex items-center space-x-3">
-                <button id="monogram-btn" title="Open ASCII Studio Controls" class="w-9 h-9 rounded-full bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 flex items-center justify-center font-mono text-xs font-semibold shadow-md hover:scale-105 active:scale-95 transition-transform">
-                    C<span class="text-[9px] align-top text-pink-400 dark:text-pink-600">✦</span>
-                </button>
-                <span class="hidden sm:inline-block font-mono text-[11px] text-stone-400 dark:text-stone-500 bg-white/60 dark:bg-stone-900/60 px-2.5 py-1 rounded-full backdrop-blur-sm border border-stone-200/50 dark:border-stone-800/50">
-                    Move cursor to ripple • Click to plant lotus
-                </span>
             </div>
 
             <!-- Center Bottom WORK Arrow -->
@@ -160,6 +154,9 @@
 
             <!-- Bottom Right Live FPS / Grid Readout -->
             <div class="hidden sm:flex pointer-events-auto items-center space-x-2 font-mono text-[10px] text-stone-400 dark:text-stone-500">
+                <span class="hidden sm:inline-block font-mono text-[11px] text-stone-400 dark:text-stone-500 bg-white/60 dark:bg-stone-900/60 px-2.5 py-1 rounded-full backdrop-blur-sm border border-stone-200/50 dark:border-stone-800/50">
+                    Move cursor to ripple • Click to plant lotus
+                </span>
                 <span id="grid-stats">GRID 96×54</span>
                 <span>•</span>
                 <button id="quick-studio-btn" class="underline hover:text-stone-700 dark:hover:text-stone-300">TUNE ASCII</button>
