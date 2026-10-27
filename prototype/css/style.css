@@ -132,3 +132,32 @@ html.dark body[data-pond-theme="cyber"] {
         linear-gradient(to right, rgba(20, 60, 68, 0.35) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(20, 60, 68, 0.35) 1px, transparent 1px);
 }
+
+/* ---- Prototype mobile pass + hero text presence (glass look unchanged) ---- */
+
+/* Halo in the page's own background colour lifts the hero words off the
+   busy ASCII art without touching the glass panel itself. */
+.hero-lede {
+    text-shadow: 0 1px 10px rgba(250, 249, 245, 0.6), 0 0 3px rgba(250, 249, 245, 0.85);
+}
+html.dark .hero-lede {
+    text-shadow: 0 1px 10px rgba(13, 16, 23, 0.65), 0 0 3px rgba(13, 16, 23, 0.8);
+}
+.hero-eyebrow {
+    text-shadow: 0 1px 8px rgba(250, 249, 245, 0.55), 0 0 3px rgba(250, 249, 245, 0.8);
+}
+html.dark .hero-eyebrow {
+    text-shadow: 0 1px 8px rgba(13, 16, 23, 0.6), 0 0 3px rgba(13, 16, 23, 0.75);
+}
+
+/* Scrollable top nav on small screens: no visible scrollbar */
+.nav-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.nav-scroll::-webkit-scrollbar { display: none; }
+
+@media (max-width: 640px) {
+    /* Slightly tighter eyebrow tracking so it wraps more gracefully */
+    .hero-eyebrow { letter-spacing: 0.18em; }
+    /* Writing rows: tag drops under the title instead of squeezing it */
+    .th-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .th-row > span:last-child { margin-left: 0; }
+}
