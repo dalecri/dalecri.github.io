@@ -13,12 +13,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap">
 <style>
+/* Alpha Lyrae (Vega/Fontfabric, SIL OFL 1.1): display face; its CALT feature pixelates every 4th glyph */
+@font-face{font-family:"Alpha Lyrae";src:url("assets/fonts/AlphaLyrae-Medium.woff2") format("woff2"),url("assets/fonts/AlphaLyrae-Medium.woff") format("woff");font-weight:400 700;font-style:normal;font-display:swap}
 /* Layout: one calm column, lamp-lit plum night; pixel labels as the signature detail */
 /* Layout: a framed card on a dotted night sky, centered mono hero; lavender as the one accent */
 :root{
   --sky:#18141F; --bg:#221D2B; --surface:#2A2434; --ink:#EDE7F3; --muted:#A99DBB; --line:#3A3247;
   --lamp:#B9A7DD; --lamp-soft:#342C44; --plum:#CDBDEA; --fill:#8C80A0; --dots:#2C2636;
-  --f-display:"Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-display:"Alpha Lyrae", "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
   --f-pixel:"Space Mono", ui-monospace, Menlo, monospace;
   color-scheme:dark;
@@ -32,7 +34,7 @@
 
 /* ===== Theme: NORDIC (calm, muted, Scandinavian colour blocks) ===== */
 html:root[data-palette="nordic"]{--sky:#C9D3D8;--bg:#EEF1F2;--surface:#FFFFFF;--ink:#1E2A30;--muted:#5B6970;--line:#D5DDE0;--lamp:#3E6B63;--lamp-soft:#DCE8E3;--plum:#3E6B63;--fill:#8C9AA1;--dots:#B9C5CB;
- --f-display:"Manrope","Segoe UI",system-ui,sans-serif;--f-pixel:"Manrope",system-ui,sans-serif;color-scheme:light}
+ --f-display:"Alpha Lyrae","Manrope","Segoe UI",system-ui,sans-serif;--f-pixel:"Manrope",system-ui,sans-serif;color-scheme:light}
 [data-palette="nordic"] .frame{border:0;border-radius:20px}
 [data-palette="nordic"] .px{letter-spacing:.14em;font-weight:700}
 [data-palette="nordic"] .hero h1{font-weight:800;letter-spacing:-.045em}
